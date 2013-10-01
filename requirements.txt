@@ -6,3 +6,4 @@
 
 django
 django-crispy-forms
+-e git+https://github.com/lovasb/django-renderer.git#egg=drenderer

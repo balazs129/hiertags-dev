@@ -12,8 +12,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.',
-        'NAME': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': '/tmp/database.sq3',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -23,7 +23,6 @@ DATABASES = {
 
 TIME_ZONE = 'Europe/Budapest'
 LANGUAGE_CODE = 'hu-hu'
-SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -81,12 +80,12 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
     # 'django.contrib.admindocs',
     'crispy_forms',
+    'graphviz',
 )
 
 LOGGING = {
