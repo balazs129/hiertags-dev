@@ -4,6 +4,9 @@
 #
 # pip install -r requirements.txt
 
+uwsgi
 django
 django-crispy-forms
 -e git+https://github.com/lovasb/django-renderer.git#egg=drenderer
+lxml
+dateutils
