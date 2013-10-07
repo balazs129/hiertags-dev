@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="well sidebar-nav" style="height: 500px;">
+                <h4>Contact</h4>
+                <a href="mailto:hiertags@hal.elte.hu">hiertags@hal.elte.hu</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <h2>{{ flatpage.title }}</h2>
+            {{ flatpage.content }}
+        </div>
+    </div>
+{% endblock %}

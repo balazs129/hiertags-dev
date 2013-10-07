@@ -1,19 +1,21 @@
 # Django settings for hiertags project.
 from os.path import abspath, dirname, join
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Bence Lovas', 'lovasb@hal.elte.hu'),
 )
 
 MANAGERS = ADMINS
 
+PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__)))).replace('\\','/')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/tmp/database.sq3',
+        'NAME': PROJECT_ROOT + '/hiertags/database.sq3',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -23,12 +25,12 @@ DATABASES = {
 
 TIME_ZONE = 'Europe/Budapest'
 LANGUAGE_CODE = 'hu-hu'
+SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
 # Directories
-PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__)))).replace('\\','/')
 MEDIA_ROOT = PROJECT_ROOT + '/uploads/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = PROJECT_ROOT + '/static/'
@@ -57,6 +59,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -70,6 +73,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.static',
     'django.core.context_processors.media',
+    'hiertags.context_processors.act_menu',
 )
 
 TEMPLATE_DIRS = (
@@ -79,10 +83,12 @@ TEMPLATE_DIRS = (
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.sites',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'django.contrib.flatpages',
     # 'django.contrib.admindocs',
     'crispy_forms',
     'graphviz',
@@ -113,3 +119,4 @@ LOGGING = {
 }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+ALLOWED_HOSTS = ['*']

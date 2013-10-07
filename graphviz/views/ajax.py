@@ -17,7 +17,7 @@ def graph_data_cytoscapejs(request):
                 root = etree.fromstring(xgmml)
                 for node in root.xpath('.//node'):
                     #label': node.attrib['label']
-                    n = {'data': {'weight': 1, 'id': node.attrib['id']}}
+                    n = {'data': {'weight': 1, 'id': node.attrib['id'], 'label': node.attrib['label']}}
                     graphics = node.find('.//graphics')
                     if graphics is not None:
                         n['position'] = {'x': float(graphics.attrib['x']), 'y': float(graphics.attrib['y'])}

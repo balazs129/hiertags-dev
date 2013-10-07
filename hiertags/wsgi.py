@@ -17,6 +17,8 @@ import os
 import sys
 from os.path import abspath, dirname, join
 
+import site
+site.addsitedir('/home/lovasb/.virtualenvs/hiertags/lib/python2.7/site-packages')
 
 sys.path.append(dirname(dirname(abspath(__file__))).replace('\\','/'))
 

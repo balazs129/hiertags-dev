@@ -1,1 +1,1180 @@
-{}
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"templ",
+				"template	import"
+			],
+			[
+				"F",
+				"FileField	import"
+			],
+			[
+				"con",
+				"contrib	import"
+			],
+			[
+				"render",
+				"render_to_response	function"
+			],
+			[
+				"log",
+				"login_required	function"
+			],
+			[
+				"de",
+				"decorators	import"
+			],
+			[
+				"demo",
+				"demoEdges"
+			],
+			[
+				"c",
+				"conf	import"
+			],
+			[
+				"Z",
+				"ZipFile	class"
+			],
+			[
+				"widget",
+				"widgets	import"
+			],
+			[
+				"wid",
+				"widgets	import"
+			],
+			[
+				"get",
+				"get_widget_attributes	function"
+			],
+			[
+				"widget_",
+				"widget_attrs"
+			],
+			[
+				"uni",
+				"unicode	class"
+			],
+			[
+				"w",
+				"widget_attrs"
+			],
+			[
+				"mul",
+				"multipleSelect"
+			],
+			[
+				"Select",
+				"SelectMupltipleWithCheckbox	class"
+			],
+			[
+				"Sele",
+				"SelectMupltipleWithCheckbox	class"
+			],
+			[
+				"pa",
+				"patterns	import"
+			],
+			[
+				"templa",
+				"template_name	param"
+			],
+			[
+				"mess",
+				"messages	import"
+			],
+			[
+				"date",
+				"datetime	class"
+			],
+			[
+				"g",
+				"get"
+			],
+			[
+				"Dat",
+				"DateTimeField	class"
+			],
+			[
+				"Da",
+				"DateTimeField	class"
+			],
+			[
+				"us",
+				"user_login	function"
+			],
+			[
+				"lo",
+				"login_required	function"
+			],
+			[
+				"own",
+				"own_projects"
+			],
+			[
+				"o",
+				"own_projects"
+			],
+			[
+				"active",
+				"actives	statement"
+			],
+			[
+				"P",
+				"Project	class"
+			],
+			[
+				"pro",
+				"project	import"
+			],
+			[
+				"Pro",
+				"ProjectIndex	import"
+			],
+			[
+				"m",
+				"messages	import"
+			],
+			[
+				"Re",
+				"RequestContext	import"
+			],
+			[
+				"Mo",
+				"ModelChoiceField	class"
+			],
+			[
+				"St",
+				"StatisticHelper	class"
+			],
+			[
+				"stat",
+				"statistic	statement"
+			],
+			[
+				"Proj",
+				"ProjectIndex	class"
+			],
+			[
+				"Pr",
+				"Project"
+			],
+			[
+				"Man",
+				"ManyToManyField	import"
+			],
+			[
+				"cl",
+				"clean_password"
+			],
+			[
+				"T",
+				"Team"
+			],
+			[
+				"ass",
+				"assigned_to"
+			],
+			[
+				"tr",
+				"transaction"
+			],
+			[
+				"Http",
+				"HttpResponse"
+			],
+			[
+				"index",
+				"indexes"
+			],
+			[
+				"value",
+				"values_list"
+			],
+			[
+				"filt",
+				"filt2"
+			],
+			[
+				"assig",
+				"assigned_objs"
+			],
+			[
+				"update",
+				"update_team"
+			],
+			[
+				"assi",
+				"assignee_required"
+			],
+			[
+				"Device",
+				"DeviceGroup"
+			],
+			[
+				"p",
+				"parallels"
+			],
+			[
+				"Team",
+				"TeamCrudHandler"
+			],
+			[
+				"conte",
+				"context_instance"
+			],
+			[
+				"inte",
+				"intervall_end"
+			],
+			[
+				"cle",
+				"cleaned_data"
+			],
+			[
+				"as",
+				"assignee_obj"
+			],
+			[
+				"fi",
+				"filter"
+			],
+			[
+				"in",
+				"instance"
+			],
+			[
+				"intervall",
+				"intervall_start"
+			],
+			[
+				"class",
+				"classmethod"
+			],
+			[
+				"re",
+				"relativedelta"
+			],
+			[
+				"get_",
+				"get_object_or_404"
+			],
+			[
+				"external",
+				"external-event"
+			],
+			[
+				"M",
+				"Member"
+			],
+			[
+				"all_",
+				"all_team_count"
+			],
+			[
+				"mem",
+				"members_new"
+			],
+			[
+				"memb",
+				"members_orig"
+			],
+			[
+				"end",
+				"end_date"
+			],
+			[
+				"propert",
+				"property	class"
+			],
+			[
+				"prop",
+				"property	class"
+			],
+			[
+				"exce",
+				"except	module"
+			],
+			[
+				"Ex",
+				"ExampleForm	import"
+			],
+			[
+				"colour",
+				"colourPicker"
+			],
+			[
+				"co",
+				"count"
+			],
+			[
+				"inter",
+				"intervall_start"
+			],
+			[
+				"eve",
+				"events	statement"
+			],
+			[
+				"ren",
+				"render_to_string	function"
+			],
+			[
+				"l",
+				"loader	import"
+			],
+			[
+				"a",
+				"allDay"
+			],
+			[
+				"For",
+				"FormHelper	import"
+			],
+			[
+				"Fo",
+				"FormHelper	class"
+			],
+			[
+				"Te",
+				"TeamCrudHandler	class"
+			],
+			[
+				"com",
+				"company	import"
+			],
+			[
+				"s",
+				"sites	import"
+			],
+			[
+				"unicde",
+				"unicode"
+			],
+			[
+				"sta",
+				"start_date	param"
+			],
+			[
+				"st",
+				"strftime"
+			],
+			[
+				"except",
+				"TakenException"
+			],
+			[
+				"assign",
+				"assigned_obj"
+			],
+			[
+				"mu",
+				"mutual_exclision_helper	import"
+			],
+			[
+				"E",
+				"ExclusionHelper	import"
+			],
+			[
+				"excl",
+				"exclude_obj"
+			],
+			[
+				"obj",
+				"objects"
+			],
+			[
+				"DAte",
+				"DateTimeField"
+			],
+			[
+				"isn",
+				"isinstance	function"
+			],
+			[
+				"posi",
+				"position_filters	statement"
+			],
+			[
+				"__cre",
+				"__create_clever_filters	function"
+			],
+			[
+				"event",
+				"event_type_filter"
+			],
+			[
+				"position",
+				"position_filters"
+			],
+			[
+				"to",
+				"today"
+			],
+			[
+				"da",
+				"date"
+			],
+			[
+				"tran",
+				"transfer_bus	statement"
+			],
+			[
+				"ac",
+				"active_passengers_count	statement"
+			],
+			[
+				"form",
+				"forms	import"
+			],
+			[
+				"pass",
+				"passenger	import"
+			],
+			[
+				"transfer_",
+				"transfer_passenger_count"
+			],
+			[
+				"assertN",
+				"assertNotEqual	function"
+			],
+			[
+				"__",
+				"__init__"
+			],
+			[
+				"base",
+				"base_views	import"
+			],
+			[
+				"assertI",
+				"assertNotIn	function"
+			],
+			[
+				"Pa",
+				"PassengerHandler	import"
+			],
+			[
+				"Tran",
+				"TransferListGenerator	import"
+			],
+			[
+				"Trans",
+				"TransferListGenerator	class"
+			],
+			[
+				"assert",
+				"assertEqual	function"
+			],
+			[
+				"comm",
+				"commit_on_success	function"
+			],
+			[
+				"C",
+				"CANT_CUT"
+			],
+			[
+				"Date",
+				"DateTimeField"
+			],
+			[
+				"selected_",
+				"selected_person"
+			],
+			[
+				"felhas",
+				"felhasznalo__username"
+			],
+			[
+				"Par",
+				"Partner	import"
+			],
+			[
+				"Part",
+				"PartnerBusDriverHandler	import"
+			],
+			[
+				"busz",
+				"buszceg	statement"
+			],
+			[
+				"Edit",
+				"EditDriverForm	class"
+			],
+			[
+				"Busz",
+				"BuszCeg	class"
+			],
+			[
+				"stati",
+				"statistics	param"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "hiertags/settings.py",
+			"settings":
+			{
+				"buffer_size": 2900,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "graphviz/views/views.py",
+			"settings":
+			{
+				"buffer_size": 621,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/registration/base.html",
+			"settings":
+			{
+				"buffer_size": 738,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "graphviz/urls.py",
+			"settings":
+			{
+				"buffer_size": 256,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/simple_form.html",
+			"settings":
+			{
+				"buffer_size": 967,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/base.html",
+			"settings":
+			{
+				"buffer_size": 3141,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "graphviz/forms.py",
+			"settings":
+			{
+				"buffer_size": 274,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 75.0,
+		"selected_items":
+		[
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/lovasb/WORK/ELTE/hiertags/graphviz/views/__init__.py",
+		"/home/lovasb/WORK/ELTE/hiertags/templates/cytoscape.html",
+		"/home/lovasb/WORK/ELTE/hiertags/hiertags/urls.py",
+		"/home/lovasb/WORK/ELTE/hiertags/site_media/js/demo.js",
+		"/home/lovasb/WORK/ELTE/hiertags/graphviz/views/ajax.py",
+		"/home/lovasb/WORK/ELTE/hiertags/templates/base.html",
+		"/home/lovasb/WORK/ELTE/hiertags/graphviz/load_data.py",
+		"/home/lovasb/WORK/ELTE/hiertags/graphviz/urls.py",
+		"/home/lovasb/WORK/ELTE/hiertags/graphviz/views.py",
+		"/home/lovasb/WORK/ELTE/hiertags/requirements.txt",
+		"/home/lovasb/WORK/ELTE/graphviz/templates/cytoscape.html",
+		"/home/lovasb/WORK/ELTE/graphviz/graphviz/settings.py",
+		"/home/lovasb/WORK/ELTE/graphviz/graphviz/urls.py",
+		"/home/lovasb/WORK/ELTE/graphviz/site_media/js/demo.js",
+		"/home/lovasb/WORK/ELTE/graphviz/templates/base.html",
+		"/home/lovasb/WORK/CODEHOUSE/REUSABLE/richforms/examples/richforms/static/richforms/css/multiple-select.css",
+		"/home/lovasb/WORK/CODEHOUSE/REUSABLE/richforms/examples/widgets/forms.py",
+		"/home/lovasb/WORK/CODEHOUSE/REUSABLE/richforms/examples/widgets/urls.py",
+		"/home/lovasb/WORK/CODEHOUSE/REUSABLE/richforms/examples/examples/settings.py",
+		"/home/lovasb/WORK/CODEHOUSE/REUSABLE/richforms/examples/examples/urls.py",
+		"/home/lovasb/WORK/CODEHOUSE/REUSABLE/richforms/examples/richforms/widgets.py",
+		"/home/lovasb/WORK/CODEHOUSE/REUSABLE/richforms/examples/richforms/templates/richforms/imports.html",
+		"/home/lovasb/WORK/CODEHOUSE/REUSABLE/richforms/examples/richforms/static/richforms/css/jqueryui.codehouse.css",
+		"/home/lovasb/WORK/CODEHOUSE/REUSABLE/richforms/examples/templates/base.html",
+		"/home/lovasb/WORK/CODEHOUSE/REUSABLE/richforms/examples/richforms/static/richforms/js/jquery.multiple.select.js",
+		"/home/lovasb/WORK/CODEHOUSE/REUSABLE/richforms/examples/NOTES.txt",
+		"/home/lovasb/WORK/CODEHOUSE/REUSABLE/richforms/examples/templates/widgets/widgets.html",
+		"/home/lovasb/WORK/CODEHOUSE/REUSABLE/richforms/examples/examples.sublime-project",
+		"/home/lovasb/WORK/CODEHOUSE/bango/bango.sublime-project",
+		"/home/lovasb/WORK/CODEHOUSE/bango/bango.sublime-workspace",
+		"/home/lovasb/WORK/LOVASSP/lovassp/team/migrations/0002_add_member_payed.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/team/views/views.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/team/crud.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/project/middleware.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/site_media/js/fullcalendar/fullcalendar.js",
+		"/home/lovasb/WORK/LOVASSP/lovassp/site_media/js/fullcalendar/fullcalendar.min.js",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/team/calendar.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/lovassp/dev_settings.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/project/context_processors.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/lovassp/settings.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/lovassp/urls.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/team/forms.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/team/views/ajax.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/base.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/project/models.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/project/decorators.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/project/performance_indexes.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/project/static/project/js/performance_index.js",
+		"/home/lovasb/WORK/LOVASSP/lovassp/project/views/ajax.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/project/forms.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/employee/forms.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/project/views/views.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/project/project_list.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/project/static/project/performace_index.js",
+		"/home/lovasb/WORK/LOVASSP/lovassp/employee/statistic.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/employee/views/views.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/employee/statistic.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/employee/models.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/requirements.txt",
+		"/home/lovasb/WORK/LOVASSP/lovassp/employee/urls.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/employee/migrations/0002_add_field_employee_base_salary.py",
+		"/home/lovasb/WORK/Personal/moderncv/examples/lb_cv.tex",
+		"/home/lovasb/WORK/LOVASSP/lovassp/team/models.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/team/statistic.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/employee/__init__.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/team/mutual_exclision_helper.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/employee/views/ajax.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/employee/crud.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/employee/fixtures/initial_data.json",
+		"/home/lovasb/WORK/LOVASSP/lovassp/employee/fixtures/employee.json",
+		"/home/lovasb/WORK/LOVASSP/lovassp/project/urls.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/site_media/js/project.js",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/employee/employee_list.html",
+		"/home/lovasb/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/lovasb/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/lovasb/WORK/LOVASSP/lovassp/device/models.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/device/fixtures/initial_data.json",
+		"/home/lovasb/WORK/LOVASSP/lovassp/device/fixtures/device_groups.json",
+		"/home/lovasb/WORK/LOVASSP/lovassp/project/fixtures/projects.json",
+		"/home/lovasb/WORK/LOVASSP/lovassp/employee/tests.py",
+		"/home/lovasb/WORK/CODEHOUSE/puppet_jegyzet.txt",
+		"/home/lovasb/WORK/LOVASSP/lovassp/team/urls.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/site_media/robots.txt",
+		"/home/lovasb/WORK/LOVASSP/lovassp/lovassp/views.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/device/views/ajax.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/device/crud.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/device/views/views.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/device/events.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/device/urls.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/device/device_list.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/device/device_list_data.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/company/company_list.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/company/models.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/company/company_list_data.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/company/forms.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/company/tests.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/company/crud.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/device/tests.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/employee/employee_list_data.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/site_media/js/lovassp.js",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/team/statistic.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/team/own_teams.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/team/tests.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/lovassp/middleware.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/team/save_benchmark.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/device/assignee_device.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/device/device_datapage.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/ajax_form.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/device/forms.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/team/__init__.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/team/views/__init__.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/project/crud.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/device/fixtures/devices.json",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/project/project_list_data.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/registration/login.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/project/project_datapage.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/project/tests.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/team/debug.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/site_media/css/colourPicker/jquery.colourPicker.css",
+		"/home/lovasb/WORK/LOVASSP/lovassp/site_media/css/lovassp.css",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/home.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/templates/team/new_team.html",
+		"/home/lovasb/WORK/LOVASSP/lovassp/project/fixtures/project.json",
+		"/home/lovasb/WORK/LOVASSP/lovassp/project/__init__.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/company/admin.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp_old/alkalmazott/models.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp/company/__init__.py",
+		"/home/lovasb/WORK/LOVASSP/lovassp_old/lovassp/settings.py"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/home/lovasb/WORK/LOVASSP/lovassp/project/static/project",
+			"*.py",
+			"-*bin/*,-*migrations/*,-*.json"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"v",
+			"close",
+			"font",
+			"img/multiple-select.png",
+			"multiple-select.png",
+			"stat",
+			"print",
+			"eszkoz.eszkoz",
+			"});\n",
+			"itt",
+			"assignee_obj =",
+			"assignee_obj = Work",
+			"assignee_obj=",
+			"print",
+			".assignee",
+			"()\n",
+			"print ",
+			"print",
+			"filters",
+			"assignee",
+			"confirm",
+			"dialog-confirm",
+			"exclusion",
+			"obj_is_assigned",
+			" \n",
+			"= ",
+			"%}",
+			"pk",
+			"actives",
+			"Member.objects",
+			"Ceg",
+			"True",
+			"print",
+			"color",
+			"tagit",
+			".colourpicker",
+			"team",
+			"alkalm",
+			"Projekt.objects",
+			"Projekt",
+			"Alkalmazott",
+			"anyja_neve",
+			"image",
+			"kep",
+			"bankszamlaszam",
+			"\"nev\"",
+			"nev",
+			"n",
+			"szul_datum",
+			"szigszam",
+			"lakcim_varos",
+			"szul_hely",
+			"adoszam",
+			"telefon",
+			"tajszam",
+			"lakcim_cim",
+			"lakcim_irszam",
+			"alkalmazott.alkalmazott",
+			"\n    ",
+			"team_data",
+			"emp2",
+			"6:",
+			"models",
+			"lemondva",
+			"get_bu",
+			"reverse",
+			"ajax",
+			"template",
+			"utasszam",
+			"transfer_order_pdf",
+			" \n",
+			"redmine",
+			"content",
+			"transa",
+			"print",
+			"person_data",
+			"Torok",
+			"partner",
+			"form",
+			"content",
+			"\"\n",
+			"generate_zip_for_bus_statistic",
+			" \n",
+			"manager",
+			"):\n",
+			"get_bus_data",
+			"lemondva",
+			"print",
+			"get_transfer_buses",
+			" \n",
+			"transfers",
+			"1114",
+			"500",
+			"username",
+			"retval",
+			"print",
+			"...\n",
+			"persistent",
+			"persistent_messages",
+			"add_"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"../img/multiple-select.png",
+			"img/multiple-select.png",
+			"device.device"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 5,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "hiertags/settings.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2900,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 104.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "graphviz/views/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 621,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								486,
+								486
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "templates/registration/base.html",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 738,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "graphviz/urls.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 256,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								154,
+								154
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 18.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "templates/simple_form.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 967,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								262,
+								262
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "templates/base.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3141,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								951,
+								951
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 205.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "graphviz/forms.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 274,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								210,
+								210
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"project": "hiertags.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"szemely/mode",
+				"szemely/models.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"budw",
+				"~/WORK/BUDWELCO/budwelco/budwelco/budwelco.sublime-workspace"
+			],
+			[
+				"bud",
+				"~/WORK/BUDWELCO/budwelco/budwelco.sublime-workspace"
+			],
+			[
+				"",
+				"~/WORK/BUDWELCO/budwelco/budwelco.sublime-project"
+			],
+			[
+				"budwe",
+				"~/WORK/BUDWELCO/budwelco/budwelco.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 220.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

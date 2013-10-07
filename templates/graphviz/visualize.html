@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/cytoscape/cytoscape.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/cytoscape/plugins/jquery.cytoscape-panzoom.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/cytoscape/plugins/jquery.cytoscape-navigator.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/cytoscape/jquery.cytoscape-panzoom.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/cytoscape/jquery.cytoscape-navigator.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/graphviz.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/graphviz.css" />
+{% endblock %}
+
+
+{% block content %}
+    <div class="col-md-12">
+        <div id="graph" style="display: table; width: 100%; height: 450px; margin-bottom: 50px;" data-url="{% url 'graphviz-data-cytoscapejs' %}"></div>
+    </div>
+{% endblock %}
