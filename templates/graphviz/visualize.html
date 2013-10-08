@@ -8,10 +8,49 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/cytoscape/jquery.cytoscape-navigator.css" />
     <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/graphviz.js"></script>
     <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/graphviz.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/jquery.fileupload-ui.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/jquery.fileupload.js"></script>
+    <script>
+$(function () {
+    'use strict';
+    // Change this to the location of your server-side upload handler:
+    var url = '/graphviz/data/cytoscapejs/';
+    var csrftoken = $.cookie('csrftoken');
+    $('#fileupload').fileupload({
+        url: url,
+        crossDomain: false,
+        beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        },
+        paramName: 'graph',
+        dataType: 'json', /* $('input:file') */
+        done: function (e, data) {
+            /* visualize graph */
+            visualize_graph('graph', data.result)
+        }
+    }).prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');
+});
+    </script>
 {% endblock %}
 
 
 {% block content %}
+    <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>Select files...</span>
+        <input id="fileupload" type="file" name="file" multiple>
+    </span>
+    <br>
+    <br>
+    <!-- The global progress bar -->
+    <div id="progress" class="progress">
+        <div class="progress-bar progress-bar-success"></div>
+    </div>
+    <!-- The container for the uploaded files -->
+    <div id="files" class="files"></div>
+    <br>
+
     <div class="col-md-12">
         <div id="graph" style="display: table; width: 100%; height: 450px; margin-bottom: 50px;" data-url="{% url 'graphviz-data-cytoscapejs' %}"></div>
     </div>

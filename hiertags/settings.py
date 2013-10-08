@@ -15,7 +15,7 @@ PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__)))).replace('\\','/')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': PROJECT_ROOT + '/hiertags/database.sq3',
+        'NAME': PROJECT_ROOT + '/database.sq3',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -120,3 +120,4 @@ LOGGING = {
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 ALLOWED_HOSTS = ['*']
+LOGIN_REDIRECT_URL = '/home/'
