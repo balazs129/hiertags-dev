@@ -8,6 +8,28 @@ cy.on('mousemove', function (e) {
                             })
 */
 
+$(function () {
+    'use strict';
+    // Change this to the location of your server-side upload handler:
+    var url = '/graphviz/data/cytoscapejs/';
+    var csrftoken = $.cookie('csrftoken');
+    $('#fileupload').fileupload({
+        url: url,
+        crossDomain: false,
+        beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        },
+        paramName: 'graph',
+        dataType: 'json', /* $('input:file') */
+        done: function (e, data) {
+            /* visualize graph */
+            visualize_graph('graph', data.result)
+        }
+    }).prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');
+});
+
+reloaded = false
 visualize_graph = function(div_id, retval) {
     $('#' + div_id).cytoscape({
         showOverlay: false,
@@ -28,13 +50,18 @@ visualize_graph = function(div_id, retval) {
                 'text-outline-opacity': '0.5'
         }),
         ready: function(){
-            console.log(retval.nodes.length)
-            console.log(retval.edges.length)
+            /* console.log(retval.nodes.length)
+            console.log(retval.edges.length) */
             var cy = this;
             $('#' + div_id).cytoscapePanzoom();
             $('#' + div_id).cytoscapeNavigator();
             cy.nodes().on('mouseover', function () {
-                factor = (1 / cy.zoom()) * 1.2
+                //console.log(cy.zoom())
+                if (cy.zoom() > 1.0) {
+                    factor = cy.zoom() * 1.1
+                } else {
+                    factor = (1 / cy.zoom()) * 1.2
+                }
                 if (this.data('origWidth') == undefined) {
                     this.data('origWidth', this.width())
                 }
@@ -42,7 +69,7 @@ visualize_graph = function(div_id, retval) {
                     this.data('origHeight', this.height())
                 }
                 this.animate({
-                    css: { 'width': this.width() * factor, 'height': this.height() * factor, 
+                    css: { 'width':  this.width() * factor, 'height': this.height() * factor, 
                            'font-size': 15 * factor, 'font-weight': '900' 
                     }, duration: 100
                 });
@@ -60,12 +87,3 @@ visualize_graph = function(div_id, retval) {
         }
     });
 }
-$(function() {
-    /*$.ajax({
-        url: $('#graph').data('url'),
-        async: false,
-        success: function(retval) {
-            
-        }
-    });*/
-});
