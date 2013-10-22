@@ -37,6 +37,7 @@
                     <li class="{% if act_menu == 'team' %}active{% endif %}"><a href="/team/">People</a></li>
                     {% if user.is_authenticated %}
                     <li class="{% if act_menu == 'graphviz' %}active{% endif %}"><a href="{% url 'graphviz-visualize' %}">Visualize</a></li>
+                    <li class="{% if act_menu == 'graphviz2' %}active{% endif %}"><a href="{% url 'graphviz-visualize2' %}">Visualize server side</a></li>
                     {% endif %}
                 </ul>
 

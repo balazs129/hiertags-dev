@@ -3,5 +3,6 @@ from . import views
 
 urlpatterns = patterns('',
     url(r'^$', views.visualize, name='graphviz-visualize'),
+    url(r'^serverside/$', views.visualize2, name='graphviz-visualize2'),
     url(r'^data/cytoscapejs/$', views.graph_data_cytoscapejs, name='graphviz-data-cytoscapejs'),
 )

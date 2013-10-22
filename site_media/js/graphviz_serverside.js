@@ -7,27 +7,6 @@ cy.on('mousemove', function (e) {
                                 console.log('---------------------')
                             })
 */
-$(function () {
-    'use strict';
-    // Change this to the location of your server-side upload handler:
-    var url = '/graphviz/data/cytoscapejs/';
-    var csrftoken = $.cookie('csrftoken');
-    $('#fileupload').fileupload({
-        url: url,
-        crossDomain: false,
-        beforeSend: function(xhr, settings) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        },
-        paramName: 'graph',
-        dataType: 'json', /* $('input:file') */
-        done: function (e, data) {
-            /* visualize graph */
-            visualize_graph('graph', data.result);
-        }
-    }).prop('disabled', !$.support.fileInput)
-        .parent().addClass($.support.fileInput ? undefined : 'disabled');
-});
-
 
 visualize_graph = function(div_id, retval) {
     console.log(retval)
