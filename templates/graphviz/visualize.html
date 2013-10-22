@@ -4,34 +4,13 @@
     <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/cytoscape/cytoscape.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/cytoscape/plugins/jquery.cytoscape-panzoom.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/cytoscape/plugins/jquery.cytoscape-navigator.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/cytoscape/cytoscape.renderer.canvas.js"></script>
     <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/cytoscape/jquery.cytoscape-panzoom.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/cytoscape/jquery.cytoscape-navigator.css" />
     <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/graphviz.js"></script>
     <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/graphviz.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/jquery.fileupload-ui.css" />
     <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/jquery.fileupload.js"></script>
-    <script>
-$(function () {
-    'use strict';
-    // Change this to the location of your server-side upload handler:
-    var url = '/graphviz/data/cytoscapejs/';
-    var csrftoken = $.cookie('csrftoken');
-    $('#fileupload').fileupload({
-        url: url,
-        crossDomain: false,
-        beforeSend: function(xhr, settings) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        },
-        paramName: 'graph',
-        dataType: 'json', /* $('input:file') */
-        done: function (e, data) {
-            /* visualize graph */
-            visualize_graph('graph', data.result)
-        }
-    }).prop('disabled', !$.support.fileInput)
-        .parent().addClass($.support.fileInput ? undefined : 'disabled');
-});
-    </script>
 {% endblock %}
 
 

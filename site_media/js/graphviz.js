@@ -7,7 +7,6 @@ cy.on('mousemove', function (e) {
                                 console.log('---------------------')
                             })
 */
-
 $(function () {
     'use strict';
     // Change this to the location of your server-side upload handler:
@@ -23,17 +22,18 @@ $(function () {
         dataType: 'json', /* $('input:file') */
         done: function (e, data) {
             /* visualize graph */
-            visualize_graph('graph', data.result)
+            visualize_graph('graph', data.result);
         }
     }).prop('disabled', !$.support.fileInput)
         .parent().addClass($.support.fileInput ? undefined : 'disabled');
 });
 
-reloaded = false
+
 visualize_graph = function(div_id, retval) {
     $('#' + div_id).cytoscape({
         showOverlay: false,
         maxZoom: 2,
+        renderer: { name: 'canvas'},
         layout: {
             name: 'preset'
         },

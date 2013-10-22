@@ -28,6 +28,8 @@ class FileHandler(object):
                     if line.startswith('#'):
                         continue
                     line = line.strip().split(' ')
+                    if len(line) < 2:
+                        line = line.split('\t')
                     self.graph.add_node(line[0], {'label': line[1], 'weight': 1})
                 for line in zf.open('edges.txt').readlines():
                     if line.startswith('#') or not len(line.strip()):
