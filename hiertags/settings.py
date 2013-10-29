@@ -74,6 +74,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.core.context_processors.media',
     'hiertags.context_processors.act_menu',
+    'django.contrib.messages.context_processors.messages',
 )
 
 TEMPLATE_DIRS = (

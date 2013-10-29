@@ -8,6 +8,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/cytoscape/cytoscape.renderer.canvas.js"></script>
     <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/cytoscape/jquery.cytoscape-panzoom.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/cytoscape/jquery.cytoscape-navigator.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/jquery.cxtmenu.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/graphviz_serverside.js"></script>
     <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/graphviz.css" />
     <script type="text/javascript">
@@ -25,6 +26,7 @@
 {% block content %}
     <div class="col-md-12">
         {% crispy form form.helper %}
+        <button type="button" id="showall" class="btn btn-lg btn-primary" disabled="disabled">Show all nodes</button>
         <div id="graph" style="display: table; width: 100%; height: 450px; margin-bottom: 50px;" data-url="{% url 'graphviz-data-cytoscapejs' %}"></div>
     </div>
 {% endblock %}

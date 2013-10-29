@@ -4,6 +4,10 @@ from lxml import etree
 from zipfile import ZipFile
 
 
+class BadExtensionException(Exception):
+    def __str__(self):
+        return u"Wrong file format! Please use xgmml or zip file."
+
 
 class FileHandler(object):
 
@@ -27,9 +31,11 @@ class FileHandler(object):
                 for line in zf.open('nodes.txt').readlines():
                     if line.startswith('#'):
                         continue
-                    line = line.strip().split(' ')
+                    line = line.strip().split('\t')
                     if len(line) < 2:
-                        line = line.split('\t')
+                        line = line[0].split(' ')
+                    if len(line) > 2:
+                        line = [line[0], ' '.join(p for p in line[1:])]
                     self.graph.add_node(line[0], {'label': line[1], 'weight': 1})
                 for line in zf.open('edges.txt').readlines():
                     if line.startswith('#') or not len(line.strip()):
@@ -45,6 +51,8 @@ class FileHandler(object):
                 self.graph.add_node(node.attrib['id'], {'label': node.attrib['label'], 'weight': 1})
             for edge in root.xpath('.//edge'):
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
+        else:
+            raise BadExtensionException()
 
     def get_graph_with_positions(self):
         nodes, edges = [], []

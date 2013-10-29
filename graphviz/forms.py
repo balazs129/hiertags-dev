@@ -12,4 +12,4 @@ class GraphUploadForm(forms.Form):
         self.helper.form_method = 'post'
         self.helper.form_style = 'inline'
         self.helper.form_class = 'form-horizontal search_form'
-        self.helper.add_input(Submit('submit', 'Send'))
+        self.helper.add_input(Submit('submit', 'Submit'))
