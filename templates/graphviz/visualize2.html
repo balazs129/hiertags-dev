@@ -25,6 +25,7 @@
 
 {% block content %}
     <div class="col-md-12">
+        <p>{{ description|safe }}</p>
         {% crispy form form.helper %}
         <button type="button" id="showall" class="btn btn-lg btn-primary" disabled="disabled">Show all nodes</button>
         <div id="graph" style="display: table; width: 100%; height: 450px; margin-bottom: 50px;" data-url="{% url 'graphviz-data-cytoscapejs' %}"></div>

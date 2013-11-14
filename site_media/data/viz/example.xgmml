@@ -1,0 +1,2632 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<graph label="annots_guardian_nowhitespaces_tag_hierarchy_B-corrected-min5obj.txt" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cy="http://www.cytoscape.org" xmlns="http://www.cs.rpi.edu/XGMML"  directed="1">
+  <att name="documentVersion" value="1.1"/>
+  <att name="networkMetadata">
+    <rdf:RDF>
+      <rdf:Description rdf:about="http://www.cytoscape.org/">
+        <dc:type>Protein-Protein Interaction</dc:type>
+        <dc:description>N/A</dc:description>
+        <dc:identifier>N/A</dc:identifier>
+        <dc:date>2013-09-27 17:49:57</dc:date>
+        <dc:title>annots_guardian_nowhitespaces_tag_hierarchy_B-corrected-min5obj.txt</dc:title>
+        <dc:source>http://www.cytoscape.org/</dc:source>
+        <dc:format>Cytoscape-XGMML</dc:format>
+      </rdf:Description>
+    </rdf:RDF>
+  </att>
+  <att type="string" name="backgroundColor" value="#ccccff"/>
+  <att type="real" name="GRAPH_VIEW_ZOOM" value="0.1653524230799045"/>
+  <att type="real" name="GRAPH_VIEW_CENTER_X" value="5051.917024697517"/>
+  <att type="real" name="GRAPH_VIEW_CENTER_Y" value="219.24511434746358"/>
+  <att type="boolean" name="NODE_SIZE_LOCKED" value="true"/>
+  <att type="string" name="__layoutAlgorithm" value="grid" cy:hidden="true"/>
+  <node label="Newspapers &amp; magazines" id="-603">
+    <att type="string" name="canonicalName" value="Newspapers &amp; magazines"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2526.359130859375" y="187.66819763183594" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Phone hacking" id="-690">
+    <att type="string" name="canonicalName" value="Phone hacking"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2487.699462890625" y="463.8027038574219" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="National newspapers" id="-587">
+    <att type="string" name="canonicalName" value="National newspapers"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2487.699462890625" y="373.8027038574219" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="News of the World" id="-601">
+    <att type="string" name="canonicalName" value="News of the World"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2585.82373046875" y="373.03582763671875" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Newspapers" id="-602">
+    <att type="string" name="canonicalName" value="Newspapers"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99993896484375" w="40.0" x="2527.892333984375" y="278.43499755859375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Public services policy" id="-736">
+    <att type="string" name="canonicalName" value="Public services policy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="-483.62646484375" y="369.1629943847656" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Crime" id="-808">
+    <att type="string" name="canonicalName" value="Crime"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3366.912353515625" y="89.912109375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Public finance" id="-729">
+    <att type="string" name="canonicalName" value="Public finance"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="-483.62646484375" y="549.1630249023438" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Public sector cuts" id="-731">
+    <att type="string" name="canonicalName" value="Public sector cuts"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="-483.62646484375" y="459.1629943847656" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="David Cameron" id="-370">
+    <att type="string" name="canonicalName" value="David Cameron"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1623.8916015625" y="189.24658203125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="James Murdoch" id="-979">
+    <att type="string" name="canonicalName" value="James Murdoch"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2926.661376953125" y="186.1345672607422" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="London" id="-702">
+    <att type="string" name="canonicalName" value="London"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3167.399169921875" y="90.04393005371094" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Liberal-Conservative coalition" id="-1108">
+    <att type="string" name="canonicalName" value="Liberal-Conservative coalition"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="40.0" x="1908.2996826171875" y="279.24659729003906" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="November 30 public sector strike" id="-625">
+    <att type="string" name="canonicalName" value="November 30 public sector strike"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="-410.92791748046875" y="459.1629943847656" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Rupert Murdoch" id="-809">
+    <att type="string" name="canonicalName" value="Rupert Murdoch"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3006.272216796875" y="365.3677978515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Occupy London" id="-635">
+    <att type="string" name="canonicalName" value="Occupy London"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00001525878906" w="40.0" x="3271.583251953125" y="272.2229537963867" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="House of Commons" id="-498">
+    <att type="string" name="canonicalName" value="House of Commons"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1690.2037353515625" y="369.24658203125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Theresa May" id="-967">
+    <att type="string" name="canonicalName" value="Theresa May"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="40.0" x="1690.2037353515625" y="279.24659729003906" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Privacy &amp; the media" id="-724">
+    <att type="string" name="canonicalName" value="Privacy &amp; the media"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2572.66748046875" y="461.5022277832031" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Media business" id="-1155">
+    <att type="string" name="canonicalName" value="Media business"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2853.525146484375" y="364.6009216308594" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Press intrusion" id="-718">
+    <att type="string" name="canonicalName" value="Press intrusion"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2645.1318359375" y="459.96856689453125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Conservatives" id="-826">
+    <att type="string" name="canonicalName" value="Conservatives"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1908.2996826171875" y="189.24658203125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Metropolitan police" id="-543">
+    <att type="string" name="canonicalName" value="Metropolitan police"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3038.1083984375" y="270.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Anglicanism" id="-806">
+    <att type="string" name="canonicalName" value="Anglicanism"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3192.039794921875" y="541.3381958007812" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Tax and spending" id="-923">
+    <att type="string" name="canonicalName" value="Tax and spending"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="40.0" x="1544.8065185546875" y="279.24659729003906" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Recession" id="-764">
+    <att type="string" name="canonicalName" value="Recession"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1475.5985107421875" y="280.1390686035156" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Economic policy" id="-1083">
+    <att type="string" name="canonicalName" value="Economic policy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1540.5089111328125" y="190.43370056152344" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Milly Dowler" id="-556">
+    <att type="string" name="canonicalName" value="Milly Dowler"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2717.830810546875" y="459.96856689453125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Live video" id="-478">
+    <att type="string" name="canonicalName" value="Live video"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2790.529541015625" y="459.96856689453125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Leveson inquiry" id="-788">
+    <att type="string" name="canonicalName" value="Leveson inquiry"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2685.660400390625" y="369.2017517089844" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Young people" id="-1138">
+    <att type="string" name="canonicalName" value="Young people"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.999969482421875" x="332.36476135253906" y="370.6812438964844" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Police" id="-1022">
+    <att type="string" name="canonicalName" value="Police"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3074.440673828125" y="178.45889282226562" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Andrew Lansley" id="-279">
+    <att type="string" name="canonicalName" value="Andrew Lansley"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.00001525878906" x="219.03101348876953" y="555.2362060546875" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Health policy" id="-353">
+    <att type="string" name="canonicalName" value="Health policy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="40.00001525878906" x="219.03101348876953" y="465.2361297607422" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Ed Miliband" id="-657">
+    <att type="string" name="canonicalName" value="Ed Miliband"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1835.6009521484375" y="369.24658203125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Labour" id="-984">
+    <att type="string" name="canonicalName" value="Labour"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="40.0" x="1835.6009521484375" y="279.24659729003906" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Francis Maude" id="-290">
+    <att type="string" name="canonicalName" value="Francis Maude"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="-563.2954711914062" y="457.644775390625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Danny Alexander" id="-191">
+    <att type="string" name="canonicalName" value="Danny Alexander"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="-563.2954711914062" y="367.644775390625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Pensions" id="-1057">
+    <att type="string" name="canonicalName" value="Pensions"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000091552734375" x="-338.22923278808594" y="459.1629943847656" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Nick Clegg" id="-606">
+    <att type="string" name="canonicalName" value="Nick Clegg"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1980.9981689453125" y="369.24658203125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Liberal Democrats" id="-607">
+    <att type="string" name="canonicalName" value="Liberal Democrats"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="40.0" x="1980.9981689453125" y="279.24659729003906" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="William Hague" id="-1116">
+    <att type="string" name="canonicalName" value="William Hague"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00001525878906" w="40.0" x="2362.413818359375" y="275.86104583740234" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Foreign policy" id="-285">
+    <att type="string" name="canonicalName" value="Foreign policy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2362.413818359375" y="185.8610382080078" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Communities" id="-310">
+    <att type="string" name="canonicalName" value="Communities"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000030517578125" w="40.000030517578125" x="499.0181121826172" y="279.16297912597656" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Ministry of Defence" id="-1004">
+    <att type="string" name="canonicalName" value="Ministry of Defence"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3786.903564453125" y="270.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Defence policy" id="-203">
+    <att type="string" name="canonicalName" value="Defence policy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3786.903564453125" y="180.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Protest" id="-727">
+    <att type="string" name="canonicalName" value="Protest"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00001525878906" w="40.0" x="3425.188720703125" y="270.68184661865234" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Autumn statement 2011" id="-54">
+    <att type="string" name="canonicalName" value="Autumn statement 2011"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1618.4765625" y="371.0315856933594" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="George Osborne" id="-316">
+    <att type="string" name="canonicalName" value="George Osborne"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="40.0" x="1618.4765625" y="281.03160095214844" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="The Sun" id="-960">
+    <att type="string" name="canonicalName" value="The Sun"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2387.595458984375" y="465.3363037109375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="News International" id="-981">
+    <att type="string" name="canonicalName" value="News International"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2387.595458984375" y="375.3363037109375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Brendan Barber" id="-634">
+    <att type="string" name="canonicalName" value="Brendan Barber"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.99993896484375" x="-234.00526428222656" y="366.1264343261719" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Trade unions" id="-992">
+    <att type="string" name="canonicalName" value="Trade unions"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="39.99993896484375" x="-383.957275390625" y="274.6080856323242" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="News Corporation" id="-938">
+    <att type="string" name="canonicalName" value="News Corporation"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2926.661376953125" y="276.1345520019531" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="UK riots" id="-1021">
+    <att type="string" name="canonicalName" value="UK riots"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3110.806884765625" y="270.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Education policy" id="-929">
+    <att type="string" name="canonicalName" value="Education policy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="40.0" x="2199.0947265625" y="279.24659729003906" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Education" id="-1008">
+    <att type="string" name="canonicalName" value="Education"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000244140625" x="2126.3963623046875" y="189.24658203125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Unemployment and employment statistics" id="-1054">
+    <att type="string" name="canonicalName" value="Unemployment and employment statistics"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="405.0633544921875" y="370.6812438964844" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Unemployment" id="-1139">
+    <att type="string" name="canonicalName" value="Unemployment"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="39.99993896484375" x="367.5986633300781" y="280.68125915527344" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="TUC" id="-916">
+    <att type="string" name="canonicalName" value="TUC"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000091552734375" x="-338.22923278808594" y="639.1630249023438" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Public sector pay" id="-732">
+    <att type="string" name="canonicalName" value="Public sector pay"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000091552734375" x="-338.22923278808594" y="549.1630249023438" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Vince Cable" id="-1082">
+    <att type="string" name="canonicalName" value="Vince Cable"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1308.4432373046875" y="191.0039825439453" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Independent Police Complaints Commission" id="-769">
+    <att type="string" name="canonicalName" value="Independent Police Complaints Commission"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3110.806884765625" y="360.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Poverty" id="-714">
+    <att type="string" name="canonicalName" value="Poverty"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000030517578125" w="40.00007629394531" x="-198.41699981689453" y="276.1263885498047" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Housing" id="-1018">
+    <att type="string" name="canonicalName" value="Housing"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000030517578125" x="499.0181121826172" y="369.1629943847656" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Child protection" id="-943">
+    <att type="string" name="canonicalName" value="Child protection"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000244140625" x="712.8658447265625" y="368.263427734375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Children" id="-867">
+    <att type="string" name="canonicalName" value="Children"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000030517578125" w="40.000244140625" x="712.8658447265625" y="278.26341247558594" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Remembrance Day" id="-839">
+    <att type="string" name="canonicalName" value="Remembrance Day"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3859.60205078125" y="180.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Military" id="-775">
+    <att type="string" name="canonicalName" value="Military"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3822.702392578125" y="89.85611724853516" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Media law" id="-918">
+    <att type="string" name="canonicalName" value="Media law"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3376.89404296875" y="179.2294464111328" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Property" id="-725">
+    <att type="string" name="canonicalName" value="Property"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000030517578125" x="499.0181121826172" y="459.1629943847656" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Civil service" id="-148">
+    <att type="string" name="canonicalName" value="Civil service"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.99992370605469" x="-265.53052520751953" y="459.1629943847656" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Public sector pensions" id="-733">
+    <att type="string" name="canonicalName" value="Public sector pensions"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000091552734375" x="-338.22923278808594" y="369.1629943847656" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Money" id="-1129">
+    <att type="string" name="canonicalName" value="Money"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000030517578125" w="39.99998474121094" x="-42.94782257080078" y="278.2742156982422" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Tony Blair" id="-983">
+    <att type="string" name="canonicalName" value="Tony Blair"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2221.614013671875" y="188.28500366210938" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Social care" id="-866">
+    <att type="string" name="canonicalName" value="Social care"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000030517578125" w="40.0" x="577.0546875" y="278.50257873535156" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Transport policy" id="-994">
+    <att type="string" name="canonicalName" value="Transport policy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3932.300537109375" y="180.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Brodie Clark" id="-105">
+    <att type="string" name="canonicalName" value="Brodie Clark"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="40.0" x="1762.9024658203125" y="279.24659729003906" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Immigration and asylum" id="-472">
+    <att type="string" name="canonicalName" value="Immigration and asylum"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1726.5531005859375" y="189.24658203125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="BBC" id="-735">
+    <att type="string" name="canonicalName" value="BBC"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2641.253173828125" y="185.3677520751953" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Prisons and probation" id="-843">
+    <att type="string" name="canonicalName" value="Prisons and probation"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99998474121094" w="40.0" x="3547.736083984375" y="269.2294387817383" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="UK criminal justice" id="-1143">
+    <att type="string" name="canonicalName" value="UK criminal justice"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3547.736083984375" y="179.2294464111328" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Doctors" id="-213">
+    <att type="string" name="canonicalName" value="Doctors"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="39.999847412109375" x="291.72959899902344" y="465.2361297607422" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="NHS" id="-579">
+    <att type="string" name="canonicalName" value="NHS"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="249.71002197265625" y="373.7178649902344" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Higher education" id="-834">
+    <att type="string" name="canonicalName" value="Higher education"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="40.000244140625" x="2126.3963623046875" y="279.24659729003906" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Society" id="-993">
+    <att type="string" name="canonicalName" value="Society"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.99993896484375" x="236.38967895507812" y="189.16302490234375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Tuition fees" id="-1066">
+    <att type="string" name="canonicalName" value="Tuition fees"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.999755859375" x="2084.0467529296875" y="459.2466125488281" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Michael Gove" id="-889">
+    <att type="string" name="canonicalName" value="Michael Gove"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000732421875" x="2053.6968994140625" y="369.24658203125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Schools" id="-1007">
+    <att type="string" name="canonicalName" value="Schools"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="40.000732421875" x="2053.6968994140625" y="279.24659729003906" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Green politics" id="-335">
+    <att type="string" name="canonicalName" value="Green politics"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.9998779296875" x="2015.4596557617188" y="186.3618927001953" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="BSkyB" id="-1050">
+    <att type="string" name="canonicalName" value="BSkyB"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2926.2236328125" y="454.6009216308594" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Television industry" id="-937">
+    <att type="string" name="canonicalName" value="Television industry"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2926.2236328125" y="364.6009216308594" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="UK security and terrorism" id="-1023">
+    <att type="string" name="canonicalName" value="UK security and terrorism"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000244140625" x="2289.2149658203125" y="186.95077514648438" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Cuts and closures" id="-182">
+    <att type="string" name="canonicalName" value="Cuts and closures"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2168.37109375" y="459.24658203125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Students" id="-1063">
+    <att type="string" name="canonicalName" value="Students"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000244140625" x="2126.3963623046875" y="369.24658203125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Local government" id="-482">
+    <att type="string" name="canonicalName" value="Local government"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="577.0546875" y="368.5025939941406" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Bank of England" id="-639">
+    <att type="string" name="canonicalName" value="Bank of England"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="39.99945068359375" x="984.4402770996094" y="457.03993225097656" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Economic growth (GDP)" id="-744">
+    <att type="string" name="canonicalName" value="Economic growth (GDP)"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.99945068359375" x="984.4402770996094" y="367.0399475097656" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="House of Lords" id="-743">
+    <att type="string" name="canonicalName" value="House of Lords"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1816.0372314453125" y="188.28501892089844" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Politics" id="-1133">
+    <att type="string" name="canonicalName" value="Politics"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1904.7447509765625" y="90.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Job hunting" id="-418">
+    <att type="string" name="canonicalName" value="Job hunting"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.00007629394531" x="-162.64507293701172" y="462.1995544433594" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Pay" id="-672">
+    <att type="string" name="canonicalName" value="Pay"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.999996185302734" x="-79.0416431427002" y="462.1995544433594" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Work &amp; careers" id="-1128">
+    <att type="string" name="canonicalName" value="Work &amp; careers"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000083923339844" x="-111.20276260375977" y="373.71783447265625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Executive pay and bonuses" id="-256">
+    <att type="string" name="canonicalName" value="Executive pay and bonuses"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1230.1417236328125" y="453.25128173828125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Family finances" id="-1025">
+    <att type="string" name="canonicalName" value="Family finances"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.99999237060547" x="-6.343061447143555" y="462.1995544433594" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Media" id="-752">
+    <att type="string" name="canonicalName" value="Media"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2738.052490234375" y="90.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Financial sector" id="-267">
+    <att type="string" name="canonicalName" value="Financial sector"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00006103515625" w="40.0" x="1441.0262451171875" y="545.1650085449219" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Banking" id="-1087">
+    <att type="string" name="canonicalName" value="Banking"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1441.0262451171875" y="455.16510009765625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Health" id="-538">
+    <att type="string" name="canonicalName" value="Health"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.999969482421875" x="201.5661163330078" y="280.6812744140625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Iraq" id="-819">
+    <att type="string" name="canonicalName" value="Iraq"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000038146972656" w="40.0" x="5663.18017578125" y="93.74908065795898" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Consumer affairs" id="-970">
+    <att type="string" name="canonicalName" value="Consumer affairs"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000006675720215" x="28.602783679962158" y="372.8290710449219" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Road transport" id="-797">
+    <att type="string" name="canonicalName" value="Road transport"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="4004.99951171875" y="180.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Travel" id="-996">
+    <att type="string" name="canonicalName" value="Travel"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.9998779296875" x="1294.3755493164062" y="547.0787353515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Northern Ireland" id="-816">
+    <att type="string" name="canonicalName" value="Northern Ireland"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00001525878906" w="39.99951171875" x="3742.10498046875" y="87.25669860839844" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Race issues" id="-746">
+    <att type="string" name="canonicalName" value="Race issues"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00001525878906" w="40.0" x="3268.88623046875" y="90.00003814697266" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Extradition" id="-253">
+    <att type="string" name="canonicalName" value="Extradition"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="2775.23779296875" y="187.6681365966797" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Rail transport" id="-1000">
+    <att type="string" name="canonicalName" value="Rail transport"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="4077.69775390625" y="180.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Transport" id="-995">
+    <att type="string" name="canonicalName" value="Transport"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="4005.971923828125" y="88.45889282226562" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Mortgages" id="-567">
+    <att type="string" name="canonicalName" value="Mortgages"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000030517578125" x="499.0181121826172" y="549.1630249023438" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Thomas Cook" id="-1002">
+    <att type="string" name="canonicalName" value="Thomas Cook"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0001220703125" x="1367.0742797851562" y="547.0787353515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Travel &amp; leisure" id="-997">
+    <att type="string" name="canonicalName" value="Travel &amp; leisure"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1326.8140869140625" y="455.1650390625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Business" id="-998">
+    <att type="string" name="canonicalName" value="Business"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1298.67333984375" y="362.4855651855469" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Christianity" id="-141">
+    <att type="string" name="canonicalName" value="Christianity"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3237.5615234375" y="452.9935302734375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Drugs" id="-585">
+    <att type="string" name="canonicalName" value="Drugs"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00001525878906" w="40.0" x="3456.804443359375" y="89.08558654785156" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Monarchy" id="-793">
+    <att type="string" name="canonicalName" value="Monarchy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3651.122802734375" y="85.42781066894531" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Economics" id="-1055">
+    <att type="string" name="canonicalName" value="Economics"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1096.0784912109375" y="274.01788330078125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Gun crime" id="-1100">
+    <att type="string" name="canonicalName" value="Gun crime"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3110.806884765625" y="540.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Mark Duggan" id="-950">
+    <att type="string" name="canonicalName" value="Mark Duggan"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3110.806884765625" y="450.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Equality" id="-1121">
+    <att type="string" name="canonicalName" value="Equality"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000030517578125" w="40.0" x="643.4044189453125" y="277.5290985107422" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="WikiLeaks" id="-1111">
+    <att type="string" name="canonicalName" value="WikiLeaks"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000030517578125" w="40.0" x="2775.23779296875" y="367.66819763183594" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Julian Assange" id="-434">
+    <att type="string" name="canonicalName" value="Julian Assange"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00006103515625" w="40.0" x="2775.23779296875" y="277.66815185546875" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Egypt" id="-578">
+    <att type="string" name="canonicalName" value="Egypt"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="40.0" x="5168.1259765625" y="270.38526916503906" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Arab and Middle East unrest" id="-728">
+    <att type="string" name="canonicalName" value="Arab and Middle East unrest"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5207.22705078125" y="180.9837188720703" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Real estate" id="-759">
+    <att type="string" name="canonicalName" value="Real estate"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000030517578125" x="499.0181121826172" y="729.1630249023438" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Housing market" id="-371">
+    <att type="string" name="canonicalName" value="Housing market"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000030517578125" x="499.0181121826172" y="639.1630249023438" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Human rights" id="-1112">
+    <att type="string" name="canonicalName" value="Human rights"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3620.434326171875" y="179.2294464111328" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Currencies" id="-245">
+    <att type="string" name="canonicalName" value="Currencies"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.9998779296875" x="1069.6074829101562" y="638.03564453125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="IMF" id="-378">
+    <att type="string" name="canonicalName" value="IMF"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="40.0001220703125" x="830.8532104492188" y="457.0399932861328" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="G20" id="-303">
+    <att type="string" name="canonicalName" value="G20"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0001220703125" x="830.8532104492188" y="367.0400085449219" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="UK news" id="-1093">
+    <att type="string" name="canonicalName" value="UK news"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999977111816406" w="40.0" x="3227.95703125" y="-60.90187454223633" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Angela Merkel" id="-32">
+    <att type="string" name="canonicalName" value="Angela Merkel"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.9998779296875" x="1144.3613891601562" y="637.0787963867188" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="European banks" id="-318">
+    <att type="string" name="canonicalName" value="European banks"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00006103515625" w="39.9998779296875" x="1144.3613891601562" y="547.0787658691406" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Global recession" id="-324">
+    <att type="string" name="canonicalName" value="Global recession"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="40.00006103515625" x="903.5520324707031" y="457.0399932861328" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Global economy" id="-758">
+    <att type="string" name="canonicalName" value="Global economy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.00006103515625" x="903.5520324707031" y="367.0400085449219" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Advertising" id="-865">
+    <att type="string" name="canonicalName" value="Advertising"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3291.096923828125" y="632.8793334960938" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Catholicism" id="-706">
+    <att type="string" name="canonicalName" value="Catholicism"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3290.109130859375" y="542.2230224609375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Fossil fuels" id="-288">
+    <att type="string" name="canonicalName" value="Fossil fuels"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000030517578125" w="40.0" x="1527.5126953125" y="458.03578186035156" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Syria" id="-915">
+    <att type="string" name="canonicalName" value="Syria"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99998474121094" w="40.0" x="5241.39013671875" y="272.10941314697266" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="European monetary union" id="-248">
+    <att type="string" name="canonicalName" value="European monetary union"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="774.3956298828125" y="729.949462890625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Silvio Berlusconi" id="-941">
+    <att type="string" name="canonicalName" value="Silvio Berlusconi"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1215.0045166015625" y="638.03564453125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Italy" id="-401">
+    <att type="string" name="canonicalName" value="Italy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1215.0045166015625" y="548.03564453125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="George Papandreou" id="-317">
+    <att type="string" name="canonicalName" value="George Papandreou"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.00006103515625" x="924.2112731933594" y="728.03564453125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Financial crisis" id="-903">
+    <att type="string" name="canonicalName" value="Financial crisis"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.99920654296875" x="996.9094543457031" y="728.03564453125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="France" id="-717">
+    <att type="string" name="canonicalName" value="France"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="4832.67724609375" y="272.1093978881836" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Nicolas Sarkozy" id="-1127">
+    <att type="string" name="canonicalName" value="Nicolas Sarkozy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="4832.67724609375" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Bonds" id="-92">
+    <att type="string" name="canonicalName" value="Bonds"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.99993896484375" x="851.5124816894531" y="728.03564453125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="European Union" id="-323">
+    <att type="string" name="canonicalName" value="European Union"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.99993896484375" x="815.1631774902344" y="638.03564453125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Greece" id="-526">
+    <att type="string" name="canonicalName" value="Greece"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.99920654296875" x="996.9094543457031" y="638.03564453125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="New York" id="-1078">
+    <att type="string" name="canonicalName" value="New York"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3201.224609375" y="362.2229919433594" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Occupy Wall Street" id="-637">
+    <att type="string" name="canonicalName" value="Occupy Wall Street"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000030517578125" w="40.0" x="3201.224609375" y="272.2229766845703" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="European Central Bank" id="-241">
+    <att type="string" name="canonicalName" value="European Central Bank"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0001220703125" x="911.6942749023438" y="639.9495239257812" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Euro" id="-242">
+    <att type="string" name="canonicalName" value="Euro"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.99993896484375" x="959.2956237792969" y="546.1218872070312" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Palestinian territories" id="-986">
+    <att type="string" name="canonicalName" value="Palestinian territories"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="5598.38818359375" y="272.1093978881836" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Israel" id="-954">
+    <att type="string" name="canonicalName" value="Israel"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5598.38818359375" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Iran" id="-1117">
+    <att type="string" name="canonicalName" value="Iran"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5525.6904296875" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Global terrorism" id="-1149">
+    <att type="string" name="canonicalName" value="Global terrorism"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000244140625" x="2289.2149658203125" y="366.9507751464844" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Terrorism policy" id="-1068">
+    <att type="string" name="canonicalName" value="Terrorism policy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999969482421875" w="40.000244140625" x="2289.2149658203125" y="276.95079040527344" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Yemen" id="-1136">
+    <att type="string" name="canonicalName" value="Yemen"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000030517578125" w="40.0" x="5241.39013671875" y="452.1094207763672" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Bashar Al-Assad" id="-1137">
+    <att type="string" name="canonicalName" value="Bashar Al-Assad"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5241.39013671875" y="362.1094055175781" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="US foreign policy" id="-1030">
+    <att type="string" name="canonicalName" value="US foreign policy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00004577636719" w="40.0" x="6183.37158203125" y="94.49907684326172" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Airline industry" id="-1085">
+    <att type="string" name="canonicalName" value="Airline industry"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5821.81005859375" y="183.84600830078125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Air transport" id="-356">
+    <att type="string" name="canonicalName" value="Air transport"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00004577636719" w="40.0" x="5821.81005859375" y="93.84600830078125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Islam" id="-741">
+    <att type="string" name="canonicalName" value="Islam"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3309.569580078125" y="452.3033752441406" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Religion" id="-773">
+    <att type="string" name="canonicalName" value="Religion"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3271.583251953125" y="362.22296142578125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Market turmoil" id="-525">
+    <att type="string" name="canonicalName" value="Market turmoil"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.9998779296875" x="1069.6074829101562" y="818.03564453125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="European debt crisis" id="-247">
+    <att type="string" name="canonicalName" value="European debt crisis"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.9998779296875" x="1069.6074829101562" y="728.03564453125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Barack Obama" id="-71">
+    <att type="string" name="canonicalName" value="Barack Obama"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="6126.439453125" y="183.7025146484375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="United States" id="-1039">
+    <att type="string" name="canonicalName" value="United States"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000038146972656" w="40.0" x="6063.0087890625" y="93.70253372192383" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Stock markets" id="-902">
+    <att type="string" name="canonicalName" value="Stock markets"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.999755859375" x="1067.6162109375" y="545.1649169921875" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Eurozone crisis" id="-854">
+    <att type="string" name="canonicalName" value="Eurozone crisis"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000030517578125" w="39.9998779296875" x="1094.0473022460938" y="458.03578186035156" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="US military" id="-1034">
+    <att type="string" name="canonicalName" value="US military"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00006103515625" w="40.0" x="6298.83935546875" y="183.58364868164062" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Australia" id="-433">
+    <att type="string" name="canonicalName" value="Australia"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="6663.71875" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Asia Pacific" id="-689">
+    <att type="string" name="canonicalName" value="Asia Pacific"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000038146972656" w="40.0" x="6627.369140625" y="92.10943984985352" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="International criminal justice" id="-396">
+    <att type="string" name="canonicalName" value="International criminal justice"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99998474121094" w="40.0" x="3693.13330078125" y="269.2294387817383" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="International criminal court" id="-464">
+    <att type="string" name="canonicalName" value="International criminal court"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3693.13330078125" y="179.2294464111328" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Energy industry" id="-848">
+    <att type="string" name="canonicalName" value="Energy industry"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1631.357666015625" y="643.9014282226562" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Saif al-Islam Gaddafi" id="-820">
+    <att type="string" name="canonicalName" value="Saif al-Islam Gaddafi"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5343.4384765625" y="361.5400085449219" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Pakistan" id="-662">
+    <att type="string" name="canonicalName" value="Pakistan"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="6226.1396484375" y="273.58367919921875" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Nato" id="-588">
+    <att type="string" name="canonicalName" value="Nato"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00006103515625" w="40.0" x="6226.1396484375" y="183.58364868164062" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="War crimes" id="-1096">
+    <att type="string" name="canonicalName" value="War crimes"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3459.920654296875" y="178.45889282226562" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Law" id="-1020">
+    <att type="string" name="canonicalName" value="Law"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3553.015380859375" y="89.22944641113281" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="US elections 2012" id="-1029">
+    <att type="string" name="canonicalName" value="US elections 2012"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5922.638671875" y="362.109375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Middle East and North Africa" id="-1014">
+    <att type="string" name="canonicalName" value="Middle East and North Africa"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00004577636719" w="40.0" x="5468.5380859375" y="94.35074615478516" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Taliban" id="-934">
+    <att type="string" name="canonicalName" value="Taliban"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00006103515625" w="40.0" x="6371.537109375" y="183.58364868164062" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Afghanistan" id="-1035">
+    <att type="string" name="canonicalName" value="Afghanistan"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99999237060547" w="40.0" x="6298.83935546875" y="93.58371353149414" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="California" id="-112">
+    <att type="string" name="canonicalName" value="California"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99998474121094" w="40.0" x="3350.208251953125" y="270.6818313598633" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Occupy movement" id="-774">
+    <att type="string" name="canonicalName" value="Occupy movement"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="3252.568359375" y="180.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="The far right" id="-962">
+    <att type="string" name="canonicalName" value="The far right"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="4759.9794921875" y="272.1093978881836" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Germany" id="-963">
+    <att type="string" name="canonicalName" value="Germany"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="4759.9794921875" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Vladimir Putin" id="-1088">
+    <att type="string" name="canonicalName" value="Vladimir Putin"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="4905.37646484375" y="272.1093978881836" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Russia" id="-1089">
+    <att type="string" name="canonicalName" value="Russia"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="4905.37646484375" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="South Africa" id="-880">
+    <att type="string" name="canonicalName" value="South Africa"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99993896484375" w="40.0" x="5310.56103515625" y="272.86956787109375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Muammar Gaddafi" id="-611">
+    <att type="string" name="canonicalName" value="Muammar Gaddafi"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5416.1376953125" y="361.5400085449219" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Libya" id="-571">
+    <att type="string" name="canonicalName" value="Libya"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99992370605469" w="40.0" x="5380.54833984375" y="273.5342483520508" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Turkey" id="-1013">
+    <att type="string" name="canonicalName" value="Turkey"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000038146972656" w="40.0" x="5937.9677734375" y="92.18117141723633" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Energy" id="-627">
+    <att type="string" name="canonicalName" value="Energy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1479.2938232421875" y="642.923828125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Carbon emissions" id="-458">
+    <att type="string" name="canonicalName" value="Carbon emissions"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.9998779296875" x="1389.3336791992188" y="731.9462890625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Climate change" id="-218">
+    <att type="string" name="canonicalName" value="Climate change"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.9998779296875" x="1352.9840698242188" y="641.9462890625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Durban climate change conference 2011" id="-345">
+    <att type="string" name="canonicalName" value="Durban climate change conference 2011"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1231.5025634765625" y="821.9462890625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Oil and gas companies" id="-704">
+    <att type="string" name="canonicalName" value="Oil and gas companies"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1631.357666015625" y="823.9014282226562" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Oil" id="-644">
+    <att type="string" name="canonicalName" value="Oil"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1631.357666015625" y="733.9014282226562" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Japan" id="-931">
+    <att type="string" name="canonicalName" value="Japan"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1439.335205078125" y="821.010009765625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Spain" id="-887">
+    <att type="string" name="canonicalName" value="Spain"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.99951171875" x="4978.074951171875" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Space" id="-965">
+    <att type="string" name="canonicalName" value="Space"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1550.99755859375" y="731.9461669921875" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Science" id="-1105">
+    <att type="string" name="canonicalName" value="Science"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1550.99755859375" y="641.9461669921875" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Mexico" id="-544">
+    <att type="string" name="canonicalName" value="Mexico"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="6809.1162109375" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Obama administration" id="-631">
+    <att type="string" name="canonicalName" value="Obama administration"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.9998779296875" w="40.0" x="6019.61767578125" y="271.8232421875" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="US politics" id="-1038">
+    <att type="string" name="canonicalName" value="US politics"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5992.408203125" y="182.1094207763672" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="International Atomic Energy Agency (IAEA)" id="-394">
+    <att type="string" name="canonicalName" value="International Atomic Energy Agency (IAEA)"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5525.6904296875" y="362.109375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Nuclear weapons" id="-629">
+    <att type="string" name="canonicalName" value="Nuclear weapons"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="5525.6904296875" y="272.1093978881836" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="World news" id="-1132">
+    <att type="string" name="canonicalName" value="World news"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.999993324279785" w="40.0" x="6053.94677734375" y="-8.303967952728271" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Consumer spending" id="-167">
+    <att type="string" name="canonicalName" value="Consumer spending"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.00002956390381" x="24.48124361038208" y="550.4220581054688" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="US domestic policy" id="-1046">
+    <att type="string" name="canonicalName" value="US domestic policy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5770.28662109375" y="364.9689025878906" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Americas" id="-761">
+    <att type="string" name="canonicalName" value="Americas"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000038146972656" w="40.0" x="6809.1162109375" y="92.10943984985352" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="US Congress" id="-1026">
+    <att type="string" name="canonicalName" value="US Congress"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5849.939453125" y="362.109375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="US economy" id="-1028">
+    <att type="string" name="canonicalName" value="US economy"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="5816.48583984375" y="272.1093978881836" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Burma" id="-109">
+    <att type="string" name="canonicalName" value="Burma"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000038146972656" w="40.0" x="6969.943359375" y="92.33574295043945" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Ai Weiwei" id="-16">
+    <att type="string" name="canonicalName" value="Ai Weiwei"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="6591.01953125" y="272.1093978881836" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="China" id="-973">
+    <att type="string" name="canonicalName" value="China"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="6591.01953125" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Mitt Romney" id="-565">
+    <att type="string" name="canonicalName" value="Mitt Romney"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="6068.03662109375" y="362.109375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Morocco" id="-878">
+    <att type="string" name="canonicalName" value="Morocco"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="5671.0869140625" y="272.1093978881836" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Herman Cain" id="-358">
+    <att type="string" name="canonicalName" value="Herman Cain"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="6140.7333984375" y="362.109375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Anders Behring Breivik" id="-28">
+    <att type="string" name="canonicalName" value="Anders Behring Breivik"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5050.77294921875" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Norway" id="-622">
+    <att type="string" name="canonicalName" value="Norway"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5123.47216796875" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Europe" id="-1053">
+    <att type="string" name="canonicalName" value="Europe"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000038146972656" w="39.99951171875" x="4941.724853515625" y="92.10943984985352" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Cybercrime" id="-347">
+    <att type="string" name="canonicalName" value="Cybercrime"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="6518.32177734375" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Computing" id="-294">
+    <att type="string" name="canonicalName" value="Computing"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.000038146972656" w="40.0" x="6481.97216796875" y="92.10943984985352" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Kuwait" id="-456">
+    <att type="string" name="canonicalName" value="Kuwait"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="5743.78564453125" y="272.1093978881836" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Bahrain" id="-824">
+    <att type="string" name="canonicalName" value="Bahrain"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5707.43701171875" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Global development" id="-321">
+    <att type="string" name="canonicalName" value="Global development"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1323.754150390625" y="821.9462890625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Global climate talks" id="-322">
+    <att type="string" name="canonicalName" value="Global climate talks"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1276.65087890625" y="731.9462890625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Unesco" id="-1102">
+    <att type="string" name="canonicalName" value="Unesco"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="7061.22998046875" y="180.96896362304688" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="United Nations" id="-1060">
+    <att type="string" name="canonicalName" value="United Nations"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00004577636719" w="40.0" x="7061.22998046875" y="90.96894836425781" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Environment" id="-1115">
+    <att type="string" name="canonicalName" value="Environment"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1527.5126953125" y="548.03564453125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Japan disaster" id="-409">
+    <att type="string" name="canonicalName" value="Japan disaster"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0001220703125" x="1515.6431274414062" y="822.923828125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Nuclear power" id="-626">
+    <att type="string" name="canonicalName" value="Nuclear power"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1479.2938232421875" y="732.923828125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Farc" id="-1080">
+    <att type="string" name="canonicalName" value="Farc"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="6881.81494140625" y="272.1093978881836" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Colombia" id="-158">
+    <att type="string" name="canonicalName" value="Colombia"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="6881.81494140625" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Democrats" id="-205">
+    <att type="string" name="canonicalName" value="Democrats"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5995.3369140625" y="362.109375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Republicans" id="-779">
+    <att type="string" name="canonicalName" value="Republicans"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99993896484375" w="40.0" x="5922.05517578125" y="270.51629638671875" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Democratic Republic of the Congo" id="-204">
+    <att type="string" name="canonicalName" value="Democratic Republic of the Congo"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="5452.9921875" y="272.1093978881836" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Africa" id="-1151">
+    <att type="string" name="canonicalName" value="Africa"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="5380.29345703125" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Hillary Clinton" id="-360">
+    <att type="string" name="canonicalName" value="Hillary Clinton"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="6969.943359375" y="272.33568572998047" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Aung San Suu Kyi" id="-361">
+    <att type="string" name="canonicalName" value="Aung San Suu Kyi"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="6969.943359375" y="182.33572387695312" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Wildlife" id="-1114">
+    <att type="string" name="canonicalName" value="Wildlife"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1776.754638671875" y="733.9014282226562" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Animals" id="-163">
+    <att type="string" name="canonicalName" value="Animals"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1776.754638671875" y="643.9014282226562" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Brazil" id="-98">
+    <att type="string" name="canonicalName" value="Brazil"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="6736.4169921875" y="272.1093978881836" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Drugs trade" id="-366">
+    <att type="string" name="canonicalName" value="Drugs trade"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="6736.4169921875" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Drought" id="-216">
+    <att type="string" name="canonicalName" value="Drought"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1704.056396484375" y="733.9014282226562" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Natural disasters and extreme weather" id="-1103">
+    <att type="string" name="canonicalName" value="Natural disasters and extreme weather"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="1704.056396484375" y="643.9014282226562" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Rick Perry" id="-1041">
+    <att type="string" name="canonicalName" value="Rick Perry"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="6213.43310546875" y="362.109375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Censorship" id="-811">
+    <att type="string" name="canonicalName" value="Censorship"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="6424.654296875" y="362.109375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Internet" id="-875">
+    <att type="string" name="canonicalName" value="Internet"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="6424.654296875" y="272.1093978881836" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Mining" id="-590">
+    <att type="string" name="canonicalName" value="Mining"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="4315.48974609375" y="180.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Wales" id="-1092">
+    <att type="string" name="canonicalName" value="Wales"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="4315.48974609375" y="90.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Newt Gingrich" id="-1033">
+    <att type="string" name="canonicalName" value="Newt Gingrich"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="6286.13232421875" y="362.109375" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Republican presidential nomination 2012" id="-789">
+    <att type="string" name="canonicalName" value="Republican presidential nomination 2012"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99986267089844" w="40.0" x="6113.90185546875" y="271.3128433227539" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Life and style" id="-1147">
+    <att type="string" name="canonicalName" value="Life and style"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000030517578125" x="154.90394592285156" y="462.1994934082031" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Health &amp; wellbeing" id="-1070">
+    <att type="string" name="canonicalName" value="Health &amp; wellbeing"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.000030517578125" x="154.90394592285156" y="372.1994934082031" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Books" id="-1125">
+    <att type="string" name="canonicalName" value="Books"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="577.0546875" y="548.5026245117188" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Libraries" id="-474">
+    <att type="string" name="canonicalName" value="Libraries"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="577.0546875" y="458.5025939941406" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Theatre" id="-966">
+    <att type="string" name="canonicalName" value="Theatre"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.00048828125" x="4223.095458984375" y="180.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Stage" id="-958">
+    <att type="string" name="canonicalName" value="Stage"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="4185.1884765625" y="88.45887756347656" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Cricket" id="-681">
+    <att type="string" name="canonicalName" value="Cricket"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="4423.96484375" y="92.07333374023438" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Christmas" id="-145">
+    <att type="string" name="canonicalName" value="Christmas"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.00001525878906" x="107.04222869873047" y="550.4220581054688" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Retail industry" id="-860">
+    <att type="string" name="canonicalName" value="Retail industry"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.00002670288086" x="66.35557746887207" y="462.1995544433594" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Women" id="-1120">
+    <att type="string" name="canonicalName" value="Women"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="643.4044189453125" y="457.52911376953125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Gender" id="-1123">
+    <att type="string" name="canonicalName" value="Gender"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="643.4044189453125" y="367.52911376953125" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Hacking" id="-346">
+    <att type="string" name="canonicalName" value="Hacking"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="6497.35107421875" y="272.1093978881836" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Technology" id="-1135">
+    <att type="string" name="canonicalName" value="Technology"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="6445.62255859375" y="182.10943603515625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Film" id="-936">
+    <att type="string" name="canonicalName" value="Film"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.00048828125" x="4199.294677734375" y="270.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Art" id="-661">
+    <att type="string" name="canonicalName" value="Art"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="4050.060302734375" y="359.2294006347656" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Art and design" id="-991">
+    <att type="string" name="canonicalName" value="Art and design"/>
+    <graphics type="ROUNDED_RECTANGLE" h="39.99995422363281" w="40.0" x="4050.060302734375" y="269.2294235229492" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Pop and rock" id="-1072">
+    <att type="string" name="canonicalName" value="Pop and rock"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.99951171875" x="4126.596435546875" y="360.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Music" id="-1141">
+    <att type="string" name="canonicalName" value="Music"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.99951171875" x="4126.596435546875" y="270.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Television" id="-1048">
+    <att type="string" name="canonicalName" value="Television"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="4283.388671875" y="270.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Culture" id="-935">
+    <att type="string" name="canonicalName" value="Culture"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="39.99951171875" x="4150.396240234375" y="180.0" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Premier League 2011-12" id="-739">
+    <att type="string" name="canonicalName" value="Premier League 2011-12"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="4361.25927734375" y="359.2607116699219" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Football" id="-988">
+    <att type="string" name="canonicalName" value="Football"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.00001525878906" w="40.0" x="4361.25927734375" y="269.26070404052734" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Olympic Games 2012" id="-668">
+    <att type="string" name="canonicalName" value="Olympic Games 2012"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="4485.7587890625" y="272.07330322265625" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <node label="Sport" id="-665">
+    <att type="string" name="canonicalName" value="Sport"/>
+    <graphics type="ROUNDED_RECTANGLE" h="40.0" w="40.0" x="4423.96484375" y="182.07333374023438" fill="#ff9900" width="1" outline="#666666"/>
+  </node>
+  <edge label="Newspapers &amp; magazines (pp) Newspapers" source="-603" target="-602">
+    <att type="string" name="canonicalName" value="Newspapers &amp; magazines (pp) Newspapers"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="National newspapers (pp) Phone hacking" source="-587" target="-690">
+    <att type="string" name="canonicalName" value="National newspapers (pp) Phone hacking"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Newspapers (pp) National newspapers" source="-602" target="-587">
+    <att type="string" name="canonicalName" value="Newspapers (pp) National newspapers"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Newspapers (pp) Leveson inquiry" source="-602" target="-788">
+    <att type="string" name="canonicalName" value="Newspapers (pp) Leveson inquiry"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Newspapers (pp) News of the World" source="-602" target="-601">
+    <att type="string" name="canonicalName" value="Newspapers (pp) News of the World"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Newspapers (pp) News International" source="-602" target="-981">
+    <att type="string" name="canonicalName" value="Newspapers (pp) News International"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Public services policy (pp) Public sector cuts" source="-736" target="-731">
+    <att type="string" name="canonicalName" value="Public services policy (pp) Public sector cuts"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Public sector cuts (pp) Public finance" source="-731" target="-729">
+    <att type="string" name="canonicalName" value="Public sector cuts (pp) Public finance"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="James Murdoch (pp) News Corporation" source="-979" target="-938">
+    <att type="string" name="canonicalName" value="James Murdoch (pp) News Corporation"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="London (pp) Police" source="-702" target="-1022">
+    <att type="string" name="canonicalName" value="London (pp) Police"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="London (pp) Occupy movement" source="-702" target="-774">
+    <att type="string" name="canonicalName" value="London (pp) Occupy movement"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Occupy London (pp) Religion" source="-635" target="-773">
+    <att type="string" name="canonicalName" value="Occupy London (pp) Religion"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Theresa May (pp) House of Commons" source="-967" target="-498">
+    <att type="string" name="canonicalName" value="Theresa May (pp) House of Commons"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Conservatives (pp) Labour" source="-826" target="-984">
+    <att type="string" name="canonicalName" value="Conservatives (pp) Labour"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Conservatives (pp) Liberal-Conservative coalition" source="-826" target="-1108">
+    <att type="string" name="canonicalName" value="Conservatives (pp) Liberal-Conservative coalition"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Conservatives (pp) Liberal Democrats" source="-826" target="-607">
+    <att type="string" name="canonicalName" value="Conservatives (pp) Liberal Democrats"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Economic policy (pp) Economics" source="-1083" target="-1055">
+    <att type="string" name="canonicalName" value="Economic policy (pp) Economics"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Economic policy (pp) George Osborne" source="-1083" target="-316">
+    <att type="string" name="canonicalName" value="Economic policy (pp) George Osborne"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Economic policy (pp) Tax and spending" source="-1083" target="-923">
+    <att type="string" name="canonicalName" value="Economic policy (pp) Tax and spending"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Economic policy (pp) Recession" source="-1083" target="-764">
+    <att type="string" name="canonicalName" value="Economic policy (pp) Recession"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Leveson inquiry (pp) Privacy &amp; the media" source="-788" target="-724">
+    <att type="string" name="canonicalName" value="Leveson inquiry (pp) Privacy &amp; the media"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Leveson inquiry (pp) Press intrusion" source="-788" target="-718">
+    <att type="string" name="canonicalName" value="Leveson inquiry (pp) Press intrusion"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Leveson inquiry (pp) Milly Dowler" source="-788" target="-556">
+    <att type="string" name="canonicalName" value="Leveson inquiry (pp) Milly Dowler"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Leveson inquiry (pp) Live video" source="-788" target="-478">
+    <att type="string" name="canonicalName" value="Leveson inquiry (pp) Live video"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Police (pp) Metropolitan police" source="-1022" target="-543">
+    <att type="string" name="canonicalName" value="Police (pp) Metropolitan police"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Police (pp) UK riots" source="-1022" target="-1021">
+    <att type="string" name="canonicalName" value="Police (pp) UK riots"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Health policy (pp) Andrew Lansley" source="-353" target="-279">
+    <att type="string" name="canonicalName" value="Health policy (pp) Andrew Lansley"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Labour (pp) Ed Miliband" source="-984" target="-657">
+    <att type="string" name="canonicalName" value="Labour (pp) Ed Miliband"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Danny Alexander (pp) Francis Maude" source="-191" target="-290">
+    <att type="string" name="canonicalName" value="Danny Alexander (pp) Francis Maude"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Pensions (pp) Public sector pay" source="-1057" target="-732">
+    <att type="string" name="canonicalName" value="Pensions (pp) Public sector pay"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Liberal Democrats (pp) Nick Clegg" source="-607" target="-606">
+    <att type="string" name="canonicalName" value="Liberal Democrats (pp) Nick Clegg"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Foreign policy (pp) William Hague" source="-285" target="-1116">
+    <att type="string" name="canonicalName" value="Foreign policy (pp) William Hague"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Communities (pp) Housing" source="-310" target="-1018">
+    <att type="string" name="canonicalName" value="Communities (pp) Housing"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Defence policy (pp) Ministry of Defence" source="-203" target="-1004">
+    <att type="string" name="canonicalName" value="Defence policy (pp) Ministry of Defence"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="George Osborne (pp) Autumn statement 2011" source="-316" target="-54">
+    <att type="string" name="canonicalName" value="George Osborne (pp) Autumn statement 2011"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="News International (pp) The Sun" source="-981" target="-960">
+    <att type="string" name="canonicalName" value="News International (pp) The Sun"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Trade unions (pp) Public services policy" source="-992" target="-736">
+    <att type="string" name="canonicalName" value="Trade unions (pp) Public services policy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Trade unions (pp) Public sector pensions" source="-992" target="-733">
+    <att type="string" name="canonicalName" value="Trade unions (pp) Public sector pensions"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Trade unions (pp) Danny Alexander" source="-992" target="-191">
+    <att type="string" name="canonicalName" value="Trade unions (pp) Danny Alexander"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Trade unions (pp) Brendan Barber" source="-992" target="-634">
+    <att type="string" name="canonicalName" value="Trade unions (pp) Brendan Barber"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="News Corporation (pp) Rupert Murdoch" source="-938" target="-809">
+    <att type="string" name="canonicalName" value="News Corporation (pp) Rupert Murdoch"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="News Corporation (pp) Media business" source="-938" target="-1155">
+    <att type="string" name="canonicalName" value="News Corporation (pp) Media business"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="News Corporation (pp) Television industry" source="-938" target="-937">
+    <att type="string" name="canonicalName" value="News Corporation (pp) Television industry"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK riots (pp) Independent Police Complaints Commission" source="-1021" target="-769">
+    <att type="string" name="canonicalName" value="UK riots (pp) Independent Police Complaints Commission"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Education (pp) Schools" source="-1008" target="-1007">
+    <att type="string" name="canonicalName" value="Education (pp) Schools"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Education (pp) Higher education" source="-1008" target="-834">
+    <att type="string" name="canonicalName" value="Education (pp) Higher education"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Education (pp) Education policy" source="-1008" target="-929">
+    <att type="string" name="canonicalName" value="Education (pp) Education policy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Unemployment (pp) Young people" source="-1139" target="-1138">
+    <att type="string" name="canonicalName" value="Unemployment (pp) Young people"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Unemployment (pp) Unemployment and employment statistics" source="-1139" target="-1054">
+    <att type="string" name="canonicalName" value="Unemployment (pp) Unemployment and employment statistics"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Public sector pay (pp) TUC" source="-732" target="-916">
+    <att type="string" name="canonicalName" value="Public sector pay (pp) TUC"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Independent Police Complaints Commission (pp) Mark Duggan" source="-769" target="-950">
+    <att type="string" name="canonicalName" value="Independent Police Complaints Commission (pp) Mark Duggan"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Housing (pp) Property" source="-1018" target="-725">
+    <att type="string" name="canonicalName" value="Housing (pp) Property"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Children (pp) Child protection" source="-867" target="-943">
+    <att type="string" name="canonicalName" value="Children (pp) Child protection"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Military (pp) Defence policy" source="-775" target="-203">
+    <att type="string" name="canonicalName" value="Military (pp) Defence policy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Military (pp) Remembrance Day" source="-775" target="-839">
+    <att type="string" name="canonicalName" value="Military (pp) Remembrance Day"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Property (pp) Mortgages" source="-725" target="-567">
+    <att type="string" name="canonicalName" value="Property (pp) Mortgages"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Public sector pensions (pp) November 30 public sector strike" source="-733" target="-625">
+    <att type="string" name="canonicalName" value="Public sector pensions (pp) November 30 public sector strike"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Public sector pensions (pp) Pensions" source="-733" target="-1057">
+    <att type="string" name="canonicalName" value="Public sector pensions (pp) Pensions"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Public sector pensions (pp) Civil service" source="-733" target="-148">
+    <att type="string" name="canonicalName" value="Public sector pensions (pp) Civil service"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Money (pp) Work &amp; careers" source="-1129" target="-1128">
+    <att type="string" name="canonicalName" value="Money (pp) Work &amp; careers"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Money (pp) Consumer affairs" source="-1129" target="-970">
+    <att type="string" name="canonicalName" value="Money (pp) Consumer affairs"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Social care (pp) Local government" source="-866" target="-482">
+    <att type="string" name="canonicalName" value="Social care (pp) Local government"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Immigration and asylum (pp) Theresa May" source="-472" target="-967">
+    <att type="string" name="canonicalName" value="Immigration and asylum (pp) Theresa May"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Immigration and asylum (pp) Brodie Clark" source="-472" target="-105">
+    <att type="string" name="canonicalName" value="Immigration and asylum (pp) Brodie Clark"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK criminal justice (pp) Prisons and probation" source="-1143" target="-843">
+    <att type="string" name="canonicalName" value="UK criminal justice (pp) Prisons and probation"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="NHS (pp) Health policy" source="-579" target="-353">
+    <att type="string" name="canonicalName" value="NHS (pp) Health policy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="NHS (pp) Doctors" source="-579" target="-213">
+    <att type="string" name="canonicalName" value="NHS (pp) Doctors"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Higher education (pp) Students" source="-834" target="-1063">
+    <att type="string" name="canonicalName" value="Higher education (pp) Students"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Society (pp) Trade unions" source="-993" target="-992">
+    <att type="string" name="canonicalName" value="Society (pp) Trade unions"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Society (pp) Money" source="-993" target="-1129">
+    <att type="string" name="canonicalName" value="Society (pp) Money"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Society (pp) Health" source="-993" target="-538">
+    <att type="string" name="canonicalName" value="Society (pp) Health"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Society (pp) Unemployment" source="-993" target="-1139">
+    <att type="string" name="canonicalName" value="Society (pp) Unemployment"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Society (pp) Communities" source="-993" target="-310">
+    <att type="string" name="canonicalName" value="Society (pp) Communities"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Society (pp) Children" source="-993" target="-867">
+    <att type="string" name="canonicalName" value="Society (pp) Children"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Society (pp) Social care" source="-993" target="-866">
+    <att type="string" name="canonicalName" value="Society (pp) Social care"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Society (pp) Poverty" source="-993" target="-714">
+    <att type="string" name="canonicalName" value="Society (pp) Poverty"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Society (pp) Equality" source="-993" target="-1121">
+    <att type="string" name="canonicalName" value="Society (pp) Equality"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Schools (pp) Michael Gove" source="-1007" target="-889">
+    <att type="string" name="canonicalName" value="Schools (pp) Michael Gove"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Television industry (pp) BSkyB" source="-937" target="-1050">
+    <att type="string" name="canonicalName" value="Television industry (pp) BSkyB"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK security and terrorism (pp) Terrorism policy" source="-1023" target="-1068">
+    <att type="string" name="canonicalName" value="UK security and terrorism (pp) Terrorism policy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Students (pp) Tuition fees" source="-1063" target="-1066">
+    <att type="string" name="canonicalName" value="Students (pp) Tuition fees"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Students (pp) Cuts and closures" source="-1063" target="-182">
+    <att type="string" name="canonicalName" value="Students (pp) Cuts and closures"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Local government (pp) Libraries" source="-482" target="-474">
+    <att type="string" name="canonicalName" value="Local government (pp) Libraries"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Economic growth (GDP) (GDP) (pp) Bank of England" source="-744" target="-639">
+    <att type="string" name="canonicalName" value="Economic growth (GDP) (pp) Bank of England"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Politics (pp) Society" source="-1133" target="-993">
+    <att type="string" name="canonicalName" value="Politics (pp) Society"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Politics (pp) Economic policy" source="-1133" target="-1083">
+    <att type="string" name="canonicalName" value="Politics (pp) Economic policy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Politics (pp) David Cameron" source="-1133" target="-370">
+    <att type="string" name="canonicalName" value="Politics (pp) David Cameron"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Politics (pp) Immigration and asylum" source="-1133" target="-472">
+    <att type="string" name="canonicalName" value="Politics (pp) Immigration and asylum"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Politics (pp) Conservatives" source="-1133" target="-826">
+    <att type="string" name="canonicalName" value="Politics (pp) Conservatives"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Politics (pp) Education" source="-1133" target="-1008">
+    <att type="string" name="canonicalName" value="Politics (pp) Education"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Politics (pp) Foreign policy" source="-1133" target="-285">
+    <att type="string" name="canonicalName" value="Politics (pp) Foreign policy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Politics (pp) UK security and terrorism" source="-1133" target="-1023">
+    <att type="string" name="canonicalName" value="Politics (pp) UK security and terrorism"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Politics (pp) Vince Cable" source="-1133" target="-1082">
+    <att type="string" name="canonicalName" value="Politics (pp) Vince Cable"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Politics (pp) Tony Blair" source="-1133" target="-983">
+    <att type="string" name="canonicalName" value="Politics (pp) Tony Blair"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Politics (pp) Green politics" source="-1133" target="-335">
+    <att type="string" name="canonicalName" value="Politics (pp) Green politics"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Politics (pp) House of Lords" source="-1133" target="-743">
+    <att type="string" name="canonicalName" value="Politics (pp) House of Lords"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Work &amp; careers (pp) Job hunting" source="-1128" target="-418">
+    <att type="string" name="canonicalName" value="Work &amp; careers (pp) Job hunting"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Work &amp; careers (pp) Pay" source="-1128" target="-672">
+    <att type="string" name="canonicalName" value="Work &amp; careers (pp) Pay"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Media (pp) Newspapers &amp; magazines" source="-752" target="-603">
+    <att type="string" name="canonicalName" value="Media (pp) Newspapers &amp; magazines"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Media (pp) James Murdoch" source="-752" target="-979">
+    <att type="string" name="canonicalName" value="Media (pp) James Murdoch"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Media (pp) BBC" source="-752" target="-735">
+    <att type="string" name="canonicalName" value="Media (pp) BBC"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Media (pp) Extradition" source="-752" target="-253">
+    <att type="string" name="canonicalName" value="Media (pp) Extradition"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Banking (pp) Financial sector" source="-1087" target="-267">
+    <att type="string" name="canonicalName" value="Banking (pp) Financial sector"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Health (pp) NHS" source="-538" target="-579">
+    <att type="string" name="canonicalName" value="Health (pp) NHS"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Health (pp) Health &amp; wellbeing" source="-538" target="-1070">
+    <att type="string" name="canonicalName" value="Health (pp) Health &amp; wellbeing"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Consumer affairs (pp) Family finances" source="-970" target="-1025">
+    <att type="string" name="canonicalName" value="Consumer affairs (pp) Family finances"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Consumer affairs (pp) Retail industry" source="-970" target="-860">
+    <att type="string" name="canonicalName" value="Consumer affairs (pp) Retail industry"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Extradition (pp) Julian Assange" source="-253" target="-434">
+    <att type="string" name="canonicalName" value="Extradition (pp) Julian Assange"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Transport (pp) Transport policy" source="-995" target="-994">
+    <att type="string" name="canonicalName" value="Transport (pp) Transport policy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Transport (pp) Road transport" source="-995" target="-797">
+    <att type="string" name="canonicalName" value="Transport (pp) Road transport"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Transport (pp) Rail transport" source="-995" target="-1000">
+    <att type="string" name="canonicalName" value="Transport (pp) Rail transport"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Mortgages (pp) Housing market" source="-567" target="-371">
+    <att type="string" name="canonicalName" value="Mortgages (pp) Housing market"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Travel &amp; leisure (pp) Travel" source="-997" target="-996">
+    <att type="string" name="canonicalName" value="Travel &amp; leisure (pp) Travel"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Travel &amp; leisure (pp) Thomas Cook" source="-997" target="-1002">
+    <att type="string" name="canonicalName" value="Travel &amp; leisure (pp) Thomas Cook"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Business (pp) Banking" source="-998" target="-1087">
+    <att type="string" name="canonicalName" value="Business (pp) Banking"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Business (pp) Eurozone crisis" source="-998" target="-854">
+    <att type="string" name="canonicalName" value="Business (pp) Eurozone crisis"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Business (pp) Travel &amp; leisure" source="-998" target="-997">
+    <att type="string" name="canonicalName" value="Business (pp) Travel &amp; leisure"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Business (pp) Executive pay and bonuses" source="-998" target="-256">
+    <att type="string" name="canonicalName" value="Business (pp) Executive pay and bonuses"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Business (pp) Fossil fuels" source="-998" target="-288">
+    <att type="string" name="canonicalName" value="Business (pp) Fossil fuels"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Christianity (pp) Anglicanism" source="-141" target="-806">
+    <att type="string" name="canonicalName" value="Christianity (pp) Anglicanism"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Christianity (pp) Catholicism" source="-141" target="-706">
+    <att type="string" name="canonicalName" value="Christianity (pp) Catholicism"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Economics (pp) Economic growth (GDP)" source="-1055" target="-744">
+    <att type="string" name="canonicalName" value="Economics (pp) Economic growth (GDP)"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Economics (pp) Business" source="-1055" target="-998">
+    <att type="string" name="canonicalName" value="Economics (pp) Business"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Economics (pp) G20" source="-1055" target="-303">
+    <att type="string" name="canonicalName" value="Economics (pp) G20"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Economics (pp) Global economy" source="-1055" target="-758">
+    <att type="string" name="canonicalName" value="Economics (pp) Global economy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Mark Duggan (pp) Gun crime" source="-950" target="-1100">
+    <att type="string" name="canonicalName" value="Mark Duggan (pp) Gun crime"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Equality (pp) Gender" source="-1121" target="-1123">
+    <att type="string" name="canonicalName" value="Equality (pp) Gender"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Julian Assange (pp) WikiLeaks" source="-434" target="-1111">
+    <att type="string" name="canonicalName" value="Julian Assange (pp) WikiLeaks"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Arab and Middle East unrest (pp) Egypt" source="-728" target="-578">
+    <att type="string" name="canonicalName" value="Arab and Middle East unrest (pp) Egypt"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Arab and Middle East unrest (pp) Syria" source="-728" target="-915">
+    <att type="string" name="canonicalName" value="Arab and Middle East unrest (pp) Syria"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Housing market (pp) Real estate" source="-371" target="-759">
+    <att type="string" name="canonicalName" value="Housing market (pp) Real estate"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="G20 (pp) IMF" source="-303" target="-378">
+    <att type="string" name="canonicalName" value="G20 (pp) IMF"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK news (pp) Politics" source="-1093" target="-1133">
+    <att type="string" name="canonicalName" value="UK news (pp) Politics"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK news (pp) Media" source="-1093" target="-752">
+    <att type="string" name="canonicalName" value="UK news (pp) Media"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK news (pp) London" source="-1093" target="-702">
+    <att type="string" name="canonicalName" value="UK news (pp) London"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK news (pp) Crime" source="-1093" target="-808">
+    <att type="string" name="canonicalName" value="UK news (pp) Crime"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK news (pp) Law" source="-1093" target="-1020">
+    <att type="string" name="canonicalName" value="UK news (pp) Law"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK news (pp) Military" source="-1093" target="-775">
+    <att type="string" name="canonicalName" value="UK news (pp) Military"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK news (pp) Transport" source="-1093" target="-995">
+    <att type="string" name="canonicalName" value="UK news (pp) Transport"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK news (pp) Stage" source="-1093" target="-958">
+    <att type="string" name="canonicalName" value="UK news (pp) Stage"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK news (pp) Wales" source="-1093" target="-1092">
+    <att type="string" name="canonicalName" value="UK news (pp) Wales"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK news (pp) Northern Ireland" source="-1093" target="-816">
+    <att type="string" name="canonicalName" value="UK news (pp) Northern Ireland"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK news (pp) Race issues" source="-1093" target="-746">
+    <att type="string" name="canonicalName" value="UK news (pp) Race issues"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK news (pp) Drugs" source="-1093" target="-585">
+    <att type="string" name="canonicalName" value="UK news (pp) Drugs"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK news (pp) Monarchy" source="-1093" target="-793">
+    <att type="string" name="canonicalName" value="UK news (pp) Monarchy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="UK news (pp) Cricket" source="-1093" target="-681">
+    <att type="string" name="canonicalName" value="UK news (pp) Cricket"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="European banks (pp) Angela Merkel" source="-318" target="-32">
+    <att type="string" name="canonicalName" value="European banks (pp) Angela Merkel"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Global economy (pp) Global recession" source="-758" target="-324">
+    <att type="string" name="canonicalName" value="Global economy (pp) Global recession"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Catholicism (pp) Advertising" source="-706" target="-865">
+    <att type="string" name="canonicalName" value="Catholicism (pp) Advertising"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Fossil fuels (pp) Environment" source="-288" target="-1115">
+    <att type="string" name="canonicalName" value="Fossil fuels (pp) Environment"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Syria (pp) Bashar Al-Assad" source="-915" target="-1137">
+    <att type="string" name="canonicalName" value="Syria (pp) Bashar Al-Assad"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Italy (pp) Silvio Berlusconi" source="-401" target="-941">
+    <att type="string" name="canonicalName" value="Italy (pp) Silvio Berlusconi"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Nicolas Sarkozy (pp) France" source="-1127" target="-717">
+    <att type="string" name="canonicalName" value="Nicolas Sarkozy (pp) France"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="European Union (pp) European monetary union" source="-323" target="-248">
+    <att type="string" name="canonicalName" value="European Union (pp) European monetary union"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="European Union (pp) Bonds" source="-323" target="-92">
+    <att type="string" name="canonicalName" value="European Union (pp) Bonds"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Greece (pp) George Papandreou" source="-526" target="-317">
+    <att type="string" name="canonicalName" value="Greece (pp) George Papandreou"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Greece (pp) Financial crisis" source="-526" target="-903">
+    <att type="string" name="canonicalName" value="Greece (pp) Financial crisis"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Greece (pp) European debt crisis" source="-526" target="-247">
+    <att type="string" name="canonicalName" value="Greece (pp) European debt crisis"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Occupy Wall Street (pp) New York" source="-637" target="-1078">
+    <att type="string" name="canonicalName" value="Occupy Wall Street (pp) New York"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Euro (pp) European Union" source="-242" target="-323">
+    <att type="string" name="canonicalName" value="Euro (pp) European Union"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Euro (pp) Greece" source="-242" target="-526">
+    <att type="string" name="canonicalName" value="Euro (pp) Greece"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Euro (pp) Currencies" source="-242" target="-245">
+    <att type="string" name="canonicalName" value="Euro (pp) Currencies"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Euro (pp) European Central Bank" source="-242" target="-241">
+    <att type="string" name="canonicalName" value="Euro (pp) European Central Bank"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Israel (pp) Palestinian territories" source="-954" target="-986">
+    <att type="string" name="canonicalName" value="Israel (pp) Palestinian territories"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Iran (pp) Nuclear weapons" source="-1117" target="-629">
+    <att type="string" name="canonicalName" value="Iran (pp) Nuclear weapons"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Terrorism policy (pp) Global terrorism" source="-1068" target="-1149">
+    <att type="string" name="canonicalName" value="Terrorism policy (pp) Global terrorism"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Bashar Al-Assad (pp) Yemen" source="-1137" target="-1136">
+    <att type="string" name="canonicalName" value="Bashar Al-Assad (pp) Yemen"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Air transport (pp) Airline industry" source="-356" target="-1085">
+    <att type="string" name="canonicalName" value="Air transport (pp) Airline industry"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Religion (pp) Christianity" source="-773" target="-141">
+    <att type="string" name="canonicalName" value="Religion (pp) Christianity"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Religion (pp) Islam" source="-773" target="-741">
+    <att type="string" name="canonicalName" value="Religion (pp) Islam"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="European debt crisis (pp) Market turmoil" source="-247" target="-525">
+    <att type="string" name="canonicalName" value="European debt crisis (pp) Market turmoil"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="United States (pp) US politics" source="-1039" target="-1038">
+    <att type="string" name="canonicalName" value="United States (pp) US politics"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="United States (pp) Barack Obama" source="-1039" target="-71">
+    <att type="string" name="canonicalName" value="United States (pp) Barack Obama"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Eurozone crisis (pp) European banks" source="-854" target="-318">
+    <att type="string" name="canonicalName" value="Eurozone crisis (pp) European banks"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Eurozone crisis (pp) Euro" source="-854" target="-242">
+    <att type="string" name="canonicalName" value="Eurozone crisis (pp) Euro"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Eurozone crisis (pp) Italy" source="-854" target="-401">
+    <att type="string" name="canonicalName" value="Eurozone crisis (pp) Italy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Eurozone crisis (pp) Stock markets" source="-854" target="-902">
+    <att type="string" name="canonicalName" value="Eurozone crisis (pp) Stock markets"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Asia Pacific (pp) China" source="-689" target="-973">
+    <att type="string" name="canonicalName" value="Asia Pacific (pp) China"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Asia Pacific (pp) Australia" source="-689" target="-433">
+    <att type="string" name="canonicalName" value="Asia Pacific (pp) Australia"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="International criminal court (pp) International criminal justice" source="-464" target="-396">
+    <att type="string" name="canonicalName" value="International criminal court (pp) International criminal justice"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Energy industry (pp) Oil" source="-848" target="-644">
+    <att type="string" name="canonicalName" value="Energy industry (pp) Oil"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Nato (pp) Pakistan" source="-588" target="-662">
+    <att type="string" name="canonicalName" value="Nato (pp) Pakistan"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Law (pp) Media law" source="-1020" target="-918">
+    <att type="string" name="canonicalName" value="Law (pp) Media law"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Law (pp) UK criminal justice" source="-1020" target="-1143">
+    <att type="string" name="canonicalName" value="Law (pp) UK criminal justice"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Law (pp) Human rights" source="-1020" target="-1112">
+    <att type="string" name="canonicalName" value="Law (pp) Human rights"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Law (pp) International criminal court" source="-1020" target="-464">
+    <att type="string" name="canonicalName" value="Law (pp) International criminal court"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Law (pp) War crimes" source="-1020" target="-1096">
+    <att type="string" name="canonicalName" value="Law (pp) War crimes"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Middle East and North Africa (pp) Arab and Middle East unrest" source="-1014" target="-728">
+    <att type="string" name="canonicalName" value="Middle East and North Africa (pp) Arab and Middle East unrest"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Middle East and North Africa (pp) Africa" source="-1014" target="-1151">
+    <att type="string" name="canonicalName" value="Middle East and North Africa (pp) Africa"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Middle East and North Africa (pp) Iran" source="-1014" target="-1117">
+    <att type="string" name="canonicalName" value="Middle East and North Africa (pp) Iran"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Middle East and North Africa (pp) Israel" source="-1014" target="-954">
+    <att type="string" name="canonicalName" value="Middle East and North Africa (pp) Israel"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Middle East and North Africa (pp) Bahrain" source="-1014" target="-824">
+    <att type="string" name="canonicalName" value="Middle East and North Africa (pp) Bahrain"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Afghanistan (pp) Nato" source="-1035" target="-588">
+    <att type="string" name="canonicalName" value="Afghanistan (pp) Nato"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Afghanistan (pp) US military" source="-1035" target="-1034">
+    <att type="string" name="canonicalName" value="Afghanistan (pp) US military"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Afghanistan (pp) Taliban" source="-1035" target="-934">
+    <att type="string" name="canonicalName" value="Afghanistan (pp) Taliban"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Occupy movement (pp) Occupy London" source="-774" target="-635">
+    <att type="string" name="canonicalName" value="Occupy movement (pp) Occupy London"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Occupy movement (pp) Protest" source="-774" target="-727">
+    <att type="string" name="canonicalName" value="Occupy movement (pp) Protest"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Occupy movement (pp) Occupy Wall Street" source="-774" target="-637">
+    <att type="string" name="canonicalName" value="Occupy movement (pp) Occupy Wall Street"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Occupy movement (pp) California" source="-774" target="-112">
+    <att type="string" name="canonicalName" value="Occupy movement (pp) California"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Germany (pp) The far right" source="-963" target="-962">
+    <att type="string" name="canonicalName" value="Germany (pp) The far right"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Russia (pp) Vladimir Putin" source="-1089" target="-1088">
+    <att type="string" name="canonicalName" value="Russia (pp) Vladimir Putin"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Libya (pp) Saif al-Islam Gaddafi" source="-571" target="-820">
+    <att type="string" name="canonicalName" value="Libya (pp) Saif al-Islam Gaddafi"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Libya (pp) Muammar Gaddafi" source="-571" target="-611">
+    <att type="string" name="canonicalName" value="Libya (pp) Muammar Gaddafi"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Energy (pp) Nuclear power" source="-627" target="-626">
+    <att type="string" name="canonicalName" value="Energy (pp) Nuclear power"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Climate change (pp) Global climate talks" source="-218" target="-322">
+    <att type="string" name="canonicalName" value="Climate change (pp) Global climate talks"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Climate change (pp) Carbon emissions" source="-218" target="-458">
+    <att type="string" name="canonicalName" value="Climate change (pp) Carbon emissions"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Oil (pp) Oil and gas companies" source="-644" target="-704">
+    <att type="string" name="canonicalName" value="Oil (pp) Oil and gas companies"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Science (pp) Space" source="-1105" target="-965">
+    <att type="string" name="canonicalName" value="Science (pp) Space"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="US politics (pp) US economy" source="-1038" target="-1028">
+    <att type="string" name="canonicalName" value="US politics (pp) US economy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="US politics (pp) Republicans" source="-1038" target="-779">
+    <att type="string" name="canonicalName" value="US politics (pp) Republicans"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="US politics (pp) Republican presidential nomination 2012" source="-1038" target="-789">
+    <att type="string" name="canonicalName" value="US politics (pp) Republican presidential nomination 2012"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="US politics (pp) Obama administration" source="-1038" target="-631">
+    <att type="string" name="canonicalName" value="US politics (pp) Obama administration"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Nuclear weapons (pp) International Atomic Energy Agency (IAEA)" source="-629" target="-394">
+    <att type="string" name="canonicalName" value="Nuclear weapons (pp) International Atomic Energy Agency (IAEA)"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="World news (pp) Air transport" source="-1132" target="-356">
+    <att type="string" name="canonicalName" value="World news (pp) Air transport"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="World news (pp) Europe" source="-1132" target="-1053">
+    <att type="string" name="canonicalName" value="World news (pp) Europe"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="World news (pp) Middle East and North Africa" source="-1132" target="-1014">
+    <att type="string" name="canonicalName" value="World news (pp) Middle East and North Africa"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="World news (pp) Iraq" source="-1132" target="-819">
+    <att type="string" name="canonicalName" value="World news (pp) Iraq"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="World news (pp) United States" source="-1132" target="-1039">
+    <att type="string" name="canonicalName" value="World news (pp) United States"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="World news (pp) Computing" source="-1132" target="-294">
+    <att type="string" name="canonicalName" value="World news (pp) Computing"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="World news (pp) Asia Pacific" source="-1132" target="-689">
+    <att type="string" name="canonicalName" value="World news (pp) Asia Pacific"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="World news (pp) Americas" source="-1132" target="-761">
+    <att type="string" name="canonicalName" value="World news (pp) Americas"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="World news (pp) United Nations" source="-1132" target="-1060">
+    <att type="string" name="canonicalName" value="World news (pp) United Nations"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="World news (pp) Afghanistan" source="-1132" target="-1035">
+    <att type="string" name="canonicalName" value="World news (pp) Afghanistan"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="World news (pp) US foreign policy" source="-1132" target="-1030">
+    <att type="string" name="canonicalName" value="World news (pp) US foreign policy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="World news (pp) Turkey" source="-1132" target="-1013">
+    <att type="string" name="canonicalName" value="World news (pp) Turkey"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="World news (pp) Burma" source="-1132" target="-109">
+    <att type="string" name="canonicalName" value="World news (pp) Burma"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Americas (pp) Drugs trade" source="-761" target="-366">
+    <att type="string" name="canonicalName" value="Americas (pp) Drugs trade"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Americas (pp) Mexico" source="-761" target="-544">
+    <att type="string" name="canonicalName" value="Americas (pp) Mexico"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Americas (pp) Colombia" source="-761" target="-158">
+    <att type="string" name="canonicalName" value="Americas (pp) Colombia"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="US economy (pp) US domestic policy" source="-1028" target="-1046">
+    <att type="string" name="canonicalName" value="US economy (pp) US domestic policy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="US economy (pp) US Congress" source="-1028" target="-1026">
+    <att type="string" name="canonicalName" value="US economy (pp) US Congress"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Burma (pp) Aung San Suu Kyi" source="-109" target="-361">
+    <att type="string" name="canonicalName" value="Burma (pp) Aung San Suu Kyi"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="China (pp) Ai Weiwei" source="-973" target="-16">
+    <att type="string" name="canonicalName" value="China (pp) Ai Weiwei"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Europe (pp) Germany" source="-1053" target="-963">
+    <att type="string" name="canonicalName" value="Europe (pp) Germany"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Europe (pp) Nicolas Sarkozy" source="-1053" target="-1127">
+    <att type="string" name="canonicalName" value="Europe (pp) Nicolas Sarkozy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Europe (pp) Russia" source="-1053" target="-1089">
+    <att type="string" name="canonicalName" value="Europe (pp) Russia"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Europe (pp) Spain" source="-1053" target="-887">
+    <att type="string" name="canonicalName" value="Europe (pp) Spain"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Europe (pp) Anders Behring Breivik" source="-1053" target="-28">
+    <att type="string" name="canonicalName" value="Europe (pp) Anders Behring Breivik"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Europe (pp) Norway" source="-1053" target="-622">
+    <att type="string" name="canonicalName" value="Europe (pp) Norway"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Computing (pp) Technology" source="-294" target="-1135">
+    <att type="string" name="canonicalName" value="Computing (pp) Technology"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Computing (pp) Cybercrime" source="-294" target="-347">
+    <att type="string" name="canonicalName" value="Computing (pp) Cybercrime"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Bahrain (pp) Morocco" source="-824" target="-878">
+    <att type="string" name="canonicalName" value="Bahrain (pp) Morocco"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Bahrain (pp) Kuwait" source="-824" target="-456">
+    <att type="string" name="canonicalName" value="Bahrain (pp) Kuwait"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Global climate talks (pp) Durban climate change conference 2011" source="-322" target="-345">
+    <att type="string" name="canonicalName" value="Global climate talks (pp) Durban climate change conference 2011"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Global climate talks (pp) Global development" source="-322" target="-321">
+    <att type="string" name="canonicalName" value="Global climate talks (pp) Global development"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="United Nations (pp) Unesco" source="-1060" target="-1102">
+    <att type="string" name="canonicalName" value="United Nations (pp) Unesco"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Environment (pp) Climate change" source="-1115" target="-218">
+    <att type="string" name="canonicalName" value="Environment (pp) Climate change"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Environment (pp) Science" source="-1115" target="-1105">
+    <att type="string" name="canonicalName" value="Environment (pp) Science"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Environment (pp) Energy" source="-1115" target="-627">
+    <att type="string" name="canonicalName" value="Environment (pp) Energy"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Environment (pp) Energy industry" source="-1115" target="-848">
+    <att type="string" name="canonicalName" value="Environment (pp) Energy industry"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Environment (pp) Natural disasters and extreme weather" source="-1115" target="-1103">
+    <att type="string" name="canonicalName" value="Environment (pp) Natural disasters and extreme weather"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Environment (pp) Animals" source="-1115" target="-163">
+    <att type="string" name="canonicalName" value="Environment (pp) Animals"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Nuclear power (pp) Japan" source="-626" target="-931">
+    <att type="string" name="canonicalName" value="Nuclear power (pp) Japan"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Nuclear power (pp) Japan disaster" source="-626" target="-409">
+    <att type="string" name="canonicalName" value="Nuclear power (pp) Japan disaster"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Colombia (pp) Farc" source="-158" target="-1080">
+    <att type="string" name="canonicalName" value="Colombia (pp) Farc"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Republicans (pp) US elections 2012" source="-779" target="-1029">
+    <att type="string" name="canonicalName" value="Republicans (pp) US elections 2012"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Republicans (pp) Democrats" source="-779" target="-205">
+    <att type="string" name="canonicalName" value="Republicans (pp) Democrats"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Africa (pp) Libya" source="-1151" target="-571">
+    <att type="string" name="canonicalName" value="Africa (pp) Libya"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Africa (pp) South Africa" source="-1151" target="-880">
+    <att type="string" name="canonicalName" value="Africa (pp) South Africa"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Africa (pp) Democratic Republic of the Congo" source="-1151" target="-204">
+    <att type="string" name="canonicalName" value="Africa (pp) Democratic Republic of the Congo"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Aung San Suu Kyi (pp) Hillary Clinton" source="-361" target="-360">
+    <att type="string" name="canonicalName" value="Aung San Suu Kyi (pp) Hillary Clinton"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Animals (pp) Wildlife" source="-163" target="-1114">
+    <att type="string" name="canonicalName" value="Animals (pp) Wildlife"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Drugs trade (pp) Brazil" source="-366" target="-98">
+    <att type="string" name="canonicalName" value="Drugs trade (pp) Brazil"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Natural disasters and extreme weather (pp) Drought" source="-1103" target="-216">
+    <att type="string" name="canonicalName" value="Natural disasters and extreme weather (pp) Drought"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Internet (pp) Censorship" source="-875" target="-811">
+    <att type="string" name="canonicalName" value="Internet (pp) Censorship"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Wales (pp) Mining" source="-1092" target="-590">
+    <att type="string" name="canonicalName" value="Wales (pp) Mining"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Republican presidential nomination 2012 (pp) Mitt Romney" source="-789" target="-565">
+    <att type="string" name="canonicalName" value="Republican presidential nomination 2012 (pp) Mitt Romney"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Republican presidential nomination 2012 (pp) Herman Cain" source="-789" target="-358">
+    <att type="string" name="canonicalName" value="Republican presidential nomination 2012 (pp) Herman Cain"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Republican presidential nomination 2012 (pp) Rick Perry" source="-789" target="-1041">
+    <att type="string" name="canonicalName" value="Republican presidential nomination 2012 (pp) Rick Perry"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Republican presidential nomination 2012 (pp) Newt Gingrich" source="-789" target="-1033">
+    <att type="string" name="canonicalName" value="Republican presidential nomination 2012 (pp) Newt Gingrich"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Health &amp; wellbeing (pp) Life and style" source="-1070" target="-1147">
+    <att type="string" name="canonicalName" value="Health &amp; wellbeing (pp) Life and style"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Libraries (pp) Books" source="-474" target="-1125">
+    <att type="string" name="canonicalName" value="Libraries (pp) Books"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Stage (pp) Culture" source="-958" target="-935">
+    <att type="string" name="canonicalName" value="Stage (pp) Culture"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Stage (pp) Theatre" source="-958" target="-966">
+    <att type="string" name="canonicalName" value="Stage (pp) Theatre"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Cricket (pp) Sport" source="-681" target="-665">
+    <att type="string" name="canonicalName" value="Cricket (pp) Sport"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Retail industry (pp) Consumer spending" source="-860" target="-167">
+    <att type="string" name="canonicalName" value="Retail industry (pp) Consumer spending"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Retail industry (pp) Christmas" source="-860" target="-145">
+    <att type="string" name="canonicalName" value="Retail industry (pp) Christmas"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Gender (pp) Women" source="-1123" target="-1120">
+    <att type="string" name="canonicalName" value="Gender (pp) Women"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Technology (pp) Internet" source="-1135" target="-875">
+    <att type="string" name="canonicalName" value="Technology (pp) Internet"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Technology (pp) Hacking" source="-1135" target="-346">
+    <att type="string" name="canonicalName" value="Technology (pp) Hacking"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Art and design (pp) Art" source="-991" target="-661">
+    <att type="string" name="canonicalName" value="Art and design (pp) Art"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Music (pp) Pop and rock" source="-1141" target="-1072">
+    <att type="string" name="canonicalName" value="Music (pp) Pop and rock"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Culture (pp) Art and design" source="-935" target="-991">
+    <att type="string" name="canonicalName" value="Culture (pp) Art and design"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Culture (pp) Music" source="-935" target="-1141">
+    <att type="string" name="canonicalName" value="Culture (pp) Music"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Culture (pp) Film" source="-935" target="-936">
+    <att type="string" name="canonicalName" value="Culture (pp) Film"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Culture (pp) Television" source="-935" target="-1048">
+    <att type="string" name="canonicalName" value="Culture (pp) Television"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Football (pp) Premier League 2011-12" source="-988" target="-739">
+    <att type="string" name="canonicalName" value="Football (pp) Premier League 2011-12"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Sport (pp) Football" source="-665" target="-988">
+    <att type="string" name="canonicalName" value="Sport (pp) Football"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+  <edge label="Sport (pp) Olympic Games 2012" source="-665" target="-668">
+    <att type="string" name="canonicalName" value="Sport (pp) Olympic Games 2012"/>
+    <att type="string" name="interaction" value="pp" cy:editable="false"/>
+    <graphics width="1" fill="#ff9900"/>
+  </edge>
+</graph>

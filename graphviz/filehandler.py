@@ -26,6 +26,7 @@ class FileHandler(object):
         return html
 
     def build_graph(self):
+        print self.input_file.name
         if self.input_file.name.endswith('.zip'):
             with ZipFile(self.input_file) as zf:
                 for line in zf.open('nodes.txt').readlines():
@@ -51,6 +52,11 @@ class FileHandler(object):
                 self.graph.add_node(node.attrib['id'], {'label': node.attrib['label'], 'weight': 1})
             for edge in root.xpath('.//edge'):
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
+        elif self.input_file.name.endswith('.txt'):
+            print "itt vagyok"
+            for line in self.input_file.readlines():
+                line = line.strip().split(' ')
+                self.graph.add_edge(line[0], line[1])
         else:
             raise BadExtensionException()
 
@@ -58,7 +64,7 @@ class FileHandler(object):
         nodes, edges = [], []
         positions=nx.graphviz_layout(self.graph, prog='dot', args="-Grankdir=%s" % self.direction)
         for node, pos in positions.items():
-            n = {'data' : {'weight': 1, 'id': str(node), 'label': self.graph.node[node]['label']}}
+            n = {'data' : {'weight': 1, 'id': str(node), 'label': self.graph.node[node].get('label', str(node))}}
             n['position'] = {'x': pos[0], 'y': pos[1]}
             nodes.append(n)
         for from_to in self.graph.edges():
