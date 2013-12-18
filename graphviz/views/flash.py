@@ -13,6 +13,7 @@ from django.utils import simplejson
 from zipfile import BadZipfile
 from django.contrib.flatpages.models import FlatPage
 from graphviz.utils import build_subtree
+from django.views.decorators.csrf import csrf_exempt
 
 
 def cytoscapeweb(request, template_name='graphviz/visualize_flash.html'):
@@ -25,6 +26,7 @@ def cytoscapeweb(request, template_name='graphviz/visualize_flash.html'):
 
 
 @render_to(mimetype='json')
+@csrf_exempt
 def cytoscapeweb_data(request):
     form = GraphUploadForm(request.POST or None, request.FILES or None)
     nodes, edges = [], []

@@ -1,7 +1,7 @@
 import networkx as nx
 
 
-def build_subtree(G, root, out=None, edge_count=100):
+def build_subtree(G, root, out=None, edge_count=500):
     out = nx.DiGraph()
     last_node = None
     for edge in nx.bfs_edges(G, root):
