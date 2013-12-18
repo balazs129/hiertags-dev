@@ -5,65 +5,37 @@
     <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/cytoscapeweb/cytoscapeweb.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/cytoscapeweb/json2.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/cytoscapeweb/AC_OETags.min.js"></script>
-    <script type="text/javascript">
-        var networ_json = {
-            dataSchema: {
-                nodes: [ { name: "label", type: "string" }]
-            },
-            data: {
-                nodes: {{ nodes|safe }},
-                edges: {{ edges|safe }}
-            }
-        };
-
-        $(function () {
-            var vis = new org.cytoscapeweb.Visualization('cytoscapeweb', {
-                swfPath: "{{ STATIC_URL }}site_media/swf/CytoscapeWeb",
-                flashInstallerPath: "{{ STATIC_URL }}site_media/swf/playerProductInstall"
-            });
-            vis.addListener("mouseover", "nodes", function(evt) {
-                var node = evt.target;
-                var bypass = { nodes: { }, edges: { } };
-                bypass['nodes'][node.data.id] = {'size': 300, 'labelFontSize': 40}
-                vis.visualStyleBypass(bypass);
-            });
-
-            vis.addListener("mouseout", "nodes", function(evt) {
-                var node = evt.target;
-                var bypass = { nodes: { }, edges: { } };
-                bypass['nodes'][node.data.id] = {'size': 30, 'labelFontSize': 10}
-                vis.visualStyleBypass(bypass);
-            });
-
-            if (networ_json.data.nodes.length) {
-                vis.ready(function () {
-                    var style = {
-                        global: {
-                            backgroundColor: "#ffffff"
-                        },
-                        nodes: {
-                            size: 30,
-                            labelFontSize: 10,
-                            labelVerticalAnchor: 'bottom',
-                            labelYOffset: 4,
-                            opacity: 1.0
-                        }
-                    };     
-                    vis.visualStyle(style);
-                });
-                vis.draw({ network: networ_json, layout: 'Tree', panZoomControlVisible: true });    
-            }
-        });
-    </script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/jquery.fileupload-ui.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/jquery.fileupload.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/graphviz.js"></script>
 {% endblock %}
 
 
 {% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <p>{{ description|safe }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="btn btn-success fileinput-button">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>Select files...</span>
+                <input id="fileupload" type="file" name="file" multiple>
+            </span>
+            <!-- The global progress bar -->
+            <div id="progress" class="progress">
+                <div class="progress-bar progress-bar-success"></div>
+            </div>
+        </div>
+    </div>
+    <!-- The container for the uploaded files -->
+    <div id="files" class="files"></div>
     <div class="col-md-12">
         <p>{{ description|safe }}</p>
-        {% crispy form form.helper %}
         <!-- button type="button" id="showall" class="btn btn-lg btn-primary" disabled="disabled">Show all nodes</button -->
-        <div id="cytoscapeweb" style="width: 100%; height: 600px; display: block; border: 1px solid black;">
+        <div id="graphViewer" style="width: 100%; height: 600px; display: block;">
             Cytoscape Web will replace the contents of this div with your graph.
         </div>
     </div>

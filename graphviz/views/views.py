@@ -1,3 +1,4 @@
+#encoding: utf8
 import networkx as nx
 from drenderer.decorators import render_to
 from django.conf import settings
@@ -18,20 +19,19 @@ def visualize(request, template_name='graphviz/visualize.html'):
                                 {'form': form},
                                 context_instance=RequestContext(request))
 
+"""
+def build_subtree(G, root, out=None, edge_count=400):
+    root_children_count = len(G[root].keys())
+    ### ha van elég hely, hozzáadom a gyerekeket
+    if root_children_count <= edge_count:
+        ### add childrens
+        edge_count -= root_children_count
+    ### ha a gyerekek hozzáadása után még mindig van elég hely
+    if edge_count > 0:
+        ### balról jobbra haladva hozzáadom a következő szintet
+        for child in G[root].keys():
+            out, edge_count = build_subtree(G, key, out, edge_count)
 
-def build_subtree(G, root, out=None, max_edge_count=200):
-    if not out:
-        out = nx.DiGraph()
-    for to in G[root].keys():
-        if len(out.edges()) > max_edge_count:
-            break
-        out.add_edge(root, to)
-        out.node[to] = G.node[to]
-    out.node[root] = G.node[root]
-    if len(out.edges()) < max_edge_count:
-        for key in G[root].keys():
-            build_subtree(G, key, out, max_edge_count)
-    return out
 
 
 def visualize2(request, template_name='graphviz/visualize2.html'):
@@ -62,7 +62,7 @@ def visualize2(request, template_name='graphviz/visualize2.html'):
                                 {'form': form, 'nodes': simplejson.dumps(nodes), 
                                 'edges': simplejson.dumps(edges), 'description': description},
                                 context_instance=RequestContext(request))
-
+"""
 
 @render_to(mimetype='json')
 def get_specified_nodes(request, node_id, fn_name):

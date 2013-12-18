@@ -1,16 +1,5 @@
-/*
-cy.on('mousemove', function (e) {
-                                console.log(e.originalEvent.clientX)
-                                $.each(cy.nodes(), function(index, value) {
-                                    console.log(value.renderedPosition())
-                                });
-                                console.log('---------------------')
-                            })
-*/
-$(function () {
-    'use strict';
-    // Change this to the location of your server-side upload handler:
-    var url = '/graphviz/data/cytoscapejs/';
+initialize_uploader = function() {
+    var url = '/graphviz/flash/data/';
     var csrftoken = $.cookie('csrftoken');
     $('#fileupload').fileupload({
         url: url,
@@ -25,66 +14,106 @@ $(function () {
             visualize_graph('graph', data.result);
         }
     }).prop('disabled', !$.support.fileInput)
-        .parent().addClass($.support.fileInput ? undefined : 'disabled');
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');    
+}
+
+initialize_viewer = function() {
+    vis = new org.cytoscapeweb.Visualization('graphViewer', {
+        swfPath: "/static/site_media/swf/CytoscapeWeb",
+        flashInstallerPath: "/static/site_media/swf/playerProductInstall"
+    });
+
+    vis.addListener("mouseover", "nodes", function(evt) {
+        var node = evt.target;
+        var bypass = { nodes: { }, edges: { } };
+        bypass['nodes'][node.data.id] = {'size': 300, 'labelFontSize': 60, 'labelFontWeight': 'bold'}
+        vis.visualStyleBypass(bypass);
+    });
+
+    vis.addListener("mouseout", "nodes", function(evt) {
+        var node = evt.target;
+        var bypass = { nodes: { }, edges: { } };
+        bypass['nodes'][node.data.id] = {}
+        vis.visualStyleBypass(bypass);
+    });
+    vis.draw({network: network}); 
+}
+
+var vis = undefined
+var network = {
+    dataSchema: {
+        nodes: [{name: "label", type: "string"}, {name: "collapsed", type: "boolean"}],
+        edges: [{name: "directed", type: "boolean", defValue: true}]
+    },
+    data: { nodes: [], edges: [] }
+};
+$(function () {
+    'use strict';
+    initialize_uploader();
+    initialize_viewer();
 });
 
+var options = {}
+visualize_graph = function(div_id, retval, node_id) {
+    network.data.nodes = retval.nodes
+    network.data.edges = retval.edges
+    /*for (var i=0; i<retval.nodes.length; i++) {
+        console.log(retval.nodes[i]['collapsed'])
+    }*/
+    options = { fitToScreen: true, points: retval.points };
+    vis.draw({ network: network, panZoomControlVisible: true });  
+    vis.ready(function () {
+        var colorMapper = {
+            attrName: "collapsed",
+            entries: [{ attrValue: true, value: "#204a87" },
+                      { attrValue: false, value: "#fce94f" }]
+        };
+        /* Set visual style */
+        var style = {
+            global: {
+                backgroundColor: "#ffffff"
+            },
+            nodes: {
+                size: 30,
+                labelFontSize: 10,
+                labelVerticalAnchor: 'bottom',
+                labelYOffset: 4,
+                opacity: 1.0,
+                color: { discreteMapper: colorMapper }
+            }
+        };     
+        vis.visualStyle(style);
+        /* Set context menus */
+        vis.layout({name: 'Preset', options: options});
+        vis.removeAllContextMenuItems();
+        vis.addContextMenuItem("View node subtree", "nodes", 
+            function (evt) {
+                node = evt.target;
+                if (node['data']['collapsed']) {
+                    var url = '/graphviz/flash/expand/' + node['data']['id'] + '/child/'
+                    $.ajax({
+                        url: url,
+                        async: false,
+                        success: function(retval) {
+                            visualize_graph('graph', retval, node['data']['id']);
+                        }
+                    });
+                }
+            }
+        );
 
-visualize_graph = function(div_id, retval) {
-    console.log(retval)
-    $('#' + div_id).cytoscape({
-        showOverlay: false,
-        maxZoom: 2,
-        renderer: { name: 'canvas'},
-        layout: {
-            name: 'preset'
-        },
-        elements: { 
-            nodes: retval.nodes,
-            edges: retval.edges
-        },
-        style: cytoscape.stylesheet()
-            .selector('node')
-            .css({
-                'content': 'data(label)',
-                'font-size': 10,
-                'text-outline-color': '#000',
-                'text-outline-opacity': '0.5'
-        }),
-        ready: function(){
-            /* console.log(retval.nodes.length)
-            console.log(retval.edges.length) */
-            var cy = this;
-            $('#' + div_id).cytoscapePanzoom();
-            $('#' + div_id).cytoscapeNavigator();
-            cy.nodes().on('mouseover', function () {
-                //console.log(cy.zoom())
-                if (cy.zoom() > 1.0) {
-                    factor = cy.zoom() * 1.1
-                } else {
-                    factor = (1 / cy.zoom()) * 1.2
-                }
-                if (this.data('origWidth') == undefined) {
-                    this.data('origWidth', this.width())
-                }
-                if (this.data('origHeight') == undefined) {
-                    this.data('origHeight', this.height())
-                }
-                this.animate({
-                    css: { 'width':  this.width() * factor, 'height': this.height() * factor, 
-                           'font-size': 15 * factor, 'font-weight': '900' 
-                    }, duration: 100
+        vis.addContextMenuItem("Jump to parent", "nodes", 
+            function (evt) {
+                node = evt.target;
+                var url = '/graphviz/flash/expand/' + node['data']['id'] + '/parent/'
+                $.ajax({
+                    url: url,
+                    async: false,
+                    success: function(retval) {
+                        visualize_graph('graph', retval, node['data']['id']);
+                    }
                 });
-            });
-            cy.nodes().on('mouseout', function () {
-                if (this.data('origWidth') == undefined) {
-                    return
-                }
-                this.animate({
-                    css: { 'width': this.data('origWidth'), 'height': this.data('origHeight'), 
-                           'font-size': 10, 'font-weight': '100' 
-                    }, duration: 100 
-                });
-            });
-        }
+            }
+        );
     });
 }

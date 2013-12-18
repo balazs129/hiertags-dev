@@ -11,10 +11,14 @@ class BadExtensionException(Exception):
 
 class FileHandler(object):
 
-    def __init__(self, input_file):
-        self.input_file = input_file
-        self.graph = nx.DiGraph()
-        self.direction = 'TB'
+    def __init__(self, input_file, is_stored=False):
+        if is_stored:
+            self.graph = nx.read_gpickle(input_file)
+            self.direction = 'BT'
+        else:
+            self.input_file = input_file
+            self.graph = nx.DiGraph()
+            self.direction = 'TB'
 
     def __bs_preprocess(self, html):
         """remove distracting whitespaces and newline characters"""
@@ -27,6 +31,7 @@ class FileHandler(object):
 
     def build_graph(self):
         if self.input_file.name.endswith('.zip'):
+            self.direction = 'BT'
             with ZipFile(self.input_file) as zf:
                 for line in zf.open('nodes.txt').readlines():
                     if line.startswith('#'):
@@ -41,7 +46,7 @@ class FileHandler(object):
                     if line.startswith('#') or not len(line.strip()):
                         continue
                     line = line.strip().split(' ')
-                    self.graph.add_edge(line[0], line[1])
+                    self.graph.add_edge(line[1], line[0])
         elif self.input_file.name.endswith('.xgmml'):
             self.direction = 'BT'
             xgmml = self.__bs_preprocess(self.input_file.read())
@@ -61,7 +66,8 @@ class FileHandler(object):
     def get_graph(self):
         nodes, edges = [], []
         for node in self.graph.nodes():
-            n = {'id': str(node), 'label': self.graph.node[node].get('label', str(node))}
+            n = {'id': str(node), 'label': str(node), #self.graph.node[node].get('label',
+                 'collapsed': self.graph.node[node].get('collapsed', True)}
             nodes.append(n)
         for from_to in self.graph.edges():
             e = {'source': from_to[0], 'target': from_to[1]}
@@ -82,3 +88,17 @@ class FileHandler(object):
             e['data']['id'] = '%s__%s' % (e['data']['source'], e['data']['target'])
             edges.append(e)
         return nodes, edges
+
+    def get_graph_with_positions_flash(self):
+        nodes, edges, points = [], [], []
+        positions=nx.graphviz_layout(self.graph, prog='dot', args="-Grankdir=%s" % self.direction)
+        for node, pos in positions.items():
+            points.append({'id': node, 'x': pos[0], 'y': pos[1]})
+            n = {'id': str(node), 'label':  self.graph.node[node].get('label', str(node)),
+                 'collapsed': self.graph.node[node].get('collapsed', True)}
+            nodes.append(n)
+        for from_to in self.graph.edges():
+            e = {'source': from_to[0], 'target': from_to[1]}
+            e['id'] = '%s__%s' % (e['source'], e['target'])
+            edges.append(e)
+        return nodes, edges, points
