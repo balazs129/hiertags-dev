@@ -1,5 +1,6 @@
 import networkx as nx
 from drenderer.decorators import render_to
+from django.http import Http404
 from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import render
@@ -43,7 +44,10 @@ def cytoscapeweb_data(request):
 @render_to(mimetype='json')
 def expand_subtree(request, node_id, tree_type):
     fh = FileHandler(input_file="%s/%s.gpickle" % (settings.MEDIA_ROOT, request.session.session_key), is_stored=True)
-    root = node_id if tree_type == 'child' else fh.graph.reverse().edges(node_id)[0][1]
+    try:
+        root = node_id if tree_type == 'child' else fh.graph.reverse().edges(node_id)[0][1]
+    except IndexError: ## no parent node to selected
+        raise Http404()
     fh.graph, _ = build_subtree(G=fh.graph, root=root)
     nodes, edges, points = fh.get_graph_with_positions_flash()
     return {'nodes': nodes, 'edges': edges, 'points': points}
