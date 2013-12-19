@@ -11,3 +11,5 @@ django-crispy-forms
 lxml
 dateutils
 requests
+networkx
+pygraphviz

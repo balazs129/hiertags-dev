@@ -6,3 +6,5 @@
 *.cys
 *.sq3
 *.pyo
+build*
+src*
