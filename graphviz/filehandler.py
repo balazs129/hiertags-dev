@@ -34,14 +34,19 @@ class FileHandler(object):
             self.direction = 'BT'
             with ZipFile(self.input_file) as zf:
                 for line in zf.open('nodes.txt').readlines():
-                    if line.startswith('#'):
+                    line = line.decode('utf8')
+                    line = line.strip()
+                    if line.startswith('#') or not len(line):
                         continue
-                    line = line.strip().split('\t')
+                    line = line.split('\t')
                     if len(line) < 2:
                         line = line[0].split(' ')
                     if len(line) > 2:
                         line = [line[0], ' '.join(p for p in line[1:])]
-                    self.graph.add_node(line[0], {'label': line[1], 'weight': 1})
+                    try:
+                        self.graph.add_node(line[0], {'label': line[1], 'weight': 1})
+                    except IndexError:
+                        pass
                 for line in zf.open('edges.txt').readlines():
                     if line.startswith('#') or not len(line.strip()):
                         continue
