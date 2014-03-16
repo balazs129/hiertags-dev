@@ -8,7 +8,6 @@ class BadExtensionException(Exception):
     def __str__(self):
         return u"Wrong file format! Please use xgmml or zip file."
 
-
 class FileHandler(object):
 
     def __init__(self, input_file, is_stored=False):
