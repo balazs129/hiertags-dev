@@ -1,7 +1,7 @@
 # Django settings for hiertags project.
 from os.path import abspath, dirname, join
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

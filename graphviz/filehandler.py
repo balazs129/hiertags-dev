@@ -64,6 +64,21 @@ class FileHandler(object):
             for line in self.input_file.readlines():
                 line = line.strip().split(' ')
                 self.graph.add_edge(line[0], line[1])
+        elif self.input_file.name.endswith('.cys'):
+            sessionfile = ZipFile(self.input_file, 'r')
+            contents = sessionfile.namelist()
+            networks = []
+            for elem in contents:
+                if elem.split('/')[1] == 'networks':
+                    networks.append((elem.split('/')[2], elem))
+            self.direction = 'BT'
+            xgmml = self.__bs_preprocess(sessionfile.read(networks[0][1]))
+            xgmml = xgmml.replace('xmlns="http://www.cs.rpi.edu/XGMML"', '') ### why?????
+            root = etree.fromstring(xgmml)
+            for node in root.xpath('.//node'):
+                self.graph.add_node(node.attrib['id'], {'label': node.attrib['label'], 'weight': 1})
+            for edge in root.xpath('.//edge'):
+                self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
         else:
             raise BadExtensionException()
 
