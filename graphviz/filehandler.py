@@ -1,8 +1,9 @@
+# -*- coding: utf-8 -*-
 import re
 import networkx as nx
 from lxml import etree
 from zipfile import ZipFile
-
+import HTMLParser
 
 class BadExtensionException(Exception):
     def __str__(self):
@@ -29,6 +30,7 @@ class FileHandler(object):
         return html
 
     def build_graph(self):
+        htmlpar = HTMLParser.HTMLParser()
         if self.input_file.name.endswith('.zip'):
             self.direction = 'BT'
             with ZipFile(self.input_file) as zf:
@@ -57,7 +59,7 @@ class FileHandler(object):
             xgmml = xgmml.replace('xmlns="http://www.cs.rpi.edu/XGMML"', '') ### why?????
             root = etree.fromstring(xgmml)
             for node in root.xpath('.//node'):
-                self.graph.add_node(node.attrib['id'], {'label': node.attrib['label'], 'weight': 1})
+                self.graph.add_node(node.attrib['id'], {'label': htmlpar.unescape(node.attrib['label']), 'weight': 1})
             for edge in root.xpath('.//edge'):
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
         elif self.input_file.name.endswith('.txt'):
@@ -76,7 +78,7 @@ class FileHandler(object):
             xgmml = xgmml.replace('xmlns="http://www.cs.rpi.edu/XGMML"', '') ### why?????
             root = etree.fromstring(xgmml)
             for node in root.xpath('.//node'):
-                self.graph.add_node(node.attrib['id'], {'label': node.attrib['label'], 'weight': 1})
+                self.graph.add_node(node.attrib['id'], {'label': htmlpar.unescape(node.attrib['label']), 'weight': 1})
             for edge in root.xpath('.//edge'):
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
         else:

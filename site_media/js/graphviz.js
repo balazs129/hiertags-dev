@@ -26,7 +26,7 @@ initialize_viewer = function() {
     vis.addListener("mouseover", "nodes", function(evt) {
         var node = evt.target;
         var bypass = { nodes: { }, edges: { } };
-        bypass['nodes'][node.data.id] = {'size': 300, 'labelFontSize': 60, 'labelFontWeight': 'bold'}
+        bypass['nodes'][node.data.id] = {'size': 150, 'labelFontSize': 30, 'labelFontWeight': 'bold'}
         vis.visualStyleBypass(bypass);
     });
 
@@ -74,7 +74,7 @@ visualize_graph = function(div_id, retval, node_id) {
                 backgroundColor: "#ffffff"
             },
             nodes: {
-                size: 30,
+                size: 20,
                 labelFontSize: 10,
                 labelVerticalAnchor: 'bottom',
                 labelYOffset: 4,
