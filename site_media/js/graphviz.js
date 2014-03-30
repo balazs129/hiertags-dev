@@ -2,6 +2,22 @@ initialize_uploader = function() {
     var url = '/graphviz/flash/data/';
     var csrftoken = $.cookie('csrftoken');
     $('#fileupload').fileupload({
+        add: function(e, data) {
+        filetmp = data.originalFiles[0]['name'].split('.');
+        fext = filetmp[filetmp.length - 1].toLowerCase();
+        switch (fext) {
+            case 'txt':
+            case 'zip':
+            case 'cys':
+            case 'xgmml':
+                console.log(fext);
+                data.submit();
+                break;
+            default :
+                var error = $('<p>').text='Invalid file type!';
+                $('#errorp').append(error);
+            }
+        },
         url: url,
         crossDomain: false,
         beforeSend: function(xhr, settings) {
@@ -10,10 +26,21 @@ initialize_uploader = function() {
         paramName: 'graph',
         dataType: 'json', /* $('input:file') */
         done: function (e, data) {
-            /* visualize graph */
-            visualize_graph('graph', data.result);
+            setTimeout(function() {
+                $('#progress .progress-bar').css('width', 0);
+                }, 2000);
         }
-    }).prop('disabled', !$.support.fileInput)
+    }).on('fileuploadprogressall', function(e, data){
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        $('#progress .progress-bar').css(
+            'width',
+            progress + '%'
+        );
+    }).on('fileuploaddone', function(e, data){
+         $('#errorp').remove()
+         visualize_graph('graph', data.result);
+    })
+        .prop('disabled', !$.support.fileInput)
         .parent().addClass($.support.fileInput ? undefined : 'disabled');    
 }
 
@@ -47,11 +74,6 @@ var network = {
     },
     data: { nodes: [], edges: [] }
 };
-$(function () {
-    'use strict';
-    initialize_uploader();
-    initialize_viewer();
-});
 
 var options = {}
 visualize_graph = function(div_id, retval, node_id) {
@@ -86,11 +108,12 @@ visualize_graph = function(div_id, retval, node_id) {
         /* Set context menus */
         vis.layout({name: 'Preset', options: options});
         vis.removeAllContextMenuItems();
+
         vis.addContextMenuItem("View node subtree", "nodes", 
             function (evt) {
                 node = evt.target;
-                if (node['data']['collapsed']) {
-                    var url = '/graphviz/flash/expand/' + node['data']['id'] + '/child/'
+//                if (node['data']['collapsed']) {
+                    var url = '/graphviz/flash/expand/' + node['data']['id'] + '/tree/'
                     $.ajax({
                         url: url,
                         async: false,
@@ -98,7 +121,7 @@ visualize_graph = function(div_id, retval, node_id) {
                             visualize_graph('graph', retval, node['data']['id']);
                         }
                     });
-                }
+//                }
             }
         );
 
@@ -115,5 +138,25 @@ visualize_graph = function(div_id, retval, node_id) {
                 });
             }
         );
+
+        vis.addContextMenuItem("View childs", "nodes",
+            function (evt){
+                node = evt.target;
+                var url = '/graphviz/flash/expand/' + node['data']['id'] + '/child/'
+                $.ajax({
+                    url: url,
+                    async: false,
+                    success: function(retval){
+                        visualize_graph('graph', retval, node['data']['id']);
+                    }
+                })
+            })
     });
 }
+
+$(function () {
+    'use strict';
+    initialize_uploader();
+
+    initialize_viewer();
+});

@@ -1,0 +1,18 @@
+#contentcolumn {
+    margin-left: 0px;
+    width: 700px;
+}
+
+a {
+    text-decoration: underline;
+}
+
+#errorp{
+   position: absolute;
+   top: 5px;
+   right: 0px;
+   width: 500px;
+   color: red;
+   font-size: 150%;
+   font-weight: bold;
+}

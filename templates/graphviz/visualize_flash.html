@@ -4,18 +4,16 @@
 {% block title %} HIERTAGS - Visualize{% endblock %}
 
 {% block head %}
-    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/jquery.min.js"></script>
-    <link type="text/css" href="{{ STATIC_URL }}site_media/css/jquery-ui.custom.min.css" rel="stylesheet">
-    <link type="text/css" href="{{ STATIC_URL }}site_media/css/jquery.fileupload-ui.css" rel="stylesheet">
-    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/jquery-ui.custom.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/cytoscapeweb/cytoscapeweb.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/cytoscapeweb/json2.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/cytoscapeweb/AC_OETags.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/jquery.fileupload.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}site_media/js/graphviz.js"></script>
+    <link href="{{ STATIC_URL }}site_media/css/jquery.fileupload.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site_media/css/visualize.css" rel="stylesheet">
+    <script src="{{ STATIC_URL }}site_media/js/jquery.ui.widget.js"></script>
+    <script src="{{ STATIC_URL }}site_media/js/jquery.fileupload.js"></script>
+    <script src="{{ STATIC_URL }}site_media/js/jquery.cookie.js"></script>
+    <script src="{{ STATIC_URL }}site_media/js/cytoscapeweb/cytoscapeweb.min.js"></script>
+    <script src="{{ STATIC_URL }}site_media/js/cytoscapeweb/json2.min.js"></script>
+    <script src="{{ STATIC_URL }}site_media/js/cytoscapeweb/AC_OETags.min.js"></script>
+    <script src="{{ STATIC_URL }}site_media/js/graphviz.js"></script>
 {% endblock %}
-
 
 {% block content %}
     <div class="row">
@@ -27,9 +25,10 @@
         <div class="col-md-12">
             <span class="btn btn-success fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
-                <span>Select files...</span>
-                <input id="fileupload" type="file" name="file" multiple>
+                <span>Choose file</span>
+                <input id="fileupload" type="file" name="files[]">
             </span>
+            <div id="errorp" class="errorp"></div>
             <!-- The global progress bar -->
             <div id="progress" class="progress">
                 <div class="progress-bar progress-bar-success"></div>

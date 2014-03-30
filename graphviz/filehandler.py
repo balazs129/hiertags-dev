@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-import re
 import networkx as nx
-from lxml import etree
 from zipfile import ZipFile
 import HTMLParser
+import utils
 
 class BadExtensionException(Exception):
     def __str__(self):
@@ -20,18 +19,24 @@ class FileHandler(object):
             self.graph = nx.DiGraph()
             self.direction = 'TB'
 
-    def __bs_preprocess(self, html):
-        """remove distracting whitespaces and newline characters"""
-        pat = re.compile('(^[\s]+)|([\s]+$)', re.MULTILINE)
-        html = re.sub(pat, '', html)       # remove leading and trailing whitespaces
-        html = re.sub('\n', ' ', html)     # convert newlines to spaces
-        html = re.sub('[\s]+<', '<', html) # remove whitespaces before opening tags
-        html = re.sub('>[\s]+', '>', html) # remove whitespaces after closing tags
-        return html
-
     def build_graph(self):
         htmlpar = HTMLParser.HTMLParser()
-        if self.input_file.name.endswith('.zip'):
+
+        def open_edgelist():
+            for line in self.input_file.readlines():
+                 line = line.strip().split(' ')
+                 self.graph.add_edge(line[0], line[1])
+
+            #check if current directioning OK
+            root = nx.topological_sort(self.graph)[0]
+            H = self.graph.reverse()
+            revroot = nx.topological_sort(H)[0]
+            #sum 1 to gen the number of elements from a generator function
+            if sum(1 for _ in nx.bfs_edges(self.graph, root)) < sum(1 for _ in nx.bfs_edges(H, revroot)):
+                self.graph.reverse(copy=False)
+                self.direction = 'BT'
+
+        def open_zipfile():
             self.direction = 'BT'
             with ZipFile(self.input_file) as zf:
                 for line in zf.open('nodes.txt').readlines():
@@ -53,36 +58,32 @@ class FileHandler(object):
                         continue
                     line = line.strip().split(' ')
                     self.graph.add_edge(line[1], line[0])
-        elif self.input_file.name.endswith('.xgmml'):
+
+        def open_xgmml():
             self.direction = 'BT'
-            xgmml = self.__bs_preprocess(self.input_file.read())
-            xgmml = xgmml.replace('xmlns="http://www.cs.rpi.edu/XGMML"', '') ### why?????
-            root = etree.fromstring(xgmml)
-            for node in root.xpath('.//node'):
+            nodes, edges = utils.read_xgmml(self.input_file)
+            for node in nodes:
                 self.graph.add_node(node.attrib['id'], {'label': htmlpar.unescape(node.attrib['label']), 'weight': 1})
-            for edge in root.xpath('.//edge'):
+            for edge in edges:
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
-        elif self.input_file.name.endswith('.txt'):
-            for line in self.input_file.readlines():
-                line = line.strip().split(' ')
-                self.graph.add_edge(line[0], line[1])
-        elif self.input_file.name.endswith('.cys'):
-            sessionfile = ZipFile(self.input_file, 'r')
-            contents = sessionfile.namelist()
-            networks = []
-            for elem in contents:
-                if elem.split('/')[1] == 'networks':
-                    networks.append((elem.split('/')[2], elem))
+
+        def open_cys():
             self.direction = 'BT'
-            xgmml = self.__bs_preprocess(sessionfile.read(networks[0][1]))
-            xgmml = xgmml.replace('xmlns="http://www.cs.rpi.edu/XGMML"', '') ### why?????
-            root = etree.fromstring(xgmml)
-            for node in root.xpath('.//node'):
+            nodes, edges = utils.read_xgmml(utils.select_cysnetwork(self.input_file))
+            for node in nodes:
                 self.graph.add_node(node.attrib['id'], {'label': htmlpar.unescape(node.attrib['label']), 'weight': 1})
-            for edge in root.xpath('.//edge'):
+            for edge in edges:
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
-        else:
-            raise BadExtensionException()
+
+        fileext = {'txt': open_edgelist,
+                   'zip': open_zipfile,
+                   'xgmml': open_xgmml,
+                   'cys': open_cys}
+        try:
+            fileext[self.input_file.name.split('.')[-1]]()
+        except KeyError:
+            raise BadExtensionException
+
 
     def get_graph(self):
         nodes, edges = [], []

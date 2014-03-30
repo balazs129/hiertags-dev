@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta content="text/html; charset=UTF8" http-equiv="Content-Type">
+    <meta charset="utf-8">
     <title>{% block title %} HIERTAGS {% endblock %}</title>
     <link type="image/x-icon" href="{{ STATIC_URL }}site_media/img/favicon.ico" rel="icon">
-    <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}site_media/css/bootstrap-fixes.css">
-    <link type="text/css" href="{{ STATIC_URL }}site_media/css/HIERTAGS_style.css" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link href="{{ STATIC_URL }}site_media/css/HIERTAGS_style.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -30,7 +31,7 @@
                     <a title="People" href="/people/">People</a>
                 </li>
                 <li {%  if act_menu == 'visualize' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
-                    <a title="Visualize" href="/graphviz/flash">Visualize</a>
+                    <a title="Visualize" href="/graphviz/flash/">Visualize</a>
                 </li>
             </ul>
         </div>
@@ -42,15 +43,7 @@
                 </div>
             </div>
         </div>
-        <div id="leftcolumn">
-            <div class="lefttube">
-                <br>
-                <div id="subtitle1">Contact</div>
-                    hiertags@hal.elte.hu
-                <br>
-                <br>
-                </div>
-            </div>
-        </div>
+        {% block leftcontact %}{% endblock %}
+    </div>
 </body>
 </html>

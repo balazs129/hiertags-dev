@@ -194,4 +194,6 @@ img.email {
     border-right: 1px solid #C4C2C2;
     color: white;
 }
-
+a {
+    text-decoration: underline;
+}

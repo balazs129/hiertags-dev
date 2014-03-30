@@ -11,6 +11,6 @@ urlpatterns = patterns('',
 
     url(r'^flash/$', views.cytoscapeweb, name='graphviz-visualize-flash'),
     url(r'^flash/data/$', views.cytoscapeweb_data, name='graphviz-visualize-flash-data'),
-    url(r'^flash/expand/(?P<node_id>[^/]+)/(?P<tree_type>(parent|child))/$', 
+    url(r'^flash/expand/(?P<node_id>[^/]+)/(?P<tree_type>(parent|child|tree))/$',
             views.expand_subtree, name='graphviz-expand-subtree'),
 )
