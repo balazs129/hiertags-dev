@@ -9,10 +9,12 @@
     <script src="{{ STATIC_URL }}site_media/js/jquery.ui.widget.js"></script>
     <script src="{{ STATIC_URL }}site_media/js/jquery.fileupload.js"></script>
     <script src="{{ STATIC_URL }}site_media/js/jquery.cookie.js"></script>
+    <script src="{{ STATIC_URL }}site_media/js/jquery.mousewheel.js"></script>
     <script src="{{ STATIC_URL }}site_media/js/cytoscapeweb/cytoscapeweb.min.js"></script>
     <script src="{{ STATIC_URL }}site_media/js/cytoscapeweb/json2.min.js"></script>
     <script src="{{ STATIC_URL }}site_media/js/cytoscapeweb/AC_OETags.min.js"></script>
     <script src="{{ STATIC_URL }}site_media/js/graphviz.js"></script>
+
 {% endblock %}
 
 {% block content %}
@@ -24,21 +26,15 @@
     <div class="row">
         <div class="col-md-12">
             <span class="btn btn-success fileinput-button">
-                <i class="glyphicon glyphicon-plus"></i>
+                <i class="glyphicon glyphicon-folder-open"></i>
                 <span>Choose file</span>
                 <input id="fileupload" type="file" name="files[]">
             </span>
+            <div id="progress-circle" class="progress-circle"></div>
             <div id="errorp" class="errorp"></div>
-            <!-- The global progress bar -->
-            <div id="progress" class="progress">
-                <div class="progress-bar progress-bar-success"></div>
-            </div>
         </div>
     </div>
-    <!-- The container for the uploaded files -->
-    <div id="files" class="files"></div>
     <div class="col-md-12">
-        <!-- button type="button" id="showall" class="btn btn-lg btn-primary" disabled="disabled">Show all nodes</button -->
         <div id="graphViewer" style="width: 100%; height: 400px; display: block;">
         </div>
     </div>
