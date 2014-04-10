@@ -1,8 +1,41 @@
 from zipfile import ZipFile
-
 import networkx as nx
 from lxml import etree
+from operator import itemgetter
 
+def make_ordered_tree(graph):
+    direction = 'TB'
+    positions = nx.graphviz_layout(graph, prog='dot', args="-Grankdir=%s" % direction)
+    levels, sorrend, lmap = {}, {}, {}
+    ret_order = {}
+    tmp = []
+    for node, pos in positions.iteritems():
+       tmp.append(pos[1])
+
+    level_set = set(tmp)
+    for elem in level_set:
+        levels[elem] = []
+    sorted_map = sorted(list(level_set), reverse=True)
+
+    count = 0
+    for elem in sorted_map:
+        lmap[elem] = count
+        count += 1
+
+    nodelist = positions.items()
+    for node, pos in nodelist:
+        levels[pos[1]].append({'id': node, 'x':pos[0]})
+
+    for elem in levels.keys():
+        tmp_list = []
+        sorted_nodes = sorted(levels[elem], key=itemgetter('x'))
+        for snode in sorted_nodes:
+            tmp_list.append(snode['id'])
+        levels[elem] = tmp_list
+
+    for elem in levels.keys():
+        ret_order[lmap[elem]] = levels[elem]
+    return ret_order
 
 def paint_nodes(graph):
     for node in graph.nodes():

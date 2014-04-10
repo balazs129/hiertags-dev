@@ -12,13 +12,10 @@ class BadExtensionException(Exception):
 
 
 class FileHandler(object):
-    def __init__(self, input_file, visualization=None, positions=None, is_stored=False):
+    def __init__(self, input_file, visualization=None, is_stored=False):
         if is_stored:
             self.graph = nx.read_gpickle(input_file)
             self.vgraph = nx.read_gpickle(visualization)
-            # with open(positions, 'r') as dumpfile:
-            #     self.layout = json.load(dumpfile)
-            #Direction for graphviz layout e.g. TopBottom=TB
             self.direction = 'BT'
         else:
             self.input_file = input_file
