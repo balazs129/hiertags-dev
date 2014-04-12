@@ -199,8 +199,13 @@ a {
     text-decoration: underline;
 }
 
+html, body {
+    height: 100%;
+}
+
 svg#visualization {
-    overflow: visible;
+    overflow: auto;
+    min-height: 100%;
 }
 .node circle {
     color: steelblue;

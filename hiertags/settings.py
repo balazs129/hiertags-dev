@@ -26,8 +26,6 @@ DATABASES = {
 TIME_ZONE = 'Europe/Budapest'
 LANGUAGE_CODE = 'en-en'
 SITE_ID = 1
-#USE_I18N = True
-#USE_L10N = True
 USE_TZ = True
 
 # Directories
@@ -93,7 +91,6 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     #'django.contrib.admindocs',
     'crispy_forms',
-    'graphviz',
     'visualize',
 )
 

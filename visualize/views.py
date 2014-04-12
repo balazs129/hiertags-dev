@@ -9,7 +9,7 @@ from drenderer.decorators import render_to
 def visualize(request, template_name='visualize.html'):
     form = GraphUploadForm(request.POST or None, request.FILES or None)
     try:
-        description = FlatPage.objects.get(url='/graphviz/').content
+        description = FlatPage.objects.get(url='/visdesc/').content
     except FlatPage.DoesNotExist:
         description = ''
     return render(request, template_name, {'form': form, 'description': description})

@@ -73,9 +73,10 @@ var convert_data = function (data) {
 };
 
 var generate_tree = function (treeData) {
-    var margin = {top: 20, right: 20, bottom: 20, left: 20},
+    "use strict";
+    var margin = {top: 20, right: 10, bottom: 20, left: 0},
         width = 1200 - margin.right - margin.left,
-        height = 800 - margin.top - margin.bottom;
+        height = 900 - margin.top - margin.bottom;
 
     var i = 0,
         duration = 750,
@@ -85,7 +86,7 @@ var generate_tree = function (treeData) {
         .size([height, width])
         .separation(function (a, b) {
             var width = a.name.length + b.name.length;
-            distance = width + 5; // horizontal distance between nodes = 16
+            var distance = width + 5; // horizontal distance between nodes = 16
             return distance;
         });
 
@@ -101,12 +102,6 @@ var generate_tree = function (treeData) {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     root = treeData[0];
-    //update(root)
-    //d3.json("dumpfile.json", function(error, flare) {
-    //    root = flare;
-    //    root.x0 = height / 2;
-    //    root.y0 = 0;
-    //
     function collapse(d) {
         if (d.children) {
             d._children = d.children;
@@ -130,7 +125,7 @@ var generate_tree = function (treeData) {
 
         // Normalize for fixed-depth.
         nodes.forEach(function (d) {
-            d.y = d.depth * 150;
+            d.y = d.depth * 140;
         });
 
 
@@ -147,8 +142,9 @@ var generate_tree = function (treeData) {
                 return "translate(" + source.x0 + "," + source.y0 + ")";
             })
             .on("click", click)
-            .on("mouseover", magnify)
-            .on("mouseleave", reset_orig);
+            .on("mouseenter", magnify)
+            .on("mouseleave", reset_orig)
+            .on("contextmenu", delete_node);
 
         nodeEnter.append("circle")
             .attr("r", 1e-6)
@@ -247,22 +243,36 @@ var generate_tree = function (treeData) {
         } else {
             d.children = d._children;
             d._children = null;
+            d.children.forEach(collapse);
         }
         update(d);
+    }
+
+    function delete_node(d) {
+        if (d.parent && d.parent.children){
+        console.log('removing ' + d.name);
+        var nodeToDelete = _.where(d.parent.children, {name: d.name});
+        if (nodeToDelete){
+            d.parent.children = _.without(d.parent.children, nodeToDelete[0]);
+        }
+        d3.event.preventDefault();
+        update(d);
+        }
     }
 
     function magnify(d) {
         var nodeSelection = d3.select(this);
         nodeSelection.select("circle")
             .attr("r", function (d) {
-                return 20;
+                return 15;
             });
         nodeSelection.select("text")
             .style({'font-size': '20px'})
             .attr("dy", function (d) {
-                return "2em";
+                return "1em";
             });
 //        nodeSelection.select("text").style({opacity:'1.0'});
+        d3.event.preventDefault();
     };
 
     function reset_orig(d) {
