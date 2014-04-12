@@ -21,7 +21,7 @@ urlpatterns = patterns('',
     url(r'^accounts/reset_password/complete/$', auth_views.password_reset_complete),
     #url(r'^$', login_required(TemplateView.as_view(template_name='cytoscape.html'))),
     url(r'^$', RedirectView.as_view(url='/home/'), name='root'),
-    url(r'^graphviz/', include('graphviz.urls')),
+    url(r'^visualize/', include('visualize.urls')),
     url(r'^$', include('django.contrib.flatpages.urls')),
 )
 

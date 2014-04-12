@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from zipfile import ZipFile
 import HTMLParser
+
 import networkx as nx
+
 import utils
-import json
 
 
 class BadExtensionException(Exception):
@@ -12,15 +13,9 @@ class BadExtensionException(Exception):
 
 
 class FileHandler(object):
-    def __init__(self, input_file, visualization=None, is_stored=False):
-        if is_stored:
-            self.graph = nx.read_gpickle(input_file)
-            self.vgraph = nx.read_gpickle(visualization)
-            self.direction = 'BT'
-        else:
-            self.input_file = input_file
-            self.graph = nx.DiGraph()
-            self.direction = 'TB'
+    def __init__(self, input_file):
+        self.input_file = input_file
+        self.graph = nx.DiGraph()
 
     def build_graph(self):
         htmlpar = HTMLParser.HTMLParser()
@@ -32,16 +27,13 @@ class FileHandler(object):
 
             #check if current directioning OK
             root = nx.topological_sort(self.graph)[0]
-            H = self.graph.reverse()
-            revroot = nx.topological_sort(H)[0]
+            rev_graph = self.graph.reverse()
+            revroot = nx.topological_sort(rev_graph)[0]
             #sum 1 to get the number of elements from a generator function
-            if sum(1 for _ in nx.bfs_edges(self.graph, root)) < sum(1 for _ in nx.bfs_edges(H, revroot)):
+            if sum(1 for _ in nx.bfs_edges(self.graph, root)) < sum(1 for _ in nx.bfs_edges(rev_graph, revroot)):
                 self.graph.reverse(copy=False)
-                self.direction = 'BT'
-            self.vgraph = self.graph.copy()
 
         def open_zipfile():
-            self.direction = 'BT'
             with ZipFile(self.input_file) as zf:
                 for line in zf.open('nodes.txt').readlines():
                     line = line.decode('utf8')
@@ -62,25 +54,24 @@ class FileHandler(object):
                         continue
                     line = line.strip().split(' ')
                     self.graph.add_edge(line[1], line[0])
-                self.vgraph = self.graph.copy()
 
         def open_xgmml():
             self.direction = 'BT'
             nodes, edges = utils.read_xgmml(self.input_file)
             for node in nodes:
-                self.graph.add_node(node.attrib['id'], {'id': node.attrib['id'],  'label': htmlpar.unescape(node.attrib['label'])})
+                self.graph.add_node(node.attrib['id'],
+                                    {'id': node.attrib['id'], 'label': htmlpar.unescape(node.attrib['label'])})
             for edge in edges:
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
-            self.vgraph = self.graph.copy()
 
         def open_cys():
             self.direction = 'BT'
             nodes, edges = utils.read_xgmml(utils.select_cysnetwork(self.input_file))
             for node in nodes:
-                self.graph.add_node(node.attrib['id'], {'id': node.attrib['id'],  'label': htmlpar.unescape(node.attrib['label'])})
+                self.graph.add_node(node.attrib['id'],
+                                    {'id': node.attrib['id'], 'label': htmlpar.unescape(node.attrib['label'])})
             for edge in edges:
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
-            self.vgraph = self.graph.copy()
 
         fileext = {'txt': open_edgelist,
                    'zip': open_zipfile,
@@ -91,23 +82,25 @@ class FileHandler(object):
         except KeyError:
             raise BadExtensionException
 
-    def get_graph_with_positions(self):
-        for node in self.graph.nodes():
-            try:
-                childs = nx.bfs_successors(self.graph, node)[node]
-                self.graph.node[node]['collapsed'] = False
-            except KeyError:
-                self.graph.node[node]['collapsed'] = True
-
-        nodes, edges, points = [], [], []
-        positions = nx.graphviz_layout(self.graph, prog='dot', args="-Grankdir=%s" % self.direction)
-        for node, pos in positions.items():
-            points.append({'id': node, 'x': pos[0], 'y': pos[1]})
-            n = {'id': str(node), 'label': self.graph.node[node].get('label', str(node)),
-                 'collapsed': self.graph.node[node].get('collapsed', False)}
-            nodes.append(n)
-        for from_to in self.graph.edges():
-            e = {'source': from_to[0], 'target': from_to[1]}
-            e['id'] = '%s__%s' % (e['source'], e['target'])
-            edges.append(e)
-        return {'nodes': nodes, 'edges': edges, 'points': points}
+    def gen_flat(self):
+        data = []
+        idmap = {}
+        # data = graph.nodes(data=True)
+        # If data dict empty label=id
+        for elem in self.graph.nodes_iter(data=True):
+            if len(elem[1]) == 0:
+                elem[1]['id'] = elem[0]
+                elem[1]['label'] = elem[0]
+                idmap[elem[1]['id']] = elem[1]['label']
+            else:
+                idmap[elem[1]['id']] = elem[1]['label']
+        for elem in self.graph.nodes():
+            tmp = {'name': idmap[elem]}
+            if len(self.graph.pred[elem].keys()) == 0:
+                parent = "null"
+            else:
+                t_parent = self.graph.pred[elem].keys()[0]
+                parent = idmap[t_parent]
+            tmp['parent'] = parent
+            data.append(tmp)
+        return data

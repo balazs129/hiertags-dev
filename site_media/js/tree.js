@@ -1,7 +1,7 @@
 var initialize_uploader = function () {
     'use strict';
 
-    var url = '/graphviz/flash/data/';
+    var url = '/visualize/data/';
     var csrftoken = $.cookie('csrftoken');
     $('#fileupload').fileupload({
         add: function (e, data) {
@@ -73,7 +73,6 @@ var convert_data = function (data) {
 };
 
 var generate_tree = function (treeData) {
-    // ************** Generate the tree diagram	 *****************
     var margin = {top: 20, right: 20, bottom: 20, left: 20},
         width = 1200 - margin.right - margin.left,
         height = 800 - margin.top - margin.bottom;
@@ -84,11 +83,11 @@ var generate_tree = function (treeData) {
 
     var tree = d3.layout.tree()
         .size([height, width])
-        .separation(function(a, b) {
-               var width = a.name.length + b.name.length;
-                   distance = width + 5; // horizontal distance between nodes = 16
-                   return distance;
-           });
+        .separation(function (a, b) {
+            var width = a.name.length + b.name.length;
+            distance = width + 5; // horizontal distance between nodes = 16
+            return distance;
+        });
 
     var diagonal = d3.svg.diagonal()
         .projection(function (d) {
@@ -153,20 +152,26 @@ var generate_tree = function (treeData) {
 
         nodeEnter.append("circle")
             .attr("r", 1e-6)
-            .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+            .style("fill", function (d) {
+                return d._children ? "lightsteelblue" : "#fff";
+            });
 
         nodeEnter.append("text")
 //            .attr("y", function(d) { return d.children || d._children ? -10 : 10; })
-            .attr("y", function(d) { if (d === treeData[0]){
-                return -10;}
-            else{
-                return 10;
-            }
-              })
+            .attr("y", function (d) {
+                if (d === treeData[0]) {
+                    return -10;
+                }
+                else {
+                    return 10;
+                }
+            })
             .attr("dy", ".35em")
             .attr("text-anchor", "middle")
-    //        .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-            .text(function(d) { return d.name; })
+            //        .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+            .text(function (d) {
+                return d.name;
+            })
             .style("fill-opacity", 1e-6);
 
         // Transition nodes to their new position.
@@ -249,12 +254,12 @@ var generate_tree = function (treeData) {
     function magnify(d) {
         var nodeSelection = d3.select(this);
         nodeSelection.select("circle")
-            .attr("r", function (d){
-            return 20;
-        });
+            .attr("r", function (d) {
+                return 20;
+            });
         nodeSelection.select("text")
             .style({'font-size': '20px'})
-            .attr("dy", function (d){
+            .attr("dy", function (d) {
                 return "2em";
             });
 //        nodeSelection.select("text").style({opacity:'1.0'});
@@ -262,19 +267,18 @@ var generate_tree = function (treeData) {
 
     function reset_orig(d) {
         var nodeSelection = d3.select(this);
-        nodeSelection.select("circle").attr("r", function (d){
+        nodeSelection.select("circle").attr("r", function (d) {
             return 5;
         });
         nodeSelection.select("text")
             .style({'font-size': '10px'})
-            .attr("dy", function (d){
+            .attr("dy", function (d) {
                 return ".35em";
             });
 //        nodeSelection.select("text").style({opacity:'0.6'});
     };
 
 };
-
 
 $(function () {
     $.ajaxSetup({
@@ -285,8 +289,6 @@ $(function () {
             }
         }
     });
-
     initialize_uploader();
-
 });
 
