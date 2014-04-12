@@ -166,3 +166,17 @@ def select_cysnetwork(inputfile):
         elif tmp[1][-6:] == '.xgmml':
             networks.append((tmp[1], elem))
     return sessionfile.open(networks[0][1], 'r')
+
+def gen_flat(graph):
+    data = []
+    for elem in graph.nodes_iter():
+        tmp = {}
+        tmp['name'] = elem
+
+        if len(graph.pred[elem]) == 0:
+            parent = "null"
+        else:
+            parent = graph.pred[elem].keys()[0]
+        tmp['parent'] = parent
+        data.append(tmp)
+    return data

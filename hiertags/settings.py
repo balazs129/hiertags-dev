@@ -10,7 +10,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__)))).replace('\\','/')
+PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__)))).replace('\\', '/')
 
 DATABASES = {
     'default': {
@@ -94,6 +94,7 @@ INSTALLED_APPS = (
     #'django.contrib.admindocs',
     'crispy_forms',
     'graphviz',
+    'visualize',
 )
 
 LOGGING = {

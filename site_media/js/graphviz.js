@@ -159,7 +159,9 @@ function visualize_graph(div_id, retval) {
                         url: url,
                         async: true,
                         success: function (retval) {
-                            visualize_graph('graph', retval, node.data.id);
+                           console.log(retval)
+
+//                            visualize_graph('graph', retval, node.data.id);
                         }
                     });
                 }

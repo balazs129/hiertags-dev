@@ -39,22 +39,14 @@ def cytoscapeweb(request, template_name='graphviz/visualize_flash.html'):
 @csrf_exempt
 def cytoscapeweb_data(request):
     form = GraphUploadForm(request.POST or None, request.FILES or None)
-    nodes, edges = [], []
     if form.is_valid():
         input_file = form.cleaned_data['graph']
         fh = FileHandler(input_file=input_file)
         fh.build_graph()
         fh.graph = nx.weakly_connected_component_subgraphs(fh.graph)[0]
-        root = nx.topological_sort(fh.graph)[0]
         utils.paint_nodes(fh.graph)
-        if fh.graph.number_of_nodes() < 50:
-            fh.vgraph = utils.build_subtree(fh.graph, root)
-        else:
-            fh.vgraph = utils.get_childs(fh.graph, root)
-        nx.write_gpickle(fh.graph, "%s/%s.gpickle" % (settings.MEDIA_ROOT, request.session.session_key))
-        nx.write_gpickle(fh.vgraph, "%s/v_%s.gpickle" % (settings.MEDIA_ROOT, request.session.session_key))
-        nodes, edges, points = visualize_graph(fh.vgraph, fh.direction)
-    return {'nodes': nodes, 'edges': edges, 'points': points}
+        data = utils.gen_flat(fh.graph)
+    return data
 
 
 @render_to(mimetype='json')
