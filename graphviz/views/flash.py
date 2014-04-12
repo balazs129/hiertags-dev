@@ -44,7 +44,7 @@ def cytoscapeweb_data(request):
         fh = FileHandler(input_file=input_file)
         fh.build_graph()
         fh.graph = nx.weakly_connected_component_subgraphs(fh.graph)[0]
-        utils.paint_nodes(fh.graph)
+        # utils.paint_nodes(fh.graph)
         data = utils.gen_flat(fh.graph)
     return data
 

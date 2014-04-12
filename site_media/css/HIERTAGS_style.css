@@ -203,13 +203,18 @@ svg#visualization {
     overflow: visible;
 }
 .node circle {
+    color: steelblue;
     fill: #fff;
     stroke: steelblue;
     stroke-width: 1px;
 }
 
 .node text {
-    font: 12px sans-serif;
+    font-size: 10px;
+    font-family: sans-serif;
+    /*pointer-events: none;*/
+    stroke-width: 0px;
+    /*opacity: 0.6;*/
 }
 
 .link {
@@ -217,3 +222,12 @@ svg#visualization {
     stroke: #ccc;
     stroke-width: 1px;
 }
+
+path.link {
+  fill: none;
+  stroke-width: 2px;
+}
+
+line {
+  stroke: #000;
+  stroke-width: 1px;

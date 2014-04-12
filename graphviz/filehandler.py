@@ -68,7 +68,7 @@ class FileHandler(object):
             self.direction = 'BT'
             nodes, edges = utils.read_xgmml(self.input_file)
             for node in nodes:
-                self.graph.add_node(node.attrib['id'], {'label': htmlpar.unescape(node.attrib['label']), 'weight': 1})
+                self.graph.add_node(node.attrib['id'], {'id': node.attrib['id'],  'label': htmlpar.unescape(node.attrib['label'])})
             for edge in edges:
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
             self.vgraph = self.graph.copy()
@@ -77,7 +77,7 @@ class FileHandler(object):
             self.direction = 'BT'
             nodes, edges = utils.read_xgmml(utils.select_cysnetwork(self.input_file))
             for node in nodes:
-                self.graph.add_node(node.attrib['id'], {'label': htmlpar.unescape(node.attrib['label']), 'weight': 1})
+                self.graph.add_node(node.attrib['id'], {'id': node.attrib['id'],  'label': htmlpar.unescape(node.attrib['label'])})
             for edge in edges:
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
             self.vgraph = self.graph.copy()

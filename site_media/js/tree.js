@@ -6,6 +6,7 @@ var initialize_uploader = function () {
     $('#fileupload').fileupload({
         add: function (e, data) {
             var errordiv = $('#errorp');
+            $("svg#visualization").empty();
             var filetmp = data.originalFiles[0].name.split('.');
             var fext = filetmp[filetmp.length - 1].toLowerCase();
             errordiv.html("");
@@ -33,7 +34,7 @@ var initialize_uploader = function () {
             $('#progress-circle').css('visibility', 'hidden');
         }
     }).on('fileuploadprogressall',function () {
-          $('#progress-circle').css('visibility', 'visible');
+        $('#progress-circle').css('visibility', 'visible');
 
     }).on('fileuploaddone', function (e, data) {
         $('#errorp').html("");
@@ -44,18 +45,18 @@ var initialize_uploader = function () {
         .parent().addClass($.support.fileInput ? undefined : 'disabled');
 };
 
-var convert_data = function(data){
+var convert_data = function (data) {
     "use strict";
     // create a name: node map
 
-    var dataMap = data.reduce(function(map, node) {
+    var dataMap = data.reduce(function (map, node) {
         map[node.name] = node;
         return map;
     }, {});
 
     // create the tree array
     var treeData = [];
-    data.forEach(function(node) {
+    data.forEach(function (node) {
         // add to parent
         var parent = dataMap[node.parent];
         if (parent) {
@@ -71,10 +72,10 @@ var convert_data = function(data){
     return treeData;
 };
 
-var generate_tree = function(treeData){
+var generate_tree = function (treeData) {
     // ************** Generate the tree diagram	 *****************
-    var margin = {top: 20, right: 120, bottom: 20, left: 10},
-        width = 700 - margin.right - margin.left,
+    var margin = {top: 20, right: 20, bottom: 20, left: 20},
+        width = 1200 - margin.right - margin.left,
         height = 800 - margin.top - margin.bottom;
 
     var i = 0,
@@ -82,17 +83,23 @@ var generate_tree = function(treeData){
         root;
 
     var tree = d3.layout.tree()
-        .size([height, width]);
+        .size([height, width])
+        .separation(function(a, b) {
+               var width = a.name.length + b.name.length;
+                   distance = width + 5; // horizontal distance between nodes = 16
+                   return distance;
+           });
 
     var diagonal = d3.svg.diagonal()
-        .projection(function(d) { return [d.x, d.y]; });
+        .projection(function (d) {
+            return [d.x, d.y];
+        });
 
     var svg = d3.select("svg#visualization")
         .attr("width", width + margin.right + margin.left)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-        console.log(margin);
 
     root = treeData[0];
     //update(root)
@@ -101,13 +108,13 @@ var generate_tree = function(treeData){
     //    root.x0 = height / 2;
     //    root.y0 = 0;
     //
-        function collapse(d) {
-            if (d.children) {
-                d._children = d.children;
-                d._children.forEach(collapse);
-                d.children = null;
-            }
+    function collapse(d) {
+        if (d.children) {
+            d._children = d.children;
+            d._children.forEach(collapse);
+            d.children = null;
         }
+    }
 
     root.children.forEach(collapse);
     update(root);
@@ -115,6 +122,7 @@ var generate_tree = function(treeData){
 
     d3.select(self.frameElement).style("height", "800px");
 
+// UPDATE FUNCTION
     function update(source) {
 
         // Compute the new tree layout.
@@ -122,24 +130,39 @@ var generate_tree = function(treeData){
             links = tree.links(nodes);
 
         // Normalize for fixed-depth.
-        nodes.forEach(function(d) { d.y = d.depth * 180; });
+        nodes.forEach(function (d) {
+            d.y = d.depth * 150;
+        });
+
 
         // Update the nodes…
         var node = svg.selectAll("g.node")
-            .data(nodes, function(d) { return d.id || (d.id = ++i); });
+            .data(nodes, function (d) {
+                return d.id || (d.id = ++i);
+            });
 
         // Enter any new nodes at the parent's previous position.
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")
-            .attr("transform", function(d) { return "translate(" + source.x0 + "," + source.y0 + ")"; })
-            .on("click", click);
+            .attr("transform", function (d) {
+                return "translate(" + source.x0 + "," + source.y0 + ")";
+            })
+            .on("click", click)
+            .on("mouseover", magnify)
+            .on("mouseleave", reset_orig);
 
         nodeEnter.append("circle")
             .attr("r", 1e-6)
             .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
         nodeEnter.append("text")
-            .attr("y", function(d) { return d.children || d._children ? -10 : 10; })
+//            .attr("y", function(d) { return d.children || d._children ? -10 : 10; })
+            .attr("y", function(d) { if (d === treeData[0]){
+                return -10;}
+            else{
+                return 10;
+            }
+              })
             .attr("dy", ".35em")
             .attr("text-anchor", "middle")
     //        .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
@@ -149,11 +172,15 @@ var generate_tree = function(treeData){
         // Transition nodes to their new position.
         var nodeUpdate = node.transition()
             .duration(duration)
-            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+            .attr("transform", function (d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            });
 
         nodeUpdate.select("circle")
-            .attr("r", 4.5)
-            .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+            .attr("r", 5)
+            .style("fill", function (d) {
+                return d._children ? "lightsteelblue" : "#fff";
+            });
 
         nodeUpdate.select("text")
             .style("fill-opacity", 1);
@@ -161,7 +188,9 @@ var generate_tree = function(treeData){
         // Transition exiting nodes to the parent's new position.
         var nodeExit = node.exit().transition()
             .duration(duration)
-            .attr("transform", function(d) { return "translate(" + source.x + "," + source.y + ")"; })
+            .attr("transform", function (d) {
+                return "translate(" + source.x + "," + source.y + ")";
+            })
             .remove();
 
         nodeExit.select("circle")
@@ -172,12 +201,14 @@ var generate_tree = function(treeData){
 
         // Update the links…
         var link = svg.selectAll("path.link")
-            .data(links, function(d) { return d.target.id; });
+            .data(links, function (d) {
+                return d.target.id;
+            });
 
         // Enter any new links at the parent's previous position.
         link.enter().insert("path", "g")
             .attr("class", "link")
-            .attr("d", function(d) {
+            .attr("d", function (d) {
                 var o = {x: source.x0, y: source.y0};
                 return diagonal({source: o, target: o});
             });
@@ -190,14 +221,14 @@ var generate_tree = function(treeData){
         // Transition exiting nodes to the parent's new position.
         link.exit().transition()
             .duration(duration)
-            .attr("d", function(d) {
+            .attr("d", function (d) {
                 var o = {x: source.x, y: source.y};
                 return diagonal({source: o, target: o});
             })
             .remove();
 
         // Stash the old positions for transition.
-        nodes.forEach(function(d) {
+        nodes.forEach(function (d) {
             d.x0 = d.x;
             d.y0 = d.y;
         });
@@ -214,6 +245,34 @@ var generate_tree = function(treeData){
         }
         update(d);
     }
+
+    function magnify(d) {
+        var nodeSelection = d3.select(this);
+        nodeSelection.select("circle")
+            .attr("r", function (d){
+            return 20;
+        });
+        nodeSelection.select("text")
+            .style({'font-size': '20px'})
+            .attr("dy", function (d){
+                return "2em";
+            });
+//        nodeSelection.select("text").style({opacity:'1.0'});
+    };
+
+    function reset_orig(d) {
+        var nodeSelection = d3.select(this);
+        nodeSelection.select("circle").attr("r", function (d){
+            return 5;
+        });
+        nodeSelection.select("text")
+            .style({'font-size': '10px'})
+            .attr("dy", function (d){
+                return ".35em";
+            });
+//        nodeSelection.select("text").style({opacity:'0.6'});
+    };
+
 };
 
 
