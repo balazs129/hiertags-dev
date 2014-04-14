@@ -82,3 +82,8 @@ def select_cysnetwork(inputfile):
             networks.append((tmp[1], elem))
     return sessionfile.open(networks[0][1], 'r')
 
+def get_components(graph):
+    numcomp = nx.weakly_connected.number_weakly_connected_components(graph)
+    if numcomp > 1:
+        graph = nx.nx.weakly_connected_component_subgraphs(graph)[0]
+    return numcomp, graph

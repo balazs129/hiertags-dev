@@ -7,13 +7,13 @@ a {
     text-decoration: underline;
 }
 
-#errorp{
+#infobar {
    position: absolute;
-   top: 5px;
+   top: 8px;
    right: 0px;
    width: 500px;
-   color: red;
-   font-size: 120%;
+   color: #8a6d3b;
+   /*font-size: 100%;*/
    font-weight: bold;
 }
 #progress-circle {

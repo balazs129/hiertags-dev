@@ -16,6 +16,7 @@ class FileHandler(object):
     def __init__(self, input_file):
         self.input_file = input_file
         self.graph = nx.DiGraph()
+        self.number_of_graphs = 0
 
     def build_graph(self):
         htmlpar = HTMLParser.HTMLParser()
@@ -24,6 +25,9 @@ class FileHandler(object):
             for line in self.input_file.readlines():
                 line = line.strip().split(' ')
                 self.graph.add_edge(line[0], line[1])
+
+            #Number of components
+            self.number_of_graphs, self.graph = utils.get_components(self.graph)
 
             #check if current directioning OK
             root = nx.topological_sort(self.graph)[0]
@@ -54,6 +58,7 @@ class FileHandler(object):
                         continue
                     line = line.strip().split(' ')
                     self.graph.add_edge(line[1], line[0])
+            self.number_of_graphs, self.graph = utils.get_components(self.graph)
 
         def open_xgmml():
             self.direction = 'BT'
@@ -63,6 +68,7 @@ class FileHandler(object):
                                     {'id': node.attrib['id'], 'label': htmlpar.unescape(node.attrib['label'])})
             for edge in edges:
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
+            self.number_of_graphs, self.graph = utils.get_components(self.graph)
 
         def open_cys():
             self.direction = 'BT'
@@ -72,6 +78,7 @@ class FileHandler(object):
                                     {'id': node.attrib['id'], 'label': htmlpar.unescape(node.attrib['label'])})
             for edge in edges:
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
+            self.number_of_graphs, self.graph = utils.get_components(self.graph)
 
         fileext = {'txt': open_edgelist,
                    'zip': open_zipfile,

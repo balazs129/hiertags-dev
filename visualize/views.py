@@ -23,6 +23,6 @@ def visualize_data(request):
         input_file = form.cleaned_data['graph']
         fh = FileHandler(input_file=input_file)
         fh.build_graph()
-        fh.graph = nx.weakly_connected_component_subgraphs(fh.graph)[0]
         data = fh.gen_flat()
-    return data
+        numcomp = fh.number_of_graphs
+    return {'components': numcomp, 'data': data}

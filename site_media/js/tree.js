@@ -5,7 +5,7 @@ var initialize_uploader = function () {
     var csrftoken = $.cookie('csrftoken');
     $('#fileupload').fileupload({
         add: function (e, data) {
-            var errordiv = $('#errorp');
+            var errordiv = $('#infobar');
             $("svg#visualization").empty();
             var filetmp = data.originalFiles[0].name.split('.');
             var fext = filetmp[filetmp.length - 1].toLowerCase();
@@ -37,9 +37,14 @@ var initialize_uploader = function () {
         $('#progress-circle').css('visibility', 'visible');
 
     }).on('fileuploaddone', function (e, data) {
-        $('#errorp').html("");
+        $('#infobar').html("");
         $('#progress-circle').css('visibility', 'hidden');
-        generate_tree(convert_data(data.result));
+        var number_of_components = data.result.components;
+        if (number_of_components > 1){
+            var error = $('<p>').textContent = "Uploaded file contained multiple graphs(" + number_of_components + "), using the first.";
+            $('#infobar').append(error);
+        }
+        generate_tree(convert_data(data.result.data));
     })
         .prop('disabled', !$.support.fileInput)
         .parent().addClass($.support.fileInput ? undefined : 'disabled');
@@ -295,7 +300,7 @@ $(function () {
         error: function (x) {
             if (x.status === 500) {
                 var error = $('<p>').textContent = 'Error! Graph Contains a Cycle.';
-                $('#errorp').append(error);
+                $('#infobar').append(error);
             }
         }
     });
