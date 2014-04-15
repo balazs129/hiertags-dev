@@ -61,7 +61,6 @@ class FileHandler(object):
             self.number_of_graphs, self.graph = utils.get_components(self.graph)
 
         def open_xgmml():
-            self.direction = 'BT'
             nodes, edges = utils.read_xgmml(self.input_file)
             for node in nodes:
                 self.graph.add_node(node.attrib['id'],
@@ -71,14 +70,14 @@ class FileHandler(object):
             self.number_of_graphs, self.graph = utils.get_components(self.graph)
 
         def open_cys():
-            self.direction = 'BT'
-            nodes, edges = utils.read_xgmml(utils.select_cysnetwork(self.input_file))
+            self.number_of_graphs, cys_file = utils.select_cysnetwork(self.input_file)
+            nodes, edges = utils.read_xgmml(cys_file)
             for node in nodes:
                 self.graph.add_node(node.attrib['id'],
                                     {'id': node.attrib['id'], 'label': htmlpar.unescape(node.attrib['label'])})
             for edge in edges:
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
-            self.number_of_graphs, self.graph = utils.get_components(self.graph)
+            _, self.graph = utils.get_components(self.graph)
 
         fileext = {'txt': open_edgelist,
                    'zip': open_zipfile,
@@ -92,7 +91,6 @@ class FileHandler(object):
     def gen_flat(self):
         data = []
         idmap = {}
-        # data = graph.nodes(data=True)
         # If data dict empty label=id
         for elem in self.graph.nodes_iter(data=True):
             if len(elem[1]) == 0:

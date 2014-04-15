@@ -52,8 +52,6 @@ var initialize_uploader = function () {
 
 var convert_data = function (data) {
     "use strict";
-    // create a name: node map
-
     var dataMap = data.reduce(function (map, node) {
         map[node.name] = node;
         return map;
@@ -91,7 +89,7 @@ var generate_tree = function (treeData) {
         .size([height, width])
         .separation(function (a, b) {
             var width = a.name.length + b.name.length;
-            var distance = width + 5; // horizontal distance between nodes = 16
+            var distance = width + 10; // horizontal distance between nodes = 16
             return distance;
         });
 
@@ -100,7 +98,7 @@ var generate_tree = function (treeData) {
             return [d.x, d.y];
         });
 
-    var svg = d3.select("svg#visualization")
+   var svg = d3.select("svg#visualization")
         .attr("width", width + margin.right + margin.left)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")

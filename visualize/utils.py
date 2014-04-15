@@ -80,7 +80,7 @@ def select_cysnetwork(inputfile):
             networks.append((tmp[2], elem))
         elif tmp[1][-6:] == '.xgmml':
             networks.append((tmp[1], elem))
-    return sessionfile.open(networks[0][1], 'r')
+    return len(networks), sessionfile.open(networks[0][1], 'r')
 
 def get_components(graph):
     numcomp = nx.weakly_connected.number_weakly_connected_components(graph)
