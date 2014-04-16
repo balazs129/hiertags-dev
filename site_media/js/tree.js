@@ -77,16 +77,21 @@ var convert_data = function (data) {
 
 var generate_tree = function (treeData) {
     "use strict";
-    var margin = {top: 20, right: 10, bottom: 20, left: 0},
-        width = 1200 - margin.right - margin.left,
-        height = 900 - margin.top - margin.bottom;
+//    var margin = {top: 20, right: 10, bottom: 20, left: 0},
+//        width = 700 - margin.right - margin.left,
+//        height = 480 - margin.top - margin.bottom;
+
+    var width = 700;
+    var height = 480;
+    var totalNodes = 0;
+    var maxLabelLength = 0;
 
     var i = 0,
         duration = 750,
         root;
 
     var tree = d3.layout.tree()
-        .size([height, width])
+        .size([width, height])
         .separation(function (a, b) {
             var width = a.name.length + b.name.length;
             var distance = width + 10; // horizontal distance between nodes = 16
@@ -98,13 +103,59 @@ var generate_tree = function (treeData) {
             return [d.x, d.y];
         });
 
+//    function visit(parent, visitFn, childrenFn) {
+//        if (!parent) return;
+//
+//        visitFn(parent);
+//
+//        var children = childrenFn(parent);
+//        if (children) {
+//            var count = children.length;
+//            for (var i = 0; i < count; i++) {
+//                visit(children[i], visitFn, childrenFn);
+//            }
+//        }
+//    }
+//
+//    // Call visit function to establish maxLabelLength
+//    visit(treeData, function(d) {
+//        totalNodes++;
+//        maxLabelLength = Math.max(d.name.length, maxLabelLength);
+//
+//    }, function(d) {
+//        return d.children && d.children.length > 0 ? d.children : null;
+//    });
+
+   var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on("zoom", zoom);
+
    var svg = d3.select("svg#visualization")
-        .attr("width", width + margin.right + margin.left)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+//        .attr("width", width + margin.right + margin.left)
+        .attr("width", width)
+//        .attr("height", height + margin.top + margin.bottom)
+        .attr("height", height)
+        .attr("class", "overlay")
+        .call(zoomListener);
+//        .append("svg:g")
+//            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+   function redraw() {
+      svg_group.attr("transform",
+          "translate(" + d3.event.translate + ")"
+          + " scale(" + d3.event.scale + ")");
+      node.attr("font-size", (nodeFontSize / d3.event.scale) + "px");
+   }
+
+   var svg_group = svg.append("svg:g");
+
+   function zoom() {
+       svg_group.attr("transform",
+           "translate(" + d3.event.translate + ")"
+           + " scale(" + d3.event.scale + ")");
+   }
 
     root = treeData[0];
+    root.x0 = width / 2;
+    root.y0 = height / 4;
     function collapse(d) {
         if (d.children) {
             d._children = d.children;
@@ -115,12 +166,51 @@ var generate_tree = function (treeData) {
 
     root.children.forEach(collapse);
     update(root);
+    centerNode(root);
     //});
 
-    d3.select(self.frameElement).style("height", "800px");
+//    d3.select(self.frameElement).style("height", "800px");
 
 // UPDATE FUNCTION
     function update(source) {
+
+        var levelWidth = [1];
+        var level_label_width = [1];
+        var newHeight = height;
+
+        var childCount = function(level, n) {
+            function get_numbers(d){
+                var tmp = 0;
+                var index;
+                for (index = 0; index < d.length; ++index) {
+                     tmp += d[index].name.length;
+                }
+                return tmp;
+            }
+            if (n.children && n.children.length > 0) {
+                if (levelWidth.length <= level + 1) levelWidth.push(0);
+                if (level_label_width.length <= level + 1) level_label_width.push(0);
+
+                levelWidth[level + 1] += n.children.length;
+              level_label_width[level + 1] += get_numbers(n.children)
+                n.children.forEach(function(d) {
+                    childCount(level + 1, d);
+                });
+            }
+        };
+
+        childCount(0, root);
+        newHeight = levelWidth.length * 25;
+        var newWidth = d3.max(levelWidth) * 100; // 25 pixels per line
+//        console.log('Height:' + newHeight + ' Width:' + newWidth);
+        console.log(level_label_width);
+        tree = tree.size([newWidth, newHeight])
+            .separation(function (a, b) {
+            var width = a.name.length + b.name.length;
+            var distance = width + 5; // horizontal distance between nodes = 16
+            return distance;
+        });
+
 
         // Compute the new tree layout.
         var nodes = tree.nodes(root).reverse(),
@@ -133,7 +223,7 @@ var generate_tree = function (treeData) {
 
 
         // Update the nodes…
-        var node = svg.selectAll("g.node")
+        var node = svg_group.selectAll("g.node")
             .data(nodes, function (d) {
                 return d.id || (d.id = ++i);
             });
@@ -204,7 +294,7 @@ var generate_tree = function (treeData) {
             .style("fill-opacity", 1e-6);
 
         // Update the links…
-        var link = svg.selectAll("path.link")
+        var link = svg_group.selectAll("path.link")
             .data(links, function (d) {
                 return d.target.id;
             });
@@ -238,8 +328,7 @@ var generate_tree = function (treeData) {
         });
     }
 
-    // Toggle children on click.
-    function click(d) {
+    function toggleChildren(d) {
         if (d.children) {
             d._children = d.children;
             d.children = null;
@@ -248,7 +337,23 @@ var generate_tree = function (treeData) {
             d._children = null;
             d.children.forEach(collapse);
         }
+        return d;
+    }
+
+    // Toggle children on click.
+    function click(d) {
+        if (d3.event.defaltPrevented) return;
+        d = toggleChildren(d);
+//        if (d.children) {
+//            d._children = d.children;
+//            d.children = null;
+//        } else {
+//            d.children = d._children;
+//            d._children = null;
+//            d.children.forEach(collapse);
+//        }
         update(d);
+        centerNode(d);
     }
 
     function delete_node(d) {
@@ -290,6 +395,20 @@ var generate_tree = function (treeData) {
             });
 //        nodeSelection.select("text").style({opacity:'0.6'});
     };
+
+    function centerNode(source) {
+        var scale = zoomListener.scale();
+        var x = -source.x0;
+        var y = -source.y0;
+        x = x * scale + width / 2;
+//        y = y * scale + height / 2;
+        y = y * scale + height / 4;
+        d3.select('g').transition()
+            .duration(duration)
+            .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
+        zoomListener.scale(scale);
+        zoomListener.translate([x, y]);
+    }
 
 };
 
