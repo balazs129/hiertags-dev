@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from zipfile import ZipFile
 import HTMLParser
-
+import itertools
 import networkx as nx
 
 import utils
@@ -22,9 +22,13 @@ class FileHandler(object):
         htmlpar = HTMLParser.HTMLParser()
 
         def open_edgelist():
-            for line in self.input_file.readlines():
-                line = line.strip().split(' ')
-                self.graph.add_edge(line[0], line[1])
+            with self.input_file as f:
+                lines = itertools.ifilter(None, (line.rstrip() for line in f))
+                for elem in lines:
+                    elem = elem.lstrip(' ')
+                    if elem[0] != '#':
+                        tmp = elem.strip().split(' ')
+                        self.graph.add_edge(tmp[0], tmp[1])
 
             #Number of components
             self.number_of_graphs, self.graph = utils.get_components(self.graph)
@@ -50,7 +54,7 @@ class FileHandler(object):
                     if len(line) > 2:
                         line = [line[0], ' '.join(p for p in line[1:])]
                     try:
-                        self.graph.add_node(line[0], {'label': line[1], 'weight': 1})
+                        self.graph.add_node(line[0], {'label': line[1], 'id': line[0]})
                     except IndexError:
                         pass
                 for line in zf.open('edges.txt').readlines():

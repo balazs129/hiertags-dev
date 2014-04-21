@@ -25,4 +25,5 @@ def visualize_data(request):
         fh.build_graph()
         data = fh.gen_flat()
         numcomp = fh.number_of_graphs
-    return {'components': numcomp, 'data': data}
+        num_nodes = fh.graph.number_of_nodes()
+    return {'components': numcomp, 'data': data, 'nodes': num_nodes}

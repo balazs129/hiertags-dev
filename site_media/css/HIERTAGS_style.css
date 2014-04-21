@@ -239,7 +239,7 @@ a {
 }
 
 .overlay {
-    background-color: #EEE;
+    background-color: #ffffff;
 }
 
 .node circle {
@@ -271,4 +271,14 @@ a {
 
 .ghostCircle, .activeDrag .ghostCircle {
     display: none;
+}
+
+svg#visualization{
+    width: 700px;
+    height: 480px;
+}
+
+div#rightbar{
+    /*float: right;*/
+    /*position: relative;*/
 }

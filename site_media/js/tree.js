@@ -38,13 +38,17 @@ var initialize_uploader = function () {
 
     }).on('fileuploaddone', function (e, data) {
         $('#infobar').html("");
+        $('#rightbar').html("");
         $('#progress-circle').css('visibility', 'hidden');
         var number_of_components = data.result.components;
         if (number_of_components > 1){
             var error = $('<p>').textContent = "Uploaded file contained multiple graphs(" + number_of_components + "), using the first.";
             $('#infobar').append(error);
         }
+        $('#visualization').css('border', '1px solid #e0e0e0');
+        globalData.nodes = data.result.nodes;
         generate_tree(convert_data(data.result.data));
+
     })
         .prop('disabled', !$.support.fileInput)
         .parent().addClass($.support.fileInput ? undefined : 'disabled');
@@ -77,14 +81,9 @@ var convert_data = function (data) {
 
 var generate_tree = function (treeData) {
     "use strict";
-//    var margin = {top: 20, right: 10, bottom: 20, left: 0},
-//        width = 700 - margin.right - margin.left,
-//        height = 480 - margin.top - margin.bottom;
 
     var width = 700;
     var height = 480;
-    var totalNodes = 0;
-    var maxLabelLength = 0;
 
     var i = 0,
         duration = 750,
@@ -94,7 +93,7 @@ var generate_tree = function (treeData) {
         .size([width, height])
         .separation(function (a, b) {
             var width = a.name.length + b.name.length;
-            var distance = width + 10; // horizontal distance between nodes = 16
+            var distance = width + 5; // horizontal distance between nodes = 16
             return distance;
         });
 
@@ -103,47 +102,14 @@ var generate_tree = function (treeData) {
             return [d.x, d.y];
         });
 
-//    function visit(parent, visitFn, childrenFn) {
-//        if (!parent) return;
-//
-//        visitFn(parent);
-//
-//        var children = childrenFn(parent);
-//        if (children) {
-//            var count = children.length;
-//            for (var i = 0; i < count; i++) {
-//                visit(children[i], visitFn, childrenFn);
-//            }
-//        }
-//    }
-//
-//    // Call visit function to establish maxLabelLength
-//    visit(treeData, function(d) {
-//        totalNodes++;
-//        maxLabelLength = Math.max(d.name.length, maxLabelLength);
-//
-//    }, function(d) {
-//        return d.children && d.children.length > 0 ? d.children : null;
-//    });
-
-   var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on("zoom", zoom);
+   var zoomListener = d3.behavior.zoom().scaleExtent([0.5, 2]).on("zoom", zoom);
 
    var svg = d3.select("svg#visualization")
-//        .attr("width", width + margin.right + margin.left)
         .attr("width", width)
-//        .attr("height", height + margin.top + margin.bottom)
         .attr("height", height)
         .attr("class", "overlay")
         .call(zoomListener);
-//        .append("svg:g")
-//            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-   function redraw() {
-      svg_group.attr("transform",
-          "translate(" + d3.event.translate + ")"
-          + " scale(" + d3.event.scale + ")");
-      node.attr("font-size", (nodeFontSize / d3.event.scale) + "px");
-   }
 
    var svg_group = svg.append("svg:g");
 
@@ -156,6 +122,7 @@ var generate_tree = function (treeData) {
     root = treeData[0];
     root.x0 = width / 2;
     root.y0 = height / 4;
+
     function collapse(d) {
         if (d.children) {
             d._children = d.children;
@@ -164,11 +131,73 @@ var generate_tree = function (treeData) {
         }
     }
 
+    function expand(d) {
+        if (d._children) {
+            d.children = d._children;
+            d.children.forEach(expand);
+            d._children = null;
+        }
+    }
+
+    function expand_100(d) {
+        if (d._children) {
+            d.children = d._children;
+            d._children = null;
+        }
+    }
+
+    function expand_all_children(d) {
+        d3.event.preventDefault();
+
+        if (globalData.nodes < 100) {
+            if (d._children) {
+            d.children = d._children;
+            d.children.forEach(expand);
+            d._children = null;
+            update(d);
+            centerNode(d);
+            }
+        } else {
+            if (d._children) {
+            d.children = d._children;
+            d.children.forEach(expand_100);
+            d._children = null;
+            update(d);
+            centerNode(d);
+            }
+        }
+    }
+
     root.children.forEach(collapse);
     update(root);
     centerNode(root);
-    //});
+    var t_data = $('<p>').textContent = "    Number of nodes: " + globalData.nodes;
+//    t_data.style("float", "right");
 
+    $('#rightbar')
+         .append('<input id="expandtree" type="button" value="Expand tree">')
+         .button()
+         .append('<input id="shrinktree" type="button" value="Shrink tree">')
+         .button()
+         .append(t_data);
+
+
+    d3.select("#expandtree").on("click", exClick);
+        function exClick(){
+            globalData.treeWidth += 500;
+            update(root);
+        }
+
+    d3.select("#shrinktree").on("click", shClick);
+        function shClick(){
+            if (globalData.treeWidth > 500){
+                globalData.treeWidth -= 500;
+                update(root);
+            } else {
+                globalData.treeWidth = 0;
+            }
+            update(root);
+        }
 //    d3.select(self.frameElement).style("height", "800px");
 
 // UPDATE FUNCTION
@@ -192,18 +221,28 @@ var generate_tree = function (treeData) {
                 if (level_label_width.length <= level + 1) level_label_width.push(0);
 
                 levelWidth[level + 1] += n.children.length;
-              level_label_width[level + 1] += get_numbers(n.children)
+                level_label_width[level + 1] += get_numbers(n.children);
                 n.children.forEach(function(d) {
                     childCount(level + 1, d);
                 });
             }
         };
 
+
         childCount(0, root);
-        newHeight = levelWidth.length * 25;
-        var newWidth = d3.max(levelWidth) * 100; // 25 pixels per line
-//        console.log('Height:' + newHeight + ' Width:' + newWidth);
-        console.log(level_label_width);
+        newHeight = levelWidth.length * 180;
+//        var newWidth = d3.max(levelWidth) * 100; // 25 pixels per line
+
+        var tmp_width = [];
+        for(var counter=0; counter< levelWidth.length; counter++) {
+            tmp_width[counter] = levelWidth[counter] * 5 + level_label_width[counter] * 8;
+}
+        if (d3.max(tmp_width) < 500){
+            var newWidth = 500;
+        } else {
+            var newWidth = d3.max(tmp_width) + globalData.treeWidth;
+        }
+
         tree = tree.size([newWidth, newHeight])
             .separation(function (a, b) {
             var width = a.name.length + b.name.length;
@@ -211,14 +250,13 @@ var generate_tree = function (treeData) {
             return distance;
         });
 
-
         // Compute the new tree layout.
         var nodes = tree.nodes(root).reverse(),
             links = tree.links(nodes);
 
         // Normalize for fixed-depth.
         nodes.forEach(function (d) {
-            d.y = d.depth * 140;
+            d.y = d.depth * 130;
         });
 
 
@@ -237,7 +275,7 @@ var generate_tree = function (treeData) {
             .on("click", click)
             .on("mouseenter", magnify)
             .on("mouseleave", reset_orig)
-            .on("contextmenu", delete_node);
+            .on("contextmenu", expand_all_children);
 
         nodeEnter.append("circle")
             .attr("r", 1e-6)
@@ -326,12 +364,14 @@ var generate_tree = function (treeData) {
             d.x0 = d.x;
             d.y0 = d.y;
         });
+
     }
 
     function toggleChildren(d) {
         if (d.children) {
             d._children = d.children;
             d.children = null;
+            d._children.forEach(collapse);
         } else {
             d.children = d._children;
             d._children = null;
@@ -342,23 +382,14 @@ var generate_tree = function (treeData) {
 
     // Toggle children on click.
     function click(d) {
-        if (d3.event.defaltPrevented) return;
+        if (d3.event.isDefaultPrevented) return;
         d = toggleChildren(d);
-//        if (d.children) {
-//            d._children = d.children;
-//            d.children = null;
-//        } else {
-//            d.children = d._children;
-//            d._children = null;
-//            d.children.forEach(collapse);
-//        }
         update(d);
         centerNode(d);
     }
 
     function delete_node(d) {
         if (d.parent && d.parent.children){
-        console.log('removing ' + d.name);
         var nodeToDelete = _.where(d.parent.children, {name: d.name});
         if (nodeToDelete){
             d.parent.children = _.without(d.parent.children, nodeToDelete[0]);
@@ -367,6 +398,8 @@ var generate_tree = function (treeData) {
         update(d);
         }
     }
+
+
 
     function magnify(d) {
         var nodeSelection = d3.select(this);
@@ -421,6 +454,13 @@ $(function () {
             }
         }
     });
+
     initialize_uploader();
 });
 
+var globalData = {
+    treeWidth: 0,
+    nodes: 0,
+    contLoop: true,
+    iteration: 0
+};

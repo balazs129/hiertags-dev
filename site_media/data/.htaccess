@@ -1,0 +1,3 @@
+<FilesMatch "\.(?i:xgmml|txt|cys)$">
+  Header set Content-Disposition attachment
+</FilesMatch>
