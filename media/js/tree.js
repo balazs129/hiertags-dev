@@ -2,7 +2,6 @@ var initialize_uploader = function () {
     'use strict';
 
     var url = '/visualize/data/';
-    var csrftoken = $.cookie('csrftoken');
     $('#fileupload').fileupload({
         add: function (e, data) {
             var errordiv = $('#infobar');
@@ -25,9 +24,6 @@ var initialize_uploader = function () {
 
         url: url,
         crossDomain: false,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        },
         paramName: 'graph',
         dataType: 'json',
         done: function () {
@@ -92,9 +88,7 @@ var generate_tree = function (treeData) {
     var tree = d3.layout.tree()
         .size([width, height])
         .separation(function (a, b) {
-            var width = a.name.length + b.name.length;
-            var distance = width + 5; // horizontal distance between nodes = 16
-            return distance;
+            return a.name.length + b.name.length + 5;
         });
 
     var diagonal = d3.svg.diagonal()
@@ -115,8 +109,7 @@ var generate_tree = function (treeData) {
 
    function zoom() {
        svg_group.attr("transform",
-           "translate(" + d3.event.translate + ")"
-           + " scale(" + d3.event.scale + ")");
+           "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
    }
 
     root = treeData[0];
@@ -217,8 +210,12 @@ var generate_tree = function (treeData) {
                 return tmp;
             }
             if (n.children && n.children.length > 0) {
-                if (levelWidth.length <= level + 1) levelWidth.push(0);
-                if (level_label_width.length <= level + 1) level_label_width.push(0);
+                if (levelWidth.length <= level + 1) {
+                    levelWidth.push(0);
+                }
+                if (level_label_width.length <= level + 1) {
+                    level_label_width.push(0);
+                }
 
                 levelWidth[level + 1] += n.children.length;
                 level_label_width[level + 1] += get_numbers(n.children);
@@ -236,18 +233,18 @@ var generate_tree = function (treeData) {
         var tmp_width = [];
         for(var counter=0; counter< levelWidth.length; counter++) {
             tmp_width[counter] = levelWidth[counter] * 5 + level_label_width[counter] * 8;
-}
+        }
+
+        var newWidth;
         if (d3.max(tmp_width) < 500){
-            var newWidth = 500;
+            newWidth = 500;
         } else {
-            var newWidth = d3.max(tmp_width) + globalData.treeWidth;
+            newWidth = d3.max(tmp_width) + globalData.treeWidth;
         }
 
         tree = tree.size([newWidth, newHeight])
             .separation(function (a, b) {
-            var width = a.name.length + b.name.length;
-            var distance = width + 5; // horizontal distance between nodes = 16
-            return distance;
+            return a.name.length + b.name.length + 5;
         });
 
         // Compute the new tree layout.
@@ -382,7 +379,9 @@ var generate_tree = function (treeData) {
 
     // Toggle children on click.
     function click(d) {
-        if (d3.event.isDefaultPrevented) return;
+        if (d3.event.isDefaultPrevented) {
+            return;
+        }
         d = toggleChildren(d);
         update(d);
         centerNode(d);
@@ -401,33 +400,33 @@ var generate_tree = function (treeData) {
 
 
 
-    function magnify(d) {
+    function magnify() {
         var nodeSelection = d3.select(this);
         nodeSelection.select("circle")
-            .attr("r", function (d) {
+            .attr("r", function () {
                 return 15;
             });
         nodeSelection.select("text")
             .style({'font-size': '20px'})
-            .attr("dy", function (d) {
+            .attr("dy", function () {
                 return "1em";
             });
 //        nodeSelection.select("text").style({opacity:'1.0'});
         d3.event.preventDefault();
-    };
+    }
 
-    function reset_orig(d) {
+    function reset_orig() {
         var nodeSelection = d3.select(this);
-        nodeSelection.select("circle").attr("r", function (d) {
+        nodeSelection.select("circle").attr("r", function () {
             return 5;
         });
         nodeSelection.select("text")
             .style({'font-size': '10px'})
-            .attr("dy", function (d) {
+            .attr("dy", function () {
                 return ".35em";
             });
 //        nodeSelection.select("text").style({opacity:'0.6'});
-    };
+    }
 
     function centerNode(source) {
         var scale = zoomListener.scale();

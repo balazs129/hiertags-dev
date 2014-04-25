@@ -1,18 +1,17 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
+{% load static %}
 
 {% block title %} HIERTAGS - Visualize{% endblock %}
 
 {% block head %}
-    <link href="{{ STATIC_URL }}site_media/css/jquery.fileupload.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}site_media/css/visualize.css" rel="stylesheet">
-    <script src="{{ STATIC_URL }}site_media/js/jquery.ui.widget.js"></script>
-    <script src="{{ STATIC_URL }}site_media/js/jquery.fileupload.js"></script>
-    <script src="{{ STATIC_URL }}site_media/js/jquery.cookie.js"></script>
-    <script src="{{ STATIC_URL }}site_media/js/d3.min.js"></script>
-    <script src="{{ STATIC_URL }}site_media/js/d3.layout.tree.js"></script>
-    <script src="{{ STATIC_URL }}site_media/js/underscore-min.js"></script>
-    <script src="{{ STATIC_URL }}site_media/js/tree.js"></script>
+    <link href="{%  static "css/jquery.fileupload.css" %}" rel="stylesheet">
+    <link href="{% static "css/visualize.css" %}" rel="stylesheet">
+    <script src="{% static "js/jquery.ui.widget.js" %}"></script>
+    <script src="{%  static "js/jquery.fileupload.js" %}"></script>
+    <script src="{%  static "js/d3.min.js" %}"></script>
+    <script src="{%  static "js/d3.layout.tree.js" %}"></script>
+    <script src="{%  static "js/underscore-min.js" %}"></script>
+    <script src="{%  static "js/tree.js" %}"></script>
 
 {% endblock %}
 
@@ -35,6 +34,5 @@
     </div>
     <svg id="visualization"></svg>
     <div id="rightbar">
-
     </div>
 {% endblock %}

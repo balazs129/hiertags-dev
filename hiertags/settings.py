@@ -1,50 +1,66 @@
-# Django settings for hiertags project.
-from os.path import abspath, dirname, join
+import os
+
+# ===========================
+# = Directory Declaractions =
+# ===========================
+
+BASE_DIR = os.path.dirname(__file__)
+
+# ===================
+# = Server Settings =
+# ===================
+
+ADMINS = (
+    ('Server Admin', 'admin@example.com'),
+)
+
+SERVER_NAME = 'hiertags'
+SERVER_EMAIL = 'hiertags@hal.hu'
+SECRET_KEY = 'xfgfa7a*+n&v8d(nfv6s)@+*^7nqe0&fr18ursn_cm%-t1fk^i'
+
+# ===================
+# = Global Settings =
+# ===================
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
-ADMINS = (
-    ('Bence Lovas', 'lovasb@hal.elte.hu'),
+MANAGERS = ADMINS
+TIME_ZONE = 'Europe/Budapest'
+LANGUAGE_CODE = 'en-us'
+USE_TZ = True
+SITE_ID = 1
+USE_I18N = False
+MEDIA_URL = '/media/'
+STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
+ALLOWED_HOSTS = ['*']
+STATICFILES_DIRS = (
+    'media',
+)
+TEMPLATE_DIRS = (
+   'templates',
 )
 
-MANAGERS = ADMINS
-
-PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__)))).replace('\\', '/')
+# =============
+# = Databases =
+# =============
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': PROJECT_ROOT + '/database.sq3',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+        'NAME': 'database.sqlite3',
     }
 }
 
-TIME_ZONE = 'Europe/Budapest'
-LANGUAGE_CODE = 'en-en'
-SITE_ID = 1
-USE_TZ = True
 
-# Directories
-MEDIA_ROOT = PROJECT_ROOT + '/uploads/'
-MEDIA_URL = '/media/'
-STATIC_ROOT = PROJECT_ROOT + '/static/'
-STATIC_URL = '/static/'
-
-
-STATICFILES_DIRS = (
-    ("site_media", join(dirname(dirname(__file__)),'site_media').replace('\\','/')),
-)
+# ===========================
+# = Django-specific Modules =
+# ===========================
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
-
-SECRET_KEY = 'xfgfa7a*+n&v8d(nfv6s)@+*^7nqe0&fr18ursn_cm%-t1fk^i'
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -58,14 +74,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
-
-ROOT_URLCONF = 'hiertags.urls'
-
-WSGI_APPLICATION = 'hiertags.wsgi.application'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
@@ -73,11 +82,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.core.context_processors.media',
     'hiertags.context_processors.act_menu',
-    'django.contrib.messages.context_processors.messages',
-)
-
-TEMPLATE_DIRS = (
-    join(dirname(dirname(__file__)),'templates').replace('\\','/'),
 )
 
 INSTALLED_APPS = (
@@ -89,35 +93,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.flatpages',
-    #'django.contrib.admindocs',
-    'crispy_forms',
     'visualize',
 )
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'DEBUG',
-            'propagate': True
-        },
-    }
-}
+# ==========================
+# = Miscellaneous Settings =
+# ==========================
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
-ALLOWED_HOSTS = ['*']
-LOGIN_REDIRECT_URL = '/home/'
+ROOT_URLCONF = 'hiertags.urls'
+WSGI_APPLICATION = 'hiertags.wsgi.application'

@@ -245,7 +245,7 @@ a {
 .node circle {
     fill: #fff;
     stroke: steelblue;
-    stroke-width: 1.5px;
+    stroke-width: 1px;
 }
 
 .node text {
@@ -256,29 +256,10 @@ a {
 .link {
     fill: none;
     stroke: #ccc;
-    stroke-width: 1.5px;
-}
-
-.templink {
-    fill: none;
-    stroke: red;
-    stroke-width: 3px;
-}
-
-.ghostCircle.show {
-    display: block;
-}
-
-.ghostCircle, .activeDrag .ghostCircle {
-    display: none;
+    stroke-width: 1px;
 }
 
 svg#visualization{
     width: 700px;
     height: 480px;
-}
-
-div#rightbar{
-    /*float: right;*/
-    /*position: relative;*/
 }

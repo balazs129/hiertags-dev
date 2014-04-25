@@ -4,8 +4,10 @@ import HTMLParser
 import itertools
 import networkx as nx
 
-import utils
 
+from xgmmlreader import read_xgmml
+from utils.components import get_components
+from utils.select_cys import select_cysnetwork
 
 class BadExtensionException(Exception):
     def __str__(self):
@@ -31,7 +33,7 @@ class FileHandler(object):
                         self.graph.add_edge(tmp[0], tmp[1])
 
             #Number of components
-            self.number_of_graphs, self.graph = utils.get_components(self.graph)
+            self.number_of_graphs, self.graph = get_components(self.graph)
 
             #check if current directioning OK
             root = nx.topological_sort(self.graph)[0]
@@ -62,26 +64,26 @@ class FileHandler(object):
                         continue
                     line = line.strip().split(' ')
                     self.graph.add_edge(line[1], line[0])
-            self.number_of_graphs, self.graph = utils.get_components(self.graph)
+            self.number_of_graphs, self.graph = get_components(self.graph)
 
         def open_xgmml():
-            nodes, edges = utils.read_xgmml(self.input_file)
+            nodes, edges = read_xgmml(self.input_file)
             for node in nodes:
                 self.graph.add_node(node.attrib['id'],
                                     {'id': node.attrib['id'], 'label': htmlpar.unescape(node.attrib['label'])})
             for edge in edges:
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
-            self.number_of_graphs, self.graph = utils.get_components(self.graph)
+            self.number_of_graphs, self.graph = get_components(self.graph)
 
         def open_cys():
-            self.number_of_graphs, cys_file = utils.select_cysnetwork(self.input_file)
-            nodes, edges = utils.read_xgmml(cys_file)
+            self.number_of_graphs, cys_file = select_cysnetwork(self.input_file)
+            nodes, edges = read_xgmml(cys_file)
             for node in nodes:
                 self.graph.add_node(node.attrib['id'],
                                     {'id': node.attrib['id'], 'label': htmlpar.unescape(node.attrib['label'])})
             for edge in edges:
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
-            _, self.graph = utils.get_components(self.graph)
+            _, self.graph = get_components(self.graph)
 
         fileext = {'txt': open_edgelist,
                    'zip': open_zipfile,

@@ -1,10 +1,13 @@
+import json
+
 from django.shortcuts import render
-from forms import GraphUploadForm
 from django.contrib.flatpages.models import FlatPage
 from django.views.decorators.csrf import csrf_exempt
-from filehandler import FileHandler
-import networkx as nx
-from drenderer.decorators import render_to
+from django.http import HttpResponse
+
+from forms import GraphUploadForm
+from utils.filehandler import FileHandler
+
 
 def visualize(request, template_name='visualize.html'):
     form = GraphUploadForm(request.POST or None, request.FILES or None)
@@ -15,7 +18,6 @@ def visualize(request, template_name='visualize.html'):
     return render(request, template_name, {'form': form, 'description': description})
 
 
-@render_to(mimetype='json')
 @csrf_exempt
 def visualize_data(request):
     form = GraphUploadForm(request.POST or None, request.FILES or None)
@@ -26,4 +28,5 @@ def visualize_data(request):
         data = fh.gen_flat()
         numcomp = fh.number_of_graphs
         num_nodes = fh.graph.number_of_nodes()
-    return {'components': numcomp, 'data': data, 'nodes': num_nodes}
+        return_data = {'components': numcomp, 'data': data, 'nodes': num_nodes}
+    return HttpResponse(json.dumps(return_data), mimetype = "application/json")

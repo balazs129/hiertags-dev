@@ -15,21 +15,22 @@ framework.
 """
 import os
 import sys
-from os.path import abspath, dirname, join
+from os.path import abspath, dirname
 
 import site
+
+# Add the site-packages of the chosen virtualenv to work with
 site.addsitedir('/home/lovasb/.virtualenvs/hiertags/lib/python2.7/site-packages')
 
-sys.path.append(dirname(dirname(abspath(__file__))).replace('\\','/'))
+sys.path.append(dirname(dirname(abspath(__file__))).replace('\\', '/'))
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hiertags.settings")
 
-# This application object is used by any WSGI server configured to use this
-# file. This includes Django's development server, if the WSGI_APPLICATION
-# setting points here.
-from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
+# Activate your virtual env
+# activate_env = os.path.expanduser("~/.virtualenvs/myprojectenv/bin/activate_this.py")
+# execfile(activate_env, dict(__file__=activate_env))
 
-# Apply WSGI middleware here.
-# from helloworld.wsgi import HelloWorldApplication
-# application = HelloWorldApplication(application)
+import django.core.handlers.wsgi
+
+application = django.core.handlers.wsgi.WSGIHandler()
+
