@@ -1,0 +1,32 @@
+<VirtualHost *:80>
+    ServerName hiertags-dev.elte.hu
+    DocumentRoot /home/hiertags/
+    ServerAdmin pollner@hal.elte.hu
+
+    ErrorLog /home/hiertags/log/apache_error.log
+    CustomLog /home/hiertags/log/apache_access.log "%h %l %u %t \"%r\" %>s %b %X %D %H %m %q \"%{Referer}i\" \"%{From}i\" \"%{User-Agent}i\""
+
+    Alias /static/ /home/hiertags/static/
+    <Directory /home/hiertags/static/>
+        Order deny,allow
+        Allow from all
+    </Directory>
+
+    ProxyRequests Off
+    ProxyPass /hiertags/ http://localhost:30001/
+    ProxyPassReverse /hiertags/ http://localhost:30001/
+    <Location /hiertags/>
+        Order allow,deny
+        Allow from all
+    </Location>
+
+    RewriteEngine On
+    RewriteRule ^/static/(.*) /static/$1 [PT,L]
+    RewriteRule ^/favicon\.ico /static/favicon\.ico [PT,L]
+    RewriteRule ^/apple-touch.* /static/favicon\.ico [PT,L]
+    RewriteRule ^/robots\.txt /static/robots\.txt [PT,L]
+    RewriteRule ^/$ /home/
+    RewriteRule ^(.*) /hiertags/$1 [PT,L]
+
+</VirtualHost>
+
