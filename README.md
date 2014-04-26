@@ -1,6 +1,5 @@
 
 #Installation
-- - - -
 ##Install needed packages
 First of all, update the repository:
 ```bash
