@@ -22,8 +22,8 @@ SECRET_KEY = 'xfgfa7a*+n&v8d(nfv6s)@+*^7nqe0&fr18ursn_cm%-t1fk^i'
 # = Global Settings =
 # ===================
 
-DEBUG = True
-TEMPLATE_DEBUG = True
+DEBUG = False
+TEMPLATE_DEBUG = False
 
 MANAGERS = ADMINS
 TIME_ZONE = 'Europe/Budapest'
