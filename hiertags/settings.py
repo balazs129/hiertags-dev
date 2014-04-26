@@ -23,7 +23,8 @@ SECRET_KEY = 'xfgfa7a*+n&v8d(nfv6s)@+*^7nqe0&fr18ursn_cm%-t1fk^i'
 # ===================
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = True
+
 MANAGERS = ADMINS
 TIME_ZONE = 'Europe/Budapest'
 LANGUAGE_CODE = 'en-us'
@@ -36,9 +37,11 @@ STATIC_ROOT = 'static'
 ALLOWED_HOSTS = ['*']
 STATICFILES_DIRS = (
     'media',
+    os.path.join(BASE_DIR, '../media')
 )
 TEMPLATE_DIRS = (
-   'templates',
+    'templates',
+    os.path.join(BASE_DIR, '../templates')
 )
 
 # =============
@@ -48,7 +51,7 @@ TEMPLATE_DIRS = (
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'database.sqlite3',
+        'NAME': os.path.join(BASE_DIR, '../database.sqlite3')
     }
 }
 

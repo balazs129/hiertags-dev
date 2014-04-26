@@ -20,15 +20,15 @@ from os.path import abspath, dirname
 import site
 
 # Add the site-packages of the chosen virtualenv to work with
-site.addsitedir('/home/lovasb/.virtualenvs/hiertags/lib/python2.7/site-packages')
+site.addsitedir('/home/hiertags/venv/lib/python2.7/site-packages')
 
-sys.path.append(dirname(dirname(abspath(__file__))).replace('\\', '/'))
+sys.path.append('/home/hiertags/hiertags-dev')
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hiertags.settings")
 
 # Activate your virtual env
-# activate_env = os.path.expanduser("~/.virtualenvs/myprojectenv/bin/activate_this.py")
-# execfile(activate_env, dict(__file__=activate_env))
+activate_this = '/home/hiertags/venv/bin/activate_this.py'
+execfile(activate_this, dict(__file__=activate_this))
 
 import django.core.handlers.wsgi
 

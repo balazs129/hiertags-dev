@@ -4,7 +4,6 @@
 #
 # pip install -r requirements.txt
 
-uwsgi
 django
 lxml
 dateutils
