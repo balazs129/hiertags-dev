@@ -32,10 +32,61 @@ We need to add this user to the sudoers.
 ```bash
     sudo visudo
 ````
+
 search the line '# User privilege specification', and add another to look like this:
 ```bash
     # User privilege specification
     root    ALL=(ALL:ALL) ALL
     hiertags    ALL=(ALL:ALL) ALL
 ```
+add user to the www-group
+```bash
+    sudo usermod -G www-data -a hiertags
+```
+activate user
+```bash
+    su - hiertags
+```
 
+###Set up the site
+
+####Create the virtual environment
+```bash
+    virtualenv --no-site-packages venv
+```
+activate it
+```bash
+    source venv/bin/activate
+```
+
+####Clone the repository and install python requirements
+```bash
+    git clone https://github.com/balazs129/hiertags-dev.git
+    pip install -r hiertags-dev/requirements.txt
+```
+
+###Create database and static files
+```bash
+    python manage.py syncdb
+```
+```bash
+    python manage.py config/hiertags-data.json
+```
+```bash
+    python manage.py collectstatic
+```
+
+###Configure Apache
+```bash
+    sudo cp config/hiertags.elte.hu /etc/apache2/sites-available/
+```
+Disable default site, and enable hiertags
+```bash
+    sudo a2dissite default
+    sudo a2ensite hiertags.elte.hu
+```
+Enable mem-cache and restart apache
+```bash
+    sudo a2enmod mem-cache
+    sudo service apache2 restart
+```
