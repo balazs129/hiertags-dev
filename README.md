@@ -50,7 +50,7 @@ activate user
 
 ###Set up the site
 
-####Create the virtual environment
+#####Create the virtual environment
 ```bash
     virtualenv --no-site-packages venv
 ```
@@ -59,13 +59,13 @@ activate it
     source venv/bin/activate
 ```
 
-####Clone the repository and install python requirements
+#####Clone the repository and install python requirements
 ```bash
     git clone https://github.com/balazs129/hiertags-dev.git
     pip install -r hiertags-dev/requirements.txt
 ```
 
-###Create database and static files
+#####Create database and static files
 ```bash
     python manage.py syncdb
 ```
@@ -76,7 +76,7 @@ activate it
     python manage.py collectstatic
 ```
 
-###Configure Apache
+#####Configure Apache
 ```bash
     sudo cp config/hiertags.elte.hu /etc/apache2/sites-available/
 ```
