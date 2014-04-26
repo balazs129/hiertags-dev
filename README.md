@@ -3,7 +3,7 @@
 This will describe the installation on Ubuntu/Ubuntu Server. The site is configured to work
 with this steps.
 
-###Install needed packages
+###1. Install needed packages
 First of all, update the repository.
 ```bash
     sudo apt-get update
@@ -12,7 +12,7 @@ Next, we install the packages needed to build other packages.
 ```bash
     sudo apt-get install build-essential python-dev
 ```
-Now install apache and other needed software. We need the worker version from apache.
+Now install apache and other needed softwares. We need the worker version from apache.
 ```bash
     sudo apt-get install git sqlite3 apache2-mpm-worker libapache2-mod-wsgi python-virtualenv
 ```
@@ -21,7 +21,7 @@ And last, install the packages needed to build lxml.
     sudo apt-get install libxml2 libxml2-dev libxslt1.1 libxslt1-dev
 ```
 
-###Create the environment
+###2. Create the environment
 Because of security reasons we will run the site from a dedicated user home directory.
 Create the user, and set password for the account.
 ```bash
@@ -48,9 +48,9 @@ activate user
     su - hiertags
 ```
 
-###Set up the site
+###3. Set up the site
 
-#####Create the virtual environment
+##### * Create the virtual environment
 ```bash
     virtualenv --no-site-packages venv
 ```
@@ -59,13 +59,13 @@ activate it
     source venv/bin/activate
 ```
 
-#####Clone the repository and install python requirements
+##### * Clone the repository and install python requirements
 ```bash
     git clone https://github.com/balazs129/hiertags-dev.git
     pip install -r hiertags-dev/requirements.txt
 ```
 
-#####Create database and static files
+##### * Create database and static files
 ```bash
     python manage.py syncdb
 ```
@@ -76,7 +76,7 @@ activate it
     python manage.py collectstatic
 ```
 
-#####Configure Apache
+##### * Configure Apache
 ```bash
     sudo cp config/hiertags.elte.hu /etc/apache2/sites-available/
 ```
