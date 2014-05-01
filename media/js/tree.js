@@ -37,7 +37,8 @@ var initialize_uploader = function () {
         $('#rightbar').html("");
         $('#progress-circle').css('visibility', 'hidden');
         var number_of_components = data.result.components;
-        if (number_of_components > 1){
+        globalData.treeWidth = 0;
+        if (number_of_components > 1) {
             var error = $('<p>').textContent = "Uploaded file contained multiple graphs(" + number_of_components + "), using the first.";
             $('#infobar').append(error);
         }
@@ -93,24 +94,28 @@ var generate_tree = function (treeData) {
 
     var diagonal = d3.svg.diagonal()
         .projection(function (d) {
-            return [d.x, d.y];
+            if (globalData.verticalLayout) {
+                return [d.x, d.y];
+            } else {
+                return [d.y, d.x];
+            }
         });
 
-   var zoomListener = d3.behavior.zoom().scaleExtent([0.5, 2]).on("zoom", zoom);
+    var zoomListener = d3.behavior.zoom().scaleExtent([0.5, 2]).on("zoom", zoom);
 
-   var svg = d3.select("svg#visualization")
+    var svg = d3.select("svg#visualization")
         .attr("width", width)
         .attr("height", height)
         .attr("class", "overlay")
         .call(zoomListener);
 
 
-   var svg_group = svg.append("svg:g");
+    var svg_group = svg.append("svg:g");
 
-   function zoom() {
-       svg_group.attr("transform",
-           "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
-   }
+    function zoom() {
+        svg_group.attr("transform",
+            "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
+    }
 
     root = treeData[0];
     root.x0 = width / 2;
@@ -144,71 +149,184 @@ var generate_tree = function (treeData) {
 
         if (globalData.nodes < 100) {
             if (d._children) {
-            d.children = d._children;
-            d.children.forEach(expand);
-            d._children = null;
-            update(d);
-            centerNode(d);
+                d.children = d._children;
+                d.children.forEach(expand);
+                d._children = null;
+                update(d);
+                centerNode(d);
             }
         } else {
             if (d._children) {
-            d.children = d._children;
-            d.children.forEach(expand_100);
-            d._children = null;
-            update(d);
-            centerNode(d);
+                d.children = d._children;
+                d.children.forEach(expand_100);
+                d._children = null;
+                update(d);
+                centerNode(d);
             }
         }
     }
 
-    root.children.forEach(collapse);
+    var max_depth = function (root) {
+        var levels = {};
+        var key;
+        var size = 0;
+        var nodes = tree.nodes(root).reverse();
+
+        function log(d) {
+            if (d.children) {
+                levels[d.depth] = true;
+                d.children.forEach(log);
+            }
+            else {
+                levels[d.depth] = true;
+            }
+        }
+
+        root.children.forEach(log);
+
+        for (key in levels) {
+            if (levels.hasOwnProperty(key)) size++;
+        }
+    };
+
+    max_depth(root);
+
+    function cond_collapse(d) {
+        if (d.depth < 2) {
+            if (d.children) {
+                d.children.forEach(cond_collapse);
+            }
+        } else {
+            if (d.children) {
+                d._children = d.children;
+                d.children = null;
+                d._children.forEach(cond_collapse);
+            }
+        }
+    }
+
+    root.children.forEach(cond_collapse);
+
     update(root);
     centerNode(root);
+
     var t_data = $('<p>').textContent = "    Number of nodes: " + globalData.nodes;
 //    t_data.style("float", "right");
 
     $('#rightbar')
-         .append('<input id="expandtree" type="button" value="Expand tree">')
-         .button()
-         .append('<input id="shrinktree" type="button" value="Shrink tree">')
-         .button()
-         .append(t_data);
+        .append('<input id="expandtree" type="button" value="Expand tree">')
+        .button()
+        .append('<input id="shrinktree" type="button" value="Shrink tree">')
+        .button()
+        .append('<input id="center" type="button" value="Center root">')
+        .button()
+        .append('<input id="toggleLabels" type="button" value="Toggle Labels">')
+        .button()
+        .append('<input id="toggleLayout" type="button" value="Toggle Layout">')
+        .button()
+        .append('<input id="exportPDF" type="button" value="Save as PDF">')
+        .button()
+        .append(t_data);
 
 
     d3.select("#expandtree").on("click", exClick);
-        function exClick(){
-            globalData.treeWidth += 500;
-            update(root);
-        }
+    function exClick() {
+        globalData.treeWidth += 500;
+        update(root);
+    }
 
     d3.select("#shrinktree").on("click", shClick);
-        function shClick(){
-            if (globalData.treeWidth > 500){
-                globalData.treeWidth -= 500;
-                update(root);
-            } else {
-                globalData.treeWidth = 0;
-            }
+    function shClick() {
+        if (globalData.treeWidth > 500) {
+            globalData.treeWidth -= 500;
             update(root);
+        } else {
+            globalData.treeWidth = 0;
         }
-//    d3.select(self.frameElement).style("height", "800px");
+        update(root);
+    }
 
-// UPDATE FUNCTION
+    d3.select("#center").on("click", crClick);
+    function crClick() {
+        zoomListener.scale(1).translate([0, 0]);
+        centerNode(root);
+    }
+
+    d3.select("#toggleLabels").on("click", tlClick);
+    function tlClick() {
+        globalData.labelVisibility = !globalData.labelVisibility;
+        var nodeSelection = d3.selectAll("g.node");
+        nodeSelection.select("text").text(function (d) {
+            if (globalData.labelVisibility) {
+                return d.name;
+            } else {
+                return '';
+            }
+        });
+        update(root);
+    }
+
+    d3.select("#toggleLayout").on("click", toClick);
+    function toClick() {
+        globalData.verticalLayout = !globalData.verticalLayout;
+        globalData.toggled = true;
+        update(root);
+        centerNode(root);
+    }
+
+    function submit_download_form(output_format) {
+//        Get the d3js SVG element
+        var svg_window = document.getElementById("visualization");
+//        Extract data
+        var svg_xml = (new XMLSerializer()).serializeToString(svg_window);
+
+//        submit the Form to the Server
+        var form = document.getElementById("svgform");
+        form['output_format'].value = output_format;
+        form['data'].value = svg_xml;
+        form.submit();
+//    function submit_download_form(output_format){
+//        var frm = $('#svgform');
+//        var svg_window = document.getElementById("visualization");
+//        var svg_xml = (new XMLSerializer()).serializeToString(svg_window);
+//        frm.submit(function () {
+//          $.ajax({
+//                type: frm.attr("method"),
+//                url: frm.attr('action'),
+//                data: svg_xml,
+//                success: function (data) {
+//                    console.log(data);
+//                },
+//                error: function(data) {
+//                    console.log(data);
+//                }
+//            });
+////            return false;
+//    });
+
+    }
+
+    d3.select("#exportPDF").on("click", epdfClick);
+    function epdfClick() {
+        submit_download_form("png");
+    }
+
     function update(source) {
 
         var levelWidth = [1];
         var level_label_width = [1];
         var newHeight = height;
 
-        var childCount = function(level, n) {
-            function get_numbers(d){
+        var childCount = function (level, n) {
+            function get_numbers(d) {
                 var tmp = 0;
                 var index;
                 for (index = 0; index < d.length; ++index) {
-                     tmp += d[index].name.length;
+                    tmp += d[index].name.length;
                 }
                 return tmp;
             }
+
             if (n.children && n.children.length > 0) {
                 if (levelWidth.length <= level + 1) {
                     levelWidth.push(0);
@@ -219,24 +337,23 @@ var generate_tree = function (treeData) {
 
                 levelWidth[level + 1] += n.children.length;
                 level_label_width[level + 1] += get_numbers(n.children);
-                n.children.forEach(function(d) {
+                n.children.forEach(function (d) {
                     childCount(level + 1, d);
                 });
             }
         };
-
 
         childCount(0, root);
         newHeight = levelWidth.length * 180;
 //        var newWidth = d3.max(levelWidth) * 100; // 25 pixels per line
 
         var tmp_width = [];
-        for(var counter=0; counter< levelWidth.length; counter++) {
+        for (var counter = 0; counter < levelWidth.length; counter++) {
             tmp_width[counter] = levelWidth[counter] * 5 + level_label_width[counter] * 8;
         }
 
         var newWidth;
-        if (d3.max(tmp_width) < 500){
+        if (d3.max(tmp_width) < 500) {
             newWidth = 500;
         } else {
             newWidth = d3.max(tmp_width) + globalData.treeWidth;
@@ -244,8 +361,8 @@ var generate_tree = function (treeData) {
 
         tree = tree.size([newWidth, newHeight])
             .separation(function (a, b) {
-            return a.name.length + b.name.length + 5;
-        });
+                return a.name.length + b.name.length + 5;
+            });
 
         // Compute the new tree layout.
         var nodes = tree.nodes(root).reverse(),
@@ -253,7 +370,11 @@ var generate_tree = function (treeData) {
 
         // Normalize for fixed-depth.
         nodes.forEach(function (d) {
-            d.y = d.depth * 130;
+            if (globalData.verticalLayout) {
+                d.y = d.depth * 130;
+            } else {
+                d.y = d.depth * 100;
+            }
         });
 
 
@@ -267,7 +388,11 @@ var generate_tree = function (treeData) {
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")
             .attr("transform", function (d) {
-                return "translate(" + source.x0 + "," + source.y0 + ")";
+                if (globalData.verticalLayout) {
+                    return "translate(" + source.x0 + "," + source.y0 + ")";
+                } else {
+                    return "translate(" + source.y0 + "," + source.x0 + ")";
+                }
             })
             .on("click", click)
             .on("mouseenter", magnify)
@@ -278,32 +403,64 @@ var generate_tree = function (treeData) {
             .attr("r", 1e-6)
             .style("fill", function (d) {
                 return d._children ? "lightsteelblue" : "#fff";
-            });
+            })
+            .style("stroke", "steelblue")
+            .style("stroke-width", "1px");
 
-        nodeEnter.append("text")
-//            .attr("y", function(d) { return d.children || d._children ? -10 : 10; })
-            .attr("y", function (d) {
-                if (d === treeData[0]) {
-                    return -10;
-                }
-                else {
-                    return 10;
-                }
-            })
-            .attr("dy", ".35em")
-            .attr("text-anchor", "middle")
-            //        .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-            .text(function (d) {
-                return d.name;
-            })
-            .style("fill-opacity", 1e-6);
+
+        if (globalData.verticalLayout) {
+            nodeEnter.append("svg:text")
+                .attr("y", function (d) {
+                        if (d === treeData[0]) {
+                            return -10;
+                        } else {
+                            return 10;
+                        }
+                })
+                .attr("dy", ".35em")
+                .attr("text-anchor", "middle")
+                .text(function (d) {
+                    if (globalData.labelVisibility) {
+                        return d.name;
+                    } else {
+                        return '';
+                    }
+                })
+                .style("font-size", "10px")
+                .style("font-family", "sans-serif")
+                .style("fill-opacity", 1e-6);
+        } else {
+            nodeEnter.append("svg:text")
+                .attr("x", function (d) {
+                    return d.children || d._children ? -10 : 10;
+                })
+                .attr("dx", ".35em")
+                .attr("text-anchor", function (d) {
+                    return d.children || d._children ? "end" : "start";
+                })
+                .text(function (d) {
+                    if (globalData.labelVisibility) {
+                        return d.name;
+                    } else {
+                        return '';
+                    }
+                })
+                .style("font-size", "10px")
+                .style("font-family", "sans-serif")
+                .style("fill-opacity", 1e-6);
+        }
 
         // Transition nodes to their new position.
         var nodeUpdate = node.transition()
             .duration(duration)
             .attr("transform", function (d) {
-                return "translate(" + d.x + "," + d.y + ")";
+                if (globalData.verticalLayout) {
+                    return "translate(" + d.x + "," + d.y + ")";
+                } else {
+                    return "translate(" + d.y + "," + d.x + ")";
+                }
             });
+
 
         nodeUpdate.select("circle")
             .attr("r", 5)
@@ -311,8 +468,38 @@ var generate_tree = function (treeData) {
                 return d._children ? "lightsteelblue" : "#fff";
             });
 
-        nodeUpdate.select("text")
-            .style("fill-opacity", 1);
+        if (globalData.verticalLayout) {
+            nodeUpdate.select("text")
+                .attr("x", function (){
+                    if (globalData.toggled){
+                        return -5;
+                    } else {
+                        return 0;
+                    }
+                })
+                .attr("y", function (d) {
+                        if (d === treeData[0]) {
+                            return -10;
+                        } else {
+                            return 10;
+                        }
+                })
+                .attr("dy", ".35em")
+                .attr("text-anchor", "middle")
+                .style("fill-opacity", 1);
+        } else {
+            nodeUpdate.select("text")
+                .attr("y", 0)
+                .attr("x", function (d) {
+                    return d.children || d._children ? -10 : 10;
+                })
+                .attr("dx", ".35em")
+                .attr("text-anchor", function (d) {
+                    return d.children || d._children ? "end" : "start";
+                })
+                .style("fill-opacity", 1);
+        }
+
 
         // Transition exiting nodes to the parent's new position.
         var nodeExit = node.exit().transition()
@@ -336,6 +523,9 @@ var generate_tree = function (treeData) {
 
         // Enter any new links at the parent's previous position.
         link.enter().insert("path", "g")
+            .style("fill", "none")
+            .style("stroke", "#ccc")
+            .style("stroke-width", "1px")
             .attr("class", "link")
             .attr("d", function (d) {
                 var o = {x: source.x0, y: source.y0};
@@ -388,16 +578,15 @@ var generate_tree = function (treeData) {
     }
 
     function delete_node(d) {
-        if (d.parent && d.parent.children){
-        var nodeToDelete = _.where(d.parent.children, {name: d.name});
-        if (nodeToDelete){
-            d.parent.children = _.without(d.parent.children, nodeToDelete[0]);
-        }
-        d3.event.preventDefault();
-        update(d);
+        if (d.parent && d.parent.children) {
+            var nodeToDelete = _.where(d.parent.children, {name: d.name});
+            if (nodeToDelete) {
+                d.parent.children = _.without(d.parent.children, nodeToDelete[0]);
+            }
+            d3.event.preventDefault();
+            update(d);
         }
     }
-
 
 
     function magnify() {
@@ -410,6 +599,9 @@ var generate_tree = function (treeData) {
             .style({'font-size': '20px'})
             .attr("dy", function () {
                 return "1em";
+            })
+            .text(function (d) {
+                return d.name;
             });
 //        nodeSelection.select("text").style({opacity:'1.0'});
         d3.event.preventDefault();
@@ -424,17 +616,30 @@ var generate_tree = function (treeData) {
             .style({'font-size': '10px'})
             .attr("dy", function () {
                 return ".35em";
+            })
+            .text(function (d) {
+                if (globalData.labelVisibility) {
+                    return d.name;
+                } else {
+                    return '';
+                }
             });
 //        nodeSelection.select("text").style({opacity:'0.6'});
     }
 
     function centerNode(source) {
         var scale = zoomListener.scale();
-        var x = -source.x0;
-        var y = -source.y0;
-        x = x * scale + width / 2;
-//        y = y * scale + height / 2;
-        y = y * scale + height / 4;
+        if (globalData.verticalLayout) {
+            var x = -source.x0;
+            var y = -source.y0;
+            x = x * scale + width / 2;
+            y = y * scale + height / 4;
+        } else {
+            var x = -source.y0;
+            var y = -source.x0;
+            x = x * scale + 100;
+            y = y * scale + height / 2;
+        }
         d3.select('g').transition()
             .duration(duration)
             .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
@@ -460,6 +665,7 @@ $(function () {
 var globalData = {
     treeWidth: 0,
     nodes: 0,
-    contLoop: true,
-    iteration: 0
+    labelVisibility: true,
+    verticalLayout: true,
+    toggled: false
 };

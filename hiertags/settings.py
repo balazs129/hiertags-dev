@@ -29,11 +29,11 @@ SECRET_KEY = 'xfgfa7a*+n&v8d(nfv6s)@+*^7nqe0&fr18ursn_cm%-t1fk^i'
 # DEBUG is True, Django will display a detailed traceback,
 # including a lot of metadata about your environment, such as all the currently
 # defined Django settings
-DEBUG = False
+DEBUG = True
 # A boolean that turns on/off template debug mode. If this is True, the fancy error page will display
 # a detailed report for any exception raised during template rendering.
 # This report contains the relevant snippet of the template, with the appropriate line highlighted.
-TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = DEBUG
 
 MANAGERS = ADMINS
 TIME_ZONE = 'Europe/Budapest'
@@ -43,7 +43,7 @@ LANGUAGE_CODE = 'en-us'
 # Otherwise, Django will use naive datetimes in local time.
 USE_TZ = True
 SITE_ID = 1
-# A boolean that specifies whether Django’s translation system should be enabled.
+# A boolean that specifies whether Djangos translation system should be enabled.
 # This provides an easy way to turn it off, for performance. If this is set to False,
 # Django will make some optimizations so as not to load the translation machinery.
 USE_I18N = False

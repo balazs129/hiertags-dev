@@ -5,8 +5,10 @@ from django.contrib.flatpages.models import FlatPage
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
-from forms import GraphUploadForm
+from forms import GraphUploadForm, SerializedSvgForm
 from utils.filehandler import FileHandler
+
+from cairosvg import svg2pdf
 
 
 def visualize(request, template_name='visualize.html'):
@@ -30,3 +32,13 @@ def visualize_data(request):
         num_nodes = fh.graph.number_of_nodes()
         return_data = {'components': numcomp, 'data': data, 'nodes': num_nodes}
     return HttpResponse(json.dumps(return_data), mimetype = "application/json")
+
+@csrf_exempt
+def export_data(request):
+    form = SerializedSvgForm(request.POST)
+    if form.is_valid():
+        tmp_svg = form.cleaned_data['data']
+        output = svg2pdf(tmp_svg)
+    response = HttpResponse(output, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="exported_graph.pdf"'
+    return response

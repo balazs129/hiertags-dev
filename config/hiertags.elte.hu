@@ -4,7 +4,7 @@
     ServerAdmin admin@example.com
 
     Alias /static/ /home/hiertags/hiertags-dev/static/
-    <Directory /home/hiertags/static/>
+    <Directory /home/hiertags/hiertags-dev/static/>
         Order deny,allow
         Allow from all
     </Directory>
