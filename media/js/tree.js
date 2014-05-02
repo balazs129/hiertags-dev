@@ -35,16 +35,20 @@ var initialize_uploader = function () {
     }).on('fileuploaddone', function (e, data) {
         $('#infobar').html("");
         $('#rightbar').html("");
+        $('#rightbar2').html("");
         $('#progress-circle').css('visibility', 'hidden');
         var number_of_components = data.result.components;
         globalData.treeWidth = 0;
+
         if (number_of_components > 1) {
             var error = $('<p>').textContent = "Uploaded file contained multiple graphs(" + number_of_components + "), using the first.";
             $('#infobar').append(error);
         }
         $('#visualization').css('border', '1px solid #e0e0e0');
         globalData.nodes = data.result.nodes;
-        generate_tree(convert_data(data.result.data));
+        var treeData = convert_data(data.result.data);
+        get_depth(treeData);
+        generate_tree(treeData);
 
     })
         .prop('disabled', !$.support.fileInput)
@@ -166,33 +170,9 @@ var generate_tree = function (treeData) {
         }
     }
 
-    var max_depth = function (root) {
-        var levels = {};
-        var key;
-        var size = 0;
-        var nodes = tree.nodes(root).reverse();
-
-        function log(d) {
-            if (d.children) {
-                levels[d.depth] = true;
-                d.children.forEach(log);
-            }
-            else {
-                levels[d.depth] = true;
-            }
-        }
-
-        root.children.forEach(log);
-
-        for (key in levels) {
-            if (levels.hasOwnProperty(key)) size++;
-        }
-    };
-
-    max_depth(root);
-
     function cond_collapse(d) {
-        if (d.depth < 2) {
+        console.log(d.depth);
+        if (d.depth < 3) {
             if (d.children) {
                 d.children.forEach(cond_collapse);
             }
@@ -205,46 +185,86 @@ var generate_tree = function (treeData) {
         }
     }
 
-    root.children.forEach(cond_collapse);
-
+    root.children.forEach(collapse);
     update(root);
     centerNode(root);
 
-    var t_data = $('<p>').textContent = "    Number of nodes: " + globalData.nodes;
-//    t_data.style("float", "right");
+    var t_data = $('<p>').textContent = "    Number of nodes: " + globalData.nodes +
+        "   Depth of graph: " + globalData.graphDepth;
 
     $('#rightbar')
         .append('<input id="expandtree" type="button" value="Expand tree">')
-        .button()
         .append('<input id="shrinktree" type="button" value="Shrink tree">')
-        .button()
         .append('<input id="center" type="button" value="Center root">')
-        .button()
         .append('<input id="toggleLabels" type="button" value="Toggle Labels">')
-        .button()
         .append('<input id="toggleLayout" type="button" value="Toggle Layout">')
-        .button()
-        .append('<input id="exportPDF" type="button" value="Save as PDF">')
-        .button()
-        .append(t_data);
+        .append('<input id="exportPDF" type="button" value="Save as PDF">');
+    $('#rightbar2')
+        .append(t_data)
+        .append('<input id="depthExp" type="spinner" value="1">')
+        .append('<input id="expandSpin" type="button" value="Expand">');
 
+    $("#depthExp").spinner({ max: globalData.graphDepth,
+                               min: 1,
+                               step: 1 }).width(20);
+
+    d3.select("#expandSpin").on("click", exsClick);
+        function exsClick(){
+            var level = $("#depthExp").spinner("value");
+            root.children.forEach(collapse);
+            function expand (d){
+                if (d.depth < level) {
+                    if (d._children) {
+                        d.children = d._children;
+                        d.children.forEach(expand);
+                        d._children = null;
+                        update(d);
+                        centerNode(d);
+                    } else {
+                    if (d._children) {
+                        d.children = d._children;
+                        d.children.forEach(expand);
+                        d._children = null;
+                        update(d);
+                        centerNode(d);
+                    }}
+                }
+                update(root);
+        }
+            root.children.forEach(expand);
+            centerNode(root);
+        }
 
     d3.select("#expandtree").on("click", exClick);
     function exClick() {
-        globalData.treeWidth += 500;
+        if (globalData.verticalLayout){
+            globalData.treeWidth += 400;
+        } else {
+            globalData.treeHorizontalRatio += 50;
+        }
         update(root);
     }
 
     d3.select("#shrinktree").on("click", shClick);
     function shClick() {
-        if (globalData.treeWidth > 500) {
-            globalData.treeWidth -= 500;
+        if (globalData.verticalLayout){
+            if (globalData.treeWidth > 400) {
+                globalData.treeWidth -= 400;
+                update(root);
+            } else {
+                globalData.treeWidth = 0;
+            }
             update(root);
         } else {
-            globalData.treeWidth = 0;
+            if (globalData.treeHorizontalRatio > 50){
+                globalData.treeHorizontalRatio -= 50;
+                update(root);
+            } else {
+                globalData.treeHorizontalRatio = 0;
+            }
+            update(root);
+            }
         }
-        update(root);
-    }
 
     d3.select("#center").on("click", crClick);
     function crClick() {
@@ -264,6 +284,7 @@ var generate_tree = function (treeData) {
             }
         });
         update(root);
+        centerNode(root);
     }
 
     d3.select("#toggleLayout").on("click", toClick);
@@ -280,29 +301,11 @@ var generate_tree = function (treeData) {
 //        Extract data
         var svg_xml = (new XMLSerializer()).serializeToString(svg_window);
 
-//        submit the Form to the Server
+//      submit the Form to the Server
         var form = document.getElementById("svgform");
         form['output_format'].value = output_format;
         form['data'].value = svg_xml;
         form.submit();
-//    function submit_download_form(output_format){
-//        var frm = $('#svgform');
-//        var svg_window = document.getElementById("visualization");
-//        var svg_xml = (new XMLSerializer()).serializeToString(svg_window);
-//        frm.submit(function () {
-//          $.ajax({
-//                type: frm.attr("method"),
-//                url: frm.attr('action'),
-//                data: svg_xml,
-//                success: function (data) {
-//                    console.log(data);
-//                },
-//                error: function(data) {
-//                    console.log(data);
-//                }
-//            });
-////            return false;
-//    });
 
     }
 
@@ -344,25 +347,43 @@ var generate_tree = function (treeData) {
         };
 
         childCount(0, root);
-        newHeight = levelWidth.length * 180;
-//        var newWidth = d3.max(levelWidth) * 100; // 25 pixels per line
+        var child_sum = _.reduce(levelWidth, function(memo, num){ return memo + num; }, 0);
+        if (globalData.verticalLayout){
+            newHeight = levelWidth.length * 100;
 
-        var tmp_width = [];
-        for (var counter = 0; counter < levelWidth.length; counter++) {
-            tmp_width[counter] = levelWidth[counter] * 5 + level_label_width[counter] * 8;
-        }
+            if (globalData.labelVisibility){
+                var tmp_width = [];
+                for (var counter = 0; counter < levelWidth.length; counter++) {
+                    tmp_width[counter] = levelWidth[counter] * 5 + level_label_width[counter] * 8;
+                }
 
-        var newWidth;
-        if (d3.max(tmp_width) < 500) {
-            newWidth = 500;
+                var newWidth;
+                if (d3.max(tmp_width) < 500) {
+                    newWidth = 500;
+                } else {
+                    newWidth = d3.max(tmp_width) + globalData.treeWidth;
+                }
+            } else {
+                newWidth = child_sum * 20;
+            }
+
+            tree = tree.size([newWidth, newHeight])
+                    .separation(function (a, b) {
+                         if (globalData.labelVisibility){
+                            return a.name.length + b.name.length + 5;
+                         } else {
+                             return 10;
+                         }
+                    });
         } else {
-            newWidth = d3.max(tmp_width) + globalData.treeWidth;
-        }
+            newWidth = levelWidth.length * 120;
+            newHeight = levelWidth.length * (child_sum * 3);
 
-        tree = tree.size([newWidth, newHeight])
-            .separation(function (a, b) {
-                return a.name.length + b.name.length + 5;
-            });
+            tree = tree.size([newWidth, newHeight])
+                    .separation(function () {
+                         return 10;
+                    });
+        }
 
         // Compute the new tree layout.
         var nodes = tree.nodes(root).reverse(),
@@ -371,9 +392,9 @@ var generate_tree = function (treeData) {
         // Normalize for fixed-depth.
         nodes.forEach(function (d) {
             if (globalData.verticalLayout) {
-                d.y = d.depth * 130;
-            } else {
                 d.y = d.depth * 100;
+            } else {
+                d.y = d.depth * (120 + globalData.treeHorizontalRatio);
             }
         });
 
@@ -649,6 +670,32 @@ var generate_tree = function (treeData) {
 
 };
 
+var get_depth = function (treeData) {
+        root = treeData[0];
+        var levels = {};
+        var key;
+        var size = 0;
+        var tree = d3.layout.tree();
+        var nodes = tree.nodes(root).reverse();
+
+        function log(d) {
+            if (d.children) {
+                levels[d.depth] = true;
+                d.children.forEach(log);
+            }
+            else {
+                levels[d.depth] = true;
+            }
+        }
+
+        root.children.forEach(log);
+
+        for (key in levels) {
+            if (levels.hasOwnProperty(key)) size++;
+        }
+        globalData.graphDepth = size;
+    };
+
 $(function () {
     $.ajaxSetup({
         error: function (x) {
@@ -664,8 +711,10 @@ $(function () {
 
 var globalData = {
     treeWidth: 0,
+    treeHorizontalRatio: 0,
     nodes: 0,
     labelVisibility: true,
     verticalLayout: true,
-    toggled: false
+    toggled: false,
+    graphDepth: 0
 };

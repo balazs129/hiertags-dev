@@ -6,6 +6,8 @@
 {% block head %}
     <link href="{%  static "css/jquery.fileupload.css" %}" rel="stylesheet">
     <link href="{% static "css/visualize.css" %}" rel="stylesheet">
+    <link href="{% static "css/jquery-ui-1.10.4.min.css" %}" rel="stylesheet">
+    <script src="{% static "js/jquery-ui-1.10.4.min.js" %}"></script>
     <script src="{% static "js/jquery.ui.widget.js" %}"></script>
     <script src="{%  static "js/jquery.fileupload.js" %}"></script>
     <script src="{%  static "js/d3.min.js" %}"></script>
@@ -38,7 +40,6 @@
         </div>
     </div>
     <svg id="visualization"></svg>
-    <div id="rightbar">
-    </div>
-    <canvas id="canvas" width="1000px" height="600px"></canvas>
+    <div id="rightbar"></div>
+    <div id="rightbar2"></div>
 {% endblock %}
