@@ -37,18 +37,26 @@ var initialize_uploader = function () {
         $('#rightbar').html("");
         $('#rightbar2').html("");
         $('#progress-circle').css('visibility', 'hidden');
-        var number_of_components = data.result.components;
+        globalData.numberOfComponents = data.result.data.length;
         globalData.treeWidth = 0;
-
-        if (number_of_components > 1) {
-            var error = $('<p>').textContent = "Uploaded file contained multiple graphs(" + number_of_components + "), using the first.";
+        globalData.treeHorizontalRatio = 0;
+        if (globalData.numberOfComponents > 1) {
+            var error = $('<p>').textContent = "Uploaded file contained multiple graphs(" + globalData.numberOfComponents + "), using the first.";
             $('#infobar').append(error);
         }
         $('#visualization').css('border', '1px solid #e0e0e0');
-        globalData.nodes = data.result.nodes;
-        var treeData = convert_data(data.result.data);
-        get_depth(treeData);
-        generate_tree(treeData);
+
+        globalData.graphData = [];
+        globalData.graphDepths = [];
+        globalData.nodes = [];
+        globalData.graphIndex = 0;
+
+        for(var elem = 0; elem < globalData.numberOfComponents; elem++){
+            globalData.graphData.push(convert_data(data.result.data[elem]));
+            globalData.graphDepths.push(get_depth(globalData.graphData[elem]));
+            globalData.nodes.push(data.result.data[elem].length);
+        }
+        generate_tree(globalData.graphData[0]);
 
     })
         .prop('disabled', !$.support.fileInput)
@@ -189,8 +197,10 @@ var generate_tree = function (treeData) {
     update(root);
     centerNode(root);
 
-    var t_data = $('<p>').textContent = "    Number of nodes: " + globalData.nodes +
-        "   Depth of graph: " + globalData.graphDepth;
+    var t_data = $('<p>').textContent = "    Number of nodes: " + globalData.nodes[globalData.graphIndex] +
+        "   Depth of graph: " + globalData.graphDepths[globalData.graphIndex];
+
+    var g_data = $("<p>").textContent = " Graph: " + (globalData.graphIndex + 1) + "/" + globalData.numberOfComponents
 
     $('#rightbar')
         .append('<input id="expandtree" type="button" value="Expand tree">')
@@ -202,11 +212,39 @@ var generate_tree = function (treeData) {
     $('#rightbar2')
         .append(t_data)
         .append('<input id="depthExp" type="spinner" value="1">')
-        .append('<input id="expandSpin" type="button" value="Expand">');
+        .append('<input id="expandSpin" type="button" value="Expand">')
+        .append('<input id="changeGraphUp" type="button" value="UP">')
+        .append('<input id="changeGraphDown" type="button" value="DOWN">')
+        .append(g_data);
 
-    $("#depthExp").spinner({ max: globalData.graphDepth,
+
+    $("#depthExp").spinner({ max: globalData.graphDepths[globalData.graphIndex],
                                min: 1,
                                step: 1 }).width(20);
+
+    d3.select("#changeGraphUp").on("click", chgGraph);
+        function chgGraph(){
+            if (globalData.graphIndex < (globalData.numberOfComponents - 1)){
+                globalData.graphIndex += 1;
+                $('#infobar').html("");
+                $('#rightbar').html("");
+                $('#rightbar2').html("");
+                $("#visualization").empty();
+                generate_tree(globalData.graphData[globalData.graphIndex]);
+        }
+        }
+
+    d3.select("#changeGraphDown").on("click", chdGraph);
+        function chdGraph(){
+            if (globalData.graphIndex > 0){
+                globalData.graphIndex -= 1;
+                $('#infobar').html("");
+                $('#rightbar').html("");
+                $('#rightbar2').html("");
+                $("#visualization").empty();
+                generate_tree(globalData.graphData[globalData.graphIndex]);
+        }
+        }
 
     d3.select("#expandSpin").on("click", exsClick);
         function exsClick(){
@@ -354,7 +392,7 @@ var generate_tree = function (treeData) {
             if (globalData.labelVisibility){
                 var tmp_width = [];
                 for (var counter = 0; counter < levelWidth.length; counter++) {
-                    tmp_width[counter] = levelWidth[counter] * 5 + level_label_width[counter] * 8;
+                    tmp_width[counter] = levelWidth[counter] * 4 + level_label_width[counter] * 7;
                 }
 
                 var newWidth;
@@ -376,7 +414,12 @@ var generate_tree = function (treeData) {
                          }
                     });
         } else {
-            newWidth = levelWidth.length * 120;
+            if (child_sum < 50){
+            newWidth = levelWidth.length * 80;
+            } else {
+                newWidth = levelWidth.length * (150 + child_sum);
+            }
+            console.log(levelWidth.length);
             newHeight = levelWidth.length * (child_sum * 3);
 
             tree = tree.size([newWidth, newHeight])
@@ -394,7 +437,7 @@ var generate_tree = function (treeData) {
             if (globalData.verticalLayout) {
                 d.y = d.depth * 100;
             } else {
-                d.y = d.depth * (120 + globalData.treeHorizontalRatio);
+                d.y = d.depth * (150 + globalData.treeHorizontalRatio);
             }
         });
 
@@ -693,7 +736,7 @@ var get_depth = function (treeData) {
         for (key in levels) {
             if (levels.hasOwnProperty(key)) size++;
         }
-        globalData.graphDepth = size;
+        return size;
     };
 
 $(function () {
@@ -712,9 +755,13 @@ $(function () {
 var globalData = {
     treeWidth: 0,
     treeHorizontalRatio: 0,
-    nodes: 0,
+    nodes: [],
     labelVisibility: true,
     verticalLayout: true,
     toggled: false,
-    graphDepth: 0
+    graphDepth: 0,
+    graphData: [],
+    numberOfComponents: 0,
+    graphIndex: 0,
+    graphDepths: []
 };

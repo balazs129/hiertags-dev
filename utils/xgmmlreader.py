@@ -12,6 +12,7 @@ def read_xgmml(inputfile):
     ns.pop(None)
     #get the first registered graph
     allgraphs = root.xpath('//XGMML:graph', namespaces=ns)
+
     dkey = '{' + ns['cy'] + '}' + 'documentVersion'
     try:
         version = allgraphs[0].attrib[dkey]

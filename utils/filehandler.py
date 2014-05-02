@@ -2,12 +2,11 @@
 from zipfile import ZipFile
 import HTMLParser
 import itertools
-import networkx as nx
 
+import networkx as nx
+from networkx.exception import NetworkXUnfeasible
 
 from xgmmlreader import read_xgmml
-from utils.components import get_components
-from utils.select_cys import select_cysnetwork
 
 class BadExtensionException(Exception):
     def __str__(self):
@@ -18,6 +17,8 @@ class FileHandler(object):
     def __init__(self, input_file):
         self.input_file = input_file
         self.graph = nx.DiGraph()
+        self.graphs = []
+        self.graphs_to_send = []
         self.number_of_graphs = 0
 
     def build_graph(self):
@@ -33,15 +34,20 @@ class FileHandler(object):
                         self.graph.add_edge(tmp[0], tmp[1])
 
             #Number of components
-            self.number_of_graphs, self.graph = get_components(self.graph)
+            self.graphs = nx.weakly_connected_component_subgraphs(self.graph)
 
             #check if current directioning OK
-            root = nx.topological_sort(self.graph)[0]
-            rev_graph = self.graph.reverse()
-            revroot = nx.topological_sort(rev_graph)[0]
-            #sum 1 to get the number of elements from a generator function
-            if sum(1 for _ in nx.bfs_edges(self.graph, root)) < sum(1 for _ in nx.bfs_edges(rev_graph, revroot)):
-                self.graph.reverse(copy=False)
+            for elem in self.graphs:
+                try:
+                    root = nx.topological_sort(elem)[0]
+                    rev_graph = elem.reverse()
+                    revroot = nx.topological_sort(rev_graph)[0]
+                    #sum 1 to get the number of elements from a generator function
+                    if sum(1 for _ in nx.bfs_edges(elem, root)) < sum(1 for _ in nx.bfs_edges(rev_graph, revroot)):
+                        elem.reverse(copy=False)
+                    self.graphs_to_send.append(elem)
+                except NetworkXUnfeasible:
+                    pass
 
         def open_zipfile():
             with ZipFile(self.input_file) as zf:
@@ -64,7 +70,20 @@ class FileHandler(object):
                         continue
                     line = line.strip().split(' ')
                     self.graph.add_edge(line[1], line[0])
-            self.number_of_graphs, self.graph = get_components(self.graph)
+
+            self.graphs = nx.weakly_connected_component_subgraphs(self.graph)
+
+            for elem in self.graphs:
+                try:
+                    root = nx.topological_sort(elem)[0]
+                    rev_graph = elem.reverse()
+                    revroot = nx.topological_sort(rev_graph)[0]
+                    #sum 1 to get the number of elements from a generator function
+                    if sum(1 for _ in nx.bfs_edges(elem, root)) < sum(1 for _ in nx.bfs_edges(rev_graph, revroot)):
+                        elem.reverse(copy=False)
+                    self.graphs_to_send.append(elem)
+                except NetworkXUnfeasible:
+                    pass
 
         def open_xgmml():
             nodes, edges = read_xgmml(self.input_file)
@@ -73,17 +92,50 @@ class FileHandler(object):
                                     {'id': node.attrib['id'], 'label': htmlpar.unescape(node.attrib['label'])})
             for edge in edges:
                 self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
-            self.number_of_graphs, self.graph = get_components(self.graph)
+
+            self.graphs = nx.weakly_connected_component_subgraphs(self.graph)
+
+            for elem in self.graphs:
+                try:
+                    root = nx.topological_sort(elem)[0]
+                    self.graphs_to_send.append(elem)
+                except NetworkXUnfeasible:
+                    pass
 
         def open_cys():
-            self.number_of_graphs, cys_file = select_cysnetwork(self.input_file)
-            nodes, edges = read_xgmml(cys_file)
-            for node in nodes:
-                self.graph.add_node(node.attrib['id'],
-                                    {'id': node.attrib['id'], 'label': htmlpar.unescape(node.attrib['label'])})
-            for edge in edges:
-                self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
-            _, self.graph = get_components(self.graph)
+            # cys_file = select_cysnetwork(self.input_file)
+            sessionfile = ZipFile(self.input_file, 'r')
+            contents = sessionfile.namelist()
+            networks = []
+            for elem in contents:
+                tmp = elem.split('/')
+                if tmp[1] == 'networks':
+                    # networks.append((tmp[2], elem))
+                    networks.append(elem)
+                elif tmp[1][-6:] == '.xgmml':
+                    # networks.append((tmp[1], elem))
+                    networks.append(elem)
+            sessionfile.close()
+
+            for elem in networks:
+                cysfile = ZipFile(self.input_file, 'r')
+                graphfile = cysfile.open(elem)
+                self.graph = nx.DiGraph()
+                nodes, edges = read_xgmml(graphfile)
+                for node in nodes:
+                    self.graph.add_node(node.attrib['id'],
+                                        {'id': node.attrib['id'], 'label': htmlpar.unescape(node.attrib['label'])})
+                for edge in edges:
+                    self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
+                cysfile.close()
+                self.graphs = nx.weakly_connected_component_subgraphs(self.graph)
+
+                for g_elem in self.graphs:
+                    try:
+                        root = nx.topological_sort(g_elem)[0]
+                        self.graphs_to_send.append(g_elem)
+                    except NetworkXUnfeasible:
+                        pass
 
         fileext = {'txt': open_edgelist,
                    'zip': open_zipfile,
@@ -93,25 +145,3 @@ class FileHandler(object):
             fileext[self.input_file.name.split('.')[-1]]()
         except KeyError:
             raise BadExtensionException
-
-    def gen_flat(self):
-        data = []
-        idmap = {}
-        # If data dict empty label=id
-        for elem in self.graph.nodes_iter(data=True):
-            if len(elem[1]) == 0:
-                elem[1]['id'] = elem[0]
-                elem[1]['label'] = elem[0]
-                idmap[elem[1]['id']] = elem[1]['label']
-            else:
-                idmap[elem[1]['id']] = elem[1]['label']
-        for elem in self.graph.nodes():
-            tmp = {'name': idmap[elem]}
-            if len(self.graph.pred[elem].keys()) == 0:
-                parent = "null"
-            else:
-                t_parent = self.graph.pred[elem].keys()[0]
-                parent = idmap[t_parent]
-            tmp['parent'] = parent
-            data.append(tmp)
-        return data
