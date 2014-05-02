@@ -51,6 +51,13 @@ var initialize_uploader = function () {
         globalData.nodes = [];
         globalData.graphIndex = 0;
 
+        globalData.treeWidth = 0;
+        globalData.treeHorizontalRatio = 0;
+        globalData.labelVisibility = true;
+        globalData.verticalLayout = true;
+        globalData.toggled = false;
+        globalData.graphDepth = 0;
+
         for(var elem = 0; elem < globalData.numberOfComponents; elem++){
             globalData.graphData.push(convert_data(data.result.data[elem]));
             globalData.graphDepths.push(get_depth(globalData.graphData[elem]));
@@ -159,7 +166,7 @@ var generate_tree = function (treeData) {
     function expand_all_children(d) {
         d3.event.preventDefault();
 
-        if (globalData.nodes < 100) {
+        if (globalData.nodes[globalData.graphIndex] < 100) {
             if (d._children) {
                 d.children = d._children;
                 d.children.forEach(expand);
@@ -230,6 +237,7 @@ var generate_tree = function (treeData) {
                 $('#rightbar').html("");
                 $('#rightbar2').html("");
                 $("#visualization").empty();
+                globalData.graphDepth = 0;
                 generate_tree(globalData.graphData[globalData.graphIndex]);
         }
         }
@@ -242,6 +250,7 @@ var generate_tree = function (treeData) {
                 $('#rightbar').html("");
                 $('#rightbar2').html("");
                 $("#visualization").empty();
+                globalData.graphDepth = 0;
                 generate_tree(globalData.graphData[globalData.graphIndex]);
         }
         }
@@ -388,14 +397,14 @@ var generate_tree = function (treeData) {
         var child_sum = _.reduce(levelWidth, function(memo, num){ return memo + num; }, 0);
         if (globalData.verticalLayout){
             newHeight = levelWidth.length * 100;
-
+            var newWidth;
             if (globalData.labelVisibility){
                 var tmp_width = [];
                 for (var counter = 0; counter < levelWidth.length; counter++) {
                     tmp_width[counter] = levelWidth[counter] * 4 + level_label_width[counter] * 7;
                 }
 
-                var newWidth;
+
                 if (d3.max(tmp_width) < 500) {
                     newWidth = 500;
                 } else {
@@ -414,10 +423,11 @@ var generate_tree = function (treeData) {
                          }
                     });
         } else {
-            if (child_sum < 50){
-            newWidth = levelWidth.length * 80;
+            console.log(child_sum);
+            if (d3.max(levelWidth) < 10){
+            newWidth = levelWidth.length * 50;
             } else {
-                newWidth = levelWidth.length * (150 + child_sum);
+                newWidth = levelWidth.length * (100 + child_sum);
             }
             console.log(levelWidth.length);
             newHeight = levelWidth.length * (child_sum * 3);
@@ -437,7 +447,7 @@ var generate_tree = function (treeData) {
             if (globalData.verticalLayout) {
                 d.y = d.depth * 100;
             } else {
-                d.y = d.depth * (150 + globalData.treeHorizontalRatio);
+                d.y = d.depth * (100 + globalData.treeHorizontalRatio);
             }
         });
 
