@@ -29,7 +29,7 @@ SECRET_KEY = 'xfgfa7a*+n&v8d(nfv6s)@+*^7nqe0&fr18ursn_cm%-t1fk^i'
 # DEBUG is True, Django will display a detailed traceback,
 # including a lot of metadata about your environment, such as all the currently
 # defined Django settings
-DEBUG =True
+DEBUG = False
 # A boolean that turns on/off template debug mode. If this is True, the fancy error page will display
 # a detailed report for any exception raised during template rendering.
 # This report contains the relevant snippet of the template, with the appropriate line highlighted.
@@ -47,7 +47,6 @@ SITE_ID = 1
 # This provides an easy way to turn it off, for performance. If this is set to False,
 # Django will make some optimizations so as not to load the translation machinery.
 USE_I18N = False
-MEDIA_URL = '/media/'
 # URL to use when referring to static files located in STATIC_ROOT.
 STATIC_URL = '/static/'
 # The absolute path to the directory where collectstatic will collect static files for deployment.
@@ -60,12 +59,10 @@ ALLOWED_HOSTS = ['*']
 # This setting defines the additional locations the staticfiles app will traverse if the
 # FileSystemFinder finder is enabled
 STATICFILES_DIRS = (
-    'media',
     os.path.join(BASE_DIR, '../media')
 )
 # List of locations of the template source files searched by django in search order.
 TEMPLATE_DIRS = (
-    'templates',
     os.path.join(BASE_DIR, '../templates')
 )
 

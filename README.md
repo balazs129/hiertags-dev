@@ -16,7 +16,8 @@ Next, we install the packages needed to build other packages.
 ```
 Now install apache and other needed software. We need the worker version from apache([reason](http://blog.dscpl.com.au/2012/10/why-are-you-using-embedded-mode-of.html)).
 ```bash
-    sudo apt-get install git sqlite3 apache2-mpm-worker libapache2-mod-wsgi python-virtualenv
+    sudo apt-get install git sqlite3 apache2-mpm-worker libapache2-mod-wsgi
+    sudo apt-get install python-virtualenv libffi-dev python-cairo
 ```
 And last, install the packages needed to build lxml.
 ```bash
@@ -74,22 +75,22 @@ file in the project directory.
 #####Create database and static files
 We have to create now the database for the django app.
 ```bash
-    python manage.py syncdb
+    python hiertags-dev/manage.py syncdb
 ```
 Next, we load the saved data to the newly created database to have the pages.
 ```bash
-    python manage.py config/hiertags-data.json
+   python hiertags-dev/manage.py loaddata hiertags-dev/config/hiertags_data.json
 ```
 And finally, we copy the static files to the /static dir for Apache to serve.
 ```bash
-    python manage.py collectstatic
+    python hiertags-dev/manage.py collectstatic
 ```
 
 #####Configure Apache
 The final task is to configure Apache properly. First, we copy the included virtual host file
 to the appropriate directory.
 ```bash
-    sudo cp config/hiertags.elte.hu /etc/apache2/sites-available/
+    sudo cp hiertags-dev/config/hiertags.elte.hu /etc/apache2/sites-available/
 ```
 Next, we disable the default site, and enable hiertags.
 ```bash
@@ -100,7 +101,7 @@ Enable mem-cache and headers mod, restart apache. We need mod-headers to force t
 to download instead of open in browser and mod_cache for cacheing.
 ```bash
     sudo a2enmod headers
-    sudo a2enmod mem-cache
+    sudo a2enmod mem_cache
     sudo service apache2 restart
 ```
 The site now must be functional.
