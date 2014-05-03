@@ -1,3 +1,17 @@
+var globalData = {
+    treeWidth: 0,
+    treeHorizontalRatio: 0,
+    nodes: [],
+    labelVisibility: true,
+    verticalLayout: true,
+    toggled: false,
+    graphDepth: 0,
+    graphData: [],
+    numberOfComponents: 0,
+    graphIndex: 0,
+    graphDepths: []
+};
+
 var initialize_uploader = function () {
     'use strict';
 
@@ -38,13 +52,16 @@ var initialize_uploader = function () {
         $('#rightbar2').html("");
         $('#progress-circle').css('visibility', 'hidden');
         globalData.numberOfComponents = data.result.data.length;
-        globalData.treeWidth = 0;
-        globalData.treeHorizontalRatio = 0;
+
         if (globalData.numberOfComponents > 1) {
             var error = $('<p>').textContent = "Uploaded file contained multiple graphs(" + globalData.numberOfComponents + "), using the first.";
             $('#infobar').append(error);
         }
         $('#visualization').css('border', '1px solid #e0e0e0');
+
+        // Reset Global variables
+        globalData.treeWidth = 0;
+        globalData.treeHorizontalRatio = 0;
 
         globalData.graphData = [];
         globalData.graphDepths = [];
@@ -58,7 +75,8 @@ var initialize_uploader = function () {
         globalData.toggled = false;
         globalData.graphDepth = 0;
 
-        for(var elem = 0; elem < globalData.numberOfComponents; elem++){
+        //Calculate data for graphs
+        for (var elem = 0; elem < globalData.numberOfComponents; elem += 1) {
             globalData.graphData.push(convert_data(data.result.data[elem]));
             globalData.graphDepths.push(get_depth(globalData.graphData[elem]));
             globalData.nodes.push(data.result.data[elem].length);
@@ -156,7 +174,7 @@ var generate_tree = function (treeData) {
         }
     }
 
-    function expand_100(d) {
+    function expand_norec(d) {
         if (d._children) {
             d.children = d._children;
             d._children = null;
@@ -177,25 +195,10 @@ var generate_tree = function (treeData) {
         } else {
             if (d._children) {
                 d.children = d._children;
-                d.children.forEach(expand_100);
+                d.children.forEach(expand_norec);
                 d._children = null;
                 update(d);
                 centerNode(d);
-            }
-        }
-    }
-
-    function cond_collapse(d) {
-        console.log(d.depth);
-        if (d.depth < 3) {
-            if (d.children) {
-                d.children.forEach(cond_collapse);
-            }
-        } else {
-            if (d.children) {
-                d._children = d.children;
-                d.children = null;
-                d._children.forEach(cond_collapse);
             }
         }
     }
@@ -207,7 +210,8 @@ var generate_tree = function (treeData) {
     var t_data = $('<p>').textContent = "    Number of nodes: " + globalData.nodes[globalData.graphIndex] +
         "   Depth of graph: " + globalData.graphDepths[globalData.graphIndex];
 
-    var g_data = $("<p>").textContent = " Graph: " + (globalData.graphIndex + 1) + "/" + globalData.numberOfComponents
+    var g_data = $("<p>").textContent = " Graph: " + (globalData.graphIndex + 1) +
+        "/" + globalData.numberOfComponents;
 
     $('#rightbar')
         .append('<input id="expandtree" type="button" value="Expand tree">')
@@ -216,75 +220,85 @@ var generate_tree = function (treeData) {
         .append('<input id="toggleLabels" type="button" value="Toggle Labels">')
         .append('<input id="toggleLayout" type="button" value="Toggle Layout">')
         .append('<input id="exportPDF" type="button" value="Save as PDF">');
-    $('#rightbar2')
-        .append(t_data)
-        .append('<input id="depthExp" type="spinner" value="1">')
-        .append('<input id="expandSpin" type="button" value="Expand">')
-        .append('<input id="changeGraphUp" type="button" value="UP">')
-        .append('<input id="changeGraphDown" type="button" value="DOWN">')
-        .append(g_data);
+    if (globalData.numberOfComponents > 1){
+        $('#rightbar2')
+            .append(t_data)
+            .append('<input id="depthExp" type="spinner" value="1">')
+            .append('<input id="expandSpin" type="button" value="Expand">')
+            .append('<input id="changeGraphUp" type="button" value="Next">')
+            .append('<input id="changeGraphDown" type="button" value="Previous">')
+            .append(g_data);
+        } else {
+         $('#rightbar2')
+            .append(t_data)
+            .append('<input id="depthExp" type="spinner" value="1">')
+            .append('<input id="expandSpin" type="button" value="Expand">');
+    }
+
 
 
     $("#depthExp").spinner({ max: globalData.graphDepths[globalData.graphIndex],
-                               min: 1,
-                               step: 1 }).width(20);
+        min: 1,
+        step: 1 }).width(20);
 
     d3.select("#changeGraphUp").on("click", chgGraph);
-        function chgGraph(){
-            if (globalData.graphIndex < (globalData.numberOfComponents - 1)){
-                globalData.graphIndex += 1;
-                $('#infobar').html("");
-                $('#rightbar').html("");
-                $('#rightbar2').html("");
-                $("#visualization").empty();
-                globalData.graphDepth = 0;
-                generate_tree(globalData.graphData[globalData.graphIndex]);
+    function chgGraph() {
+        if (globalData.graphIndex < (globalData.numberOfComponents - 1)) {
+            globalData.graphIndex += 1;
+            $('#infobar').html("");
+            $('#rightbar').html("");
+            $('#rightbar2').html("");
+            $("#visualization").empty();
+            globalData.graphDepth = 0;
+            generate_tree(globalData.graphData[globalData.graphIndex]);
         }
-        }
+    }
 
     d3.select("#changeGraphDown").on("click", chdGraph);
-        function chdGraph(){
-            if (globalData.graphIndex > 0){
-                globalData.graphIndex -= 1;
-                $('#infobar').html("");
-                $('#rightbar').html("");
-                $('#rightbar2').html("");
-                $("#visualization").empty();
-                globalData.graphDepth = 0;
-                generate_tree(globalData.graphData[globalData.graphIndex]);
+    function chdGraph() {
+        if (globalData.graphIndex > 0) {
+            globalData.graphIndex -= 1;
+            $('#infobar').html("");
+            $('#rightbar').html("");
+            $('#rightbar2').html("");
+            $("#visualization").empty();
+            globalData.graphDepth = 0;
+            generate_tree(globalData.graphData[globalData.graphIndex]);
         }
-        }
+    }
 
     d3.select("#expandSpin").on("click", exsClick);
-        function exsClick(){
-            var level = $("#depthExp").spinner("value");
-            root.children.forEach(collapse);
-            function expand (d){
-                if (d.depth < level) {
+    function exsClick() {
+        var level = $("#depthExp").spinner("value");
+        root.children.forEach(collapse);
+        function expand(d) {
+            if (d.depth < level) {
+                if (d._children) {
+                    d.children = d._children;
+                    d.children.forEach(expand);
+                    d._children = null;
+                    update(d);
+                    centerNode(d);
+                } else {
                     if (d._children) {
                         d.children = d._children;
                         d.children.forEach(expand);
                         d._children = null;
                         update(d);
                         centerNode(d);
-                    } else {
-                    if (d._children) {
-                        d.children = d._children;
-                        d.children.forEach(expand);
-                        d._children = null;
-                        update(d);
-                        centerNode(d);
-                    }}
+                    }
                 }
-                update(root);
+            }
+            update(root);
         }
-            root.children.forEach(expand);
-            centerNode(root);
-        }
+
+        root.children.forEach(expand);
+        centerNode(root);
+    }
 
     d3.select("#expandtree").on("click", exClick);
     function exClick() {
-        if (globalData.verticalLayout){
+        if (globalData.verticalLayout) {
             globalData.treeWidth += 400;
         } else {
             globalData.treeHorizontalRatio += 50;
@@ -294,7 +308,7 @@ var generate_tree = function (treeData) {
 
     d3.select("#shrinktree").on("click", shClick);
     function shClick() {
-        if (globalData.verticalLayout){
+        if (globalData.verticalLayout) {
             if (globalData.treeWidth > 400) {
                 globalData.treeWidth -= 400;
                 update(root);
@@ -303,15 +317,15 @@ var generate_tree = function (treeData) {
             }
             update(root);
         } else {
-            if (globalData.treeHorizontalRatio > 50){
+            if (globalData.treeHorizontalRatio > 50) {
                 globalData.treeHorizontalRatio -= 50;
                 update(root);
             } else {
                 globalData.treeHorizontalRatio = 0;
             }
             update(root);
-            }
         }
+    }
 
     d3.select("#center").on("click", crClick);
     function crClick() {
@@ -347,13 +361,11 @@ var generate_tree = function (treeData) {
         var svg_window = document.getElementById("visualization");
 //        Extract data
         var svg_xml = (new XMLSerializer()).serializeToString(svg_window);
-
 //      submit the Form to the Server
         var form = document.getElementById("svgform");
         form['output_format'].value = output_format;
         form['data'].value = svg_xml;
         form.submit();
-
     }
 
     d3.select("#exportPDF").on("click", epdfClick);
@@ -371,7 +383,7 @@ var generate_tree = function (treeData) {
             function get_numbers(d) {
                 var tmp = 0;
                 var index;
-                for (index = 0; index < d.length; ++index) {
+                for (index = 0; index < d.length; index += 1) {
                     tmp += d[index].name.length;
                 }
                 return tmp;
@@ -394,13 +406,16 @@ var generate_tree = function (treeData) {
         };
 
         childCount(0, root);
-        var child_sum = _.reduce(levelWidth, function(memo, num){ return memo + num; }, 0);
-        if (globalData.verticalLayout){
+        var child_sum = _.reduce(levelWidth, function (memo, num) {
+            return memo + num;
+        }, 0);
+
+        if (globalData.verticalLayout) {
             newHeight = levelWidth.length * 100;
             var newWidth;
-            if (globalData.labelVisibility){
+            if (globalData.labelVisibility) {
                 var tmp_width = [];
-                for (var counter = 0; counter < levelWidth.length; counter++) {
+                for (var counter = 0; counter < levelWidth.length; counter += 1) {
                     tmp_width[counter] = levelWidth[counter] * 4 + level_label_width[counter] * 7;
                 }
 
@@ -415,27 +430,25 @@ var generate_tree = function (treeData) {
             }
 
             tree = tree.size([newWidth, newHeight])
-                    .separation(function (a, b) {
-                         if (globalData.labelVisibility){
-                            return a.name.length + b.name.length + 5;
-                         } else {
-                             return 10;
-                         }
-                    });
+                .separation(function (a, b) {
+                    if (globalData.labelVisibility) {
+                        return a.name.length + b.name.length + 5;
+                    } else {
+                        return 10;
+                    }
+                });
         } else {
-            console.log(child_sum);
-            if (d3.max(levelWidth) < 10){
-            newWidth = levelWidth.length * 50;
+            if (d3.max(levelWidth) < 15) {
+                newWidth = levelWidth.length * 50;
             } else {
-                newWidth = levelWidth.length * (100 + child_sum);
+                newWidth = levelWidth.length * (100 + child_sum + globalData.treeHorizontalRatio);
             }
-            console.log(levelWidth.length);
             newHeight = levelWidth.length * (child_sum * 3);
 
             tree = tree.size([newWidth, newHeight])
-                    .separation(function () {
-                         return 10;
-                    });
+                .separation(function () {
+                    return 10;
+                });
         }
 
         // Compute the new tree layout.
@@ -447,7 +460,7 @@ var generate_tree = function (treeData) {
             if (globalData.verticalLayout) {
                 d.y = d.depth * 100;
             } else {
-                d.y = d.depth * (100 + globalData.treeHorizontalRatio);
+                d.y = d.depth * (120 + globalData.treeHorizontalRatio);
             }
         });
 
@@ -485,11 +498,11 @@ var generate_tree = function (treeData) {
         if (globalData.verticalLayout) {
             nodeEnter.append("svg:text")
                 .attr("y", function (d) {
-                        if (d === treeData[0]) {
-                            return -10;
-                        } else {
-                            return 10;
-                        }
+                    if (d === treeData[0]) {
+                        return -10;
+                    } else {
+                        return 10;
+                    }
                 })
                 .attr("dy", ".35em")
                 .attr("text-anchor", "middle")
@@ -544,19 +557,19 @@ var generate_tree = function (treeData) {
 
         if (globalData.verticalLayout) {
             nodeUpdate.select("text")
-                .attr("x", function (){
-                    if (globalData.toggled){
+                .attr("x", function () {
+                    if (globalData.toggled) {
                         return -5;
                     } else {
                         return 0;
                     }
                 })
                 .attr("y", function (d) {
-                        if (d === treeData[0]) {
-                            return -10;
-                        } else {
-                            return 10;
-                        }
+                    if (d === treeData[0]) {
+                        return -10;
+                    } else {
+                        return 10;
+                    }
                 })
                 .attr("dy", ".35em")
                 .attr("text-anchor", "middle")
@@ -724,36 +737,38 @@ var generate_tree = function (treeData) {
 };
 
 var get_depth = function (treeData) {
-        root = treeData[0];
-        var levels = {};
-        var key;
-        var size = 0;
-        var tree = d3.layout.tree();
-        var nodes = tree.nodes(root).reverse();
+    root = treeData[0];
+    var levels = {};
+    var key;
+    var size = 0;
+    var tree = d3.layout.tree();
+    var nodes = tree.nodes(root).reverse();
 
-        function log(d) {
-            if (d.children) {
-                levels[d.depth] = true;
-                d.children.forEach(log);
-            }
-            else {
-                levels[d.depth] = true;
-            }
+    function log(d) {
+        if (d.children) {
+            levels[d.depth] = true;
+            d.children.forEach(log);
         }
-
-        root.children.forEach(log);
-
-        for (key in levels) {
-            if (levels.hasOwnProperty(key)) size++;
+        else {
+            levels[d.depth] = true;
         }
-        return size;
-    };
+    }
+
+    root.children.forEach(log);
+
+    for (key in levels) {
+        if (levels.hasOwnProperty(key)) {
+            size += 1;
+        }
+    }
+    return size;
+};
 
 $(function () {
     $.ajaxSetup({
         error: function (x) {
             if (x.status === 500) {
-                var error = $('<p>').textContent = 'Error! Graph Contains a Cycle.';
+                var error = $('<p>').textContent = 'Internal server error.';
                 $('#infobar').append(error);
             }
         }
@@ -761,17 +776,3 @@ $(function () {
 
     initialize_uploader();
 });
-
-var globalData = {
-    treeWidth: 0,
-    treeHorizontalRatio: 0,
-    nodes: [],
-    labelVisibility: true,
-    verticalLayout: true,
-    toggled: false,
-    graphDepth: 0,
-    graphData: [],
-    numberOfComponents: 0,
-    graphIndex: 0,
-    graphDepths: []
-};
