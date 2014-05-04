@@ -224,19 +224,21 @@ var generate_tree = function (treeData) {
     if (globalData.numberOfComponents > 1) {
         $('#rightbar2')
             .append(t_data)
-            .append('<input id="depthExp" type="spinner" value="1">')
-            .append('<input id="expandSpin" type="button" value="Expand">')
-            .append('<input id="changeGraphDown" type="button" value="Previous">')
-            .append('<input id="changeGraphUp" type="button" value="Next">')
+            .tooltip()
+            .append('<input id="depthExp" type="spinner" value="1" title="Set how deep the graph should be expanded">')
+            .append('<input id="expandSpin" type="button" value="Expand" title="Expand the graph to the selected depth">')
+            .append('<input id="changeGraphDown" type="button" value="Previous" title="Select the previous graph">')
+            .append('<input id="changeGraphUp" type="button" value="Next" title="Select the next graph">')
             .append(g_data);
     } else {
         $('#rightbar2')
             .append(t_data)
-            .append('<input id="depthExp" type="spinner" value="1">')
-            .append('<input id="expandSpin" type="button" value="Expand">');
+            .append('<input id="depthExp" type="spinner" value="1" title="Set how deep the graph should be expanded">')
+            .append('<input id="expandSpin" type="button" value="Expand" title="Expand the graph to the selected depth">');
     }
 
     $("#rightbar").tooltip({show: {delay: 1000}});
+    $("#rightbar2").tooltip({show: {delay: 1000}});
 
 
     $("#depthExp").spinner({ max: globalData.graphDepths[globalData.graphIndex],
