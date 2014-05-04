@@ -214,27 +214,29 @@ var generate_tree = function (treeData) {
         "/" + globalData.numberOfComponents;
 
     $('#rightbar')
-        .append('<input id="expandtree" type="button" value="Expand tree">')
-        .append('<input id="shrinktree" type="button" value="Shrink tree">')
-        .append('<input id="center" type="button" value="Center root">')
-        .append('<input id="toggleLabels" type="button" value="Toggle Labels">')
-        .append('<input id="toggleLayout" type="button" value="Toggle Layout">')
+        .tooltip()
+        .append('<input id="expandtree" type="button" value="Expand tree" title="Increase the space between nodes">')
+        .append('<input id="shrinktree" type="button" value="Shrink tree" title="Decrease the space between nodes">')
+        .append('<input id="center" type="button" value="Center root" title="Reset view to the root element">')
+        .append('<input id="toggleLabels" type="button" value="Toggle Labels" title="Show/hide node labels">')
+        .append('<input id="toggleLayout" type="button" value="Flip Layout" title="Change between horizontal and vertical tree layout">')
         .append('<input id="exportPDF" type="button" value="Save as PDF">');
-    if (globalData.numberOfComponents > 1){
+    if (globalData.numberOfComponents > 1) {
         $('#rightbar2')
             .append(t_data)
             .append('<input id="depthExp" type="spinner" value="1">')
             .append('<input id="expandSpin" type="button" value="Expand">')
-            .append('<input id="changeGraphUp" type="button" value="Next">')
             .append('<input id="changeGraphDown" type="button" value="Previous">')
+            .append('<input id="changeGraphUp" type="button" value="Next">')
             .append(g_data);
-        } else {
-         $('#rightbar2')
+    } else {
+        $('#rightbar2')
             .append(t_data)
             .append('<input id="depthExp" type="spinner" value="1">')
             .append('<input id="expandSpin" type="button" value="Expand">');
     }
 
+    $("#rightbar").tooltip({show: {delay: 1000}});
 
 
     $("#depthExp").spinner({ max: globalData.graphDepths[globalData.graphIndex],
@@ -250,7 +252,12 @@ var generate_tree = function (treeData) {
             $('#rightbar2').html("");
             $("#visualization").empty();
             globalData.graphDepth = 0;
-            generate_tree(globalData.graphData[globalData.graphIndex]);
+            globalData.treeWidth = 0;
+            globalData.treeHorizontalRatio = 0;
+            globalData.labelVisibility = true;
+
+            var graph_copy = owl.deepCopy(globalData.graphData[globalData.graphIndex]);
+            generate_tree(graph_copy);
         }
     }
 
@@ -263,37 +270,49 @@ var generate_tree = function (treeData) {
             $('#rightbar2').html("");
             $("#visualization").empty();
             globalData.graphDepth = 0;
-            generate_tree(globalData.graphData[globalData.graphIndex]);
+            globalData.treeWidth = 0;
+            globalData.treeHorizontalRatio = 0;
+            globalData.labelVisibility = true;
+
+            var graph_copy = owl.deepCopy(globalData.graphData[globalData.graphIndex]);
+            generate_tree(graph_copy);
         }
     }
 
     d3.select("#expandSpin").on("click", exsClick);
     function exsClick() {
-        var level = $("#depthExp").spinner("value");
-        root.children.forEach(collapse);
-        function expand(d) {
-            if (d.depth < level) {
-                if (d._children) {
-                    d.children = d._children;
-                    d.children.forEach(expand);
-                    d._children = null;
-                    update(d);
-                    centerNode(d);
-                } else {
+        function expandtree() {
+            var level = $("#depthExp").spinner("value");
+            root.children.forEach(collapse);
+            update(root);
+            function expand(d) {
+                if (d.depth < level) {
                     if (d._children) {
                         d.children = d._children;
                         d.children.forEach(expand);
                         d._children = null;
-                        update(d);
-                        centerNode(d);
+                    } else {
+                        if (d._children) {
+                            d.children = d._children;
+                            d.children.forEach(expand);
+                            d._children = null;
+                        }
                     }
                 }
             }
+
+            root.children.forEach(expand);
             update(root);
+            centerNode(root);
         }
 
-        root.children.forEach(expand);
-        centerNode(root);
+        if (root.children) {
+            expandtree();
+        } else {
+            root.children = root._children;
+            root._children = null;
+            expandtree();
+        }
     }
 
     d3.select("#expandtree").on("click", exClick);
@@ -438,11 +457,7 @@ var generate_tree = function (treeData) {
                     }
                 });
         } else {
-            if (d3.max(levelWidth) < 15) {
-                newWidth = levelWidth.length * 50;
-            } else {
-                newWidth = levelWidth.length * (100 + child_sum + globalData.treeHorizontalRatio);
-            }
+            newWidth = levelWidth.length * (100 + child_sum + globalData.treeHorizontalRatio);
             newHeight = levelWidth.length * (child_sum * 3);
 
             tree = tree.size([newWidth, newHeight])
@@ -460,7 +475,7 @@ var generate_tree = function (treeData) {
             if (globalData.verticalLayout) {
                 d.y = d.depth * 100;
             } else {
-                d.y = d.depth * (120 + globalData.treeHorizontalRatio);
+                d.y = d.depth * (100 + globalData.treeHorizontalRatio);
             }
         });
 
@@ -664,18 +679,6 @@ var generate_tree = function (treeData) {
         centerNode(d);
     }
 
-    function delete_node(d) {
-        if (d.parent && d.parent.children) {
-            var nodeToDelete = _.where(d.parent.children, {name: d.name});
-            if (nodeToDelete) {
-                d.parent.children = _.without(d.parent.children, nodeToDelete[0]);
-            }
-            d3.event.preventDefault();
-            update(d);
-        }
-    }
-
-
     function magnify() {
         var nodeSelection = d3.select(this);
         nodeSelection.select("circle")
@@ -690,7 +693,6 @@ var generate_tree = function (treeData) {
             .text(function (d) {
                 return d.name;
             });
-//        nodeSelection.select("text").style({opacity:'1.0'});
         d3.event.preventDefault();
     }
 
@@ -711,7 +713,6 @@ var generate_tree = function (treeData) {
                     return '';
                 }
             });
-//        nodeSelection.select("text").style({opacity:'0.6'});
     }
 
     function centerNode(source) {
@@ -765,6 +766,7 @@ var get_depth = function (treeData) {
 };
 
 $(function () {
+
     $.ajaxSetup({
         error: function (x) {
             if (x.status === 500) {
