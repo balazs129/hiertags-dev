@@ -339,7 +339,7 @@ var generate_tree = function (treeData) {
         d3.select("#expandtree").on("click", exClick);
         function exClick() {
             if (globalData.verticalLayout) {
-                globalData.treeWidth += 400;
+                globalData.treeWidth += 250;
             } else {
                 globalData.treeHorizontalRatio += 50;
             }
@@ -481,7 +481,7 @@ var generate_tree = function (treeData) {
 
 
                     if (d3.max(tmp_width) < 500) {
-                        newWidth = 500;
+                        newWidth = 500 + globalData.treeWidth;
                     } else {
                         newWidth = d3.max(tmp_width) + globalData.treeWidth;
                     }
