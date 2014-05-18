@@ -18,12 +18,6 @@
 {% endblock %}
 
 {% block content %}
-    <form id="svgform" method="POST" action="download/">
-        <input type="text" id="output_format" name="output_format" style="visibility:hidden">
-        <input type="text" id="data" name="data" style="visibility:hidden">
-        <input type="submit" value="submit" style="visibility:hidden">
-    </form>
-
     <div class="row">
         <div class="col-md-12">
             <p>{{ description|safe }}</p>
@@ -43,4 +37,9 @@
     <svg id="visualization"></svg>
     <div id="rightbar"></div>
     <div id="rightbar2"></div>
+    <form id="svgform" method="POST" action="download/">
+        <input type="text" id="output_format" name="output_format" style="visibility:hidden">
+        <input type="text" id="data" name="data" style="visibility:hidden">
+        <input type="submit" value="submit" style="visibility:hidden">
+    </form>
 {% endblock %}

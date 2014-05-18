@@ -18,6 +18,7 @@ class FileHandler(object):
         self.input_file = input_file
         self.graph = nx.DiGraph()
         self.graphs = []
+        self.edges = []
         self.graphs_to_send = []
         self.number_of_graphs = 0
 
@@ -86,12 +87,7 @@ class FileHandler(object):
                     pass
 
         def open_xgmml():
-            nodes, edges = read_xgmml(self.input_file)
-            for node in nodes:
-                self.graph.add_node(node.attrib['id'],
-                                    {'id': node.attrib['id'], 'label': htmlpar.unescape(node.attrib['label'])})
-            for edge in edges:
-                self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
+            self.graph, self.edges = read_xgmml(self.input_file)
 
             self.graphs = nx.weakly_connected_component_subgraphs(self.graph)
 
@@ -103,7 +99,6 @@ class FileHandler(object):
                     pass
 
         def open_cys():
-            # cys_file = select_cysnetwork(self.input_file)
             sessionfile = ZipFile(self.input_file, 'r')
             contents = sessionfile.namelist()
             networks = []
@@ -140,6 +135,7 @@ class FileHandler(object):
         fileext = {'txt': open_edgelist,
                    'zip': open_zipfile,
                    'xgmml': open_xgmml,
+                   'xml': open_xgmml,
                    'cys': open_cys}
         try:
             fileext[self.input_file.name.split('.')[-1]]()
