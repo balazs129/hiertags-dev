@@ -517,11 +517,19 @@ var generate_tree = function (treeData) {
                     return d.id || (d.id = ++i);
                 });
 
+            var tmp_ids = []
             links.forEach(function(d){
                 if (d.hasOwnProperty('added')){
-                    d['id'] = d.source.id + d.target.id;
+                    var tmp_id = d.source.id + d.target.id;
+                    if (_.contains(tmp_ids, tmp_id)) {
+                        d['id'] = tmp_id + parseInt(globalData.nodes)
+                    } else {
+                        d['id'] = tmp_id
+                    }
+                    tmp_ids.push(d.id);
                 } else {
                     d['id'] = d.target.id;
+                    tmp_ids.push(d.id);
                 }
             })
 
