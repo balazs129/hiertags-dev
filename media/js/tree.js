@@ -400,7 +400,17 @@ var generate_tree = function (treeData) {
             }
 
             $("#rightbar").append(select_format);
-//        submit_download_form("png");
+            $("#exportPDF").attr("disabled", true);
+            var save_button = $("<input id=\"saveAction\" type=\"button\" value=\"Save!\" title=\"Save in the selected format\">");
+            $("#rightbar").append(save_button);
+            d3.select("#saveAction").on("click", saveActionButton);
+            function saveActionButton(){
+                var selected_format = to_show[$("#extSelector").val()].toLowerCase();
+                submit_download_form(selected_format);
+                $("#saveAction").remove();
+                $("#extSelector").remove();
+                $("#exportPDF").attr("disabled", false);
+            }
         }
 
 

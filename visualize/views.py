@@ -49,7 +49,7 @@ def export_data(request):
         svgxml = etree.parse(cStringIO.StringIO(tmp_svg))
         tmp_svg_cleaned = parse_svg(svgxml)
 
-        choosen_type = 'svg'
+        choosen_type = form.cleaned_data['output_format']
 
         def export_pdf(cleaned_svg):
             output = svg2pdf(cleaned_svg)
