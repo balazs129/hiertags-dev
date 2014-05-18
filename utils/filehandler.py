@@ -7,6 +7,7 @@ import networkx as nx
 from networkx.exception import NetworkXUnfeasible
 
 from xgmmlreader import read_xgmml
+from filter_DAG import parse_DAG
 
 class BadExtensionException(Exception):
     def __str__(self):
@@ -32,6 +33,8 @@ class FileHandler(object):
                     elem = elem.lstrip(' ')
                     if elem[0] != '#':
                         tmp = elem.strip().split(' ')
+                        self.graph.add_node(tmp[0], {'id': tmp[0], 'label': tmp[0]})
+                        self.graph.add_node(tmp[1], {'id': tmp[1], 'label': tmp[1]})
                         self.graph.add_edge(tmp[0], tmp[1])
 
             #Number of components
@@ -46,9 +49,13 @@ class FileHandler(object):
                     #sum 1 to get the number of elements from a generator function
                     if sum(1 for _ in nx.bfs_edges(elem, root)) < sum(1 for _ in nx.bfs_edges(rev_graph, revroot)):
                         elem.reverse(copy=False)
-                    self.graphs_to_send.append(elem)
+
+                    tree_graph, interlinks = parse_DAG(elem)
+                    self.graphs_to_send.append(tree_graph)
+                    self.edges.extend(interlinks)
                 except NetworkXUnfeasible:
                     pass
+
 
         def open_zipfile():
             with ZipFile(self.input_file) as zf:
@@ -82,19 +89,24 @@ class FileHandler(object):
                     #sum 1 to get the number of elements from a generator function
                     if sum(1 for _ in nx.bfs_edges(elem, root)) < sum(1 for _ in nx.bfs_edges(rev_graph, revroot)):
                         elem.reverse(copy=False)
-                    self.graphs_to_send.append(elem)
+
+                    tree_graph, interlinks = parse_DAG(elem)
+                    self.graphs_to_send.append(tree_graph)
+                    self.edges.extend(interlinks)
                 except NetworkXUnfeasible:
                     pass
 
         def open_xgmml():
-            self.graph, self.edges = read_xgmml(self.input_file)
+            self.graph = read_xgmml(self.input_file)
 
             self.graphs = nx.weakly_connected_component_subgraphs(self.graph)
 
             for elem in self.graphs:
                 try:
                     root = nx.topological_sort(elem)[0]
-                    self.graphs_to_send.append(elem)
+                    tree_graph, interlinks = parse_DAG(elem)
+                    self.graphs_to_send.append(tree_graph)
+                    self.edges.extend(interlinks)
                 except NetworkXUnfeasible:
                     pass
 
@@ -115,20 +127,17 @@ class FileHandler(object):
             for elem in networks:
                 cysfile = ZipFile(self.input_file, 'r')
                 graphfile = cysfile.open(elem)
-                self.graph = nx.DiGraph()
-                nodes, edges = read_xgmml(graphfile)
-                for node in nodes:
-                    self.graph.add_node(node.attrib['id'],
-                                        {'id': node.attrib['id'], 'label': htmlpar.unescape(node.attrib['label'])})
-                for edge in edges:
-                    self.graph.add_edge(edge.attrib['source'], edge.attrib['target'])
+                self.graph = read_xgmml(graphfile)
                 cysfile.close()
+
                 self.graphs = nx.weakly_connected_component_subgraphs(self.graph)
 
                 for g_elem in self.graphs:
                     try:
                         root = nx.topological_sort(g_elem)[0]
-                        self.graphs_to_send.append(g_elem)
+                        tree_graph, interlinks = parse_DAG(g_elem)
+                        self.graphs_to_send.append(tree_graph)
+                        self.edges.extend(interlinks)
                     except NetworkXUnfeasible:
                         pass
 
@@ -137,7 +146,7 @@ class FileHandler(object):
                    'xgmml': open_xgmml,
                    'xml': open_xgmml,
                    'cys': open_cys}
-        try:
-            fileext[self.input_file.name.split('.')[-1]]()
-        except KeyError:
-            raise BadExtensionException
+        # try:
+        fileext[self.input_file.name.split('.')[-1]]()
+        # except KeyError:
+        #     raise BadExtensionException

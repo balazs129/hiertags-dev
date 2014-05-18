@@ -157,6 +157,22 @@ var generate_tree = function (treeData) {
                 "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
         }
 
+        svg.append("defs").selectAll("marker")
+            .data(["normal", "added"])
+            .enter().append("marker")
+            .attr("id", function (d) {
+                return d;
+            })
+            .attr("viewBox", "0 -5 10 10")
+            .attr("refX", 17)
+            .attr("refY", 0)
+            .attr("markerWidth", 7)
+            .attr("markerHeight", 7)
+            .attr("fill", "#555")
+            .attr("orient", "auto")
+            .append("path")
+                .attr("d", "M0,-5L10,0L0,5");
+
         root = treeData[0];
         root.x0 = width / 2;
         root.y0 = height / 4;
@@ -380,7 +396,7 @@ var generate_tree = function (treeData) {
             centerNode(root);
         }
 
-        function submit_download_form(output_format) {
+        function submit_download_form(output_format, callback) {
             var svg_window = document.getElementById("visualization");
             var svg_xml = (new XMLSerializer()).serializeToString(svg_window);
 
@@ -388,6 +404,7 @@ var generate_tree = function (treeData) {
             form['output_format'].value = output_format;
             form['data'].value = svg_xml;
             form.submit();
+            callback();
         }
 
         d3.select("#exportPDF").on("click", epdfClick);
@@ -404,12 +421,14 @@ var generate_tree = function (treeData) {
             var save_button = $("<input id=\"saveAction\" type=\"button\" value=\"Save!\" title=\"Save in the selected format\">");
             $("#rightbar").append(save_button);
             d3.select("#saveAction").on("click", saveActionButton);
-            function saveActionButton(){
+            function saveActionButton() {
                 var selected_format = to_show[$("#extSelector").val()].toLowerCase();
-                submit_download_form(selected_format);
-                $("#saveAction").remove();
-                $("#extSelector").remove();
-                $("#exportPDF").attr("disabled", false);
+                submit_download_form(selected_format, function () {
+                    $("#saveAction").remove();
+                    $("#extSelector").remove();
+                    $("#exportPDF").attr("disabled", false);
+                });
+
             }
         }
 
@@ -497,11 +516,11 @@ var generate_tree = function (treeData) {
                 links = tree.links(nodes);
 
             var nodeNames = [];
-            nodes.forEach(function(d){
+            nodes.forEach(function (d) {
                 nodeNames.push(d.name);
             });
 
-            globalData.extraEdges.forEach(function(d){
+            globalData.extraEdges.forEach(function (d) {
                 if (_.contains(nodeNames, d[0]) && _.contains(nodeNames, d[1])) {
                     var new_link = {source: _.findWhere(nodes, {name: d[0]}),
                         target: _.findWhere(nodes, {name: d[1]}),
@@ -528,8 +547,8 @@ var generate_tree = function (treeData) {
                 });
 
             var tmp_ids = []
-            links.forEach(function(d){
-                if (d.hasOwnProperty('added')){
+            links.forEach(function (d) {
+                if (d.hasOwnProperty('added')) {
                     var tmp_id = d.source.id + d.target.id;
                     if (_.contains(tmp_ids, tmp_id)) {
                         d['id'] = tmp_id + parseInt(globalData.nodes)
@@ -622,7 +641,7 @@ var generate_tree = function (treeData) {
 
 
             nodeUpdate.select("circle")
-                .attr("r", 5)
+                .attr("r", 6)
                 .style("fill", function (d) {
                     return d._children ? "lightsteelblue" : "#fff";
                 });
@@ -638,9 +657,9 @@ var generate_tree = function (treeData) {
                     })
                     .attr("y", function (d) {
                         if (d === treeData[0]) {
-                            return -10;
+                            return -12;
                         } else {
-                            return 10;
+                            return 12;
                         }
                     })
                     .attr("dy", ".35em")
@@ -650,7 +669,7 @@ var generate_tree = function (treeData) {
                 nodeUpdate.select("text")
                     .attr("y", 0)
                     .attr("x", function (d) {
-                        return d.children || d._children ? -10 : 10;
+                        return d.children || d._children ? -20 : 10;
                     })
                     .attr("dx", ".35em")
                     .attr("text-anchor", function (d) {
@@ -677,7 +696,7 @@ var generate_tree = function (treeData) {
             // Update the links…
             var link = svg_group.selectAll("path.link")
                 .data(links, function (d) {
-                        return d.id;
+                    return d.id;
                 });
 
             // Enter any new links at the parent's previous position.
@@ -686,14 +705,25 @@ var generate_tree = function (treeData) {
                 .style("stroke-width", "1px")
                 .attr("class", "link")
                 .attr("stroke", function (d) {
-                       if (d.hasOwnProperty('added')) {
-                           return "#AAF";
-                       } else {
-                           return "#555";
-                           }})
+                    if (d.hasOwnProperty('added')) {
+                        return "#88F";
+                    } else {
+                        return "#222";
+                    }
+                })
+                .attr("stroke-dasharray", function (d){
+                    if (d.hasOwnProperty('added')){
+                        return "0,5 1";
+                    } else {
+                        return "1 0";
+                    }
+                })
                 .attr("d", function (d) {
                     var o = {x: source.x0, y: source.y0};
                     return diagonal({source: o, target: o});
+                })
+                .attr("marker-end", function(d) {
+                    return "url(#" + "normal" + ")";
                 });
 
             // Transition links to their new position.
@@ -761,7 +791,7 @@ var generate_tree = function (treeData) {
         function reset_orig() {
             var nodeSelection = d3.select(this);
             nodeSelection.select("circle").attr("r", function () {
-                return 5;
+                return 6;
             });
             nodeSelection.select("text")
                 .style({'font-size': '10px'})

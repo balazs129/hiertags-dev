@@ -22,7 +22,6 @@ def parse_DAG(graph):
         for rem in to_remove:
             if graph.in_degree(rem[-1]) > 1:
                 graph.remove_edge(rem[-2], rem[-1])
-                # edges_to_remove.append([rem[-2], rem[-1]])
                 edges_to_remove.append([graph.node[rem[-2]]['label'], graph.node[rem[-1]]['label']])
 
     return graph, edges_to_remove

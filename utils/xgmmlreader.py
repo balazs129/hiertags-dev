@@ -1,7 +1,6 @@
 from lxml import etree
 import networkx as nx
 import HTMLParser
-from utils.filter_DAG import parse_DAG
 
 
 def read_xgmml(inputfile):
@@ -38,18 +37,30 @@ def read_xgmml(inputfile):
     nodes = graph.xpath('XGMML:node', namespaces=ns)
     edges = graph.xpath('XGMML:edge', namespaces=ns)
 
-    tmp_graph = nx.DiGraph()
-    # for elem in nodes:
-    #     tmp_graph.add_node(elem.attrib['id'], elem.attrib)
-    # for elem in edges:
-    #     tmp_graph.add_edge(elem.attrib['source'], elem.attrib['target'], elem.attrib)
-    # return nodes, edges
-    for node in nodes:
-        tmp_graph.add_node(node.attrib['id'],
-                                    {'id': node.attrib['id'], 'label': htmlpar.unescape(node.attrib['label'])})
-    for edge in edges:
-        tmp_graph.add_edge(edge.attrib['source'], edge.attrib['target'])
+    nested_label = False
+    try:
+        for elem in nodes[0].getchildren():
+            if elem.attrib['name'] == 'label':
+                nested_label = True
+    except KeyError:
+        pass
 
-    tree_graph, interlinks = parse_DAG(tmp_graph)
-    return tree_graph, interlinks
+    tmp_graph = nx.DiGraph()
+    if nested_label:
+        for node in nodes:
+            for elem in node.getchildren():
+                if elem.attrib['name'] == 'label':
+                    tmp_name = elem.attrib['value']
+            tmp_graph.add_node(node.attrib['id'], {'id': node.attrib['id'], 'label': htmlpar.unescape(tmp_name)})
+        for edge in edges:
+            tmp_graph.add_edge(edge.attrib['source'], edge.attrib['target'])
+    else:
+        for node in nodes:
+            tmp_graph.add_node(node.attrib['id'],
+                                        {'id': node.attrib['id'], 'label': htmlpar.unescape(node.attrib['label'])})
+        for edge in edges:
+            tmp_graph.add_edge(edge.attrib['source'], edge.attrib['target'])
+
+
+    return tmp_graph
 # TODO: Return graph name
