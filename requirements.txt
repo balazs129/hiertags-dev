@@ -10,3 +10,4 @@ lxml
 dateutils
 requests
 networkx
+pillow
