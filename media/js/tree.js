@@ -228,7 +228,6 @@ var generate_tree = function (treeData) {
 
         var t_data = $("<p>").textContent = "Number of nodes: " + globalData.nodes[globalData.graphIndex] +
             "   Depth of graph: " + globalData.graphDepths[globalData.graphIndex] + "/";
-
         var g_data = $("<p>").textContent = "Graph: " + (globalData.graphIndex + 1) +
             "/" + globalData.numberOfComponents;
 
