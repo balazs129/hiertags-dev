@@ -7,3 +7,4 @@ class GraphUploadForm(forms.Form):
 class SerializedSvgForm(forms.Form):
     output_format = forms.CharField(label="output_format")
     data = forms.CharField(label="data")
+    layout = forms.CharField(label="layout")

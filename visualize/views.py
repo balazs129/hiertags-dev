@@ -36,7 +36,7 @@ def visualize_data(request):
         fh = FileHandler(input_file=input_file)
         fh.build_graph()
         for elem in fh.graphs_to_send:
-            if (elem.number_of_nodes() > 1):
+            if elem.number_of_nodes() > 1:
                 data = gen_flat(elem)
                 to_send.append(data)
         excees_edges = fh.edges
@@ -51,7 +51,7 @@ def export_data(request):
         tmp_svg = form.cleaned_data['data'].encode('utf-8')
         uniparser = etree.XMLParser(encoding='UTF-8')
         svgxml = etree.parse(cStringIO.StringIO(tmp_svg), parser=uniparser)
-        tmp_svg_cleaned = parse_svg(svgxml)
+        tmp_svg_cleaned = parse_svg(svgxml, form.cleaned_data['layout'])
 
         choosen_type = form.cleaned_data['output_format']
 
@@ -63,7 +63,7 @@ def export_data(request):
             tmp_outfile = '/tmp/' + str(uuid.uuid4())
 
             _ = subprocess.Popen(['inkscape', "-f", tmp_infile.name, "-A", tmp_outfile], shell=False,
-                 stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
+                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
 
             ret_file = open(tmp_outfile, 'rb')
             output = ret_file.read()
@@ -83,7 +83,7 @@ def export_data(request):
             tmp_outfile = '/tmp/' + str(uuid.uuid4())
 
             _ = subprocess.Popen(['inkscape', "-b white", "-f", tmp_infile.name, "-e", tmp_outfile], shell=False,
-                 stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
+                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
 
             ret_file = open(tmp_outfile, 'rb')
             output = ret_file.read()
@@ -103,7 +103,7 @@ def export_data(request):
             tmp_outfile = '/tmp/' + str(uuid.uuid4())
 
             _ = subprocess.Popen(['inkscape', "-b white", "-f", tmp_infile.name, "-e", tmp_outfile], shell=False,
-                 stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
+                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
 
             png = Image.open(tmp_outfile)
             tmp_jpeg = tempfile.NamedTemporaryFile()
@@ -128,7 +128,7 @@ def export_data(request):
             tmp_outfile = '/tmp/' + str(uuid.uuid4())
 
             _ = subprocess.Popen(['inkscape', "-f", tmp_infile.name, "-l", tmp_outfile], shell=False,
-                 stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
+                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
 
             ret_file = open(tmp_outfile, 'rb')
             output = ret_file.read()

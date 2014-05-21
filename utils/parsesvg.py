@@ -2,7 +2,7 @@ from lxml import etree
 import math
 
 
-def parse_svg(svgtree):
+def parse_svg(svgtree, layout):
     root = svgtree.getroot()
 
     ns = root.nsmap
@@ -46,11 +46,18 @@ def parse_svg(svgtree):
 
     text_padding = int(math.floor((text_padding_right / 2 + text_padding_left / 2)))
     margins = (margin_left, margin_right, margin_top, margin_bottom)
-    width = margins[1] - margins[0] + padding + text_padding
+    if layout == 'vertical':
+        width = margins[1] - margins[0] + padding + text_padding * 2
+    else:
+        width = margins[1] - margins[0] + padding + text_padding * 8
     height = margins[3] - margins[2] + padding
     root.attrib['width'] = str(width)
     root.attrib['height'] = str(height)
     del root.attrib['style']
-    trans.attrib['transform'] = 'translate(0,50) scale(1)'
+    if layout == 'vertical':
+        trans.attrib['transform'] = 'translate(50,50) scale(1)'
+    else:
+        transx = 50 + text_padding * 5
+        trans.attrib['transform'] = 'translate(' + str(transx) + ',50) scale(1)'
 
     return etree.tostring(root, pretty_print=True)

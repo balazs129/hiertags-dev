@@ -401,8 +401,13 @@ var generate_tree = function (treeData) {
             var svg_xml = (new XMLSerializer()).serializeToString(svg_window);
 
             var form = document.getElementById("svgform");
-            form['output_format'].value = output_format;
-            form['data'].value = svg_xml;
+            form.output_format.value = output_format;
+            form.data.value = svg_xml;
+            if (globalData.verticalLayout){
+                form.layout.value = "vertical";
+            } else {
+                form.layout.value = "horizontal";
+            }
             form.submit();
             callback();
         }
