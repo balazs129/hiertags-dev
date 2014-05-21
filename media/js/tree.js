@@ -226,8 +226,8 @@ var generate_tree = function (treeData) {
         update(root);
         centerNode(root);
 
-        var t_data = $("<p>").textContent = "Number of nodes: " + globalData.nodes[globalData.graphIndex] +
-            "   Depth of graph: " + globalData.graphDepths[globalData.graphIndex] + "/";
+        var node_data = $("<p>").textContent = "Nodes: " + globalData.nodes[globalData.graphIndex]
+        var depth_data = $("<p>").textContent = "Depth of graph: " + globalData.graphDepths[globalData.graphIndex] + "/";
         var g_data = $("<p>").textContent = "Graph: " + (globalData.graphIndex + 1) +
             "/" + globalData.numberOfComponents;
 
@@ -240,10 +240,13 @@ var generate_tree = function (treeData) {
             .append('<input id="flipLayout" type="button" value="Flip Layout" title="Change between horizontal and vertical tree layout">')
             .append('<input id="changeGraphUp" type="button" value="Next" title="Select the next graph">')
             .append('<input id="changeGraphDown" type="button" value="Previous" title="Select the previous graph">')
-            .append(g_data);
+            .append(g_data)
+            .append("<br>")
+            .append(node_data);
+
         if (globalData.numberOfComponents > 1) {
             $('#rightbar2')
-                .append(t_data)
+                .append(depth_data)
                 .tooltip()
                 .append('<input id="depthExp" type="spinner" value="1" title="Set how deep the graph should be expanded">')
                 .append('<input id="expandSpin" type="button" value="Expand" title="Expand the graph to the selected depth">')
@@ -251,7 +254,7 @@ var generate_tree = function (treeData) {
 
         } else {
             $('#rightbar2')
-                .append(t_data)
+                .append(depth_data)
                 .append('<input id="depthExp" type="spinner" value="1" title="Set how deep the graph should be expanded">')
                 .append('<input id="expandSpin" type="button" value="Expand" title="Expand the graph to the selected depth">')
                 .append('<input id="exportGraph" type="button" value="Save as...">');
@@ -663,14 +666,17 @@ var generate_tree = function (treeData) {
                     })
                     .attr("y", function (d) {
                         if (d === treeData[0]) {
-                            return -12;
+                            return -14;
                         } else {
-                            return 12;
+                            return 14;
                         }
                     })
                     .attr("dy", ".35em")
                     .attr("text-anchor", "middle")
+                    .style("fill", "#E65C00")
+                    .style("stroke", "#E65C00")
                     .style("fill-opacity", 1);
+
             } else {
                 nodeUpdate.select("text")
                     .attr("y", 0)
@@ -714,7 +720,7 @@ var generate_tree = function (treeData) {
                     if (d.hasOwnProperty('added')) {
                         return "#88F";
                     } else {
-                        return "#222";
+                        return "#444";
                     }
                 })
                 .attr("stroke-dasharray", function (d){
