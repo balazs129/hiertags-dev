@@ -42,3 +42,79 @@ a {
     vertical-align: middle;
     white-space: nowrap;
 }
+
+.lefttube2 {
+    padding-bottom: 10px;
+}
+
+.innertube3 {
+    padding-bottom: 10px;
+}
+
+#visualization {
+    display: inline-block;
+    width: 800px;
+    height: 480px;
+    margin-left: 250px;
+    margin-right: auto;
+}
+
+#rightbar {
+    display: inline-block;
+    position: absolute;
+    margin-left: 10px;
+    width: 100px;
+    height: auto;
+}
+
+#rightbar2 {
+    width: 800px;
+    margin-right: auto;
+    margin-left: 250px;
+    display: block;
+}
+
+#rightbar2 p {
+    padding-left: 10px;
+}
+
+
+#shrinkTree,
+#expandTree,
+#centerRoot,
+#toggleLabels,
+#flipLayout {
+    width: 100px;
+    margin-top: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+#changeGraphUp {
+    width: 100px;
+    margin-top: 200px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+#changeGraphDown {
+    width: 100px;
+    margin-top: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-bottom: 10px;
+}
+
+#saveAction {
+    float: right;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    width: 100px;
+}
+
+#exportGraph {
+    width: 100px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-left: 150px;
+}

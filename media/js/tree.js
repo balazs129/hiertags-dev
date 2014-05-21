@@ -119,7 +119,7 @@ var convert_data = function (data) {
 var generate_tree = function (treeData) {
         "use strict";
 
-        var width = 700;
+        var width = $("#visualization").width();
         var height = 480;
 
         var i = 0,
@@ -226,34 +226,36 @@ var generate_tree = function (treeData) {
         update(root);
         centerNode(root);
 
-        var t_data = $('<p>').textContent = "    Number of nodes: " + globalData.nodes[globalData.graphIndex] +
-            "   Depth of graph: " + globalData.graphDepths[globalData.graphIndex];
+        var t_data = $("<p>").textContent = "Number of nodes: " + globalData.nodes[globalData.graphIndex] +
+            "   Depth of graph: " + globalData.graphDepths[globalData.graphIndex] + "/";
 
-        var g_data = $("<p>").textContent = " Graph: " + (globalData.graphIndex + 1) +
+        var g_data = $("<p>").textContent = "Graph: " + (globalData.graphIndex + 1) +
             "/" + globalData.numberOfComponents;
 
         $('#rightbar')
             .tooltip()
-            .append('<input id="expandtree" type="button" value="Expand tree" title="Increase the space between nodes">')
-            .append('<input id="shrinktree" type="button" value="Shrink tree" title="Decrease the space between nodes">')
-            .append('<input id="center" type="button" value="Center root" title="Reset view to the root element">')
+            .append('<input id="expandTree" type="button" value="Expand tree" title="Increase the space between nodes">')
+            .append('<input id="shrinkTree" type="button" value="Shrink tree" title="Decrease the space between nodes">')
+            .append('<input id="centerRoot" type="button" value="Center root" title="Reset view to the root element">')
             .append('<input id="toggleLabels" type="button" value="Toggle Labels" title="Show/hide node labels">')
-            .append('<input id="toggleLayout" type="button" value="Flip Layout" title="Change between horizontal and vertical tree layout">')
-            .append('<input id="exportPDF" type="button" value="Save as...">');
+            .append('<input id="flipLayout" type="button" value="Flip Layout" title="Change between horizontal and vertical tree layout">')
+            .append('<input id="changeGraphUp" type="button" value="Next" title="Select the next graph">')
+            .append('<input id="changeGraphDown" type="button" value="Previous" title="Select the previous graph">')
+            .append(g_data);
         if (globalData.numberOfComponents > 1) {
             $('#rightbar2')
                 .append(t_data)
                 .tooltip()
                 .append('<input id="depthExp" type="spinner" value="1" title="Set how deep the graph should be expanded">')
                 .append('<input id="expandSpin" type="button" value="Expand" title="Expand the graph to the selected depth">')
-                .append('<input id="changeGraphDown" type="button" value="Previous" title="Select the previous graph">')
-                .append('<input id="changeGraphUp" type="button" value="Next" title="Select the next graph">')
-                .append(g_data);
+                .append('<input id="exportGraph" type="button" value="Save as...">');
+
         } else {
             $('#rightbar2')
                 .append(t_data)
                 .append('<input id="depthExp" type="spinner" value="1" title="Set how deep the graph should be expanded">')
-                .append('<input id="expandSpin" type="button" value="Expand" title="Expand the graph to the selected depth">');
+                .append('<input id="expandSpin" type="button" value="Expand" title="Expand the graph to the selected depth">')
+                .append('<input id="exportGraph" type="button" value="Save as...">');
         }
 
         $("#rightbar").tooltip({show: {delay: 1000}});
@@ -336,7 +338,7 @@ var generate_tree = function (treeData) {
             }
         }
 
-        d3.select("#expandtree").on("click", exClick);
+        d3.select("#expandTree").on("click", exClick);
         function exClick() {
             if (globalData.verticalLayout) {
                 globalData.treeWidth += 250;
@@ -346,7 +348,7 @@ var generate_tree = function (treeData) {
             update(root);
         }
 
-        d3.select("#shrinktree").on("click", shClick);
+        d3.select("#shrinkTree").on("click", shClick);
         function shClick() {
             if (globalData.verticalLayout) {
                 if (globalData.treeWidth > 400) {
@@ -367,7 +369,7 @@ var generate_tree = function (treeData) {
             }
         }
 
-        d3.select("#center").on("click", crClick);
+        d3.select("#centerRoot").on("click", crClick);
         function crClick() {
             zoomListener.scale(1).translate([0, 0]);
             centerNode(root);
@@ -388,7 +390,7 @@ var generate_tree = function (treeData) {
             centerNode(root);
         }
 
-        d3.select("#toggleLayout").on("click", toClick);
+        d3.select("#flipLayout").on("click", toClick);
         function toClick() {
             globalData.verticalLayout = !globalData.verticalLayout;
             globalData.toggled = true;
@@ -412,7 +414,7 @@ var generate_tree = function (treeData) {
             callback();
         }
 
-        d3.select("#exportPDF").on("click", epdfClick);
+        d3.select("#exportGraph").on("click", epdfClick);
         function epdfClick() {
             var valid_ext = "PDF,PNG,JPG,SVG";
             var to_show = valid_ext.split(',');
@@ -421,17 +423,17 @@ var generate_tree = function (treeData) {
                 $("<option />", {value: val, text: to_show[val]}).appendTo(select_format);
             }
 
-            $("#rightbar").append(select_format);
-            $("#exportPDF").attr("disabled", true);
+            $("#rightbar2").append(select_format);
+            $("#exportGraph").attr("disabled", true);
             var save_button = $("<input id=\"saveAction\" type=\"button\" value=\"Save!\" title=\"Save in the selected format\">");
-            $("#rightbar").append(save_button);
+            $("#rightbar2").append(save_button);
             d3.select("#saveAction").on("click", saveActionButton);
             function saveActionButton() {
                 var selected_format = to_show[$("#extSelector").val()].toLowerCase();
                 submit_download_form(selected_format, function () {
                     $("#saveAction").remove();
                     $("#extSelector").remove();
-                    $("#exportPDF").attr("disabled", false);
+                    $("#exportGraph").attr("disabled", false);
                 });
 
             }
@@ -680,7 +682,7 @@ var generate_tree = function (treeData) {
                     .attr("text-anchor", function (d) {
                         return d.children || d._children ? "end" : "start";
                     })
-                    .style("fill-opacity", 1);
+                    .style("fill-opacity", 1)
             }
 
 

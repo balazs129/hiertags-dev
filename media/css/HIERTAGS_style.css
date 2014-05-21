@@ -241,8 +241,3 @@ a {
 .overlay {
     background-color: #ffffff;
 }
-
-svg#visualization{
-    width: 700px;
-    height: 480px;
-}
