@@ -632,7 +632,7 @@ var generate_tree = function (treeData) {
                             return '';
                         }
                     })
-                    .style("font-size", "10px")
+                    .style("font-size", "12px")
                     .style("font-family", "sans-serif")
                     .style("fill-opacity", 1e-6);
             }
@@ -652,7 +652,7 @@ var generate_tree = function (treeData) {
             nodeUpdate.select("circle")
                 .attr("r", 6)
                 .style("fill", function (d) {
-                    return d._children ? "lightsteelblue" : "#fff";
+                    return d._children ? "#09f" : "#fff";
                 });
 
             if (globalData.verticalLayout) {
@@ -673,8 +673,8 @@ var generate_tree = function (treeData) {
                     })
                     .attr("dy", ".35em")
                     .attr("text-anchor", "middle")
-                    .style("fill", "#E65C00")
-                    .style("stroke", "#E65C00")
+                    .style("fill", "#353524")
+//                    .style("stroke", "#AAA")
                     .style("fill-opacity", 1);
 
             } else {
@@ -720,7 +720,7 @@ var generate_tree = function (treeData) {
                     if (d.hasOwnProperty('added')) {
                         return "#88F";
                     } else {
-                        return "#444";
+                        return "#999";
                     }
                 })
                 .attr("stroke-dasharray", function (d){
