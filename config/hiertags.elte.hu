@@ -11,7 +11,6 @@
 
     WSGIDaemonProcess hiertags processes=2 threads=15
     WSGIProcessGroup hiertags
-    WSGIPythonPath /home/hiertags/hiertags-dev:/home/hiertags/venv/lib/python2.7/site-packages
 
     WSGIScriptAlias / /home/hiertags/hiertags-dev/hiertags/wsgi.py
 </VirtualHost>

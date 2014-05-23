@@ -4,10 +4,7 @@
 #
 # pip install -r requirements.txt
 
-cairosvg
 django
 lxml
-dateutils
-requests
 networkx
 pillow

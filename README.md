@@ -22,7 +22,7 @@ Now install apache and other packages. We need the worker version from apache([r
 Next, we need some packages to the image processing. We will use ([Inkscape](http://www.inkscape.org/en/)) to convert
 the generated SVG to other formats.
 ```bash
-    sudo apt-get install python-virtualenv libjpeg-dev inkscape
+    sudo apt-get install python-virtualenv libjpeg-dev git inkscape
 ```
 And last, install the packages needed to build lxml.
 ```bash
@@ -60,8 +60,9 @@ Finally login to the newly created user account.
 ###3. Set up the site
 Virtualenv allow us to separate python applications. Django will use its own environment.
 #####Create the virtual environment
+Newer virtualenv versions has the 'no-site-packages' option by default.
 ```bash
-    virtualenv --no-site-packages venv
+    virtualenv venv
 ```
 Activate it.
 ```bash
@@ -78,15 +79,16 @@ file in the project directory.
 ```
 
 #####Create database and static files
-We have to create now the database for the django app.
+We have to create now the database for the django app. There will be some questions regarding
+the superuser, just fill in the appropriate information.
 ```bash
     python hiertags-dev/manage.py syncdb
 ```
-Next, we load the saved data to the newly created database to have the pages.
+Next, we load the shipped data to the newly created database to have the pages.
 ```bash
    python hiertags-dev/manage.py loaddata hiertags-dev/config/hiertags_data.json
 ```
-And finally, we copy the static files to the /static dir for Apache to serve.
+And finally, we copy the static files(css, js) to the /static dir for Apache to serve.
 ```bash
     python hiertags-dev/manage.py collectstatic
 ```
@@ -96,6 +98,10 @@ The final task is to configure Apache properly. First, we copy the included virt
 to the appropriate directory.
 ```bash
     sudo cp hiertags-dev/config/hiertags.elte.hu /etc/apache2/sites-available/
+```
+Copy the included config file to the 'conf.d' dir of apache2:
+```bash
+    sudo cp hiertags-dev/config/wsgiconf /etc/apache2/conf.d/
 ```
 Next, we disable the default site, and enable hiertags.
 ```bash
