@@ -14,14 +14,19 @@ Next, we install the packages needed to build other packages.
 ```bash
     sudo apt-get install build-essential python-dev
 ```
-Now install apache and other needed software. We need the worker version from apache([reason](http://blog.dscpl.com.au/2012/10/why-are-you-using-embedded-mode-of.html)).
+Now install apache and other packages. We need the worker version from apache([reason]
+(http://blog.dscpl.com.au/2012/10/why-are-you-using-embedded-mode-of.html)).
 ```bash
     sudo apt-get install git sqlite3 apache2-mpm-worker libapache2-mod-wsgi
-    sudo apt-get install python-virtualenv libffi-dev libjpeg-dev python-cairo
+```
+Next, we need some packages to the image processing. We will use ([Inkscape](http://www.inkscape.org/en/)) to convert
+the generated SVG to other formats.
+```bash
+    sudo apt-get install python-virtualenv libjpeg-dev inkscape
 ```
 And last, install the packages needed to build lxml.
 ```bash
-    sudo apt-get install libxml2 libxml2-dev libxslt1.1 libxslt1-dev
+    sudo apt-get install libxml2 libxml2-dev libxslt1-dev
 ```
 
 ###2. Create the environment
