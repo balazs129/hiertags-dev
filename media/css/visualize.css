@@ -110,17 +110,26 @@ a {
     margin-bottom: 10px;
 }
 
-#saveAction {
-    float: right;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    width: 100px;
-}
-
 #exportGraph {
     width: 100px;
     padding-top: 2px;
     padding-bottom: 2px;
     margin-left: 250px;
 }
+
+#extSelector {
+    margin-top: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    width: 80px;
+    text-align: center;
+}
+
+#saveAction {
+    margin-left: 50px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    width: 100px;
+}
+
 

@@ -879,19 +879,19 @@ $(function () {
             }
         }
     });
+
     var docWidth = String(parseInt($(window).width() * 0.7));
     var freeHeight = $(window).height() - 370;
     if (freeHeight < 480 ) {
-         $("#visualization").height("480");
+         $("#visualization").height("480").width(docWidth);
          $("#rightbar").height("480");
     } else {
-         $("#visualization").height(String(freeHeight));
+         $("#visualization").height(String(freeHeight)).width(docWidth);
          $("#rightbar").height(String(freeHeight));
     }
     var docHeight = String($(window).height() - 370);
     console.log(docHeight);
 
-    $("#visualization").width(docWidth);
 
     initialize_uploader();
 });
