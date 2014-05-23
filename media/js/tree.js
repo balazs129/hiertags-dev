@@ -10,7 +10,7 @@ var globalData = {
     numberOfComponents: 0,
     graphIndex: 0,
     graphDepths: [],
-    extraEdges: [],
+    extraEdges: []
 };
 
 var initialize_uploader = function () {
@@ -674,7 +674,6 @@ var generate_tree = function (treeData) {
                     .attr("dy", ".35em")
                     .attr("text-anchor", "middle")
                     .style("fill", "#353524")
-//                    .style("stroke", "#AAA")
                     .style("fill-opacity", 1);
 
             } else {

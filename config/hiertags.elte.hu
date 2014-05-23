@@ -1,5 +1,5 @@
 <VirtualHost *:80>
-    ServerName hiertags-dev.elte.hu
+    ServerName hiertags.elte.hu
     DocumentRoot /home/hiertags/hiertags-dev/
     ServerAdmin admin@example.com
 
@@ -9,8 +9,9 @@
         Allow from all
     </Directory>
 
-    WSGIDaemonProcess hiertags user=hiertags group=hiertags processes=2 threads=5 python-path=/home/hiertags/hiertags-dev:/home/hiertags/venv/lib/python2.7/site-packages
+    WSGIDaemonProcess hiertags processes=2 threads=15
     WSGIProcessGroup hiertags
+    WSGIPythonPath /home/hiertags/hiertags-dev:/home/hiertags/venv/lib/python2.7/site-packages
 
     WSGIScriptAlias / /home/hiertags/hiertags-dev/hiertags/wsgi.py
 </VirtualHost>
