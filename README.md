@@ -19,8 +19,8 @@ Now install apache and other packages. We need the worker version from apache([r
 ```bash
     sudo apt-get install git sqlite3 apache2-mpm-worker libapache2-mod-wsgi
 ```
-Next, we need some packages to the image processing. We will use ([Inkscape](http://www.inkscape.org/en/)) to convert
-the generated SVG to other formats.
+Next, we need some packages to the image processing. We will use [Inkscape](http://www.inkscape.org/en/)
+to convert the generated SVG to other formats.
 ```bash
     sudo apt-get install python-virtualenv libjpeg-dev git inkscape
 ```
@@ -115,4 +115,4 @@ to download instead of open in browser and mod_cache for cacheing.
     sudo a2enmod mem_cache
     sudo service apache2 restart
 ```
-The site now must be functional.
+The site have to be functional now.

@@ -58,8 +58,8 @@ a {
 
 #visualization {
     display: inline-block;
-    width: 70%;
-    height: 480px;
+    /*width: 70%;*/
+    /*height: 480px;*/
     margin-left: auto;
     margin-right: auto;
 }
@@ -69,7 +69,7 @@ a {
     position: absolute;
     margin-left: 10px;
     width: 100px;
-    height: auto;
+    /*height: auto;*/
 }
 
 #rightbar2 {

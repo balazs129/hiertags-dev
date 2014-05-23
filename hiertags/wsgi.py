@@ -27,10 +27,6 @@ sys.path.append('/home/hiertags/hiertags-dev')
 # Setting up the django settings file
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hiertags.settings")
 
-# Activate your virtual env
-# activate_this = '/home/hiertags/venv/bin/activate_this.py'
-# execfile(activate_this, dict(__file__=activate_this))
-
 import django.core.handlers.wsgi
 
 application = django.core.handlers.wsgi.WSGIHandler()
