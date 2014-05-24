@@ -119,8 +119,9 @@ var convert_data = function (data) {
 var generate_tree = function (treeData) {
         "use strict";
 
-        var width = $("#visualization").width();
-        var height = 480;
+        var visWindow = $("#visualization");
+        var width = visWindow.width();
+        var height = visWindow.height();
 
         var i = 0,
             duration = 750,
