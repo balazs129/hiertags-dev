@@ -9,7 +9,14 @@
         Allow from all
     </Directory>
 
-    WSGIDaemonProcess hiertags processes=2 threads=15
+    #Logging
+    # Logging configuration
+    LogFormat "%{X-Forwarded-For}i %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+    CustomLog /home/hiertags/hiertags-dev/logs/access.log combined
+    ErrorLog /home/hiertags/hiertags-dev/error.log
+
+    # WSGI Settings
+    WSGIDaemonProcess hiertags processes=5 threads=1
     WSGIProcessGroup hiertags
 
     WSGIScriptAlias / /home/hiertags/hiertags-dev/hiertags/wsgi.py
