@@ -48,61 +48,68 @@ search the line '# User privilege specification', and add another line to look l
     root    ALL=(ALL:ALL) ALL
     hiertags    ALL=(ALL:ALL) ALL
 ```
-add the user to the www-group, so apache can serve from the user home directory.
-```bash
-    sudo usermod -G www-data -a hiertags
-```
+`CTRL+O` to write out the changes and finally `CTRL+X` to exit.
 Finally login to the newly created user account.
 ```bash
     su - hiertags
 ```
 
 ###3. Set up the site
-Virtualenv allow us to separate python applications. Django will use its own environment.
-#####Create the virtual environment
-Newer virtualenv versions has the 'no-site-packages' option by default.
-```bash
-    virtualenv venv
-```
-Activate it.
-```bash
-    source venv/bin/activate
-```
+Virtualenv allows us to separate python applications. This site will use its own environment.
 
-#####Clone the repository and install python requirements
-Next, we clone the repository to our working machine, and install the required python packages
-in the virtual environment. Pip can automatically install packages using the 'requirements.txt'
-file in the project directory.
+#####Clone the repository and install the virtual environment
+Firts, we clone the repository to our working machine.
 ```bash
     git clone https://github.com/balazs129/hiertags-dev.git
-    pip install -r hiertags-dev/requirements.txt
+```
+Now, we install the virtualenv in the project dir.
+```bash
+    cd hiertags-dev
+    virtualenv .
+```
+Then, we activate the virtual environment and install the required python packages
+in it. Pip can automatically install packages using the 'requirements.txt'
+file in the project directory.
+```bash
+    source bin/activate
+    pip install -r requirements.txt
 ```
 
 #####Create database and static files
 We have to create now the database for the django app. There will be some questions regarding
 the superuser, just fill in the appropriate information.
 ```bash
-    python hiertags-dev/manage.py syncdb
+    python manage.py syncdb
 ```
-Next, we load the shipped data to the newly created database to have the pages.
+With the provided information you can log in to the app admin interface once the site is running by
+writing 'admin' after the domain name for example: `http://hiertags-dev.elte.hu/admin`. There you can
+set user privileges and can edit or add/remove flatpages of the site(flatpages storing the html content
+of static pages). With the database creation the shipped data(conf/initial_data.json) is automatically
+added to the database(these are the flatpage contents).
+Next, copy the static files(css, js) to the /static dir for Apache to serve.
 ```bash
-   python hiertags-dev/manage.py loaddata hiertags-dev/config/hiertags_data.json
+    python manage.py collectstatic
 ```
-And finally, we copy the static files(css, js) to the /static dir for Apache to serve.
+Type 'yes' to copy the files.
+Now, we need to set the whole project dir owner to apache or we can not use the admin site(apache will not
+be able to read/write the database):
 ```bash
-    python hiertags-dev/manage.py collectstatic
+    cd ..
+    sudo chown -R www-data:www-data hiertags-dev/
+```
+And finally, change back to the project dir.
+```
+    cd hiertags-dev
 ```
 
 #####Configure Apache
 The final task is to configure Apache properly. First, we copy the included virtual host file
 to the appropriate directory.
 ```bash
-    sudo cp hiertags-dev/config/hiertags.elte.hu /etc/apache2/sites-available/
+    sudo cp conf/hiertags.elte.hu /etc/apache2/sites-available/
 ```
-Copy the included config file to the 'conf.d' dir of apache2:
-```bash
-    sudo cp hiertags-dev/config/wsgiconf /etc/apache2/conf.d/
-```
+You should check now the file content(see [Configuration Files](https://github.com/balazs129/hiertags-dev/wiki/Config))
+and edit the paths if you are not following the default installation.
 Next, we disable the default site, and enable hiertags.
 ```bash
     sudo a2dissite default
@@ -115,4 +122,5 @@ to download instead of open in browser and mod_cache for cacheing.
     sudo a2enmod mem_cache
     sudo service apache2 restart
 ```
-The site have to be functional now.
+The site has to be functional now. If you have problems logging in to the admin site it usually means Apache
+can not read/write the database file which means permission problems present.

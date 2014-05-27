@@ -65,7 +65,11 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, '../templates'),
 )
-
+# List of directories searched for fixture files, in addition to the fixtures
+# directory of each application, in search order.
+FIXTURE_DIRS = (
+    os.path.join(BASE_DIR, '../conf'),
+)
 # =============
 # = Databases =
 # =============
@@ -73,7 +77,7 @@ TEMPLATE_DIRS = (
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, '../database.sqlite3')
+        'NAME': 'home/hiertags/database.sqlite3'
     }
 }
 

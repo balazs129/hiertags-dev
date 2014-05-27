@@ -13,10 +13,10 @@
     # Logging configuration
     LogFormat "%{X-Forwarded-For}i %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
     CustomLog /home/hiertags/hiertags-dev/logs/access.log combined
-    ErrorLog /home/hiertags/hiertags-dev/error.log
+    ErrorLog /home/hiertags/hiertags-dev/logs/error.log
 
     # WSGI Settings
-    WSGIDaemonProcess hiertags processes=5 threads=1
+    WSGIDaemonProcess hiertags processes=5 threads=1 python-path=/home/hiertags/hiertags-dev:/home/hiertags/hiertags-dev/lib/python2.7/site-packages
     WSGIProcessGroup hiertags
 
     WSGIScriptAlias / /home/hiertags/hiertags-dev/hiertags/wsgi.py
