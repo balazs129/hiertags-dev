@@ -82,7 +82,7 @@ the superuser, just fill in the appropriate information.
     python manage.py syncdb
 ```
 With the provided information you can log in to the app admin interface once the site is running by
-writing 'admin' after the domain name for example: `http://hiertags-dev.elte.hu/admin`. There you can
+writing 'admin' after the domain name(for example: `http://hiertags-dev.elte.hu/admin`). There you can
 set user privileges and can edit or add/remove flatpages of the site(flatpages storing the html content
 of static pages). With the database creation the shipped data(conf/initial_data.json) is automatically
 added to the database(these are the flatpage contents).
