@@ -19,7 +19,7 @@ import sys
 import site
 
 # Add the site-packages of the chosen virtualenv to work with
-site.addsitedir('/home/hiertags/venv/lib/python2.7/site-packages')
+site.addsitedir('/home/hiertags/hiertags-dev/lib/python2.7/site-packages')
 
 # Adding the project to the system path
 sys.path.append('/home/hiertags/hiertags-dev')

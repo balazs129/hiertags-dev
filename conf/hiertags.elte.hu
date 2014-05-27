@@ -9,7 +9,6 @@
         Allow from all
     </Directory>
 
-    #Logging
     # Logging configuration
     LogFormat "%{X-Forwarded-For}i %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
     CustomLog /home/hiertags/hiertags-dev/logs/access.log combined
