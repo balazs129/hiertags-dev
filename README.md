@@ -48,7 +48,7 @@ search the line '# User privilege specification', and add another line to look l
     root    ALL=(ALL:ALL) ALL
     hiertags    ALL=(ALL:ALL) ALL
 ```
-`CTRL+O` to write out the changes and finally `CTRL+X` to exit.
+`CTRL+o` to write out the changes and finally `CTRL+x` to exit.
 Finally login to the newly created user account.
 ```bash
     su - hiertags
