@@ -142,7 +142,7 @@ var generate_tree = function (treeData) {
                 }
             });
 
-        var zoomListener = d3.behavior.zoom().scaleExtent([0.5, 2]).on("zoom", zoom);
+        var zoomListener = d3.behavior.zoom().scaleExtent([0.2, 2]).on("zoom", zoom);
 
         var svg = d3.select("svg#visualization")
             .attr("width", width)
@@ -720,7 +720,7 @@ var generate_tree = function (treeData) {
                     if (d.hasOwnProperty('added')) {
                         return "#88F";
                     } else {
-                        return "#999";
+                        return "#666";
                     }
                 })
                 .attr("stroke-dasharray", function (d){
