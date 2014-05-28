@@ -14,7 +14,7 @@ Next, we install the packages needed to build other packages.
 ```bash
     sudo apt-get install build-essential python-dev
 ```
-Now install apache and other packages. We need the worker version from apache([reason]
+Now install Apache and other packages. We need the worker version from Apache([reason]
 (http://blog.dscpl.com.au/2012/10/why-are-you-using-embedded-mode-of.html)).
 ```bash
     sudo apt-get install git sqlite3 apache2-mpm-worker libapache2-mod-wsgi
@@ -91,7 +91,7 @@ Next, copy the static files(css, js) to the /static dir for Apache to serve.
     python manage.py collectstatic
 ```
 Type 'yes' to copy the files.
-Now, we need to set the whole project dir owner to apache or we can not use the admin site(apache will not
+Now, we need to set the whole project dir owner to Apache or we can not use the admin site(apache will not
 be able to read/write the database):
 ```bash
     cd ..
@@ -123,4 +123,4 @@ to download instead of open in browser and mod_cache for cacheing.
     sudo service apache2 restart
 ```
 The site has to be functional now. If you have problems logging in to the admin site it usually means Apache
-can not read/write the database file which means permission problems present.
+can not read/write the database file which means permission problems are present.

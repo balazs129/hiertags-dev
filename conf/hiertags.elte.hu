@@ -1,6 +1,5 @@
 <VirtualHost *:80>
     ServerName hiertags.elte.hu
-    DocumentRoot /home/hiertags/hiertags-dev/
     ServerAdmin admin@example.com
 
     Alias /static/ /home/hiertags/hiertags-dev/static/

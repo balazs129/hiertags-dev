@@ -1,0 +1,3 @@
+<FilesMatch "\.(?i:txt|pl)$">
+  Header set Content-Disposition attachment
+</FilesMatch>

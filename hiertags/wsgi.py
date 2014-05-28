@@ -22,7 +22,9 @@ import site
 site.addsitedir('/home/hiertags/hiertags-dev/lib/python2.7/site-packages')
 
 # Adding the project to the system path
-sys.path.append('/home/hiertags/hiertags-dev')
+path = '/home/hiertags/hiertags-dev'
+if path not in sys.path:
+    sys.path.append(path)
 
 # Setting up the django settings file
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hiertags.settings")
@@ -30,4 +32,3 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hiertags.settings")
 import django.core.handlers.wsgi
 
 application = django.core.handlers.wsgi.WSGIHandler()
-
