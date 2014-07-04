@@ -118,6 +118,6 @@ ROOT_URLCONF = 'hiertags.urls'
 WSGI_APPLICATION = 'hiertags.wsgi.application'
 
 try:
-	from settings_dev import *
+    from settings_dev import *
 except ImportError, exp:
-	pass
+    pass
