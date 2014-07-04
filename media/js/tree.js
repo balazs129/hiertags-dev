@@ -452,16 +452,13 @@ jQuery(function ($) {
 
             function centerNode(source) {
                 var scale = zoomListener.scale();
+                var x,y = 0;
                 if (globalData.verticalLayout) {
-                    var x = -source.x0;
-                    var y = -source.y0;
-                    x = x * scale + width / 2;
-                    y = y * scale + height / 4;
+                    x = -source.x0 * scale + width / 2;
+                    y = -source.y0 * scale + height / 4;
                 } else {
-                    var x = -source.y0;
-                    var y = -source.x0;
-                    x = x * scale + 100;
-                    y = y * scale + height / 2;
+                    x = -source.y0 * scale + 100;
+                    y = -source.x0 * scale + height / 2;
                 }
                 d3.select('g').transition()
                     .duration(duration)
@@ -528,6 +525,7 @@ jQuery(function ($) {
                 var levelWidth = [1];
                 var level_label_width = [1];
                 var newHeight = height;
+                var newWidth;
 
                 var childCount = function (level, n) {
                     function get_numbers(d) {
@@ -562,7 +560,7 @@ jQuery(function ($) {
 
                 if (globalData.verticalLayout) {
                     newHeight = levelWidth.length * 100;
-                    var newWidth;
+
                     if (globalData.labelVisibility) {
                         var tmp_width = [];
                         for (var counter = 0; counter < levelWidth.length; counter += 1) {
@@ -851,7 +849,7 @@ jQuery(function ($) {
         var key;
         var size = 0;
         var tree = d3.layout.tree();
-        var nodes = tree.nodes(root).reverse();
+        tree.nodes(root).reverse();
 
         function log(d) {
             if (d.children) {
@@ -891,7 +889,7 @@ jQuery(function ($) {
         $("#visualization").height(String(freeHeight)).width(docWidth);
         $("#rightbar").height(String(freeHeight));
     }
-    var docHeight = String($(window).height() - 370);
+//    var docHeight = String($(window).height() - 370);
 
     initialize_uploader();
 });
