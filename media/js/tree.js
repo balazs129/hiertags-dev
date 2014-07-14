@@ -267,11 +267,11 @@ jQuery(function ($) {
                     this.textContent = this.textContent.replace(old_text, new_text);
                 });
 
-                var rb = $("#rightbar").contents().filter(function(){
-                    return this.nodeType !==1;
+                var rb = $("#rightbar").contents().filter(function () {
+                    return this.nodeType !== 1;
                 });
                 var new_g_text = "Graph: " + (globalData.graphIndex + 1) +
-            "/" + globalData.numberOfComponents;
+                    "/" + globalData.numberOfComponents;
                 var new_n_text = "Nodes: " + globalData.nodes[globalData.graphIndex];
 
                 rb.each(function () {
@@ -317,11 +317,11 @@ jQuery(function ($) {
                     this.textContent = this.textContent.replace(old_text, new_text);
                 });
 
-                 var rb = $("#rightbar").contents().filter(function(){
-                    return this.nodeType !==1;
+                var rb = $("#rightbar").contents().filter(function () {
+                    return this.nodeType !== 1;
                 });
                 var new_g_text = "Graph: " + (globalData.graphIndex + 1) +
-            "/" + globalData.numberOfComponents;
+                    "/" + globalData.numberOfComponents;
                 var new_n_text = "Nodes: " + globalData.nodes[globalData.graphIndex];
 
                 rb.each(function () {
@@ -958,7 +958,6 @@ jQuery(function ($) {
         $("#visualization").height(String(freeHeight)).width(docWidth);
         $("#rightbar").height(String(freeHeight));
     }
-//    var docHeight = String($(window).height() - 370);
 
     initialize_uploader();
 });
