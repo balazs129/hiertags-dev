@@ -1,7 +1,6 @@
 /*global $:false, jQuery:false */
 /*global d3:false */
 /*global _:false */
-/*global owl:false */
 
 $.noConflict();
 jQuery(function ($) {
@@ -18,7 +17,10 @@ jQuery(function ($) {
         numberOfComponents: 0,
         graphIndex: 0,
         graphDepths: [],
-        extraEdges: []
+        extraEdges: [],
+        get_graph: function(){
+            return this.graphData[this.graphIndex];
+        }
     };
 
     var initialize_uploader = function () {
@@ -237,8 +239,7 @@ jQuery(function ($) {
                     globalData.treeHorizontalRatio = 0;
                     globalData.labelVisibility = true;
 
-                    var graph_copy = owl.deepCopy(globalData.graphData[globalData.graphIndex]);
-                    generate_tree(graph_copy);
+                    generate_tree(globalData.get_graph());
                 }
             }
 
@@ -254,8 +255,7 @@ jQuery(function ($) {
                     globalData.treeHorizontalRatio = 0;
                     globalData.labelVisibility = true;
 
-                    var graph_copy = owl.deepCopy(globalData.graphData[globalData.graphIndex]);
-                    generate_tree(graph_copy);
+                    generate_tree(globalData.get_graph());
                 }
             }
 
