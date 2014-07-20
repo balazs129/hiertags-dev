@@ -201,6 +201,7 @@ jQuery(function ($) {
             function initiateDrag(d, domNode) {
                 draggingNode = d;
                 d3.select(domNode).select('.ghostCircle').attr('pointer-events', 'none');
+                d3.select(domNode).select('.node').attr('pointer-events', 'none');
                 d3.selectAll('.ghostCircle').attr('class', 'ghostCircle show');
                 d3.select(domNode).attr('class', 'node activeDrag');
 
@@ -301,6 +302,7 @@ jQuery(function ($) {
                     centerNode(draggingNode);
                     draggingNode = null;
                 }
+                dragStarted = false;
             }
 
             var updateTempConnector = function () {
@@ -590,19 +592,42 @@ jQuery(function ($) {
                 centerNode(root);
             }
 
-            function submit_download_form(output_format, callback) {
-                var svg_window = document.getElementById("visualization");
-                var svg_xml = (new XMLSerializer()).serializeToString(svg_window);
+            function edgelist(root) {
+                var result = [];
 
+                function log(d) {
+                    if (d.children) {
+                        result.push({name: d.name, parent: d.parent.name});
+                        d.children.forEach(log);
+                    } else if (d._children){
+                        result.push({name: d.name, parent: d.parent.name});
+                        d._children.forEach(log);
+                    } else {
+                        result.push({name: d.name, parent: d.parent.name});
+                    }
+
+                }
+                root.children.forEach(log);
+                console.log(result.length);
+            }
+
+            function submit_download_form(output_format, callback) {
                 var form = document.getElementById("svgform");
                 form.output_format.value = output_format;
-                form.data.value = svg_xml;
                 if (globalData.verticalLayout) {
                     form.layout.value = "vertical";
                 } else {
                     form.layout.value = "horizontal";
                 }
-                form.submit();
+                if (output_format === 'txt') {
+                    form.data.value = edgelist(root);
+                } else {
+                    var svg_window = document.getElementById("visualization");
+
+                    form.data.value = (new XMLSerializer()).serializeToString(svg_window);
+                }
+//                form.submit();
+//                callback();
             }
 
             function epdfClick() {
@@ -623,13 +648,14 @@ jQuery(function ($) {
                     });
                 }
 
-                d3.select("#saveAction").on("click", saveActionButton);
 
                 var rb2 = $("#rightbar2");
                 rb2.append(select_format);
                 $("#exportGraph").attr("disabled", true);
                 var save_button = $("<input id=\"saveAction\" type=\"button\" value=\"Save!\" title=\"Save in the selected format\">");
                 rb2.append(save_button);
+
+                d3.select("#saveAction").on("click", saveActionButton);
             }
 
             function reordClick() {
@@ -659,19 +685,26 @@ jQuery(function ($) {
             }
 
             function magnify(d) {
-                var nodeSelection = d3.select(this);
-                nodeSelection.select("circle")
-                    .attr("r", function () {
-                        return 15;
-                    });
-                nodeSelection.select("text")
-                    .style({'font-size': '20px'})
-                    .attr("dy", function () {
-                        return "1em";
-                    })
-                    .text(function (d) {
-                        return d.name;
-                    });
+                if (!dragStarted) {
+                    var nodeSelection = d3.select(this);
+                    nodeSelection.select("circle")
+                        .attr("r", function () {
+                            return 15;
+                        });
+                    nodeSelection.select("text")
+                        .style({'font-size': '20px'})
+                        .attr("dy", function () {
+                            return "1em";
+                        })
+                        .text(function (d) {
+                            return d.name;
+                        });
+
+                    nodeSelection.select(".ghostCircle")
+                        .attr("r", function () {
+                            return 20;
+                        });
+                }
             }
 
             function reset_orig() {
@@ -690,6 +723,11 @@ jQuery(function ($) {
                         } else {
                             return '';
                         }
+                    });
+
+                nodeSelection.select(".ghostCircle")
+                    .attr("r", function () {
+                        return 6;
                     });
             }
 
@@ -919,8 +957,8 @@ jQuery(function ($) {
                 // Phantom node
                 nodeEnter.append("circle")
                     .attr("class", "ghostCircle")
-                    .attr("r", 20)
-                    .attr("opacity", 0.15)
+                    .attr("r", 30)
+                    .attr("opacity", 0)
                     .style("fill", "red")
                     .attr("pointer-events", "mouseover")
                     .on("mouseover", function (node) {

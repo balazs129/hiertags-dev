@@ -48,12 +48,19 @@ def visualize_data(request):
 def export_data(request):
     form = SerializedSvgForm(request.POST)
     if form.is_valid():
-        tmp_svg = form.cleaned_data['data'].encode('utf-8')
-        uniparser = etree.XMLParser(encoding='UTF-8')
-        svgxml = etree.parse(cStringIO.StringIO(tmp_svg), parser=uniparser)
-        tmp_svg_cleaned = parse_svg(svgxml, form.cleaned_data['layout'])
-
         choosen_type = form.cleaned_data['output_format']
+
+        if choosen_type == 'txt':
+            graph_json = form.cleaned_data['data'].encode('utf-8')
+            with open('testfile.json', 'w') as f:
+                json.dump(graph_json, f, indent=4, encoding='utf-8')
+
+        else:
+            tmp_svg = form.cleaned_data['data'].encode('utf-8')
+            uniparser = etree.XMLParser(encoding='UTF-8')
+            svgxml = etree.parse(cStringIO.StringIO(tmp_svg), parser=uniparser)
+            tmp_svg_cleaned = parse_svg(svgxml, form.cleaned_data['layout'])
+
 
         def export_pdf(cleaned_svg):
             tmp_infile = tempfile.NamedTemporaryFile()
@@ -140,10 +147,14 @@ def export_data(request):
 
             return to_response
 
+        def export_edgelist():
+            pass
+
         export_file = {'svg': export_svg,
                        'png': export_png,
                        'pdf': export_pdf,
-                       'jpg': export_jpg}
+                       'jpg': export_jpg,
+                       'txt': export_edgelist}
         response = export_file[choosen_type](tmp_svg_cleaned)
 
     return response
