@@ -88,7 +88,8 @@ a {
 #expandTree,
 #centerRoot,
 #toggleLabels,
-#flipLayout {
+#flipLayout,
+#reorderNodes {
     width: 100px;
     margin-top: 5px;
     padding-top: 2px;
@@ -132,4 +133,16 @@ a {
     width: 100px;
 }
 
+.templink {
+    fill: none;
+    stroke: red;
+    stroke-width: 3px;
+  }
 
+  .ghostCircle.show{
+      display:block;
+  }
+
+  .ghostCircle, .activeDrag .ghostCircle{
+       display: none;
+  }
