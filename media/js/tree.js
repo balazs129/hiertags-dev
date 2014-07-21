@@ -597,18 +597,24 @@ jQuery(function ($) {
 
                 function log(d) {
                     if (d.children) {
-                        result.push({name: d.name, parent: d.parent.name});
+                        result.push([d.parent.name, d.name]);
                         d.children.forEach(log);
-                    } else if (d._children){
-                        result.push({name: d.name, parent: d.parent.name});
+                    } else if (d._children) {
+                        result.push([d.parent.name, d.name]);
                         d._children.forEach(log);
                     } else {
-                        result.push({name: d.name, parent: d.parent.name});
+                        result.push([d.parent.name, d.name]);
                     }
 
                 }
+
                 root.children.forEach(log);
-                console.log(result.length);
+//                var ret_val = {}
+//                for (var elem = 0; elem < result.length; elem++) {
+//                    ret_val[elem] = result[elem];
+//                }
+
+                return JSON.stringify(result);
             }
 
             function submit_download_form(output_format, callback) {
@@ -626,8 +632,8 @@ jQuery(function ($) {
 
                     form.data.value = (new XMLSerializer()).serializeToString(svg_window);
                 }
-//                form.submit();
-//                callback();
+                form.submit();
+                callback();
             }
 
             function epdfClick() {

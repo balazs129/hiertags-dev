@@ -4,6 +4,7 @@ import subprocess
 import tempfile
 import uuid
 import os
+import networkx as nx
 
 from django.shortcuts import render
 from django.contrib.flatpages.models import FlatPage
@@ -51,10 +52,7 @@ def export_data(request):
         choosen_type = form.cleaned_data['output_format']
 
         if choosen_type == 'txt':
-            graph_json = form.cleaned_data['data'].encode('utf-8')
-            with open('testfile.json', 'w') as f:
-                json.dump(graph_json, f, indent=4, encoding='utf-8')
-
+            tmp_svg_cleaned = form.cleaned_data['data'].encode('utf-8')
         else:
             tmp_svg = form.cleaned_data['data'].encode('utf-8')
             uniparser = etree.XMLParser(encoding='UTF-8')
@@ -147,8 +145,19 @@ def export_data(request):
 
             return to_response
 
-        def export_edgelist():
-            pass
+        def export_edgelist(data):
+            out_file = cStringIO.StringIO()
+            for elem in data.replace("\\", "")[2:-2].split("],[")[1:-1]:
+                tmp_str = elem.split(",")
+                to_write = tmp_str[0][1:-1] + ' ' + tmp_str[1][1:-1] + '\n'
+                out_file.write(to_write)
+            out_file.seek(0)
+            output = out_file.read()
+            to_response = HttpResponse(output, content_type='text/plain')
+            to_response['Content-Disposition'] = 'attachment; filename="exported_graph.txt"'
+
+            return to_response
+
 
         export_file = {'svg': export_svg,
                        'png': export_png,
