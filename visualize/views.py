@@ -4,7 +4,6 @@ import subprocess
 import tempfile
 import uuid
 import os
-import networkx as nx
 
 from django.shortcuts import render
 from django.contrib.flatpages.models import FlatPage
