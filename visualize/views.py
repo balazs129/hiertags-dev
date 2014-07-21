@@ -52,6 +52,8 @@ def export_data(request):
 
         if choosen_type == 'txt':
             tmp_svg_cleaned = form.cleaned_data['data'].encode('utf-8')
+            with open("testfile.txt", 'w') as f:
+                f.write(tmp_svg_cleaned)
         else:
             tmp_svg = form.cleaned_data['data'].encode('utf-8')
             uniparser = etree.XMLParser(encoding='UTF-8')
@@ -146,10 +148,18 @@ def export_data(request):
 
         def export_edgelist(data):
             out_file = cStringIO.StringIO()
-            for elem in data.replace("\\", "")[2:-2].split("],[")[1:-1]:
-                tmp_str = elem.split(",")
-                to_write = tmp_str[0][1:-1] + ' ' + tmp_str[1][1:-1] + '\n'
+            for elem in data.split("],["):
+                if elem[0:2] == "[[":
+                    tmp = elem[2:]
+                elif elem[-2:] == "]]":
+                    tmp = elem[:-2]
+                else:
+                    tmp = elem
+
+                cleaned = tmp.split(",")
+                to_write = cleaned[0][1:-1] + ' ' + cleaned[1][1:-1] + '\n'
                 out_file.write(to_write)
+
             out_file.seek(0)
             output = out_file.read()
             to_response = HttpResponse(output, content_type='text/plain')
