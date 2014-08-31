@@ -16,8 +16,9 @@ from forms import GraphUploadForm, SerializedSvgForm
 from utils.filehandler import FileHandler
 from utils.flatten_data import gen_flat
 from utils.parsesvg import parse_svg
+from utils.exportgraph import ExportGraph
 
-
+#TODO: rewrite whole file
 def visualize(request, template_name='visualize.html'):
     form = GraphUploadForm(request.POST or None, request.FILES or None)
     try:
@@ -33,8 +34,8 @@ def visualize_data(request):
     to_send = []
     if form.is_valid():
         input_file = form.cleaned_data['graph']
-        fh = FileHandler(input_file=input_file)
-        fh.build_graph()
+        fh = FileHandler()
+        fh.build_graph(input_file)
         for elem in fh.graphs_to_send:
             if elem.number_of_nodes() > 1:
                 data = gen_flat(elem)
@@ -49,6 +50,8 @@ def export_data(request):
     form = SerializedSvgForm(request.POST)
     if form.is_valid():
         choosen_type = form.cleaned_data['output_format']
+
+        exporter = ExportGraph()
 
         if choosen_type == 'txt':
             tmp_svg_cleaned = form.cleaned_data['data'].encode('utf-8')
@@ -173,6 +176,7 @@ def export_data(request):
                        'pdf': export_pdf,
                        'jpg': export_jpg,
                        'txt': export_edgelist}
+
         response = export_file[choosen_type](tmp_svg_cleaned)
 
     return response

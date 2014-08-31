@@ -7,11 +7,14 @@ def read_xgmml(inputfile):
     htmlpar = HTMLParser.HTMLParser()
     xgmml = etree.parse(inputfile)
     root = xgmml.getroot()
+
     #getting namespaces
     ns = root.nsmap
+
     #changing default 'None' to 'XGMML' because XPath doesn't like None
     ns['XGMML'] = ns[None]
     ns.pop(None)
+
     #get the first registered graph
     allgraphs = root.xpath('//XGMML:graph', namespaces=ns)
 
@@ -33,6 +36,7 @@ def read_xgmml(inputfile):
                 graph = allgraphs[0]
     elif version == '1.1':
         graph = allgraphs[0]
+    #TODO unsupported version
 
     nodes = graph.xpath('XGMML:node', namespaces=ns)
     edges = graph.xpath('XGMML:edge', namespaces=ns)
@@ -63,4 +67,4 @@ def read_xgmml(inputfile):
 
 
     return tmp_graph
-# TODO: Return graph name
+#TODO: Return graph name
