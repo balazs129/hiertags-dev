@@ -6,11 +6,33 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
 from forms import GraphUploadForm, SerializedSvgForm
-from utils.filehandler import FileHandler
-from utils.flatten_data import gen_flat
-from utils.exportgraph import ExportGraph
+from classes.filehandler import FileHandler
+from classes.exportgraph import ExportGraph
 
-#TODO: rewrite whole file
+
+def gen_flat(graph):
+    data = []
+    idmap = {}
+    # If data dict empty label=id
+    for elem in graph.nodes_iter(data=True):
+        if len(elem[1]) == 0:
+            elem[1]['id'] = elem[0]
+            elem[1]['label'] = elem[0]
+            idmap[elem[1]['id']] = elem[1]['label']
+        else:
+            idmap[elem[1]['id']] = elem[1]['label']
+    for elem in graph.nodes():
+        tmp = {'name': idmap[elem]}
+        if len(graph.pred[elem].keys()) == 0:
+            parent = "null"
+        else:
+            t_parent = graph.pred[elem].keys()[0]
+            parent = idmap[t_parent]
+        tmp['parent'] = parent
+        data.append(tmp)
+    return data
+
+
 def visualize(request, template_name='visualize.html'):
     form = GraphUploadForm(request.POST or None, request.FILES or None)
     try:
@@ -28,6 +50,7 @@ def visualize_data(request):
         input_file = form.cleaned_data['graph']
         fh = FileHandler()
         fh.build_graph(input_file)
+
         for elem in fh.graphs_to_send:
             if elem.number_of_nodes() > 1:
                 data = gen_flat(elem)
