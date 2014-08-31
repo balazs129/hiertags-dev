@@ -11,7 +11,6 @@ from filter_DAG import parse_DAG
 
 class FileHandler(object):
     """ Class to handle graph files."""
-
     def __init__(self):
         self.graphs = []
         self.edges = []
