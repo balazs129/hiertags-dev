@@ -17,6 +17,8 @@ jQuery(function ($) {
             graphIndex: 0,
             graphDepths: [],
             extraEdges: [],
+            suggestions: [],
+            selected: "",
 
             get_graph: function () {
                 return this.graphData[this.graphIndex];
@@ -96,8 +98,15 @@ jQuery(function ($) {
                     globalData.graphData.push(convert_data(data.result.data[elem]));
                     globalData.graphDepths.push(get_depth(globalData.graphData[elem]));
                     globalData.nodes.push(data.result.data[elem].length);
+                    var names = [];
+                    data.result.data[elem].forEach(function (node) {
+                        names.push(node.name);
+                    });
+                    globalData.suggestions.push(names);
                 }
+
                 generate_tree(globalData.graphData[0]);
+
 
             })
                 .prop('disabled', !$.support.fileInput)
@@ -105,6 +114,8 @@ jQuery(function ($) {
         };
 
         var convert_data = function (data) {
+            //Function to convert the returned flat data to recursive tree structure
+
             var dataMap = data.reduce(function (map, node) {
                 map[node.name] = node;
                 return map;
@@ -452,7 +463,69 @@ jQuery(function ($) {
                             this.textContent = this.textContent.replace(rb[1].textContent, new_n_text);
                         }
                     });
+
+                    var options = { delimiter: /(,|;)\s*/,
+                        maxHeight: 100,
+                        width: 100,
+                        deferRequestBy: 0,
+                        lookup: globalData.suggestions[globalData.graphIndex],
+                        onSelect: function (name) {
+                            globalData.selected = name;
+                        }
+                    };
+                    $("#query").autocomplete(options);
+
                 }
+            }
+
+            function grClick() {
+                var searched = globalData.selected.value;
+                var path = [];
+                var found = null;
+
+                // Search among the opened nodes
+                var visitor = function (node) {
+                    if (node.children) {
+                        node.children.forEach(visitor);
+                    }
+                    if (node.name == searched) {
+                        found = node;
+                    }
+                };
+                root.children.forEach(visitor);
+
+                // If not found among the opened nodes, search in the hidden nodes
+                if (!found) {
+                    var h_visitor = function (node) {
+                        if (node.children) {
+                            node.children.forEach(h_visitor);
+                        }
+                        else if (node._children) {
+                            node._children.forEach(h_visitor);
+                        }
+                        if (node.name == searched) {
+                            found = node;
+                            var unpack = function(h_node){
+                                if (h_node.parent != "null" && h_node._children) {
+                                    path.push(h_node);
+                                    unpack(h_node.parent);
+                                }
+                            };
+                            unpack(node.parent);
+                        }
+                    };
+                    root.children.forEach(h_visitor);
+                }
+
+                if (found) {
+                    if (path.length > 0){
+                        path.reverse();
+                        path.forEach(toggleChildren);
+                        update(root);
+                    }
+                    centerNode(found);
+                }
+
             }
 
             function chdGraph() {
@@ -502,6 +575,17 @@ jQuery(function ($) {
                             this.textContent = this.textContent.replace(rb[1].textContent, new_n_text);
                         }
                     });
+
+                    var options = { delimiter: /(,|;)\s*/,
+                        maxHeight: 100,
+                        width: 100,
+                        deferRequestBy: 0,
+                        lookup: globalData.suggestions[globalData.graphIndex],
+                        onSelect: function (names) {
+                            globalData.selected = name;
+                        }
+                    };
+                    $("#query").autocomplete(options);
                 }
             }
 
@@ -609,11 +693,6 @@ jQuery(function ($) {
                 }
 
                 root.children.forEach(log);
-//                var ret_val = {}
-//                for (var elem = 0; elem < result.length; elem++) {
-//                    ret_val[elem] = result[elem];
-//                }
-
                 return JSON.stringify(result);
             }
 
@@ -664,9 +743,6 @@ jQuery(function ($) {
                 d3.select("#saveAction").on("click", saveActionButton);
             }
 
-            function reordClick() {
-
-            }
 
             /* Functions for the update function */
             function toggleChildren(d) {
@@ -754,6 +830,7 @@ jQuery(function ($) {
                 zoomListener.translate([x, y]);
             }
 
+            //Set up autocomplete
 
             var node_data = $("<p>").textContent = "Nodes: " + globalData.nodes[globalData.graphIndex];
             var depth_data = $("<p id='spintext'>").textContent = "Depth of graph: " + globalData.get_depth() + "/";
@@ -766,10 +843,13 @@ jQuery(function ($) {
                 .append('<input id="shrinkTree" type="button" value="Shrink tree" title="Decrease the space between nodes">')
                 .append('<input id="centerRoot" type="button" value="Center root" title="Reset view to the root element">')
                 .append('<input id="toggleLabels" type="button" value="Toggle Labels" title="Show/hide node labels">')
-                .append('<input id="flipLayout" type="button" value="Flip Layout" title="Change between horizontal and vertical tree layout">');
-            if (globalData.extraEdges.length > 0) {
-                $('#rightbar').append('<input id="reorderNodes" type="button" value="Reorder Nodes" title="Select the previous graph">');
-            }
+                .append('<input id="flipLayout" type="button" value="Flip Layout" title="Change between horizontal and vertical tree layout">')
+                .append('<input type="text" name="q" id="query" />')
+                .append('<input id="getResult" type="button" value="Get Result" title="Go to the searched tag">');
+
+            /*if (globalData.extraEdges.length > 0) {
+             $('#rightbar').append('<input id="reorderNodes" type="button" value="Reorder Nodes" title="Select the previous graph">');
+             }*/
             $('#rightbar').append('<input id="changeGraphUp" type="button" value="Next" title="Select the next graph">')
                 .append('<input id="changeGraphDown" type="button" value="Previous" title="Select the previous graph">')
                 .append(g_data)
@@ -792,6 +872,17 @@ jQuery(function ($) {
                     .append('<input id="exportGraph" type="button" value="Save as...">');
             }
 
+            var options = { delimiter: /(,|;)\s*/,
+                maxHeight: 100,
+                width: 100,
+                deferRequestBy: 0,
+                lookup: globalData.suggestions[globalData.graphIndex],
+                onSelect: function (node) {
+                    globalData.selected = node;
+                }
+            };
+            $("#query").autocomplete(options);
+
             $("#rightbar").tooltip({show: {delay: 1000}});
             $("#rightbar2").tooltip({show: {delay: 1000}});
 
@@ -809,7 +900,8 @@ jQuery(function ($) {
             d3.select("#toggleLabels").on("click", tlClick);
             d3.select("#flipLayout").on("click", toClick);
             d3.select("#exportGraph").on("click", epdfClick);
-            d3.select("#reorderNodes").on("click", reordClick);
+            //d3.select("#reorderNodes").on("click", reordClick);
+            d3.select("#getResult").on("click", grClick);
 
             function update(source) {
 
@@ -1192,5 +1284,4 @@ jQuery(function ($) {
 
         initialize_uploader();
     }
-)
-;
+);

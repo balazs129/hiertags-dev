@@ -12,11 +12,11 @@ from PIL import Image
 
 
 class ExportGraph(object):
-    def __init__(self, type, data, layout):
-        self._type = type
+    def __init__(self, export_type, data, layout):
+        self._type = export_type
         self._data = data
         self._layout = layout
-        if type != 'txt':
+        if export_type != 'txt':
             self._parser = etree.XMLParser(encoding='UTF-8')
             self._generate_xml()
 
@@ -58,6 +58,7 @@ class ExportGraph(object):
 
     def export_edgelist(self):
         out_file = cStringIO.StringIO()
+
         for elem in self._data.split("],["):
             if elem[0:2] == "[[":
                 tmp = elem[2:]
