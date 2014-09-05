@@ -68,12 +68,13 @@ class ExportGraph(object):
                 tmp = elem
 
             cleaned = tmp.split(",")
-            to_write = cleaned[0][1:-1] + ' ' + cleaned[1][1:-1] + '\n'
+            token_1 = cleaned[0][1:-1].replace(" ", "_")
+            token_2 = cleaned[1][1:-1].replace(" ", "_")
+            to_write = token_1 + ' ' + token_2 + '\n'
             out_file.write(to_write)
 
         out_file.seek(0)
         output = out_file.read()
-
         return output
 
     @staticmethod
