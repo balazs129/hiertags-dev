@@ -313,6 +313,26 @@ jQuery(function ($) {
                     centerNode(draggingNode);
                     draggingNode = null;
                 }
+                // Update graph depth
+                var newDepth = get_depth(globalData.get_graph());
+                globalData.graphDepth = newDepth;
+                globalData.graphDepths[globalData.graphIndex] = newDepth;
+
+                var rb2 = $("#rightbar2").contents().filter(function () {
+                        return this.nodeType !== 1;
+                    });
+
+                var old_text = rb2.text();
+                var new_text = "Depth of graph: " + globalData.get_depth() + "/";
+
+                rb2.each(function () {
+                        this.textContent = this.textContent.replace(old_text, new_text);
+                    });
+
+                $("#depthExp").spinner({ max: globalData.graphDepths[globalData.graphIndex],
+                min: 1,
+                step: 1 }).width(20);
+
                 dragStarted = false;
             }
 
@@ -488,7 +508,7 @@ jQuery(function ($) {
                     if (node.children) {
                         node.children.forEach(visitor);
                     }
-                    if (node.name == searched) {
+                    if (node.name === searched) {
                         found = node;
                     }
                 };
@@ -503,10 +523,10 @@ jQuery(function ($) {
                         else if (node._children) {
                             node._children.forEach(h_visitor);
                         }
-                        if (node.name == searched) {
+                        if (node.name === searched) {
                             found = node;
                             var unpack = function(h_node){
-                                if (h_node.parent != "null" && h_node._children) {
+                                if (h_node.parent !== "null" && h_node._children) {
                                     path.push(h_node);
                                     unpack(h_node.parent);
                                 }
@@ -766,7 +786,7 @@ jQuery(function ($) {
                 centerNode(d);
             }
 
-            function magnify(d) {
+            function magnify() {
                 if (!dragStarted) {
                     var nodeSelection = d3.select(this);
                     nodeSelection.select("circle")
