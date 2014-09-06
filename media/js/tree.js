@@ -11,7 +11,6 @@ jQuery(function ($) {
             labelVisibility: true,
             verticalLayout: true,
             toggled: false,
-            graphDepth: 0,
             graphData: [],
             numberOfComponents: 0,
             graphIndex: 0,
@@ -91,7 +90,6 @@ jQuery(function ($) {
                 globalData.labelVisibility = true;
                 globalData.verticalLayout = true;
                 globalData.toggled = false;
-                globalData.graphDepth = 0;
 
                 //Calculate data for graphs
                 for (var elem = 0; elem < globalData.numberOfComponents; elem += 1) {
@@ -301,6 +299,22 @@ jQuery(function ($) {
                     }
                 });
 
+            function updateDepth() {
+                var rb2 = $("#rightbar2").contents().filter(function () {
+                    return this.nodeType !== 1;
+                });
+                var old_text = rb2.text();
+                var new_text = "Depth of graph: " + globalData.get_depth() + "/";
+
+                rb2.each(function () {
+                    this.textContent = this.textContent.replace(old_text, new_text);
+                });
+
+                $("#depthExp").spinner({ max: globalData.graphDepths[globalData.graphIndex],
+                    min: 1,
+                    step: 1 });
+            }
+
             function endDrag() {
                 selectedNode = null;
                 d3.selectAll('.ghostCircle').attr('class', 'ghostCircle');
@@ -312,28 +326,13 @@ jQuery(function ($) {
                     update(root);
                     centerNode(draggingNode);
                     draggingNode = null;
+                    var newDepth = get_depth(globalData.get_graph());
+                globalData.graphDepths[globalData.graphIndex] = newDepth;
+                dragStarted = false;
+                updateDepth();
                 }
                 // Update graph depth
-                var newDepth = get_depth(globalData.get_graph());
-                globalData.graphDepth = newDepth;
-                globalData.graphDepths[globalData.graphIndex] = newDepth;
 
-                var rb2 = $("#rightbar2").contents().filter(function () {
-                        return this.nodeType !== 1;
-                    });
-
-                var old_text = rb2.text();
-                var new_text = "Depth of graph: " + globalData.get_depth() + "/";
-
-                rb2.each(function () {
-                        this.textContent = this.textContent.replace(old_text, new_text);
-                    });
-
-                $("#depthExp").spinner({ max: globalData.graphDepths[globalData.graphIndex],
-                min: 1,
-                step: 1 }).width(20);
-
-                dragStarted = false;
             }
 
             var updateTempConnector = function () {
@@ -435,18 +434,33 @@ jQuery(function ($) {
                 }
             }
 
+            function updateNodes() {
+                var rb = $("#rightbar").contents().filter(function () {
+                    return this.nodeType !== 1;
+                });
+                var new_g_text = "Graph: " + (globalData.graphIndex + 1) +
+                    "/" + globalData.numberOfComponents;
+                var new_n_text = "Nodes: " + globalData.nodes[globalData.graphIndex];
+
+                rb.each(function () {
+                    if (this.textContent === rb[0].textContent) {
+                        this.textContent = this.textContent.replace(rb[0].textContent, new_g_text);
+                    } else {
+                        this.textContent = this.textContent.replace(rb[1].textContent, new_n_text);
+                    }
+                });
+            }
+
             /* Functions for tree handling */
             function chgGraph() {
                 if (globalData.graphIndex < (globalData.numberOfComponents - 1)) {
 
-                    globalData.graphDepth = 0;
                     globalData.treeWidth = 0;
                     globalData.treeHorizontalRatio = 0;
                     globalData.labelVisibility = true;
                     globalData.graphIndex += 1;
 
                     globalData.toggled = false;
-                    globalData.graphDepth = 0;
 
                     root = globalData.get_graph()[0];
                     root.x0 = width / 2;
@@ -459,30 +473,8 @@ jQuery(function ($) {
                     spinner_widget.spinner("value", 1);
                     spinner_widget.spinner({ max: globalData.graphDepths[globalData.graphIndex], min: 1, step: 1 });
 
-                    var rb2 = $("#rightbar2").contents().filter(function () {
-                        return this.nodeType !== 1;
-                    });
-                    var old_text = rb2.text();
-                    var new_text = "Depth of graph: " + globalData.get_depth() + "/";
-
-                    rb2.each(function () {
-                        this.textContent = this.textContent.replace(old_text, new_text);
-                    });
-
-                    var rb = $("#rightbar").contents().filter(function () {
-                        return this.nodeType !== 1;
-                    });
-                    var new_g_text = "Graph: " + (globalData.graphIndex + 1) +
-                        "/" + globalData.numberOfComponents;
-                    var new_n_text = "Nodes: " + globalData.nodes[globalData.graphIndex];
-
-                    rb.each(function () {
-                        if (this.textContent === rb[0].textContent) {
-                            this.textContent = this.textContent.replace(rb[0].textContent, new_g_text);
-                        } else {
-                            this.textContent = this.textContent.replace(rb[1].textContent, new_n_text);
-                        }
-                    });
+                    updateDepth();
+                    updateNodes();
 
                     var options = { delimiter: /(,|;)\s*/,
                         maxHeight: 100,
@@ -525,7 +517,7 @@ jQuery(function ($) {
                         }
                         if (node.name === searched) {
                             found = node;
-                            var unpack = function(h_node){
+                            var unpack = function (h_node) {
                                 if (h_node.parent !== "null" && h_node._children) {
                                     path.push(h_node);
                                     unpack(h_node.parent);
@@ -538,7 +530,7 @@ jQuery(function ($) {
                 }
 
                 if (found) {
-                    if (path.length > 0){
+                    if (path.length > 0) {
                         path.reverse();
                         path.forEach(toggleChildren);
                         update(root);
@@ -551,14 +543,12 @@ jQuery(function ($) {
             function chdGraph() {
                 if (globalData.graphIndex > 0) {
 
-                    globalData.graphDepth = 0;
                     globalData.treeWidth = 0;
                     globalData.treeHorizontalRatio = 0;
                     globalData.labelVisibility = true;
                     globalData.graphIndex -= 1;
 
                     globalData.toggled = false;
-                    globalData.graphDepth = 0;
 
                     root = globalData.get_graph()[0];
                     root.x0 = width / 2;
@@ -571,30 +561,8 @@ jQuery(function ($) {
                     spinner_widget.spinner("value", 1);
                     spinner_widget.spinner({ max: globalData.graphDepths[globalData.graphIndex], min: 1, step: 1 });
 
-                    var rb2 = $("#rightbar2").contents().filter(function () {
-                        return this.nodeType !== 1;
-                    });
-                    var old_text = rb2.text();
-                    var new_text = "Depth of graph: " + globalData.get_depth() + "/";
-
-                    rb2.each(function () {
-                        this.textContent = this.textContent.replace(old_text, new_text);
-                    });
-
-                    var rb = $("#rightbar").contents().filter(function () {
-                        return this.nodeType !== 1;
-                    });
-                    var new_g_text = "Graph: " + (globalData.graphIndex + 1) +
-                        "/" + globalData.numberOfComponents;
-                    var new_n_text = "Nodes: " + globalData.nodes[globalData.graphIndex];
-
-                    rb.each(function () {
-                        if (this.textContent === rb[0].textContent) {
-                            this.textContent = this.textContent.replace(rb[0].textContent, new_g_text);
-                        } else {
-                            this.textContent = this.textContent.replace(rb[1].textContent, new_n_text);
-                        }
-                    });
+                    updateDepth();
+                    updateNodes();
 
                     var options = { delimiter: /(,|;)\s*/,
                         maxHeight: 100,
