@@ -90,14 +90,14 @@ a {
 #toggleLabels,
 #flipLayout,
 #reorderNodes {
-    width: 120px;
+    width: 125px;
     margin-top: 5px;
     padding-top: 2px;
     padding-bottom: 2px;
 }
 
 #changeGraphUp {
-    width: 120px;
+    width: 125px;
     margin-top: 180px;
     padding-top: 2px;
     padding-bottom: 2px;
@@ -105,7 +105,7 @@ a {
 }
 
 #changeGraphDown {
-    width: 120px;
+    width: 125px;
     margin-top: 5px;
     padding-top: 2px;
     padding-bottom: 2px;
@@ -131,6 +131,7 @@ a {
     width: 80px;
     height: 30px;
     margin-left: 5px;
+    text-align: center;
 }
 
 
@@ -196,5 +197,12 @@ input[type=text] {
 
 #changeGraphUp .ui-button-icon-primary {
     left: auto; right: 0.5em;
+}
+
+.ui-spinner {
+    height: 28px;
+}
+.ui-spinner-input {
+    text-align: center;
 }
 

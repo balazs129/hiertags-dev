@@ -852,9 +852,9 @@ jQuery(function ($) {
             //Set up autocomplete
 
             var node_data = $("<p>").textContent = "Nodes: " + globalData.nodes[globalData.graphIndex];
-            var depth_data = $("<p id='spintext'>").textContent = "Depth of graph: " + globalData.get_depth() + "/";
+            var depth_data = $("<p id='spintext'>").textContent = "Depth of graph: " + globalData.get_depth() + " / ";
             var g_data = $("<p>").textContent = "Graph: " + (globalData.graphIndex + 1) +
-                "/" + globalData.numberOfComponents;
+                " / " + globalData.numberOfComponents;
 
             $('#rightbar')
                 .tooltip()
@@ -904,8 +904,6 @@ jQuery(function ($) {
                 .append('<button id="getResult" value="Get Result" title="Go to the searched tag">');
 
             $("#getResult").button({ text: false, icons: { primary: "ui-icon-search"  } })
-
-            //$( "#getResult" ).button( "option", "icons", { primary: "ui-icon-gear", secondary: "ui-icon-triangle-1-s" } );
 
             var options = { delimiter: /(,|;)\s*/,
                 maxHeight: 100,
