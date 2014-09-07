@@ -18,6 +18,7 @@ jQuery(function ($) {
             extraEdges: [],
             suggestions: [],
             selected: "",
+            draggedDepth: 0,
 
             get_graph: function () {
                 return this.graphData[this.graphIndex];
@@ -207,6 +208,63 @@ jQuery(function ($) {
             root.x0 = width / 2;
             root.y0 = height / 4;
 
+            function get_new_depth(root){
+
+                var depths = [];
+                function log(d) {
+                    if (d.children) {
+                        depths.push(d.depth);
+                        d.children.forEach(log);
+                    } else if (d._children) {
+                        depths.push(d.depth);
+                        d._children.forEach(log);
+                    } else {
+                        depths.push(d.depth);
+                    }
+                }
+                root.children.forEach(log);
+
+                console.log(depths);
+                globalData.graphDepths[globalData.graphIndex] = _.max(depths);
+            }
+
+            function expand(d) {
+                if (d._children) {
+                    d.children = d._children;
+                    d.children.forEach(expand);
+                    d._children = null;
+                }
+            }
+
+            function expand_norec(d) {
+                if (d._children) {
+                    d.children = d._children;
+                    d._children = null;
+                }
+            }
+
+            function expand_all_children(d) {
+                d3.event.preventDefault();
+
+                if (globalData.nodes[globalData.graphIndex] < 100) {
+                    if (d._children) {
+                        d.children = d._children;
+                        d.children.forEach(expand);
+                        d._children = null;
+                        update(d);
+                        centerNode(d);
+                    }
+                } else {
+                    if (d._children) {
+                        d.children = d._children;
+                        d.children.forEach(expand_norec);
+                        d._children = null;
+                        update(d);
+                        centerNode(d);
+                    }
+                }
+            }
+
             function initiateDrag(d, domNode) {
                 draggingNode = d;
                 d3.select(domNode).select('.ghostCircle').attr('pointer-events', 'none');
@@ -248,6 +306,7 @@ jQuery(function ($) {
                         return;
                     }
                     dragStarted = true;
+                    globalData.draggedDepth = d.depth;
                     nodes = tree.nodes(d);
                     d3.event.sourceEvent.stopPropagation();
                 })
@@ -286,6 +345,7 @@ jQuery(function ($) {
                             if (selectedNode.children) {
                                 selectedNode.children.push(draggingNode);
                             } else {
+                                if (selectedNode._children === null) { selectedNode._children = [];}
                                 selectedNode._children.push(draggingNode);
                             }
                         } else {
@@ -310,29 +370,46 @@ jQuery(function ($) {
                     this.textContent = this.textContent.replace(old_text, new_text);
                 });
 
-                $("#depthExp").spinner({ max: globalData.graphDepths[globalData.graphIndex],
+                $("#depthExp").spinner({ max: globalData.get_depth(),
                     min: 1,
                     step: 1 });
             }
 
+
+
             function endDrag() {
+                if (selectedNode) {var appendedDepth = selectedNode.depth;}
                 selectedNode = null;
                 d3.selectAll('.ghostCircle').attr('class', 'ghostCircle');
                 d3.select(domNode).attr('class', 'node');
                 // now restore the mouseover event or we won't be able to drag a 2nd time
                 d3.select(domNode).select('.ghostCircle').attr('pointer-events', '');
                 updateTempConnector();
+                // if dragging subtree, we have to manually set the new depths
                 if (draggingNode !== null) {
+                    if (draggingNode._children){
+                        var newDepth = appendedDepth + 1;
+                        var translate = newDepth - globalData.draggedDepth;
+
+                        function visitor(node){
+                            if (node._children) {
+                                node.depth += translate;
+                                node._children.forEach(visitor);
+                            } else {
+                                node.depth += translate;
+                            }
+                        }
+
+                        draggingNode._children.forEach(visitor);
+                    }
                     update(root);
-                    centerNode(draggingNode);
+                    centerNode(root);
+                    get_new_depth(root);
+                    updateDepth();
                     draggingNode = null;
-                    var newDepth = get_depth(globalData.get_graph());
-                globalData.graphDepths[globalData.graphIndex] = newDepth;
-                dragStarted = false;
-                updateDepth();
                 }
                 // Update graph depth
-
+                dragStarted = false;
             }
 
             var updateTempConnector = function () {
@@ -397,42 +474,7 @@ jQuery(function ($) {
                 }
             }
 
-            function expand(d) {
-                if (d._children) {
-                    d.children = d._children;
-                    d.children.forEach(expand);
-                    d._children = null;
-                }
-            }
 
-            function expand_norec(d) {
-                if (d._children) {
-                    d.children = d._children;
-                    d._children = null;
-                }
-            }
-
-            function expand_all_children(d) {
-                d3.event.preventDefault();
-
-                if (globalData.nodes[globalData.graphIndex] < 100) {
-                    if (d._children) {
-                        d.children = d._children;
-                        d.children.forEach(expand);
-                        d._children = null;
-                        update(d);
-                        centerNode(d);
-                    }
-                } else {
-                    if (d._children) {
-                        d.children = d._children;
-                        d.children.forEach(expand_norec);
-                        d._children = null;
-                        update(d);
-                        centerNode(d);
-                    }
-                }
-            }
 
             function updateNodes() {
                 var rb = $("#rightbar").contents().filter(function () {
@@ -530,6 +572,7 @@ jQuery(function ($) {
                 }
 
                 if (found) {
+                    console.log(found);
                     if (path.length > 0) {
                         path.reverse();
                         path.forEach(toggleChildren);
