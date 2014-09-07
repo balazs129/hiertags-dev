@@ -222,7 +222,7 @@ jQuery(function ($) {
                     }
                 }
                 root.children.forEach(log);
-
+                console.log(depths);
                 globalData.graphDepths[globalData.graphIndex] = _.max(depths);
             }
 
@@ -387,9 +387,10 @@ jQuery(function ($) {
                 if (draggingNode !== null) {
                     var newDepth = appendedDepth + 1;
                     var translate = newDepth - globalData.draggedDepth;
-                    // if dragging subtree, we have to manually set the new depths
+                    // we have to manually set the new depths for dragged nodes
                     if (draggingNode._children && draggingNode._children !== null){
 
+                        draggingNode.depth = newDepth;
                         function visitor(node){
                             if (node._children) {
                                 node.depth += translate;
