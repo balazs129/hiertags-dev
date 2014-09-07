@@ -858,39 +858,54 @@ jQuery(function ($) {
 
             $('#rightbar')
                 .tooltip()
-                .append('<input id="expandTree" type="button" value="Expand tree" title="Increase the space between nodes">')
-                .append('<input id="shrinkTree" type="button" value="Shrink tree" title="Decrease the space between nodes">')
-                .append('<input id="centerRoot" type="button" value="Center root" title="Reset view to the root element">')
-                .append('<input id="toggleLabels" type="button" value="Toggle Labels" title="Show/hide node labels">')
-                .append('<input id="flipLayout" type="button" value="Flip Layout" title="Change between horizontal and vertical tree layout">')
-
+                .append('<button id="expandTree" title="Increase the space between nodes">')
+                .append('<button id="shrinkTree" title="Decrease the space between nodes">')
+                .append('<button id="centerRoot" title="Reset view to the root element">')
+                .append('<button id="toggleLabels" title="Show/hide node labels">')
+                .append('<button id="flipLayout" title="Change between horizontal and vertical tree layout">')
+            //Jquery ui-button definitions
+            $("#expandTree").button({label: "Expand Tree", icons: { primary: 'ui-icon-plus'} })
+            $("#shrinkTree").button({label: "Shrink Tree", icons: { primary: 'ui-icon-minus'} })
+            $("#centerRoot").button({label: "Center Root", icons: { primary: 'ui-icon-home'} })
+            $("#toggleLabels").button({label: "Toggle Labels", icons: { primary: 'ui-icon-tag'} })
+            $("#flipLayout").button({label: "Flip Layout", icons: { primary: 'ui-icon-arrowreturnthick-1-e'} })
             /*if (globalData.extraEdges.length > 0) {
              $('#rightbar').append('<input id="reorderNodes" type="button" value="Reorder Nodes" title="Select the previous graph">');
              }*/
-            $('#rightbar').append('<input id="changeGraphUp" type="button" value="Next" title="Select the next graph">')
-                .append('<input id="changeGraphDown" type="button" value="Previous" title="Select the previous graph">')
+            $('#rightbar').append('<button id="changeGraphUp" title="Select the next graph">')
+                .append('<button id="changeGraphDown" title="Select the previous graph">')
                 .append(g_data)
                 .append("<br>")
                 .append(node_data);
+
+            $("#changeGraphUp").button({label: "Next Graph", icons: { primary: 'ui-icon-triangle-1-e'} })
+            $("#changeGraphDown").button({label: "Prev. Graph", icons: { primary: 'ui-icon-triangle-1-w'} })
 
             if (globalData.numberOfComponents > 1) {
                 $('#rightbar2')
                     .append(depth_data)
                     .tooltip()
                     .append('<input id="depthExp" type="spinner" value="1" title="Set how deep the graph should be expanded">')
-                    .append('<input id="expandSpin" type="button" value="Expand" title="Expand the graph to the selected depth">')
-                    .append('<input id="exportGraph" type="button" value="Save as...">');
+                    .append('<button id="expandSpin" title="Expand the graph to the selected depth">')
+                    .append('<button id="exportGraph" value="Save as...">');
 
             } else {
                 $('#rightbar2')
                     .append(depth_data)
                     .append('<input id="depthExp" type="spinner" value="1" title="Set how deep the graph should be expanded">')
-                    .append('<input id="expandSpin" type="button" value="Expand" title="Expand the graph to the selected depth">')
-                    .append('<input id="exportGraph" type="button" value="Save as...">');
+                    .append('<button id="expandSpin" title="Expand the graph to the selected depth">')
+                    .append('<button id="exportGraph" value="Save as...">');
             }
 
+            $("#expandSpin").button({label: "Expand" })
+            $("#exportGraph").button({label: "Save as...", icons: { primary: 'ui-icon-disk'} })
+
             $("#searchdiv").append('<input type="text" id="query" placeholder="Search for a tag"/>')
-                .append('<input id="getResult" type="button" value="Get Result" title="Go to the searched tag">');
+                .append('<button id="getResult" value="Get Result" title="Go to the searched tag">');
+
+            $("#getResult").button({ text: false, icons: { primary: "ui-icon-search"  } })
+
+            //$( "#getResult" ).button( "option", "icons", { primary: "ui-icon-gear", secondary: "ui-icon-triangle-1-s" } );
 
             var options = { delimiter: /(,|;)\s*/,
                 maxHeight: 100,
