@@ -160,5 +160,5 @@ a {
 .autocomplete-selected { background: #F0F0F0; }
 .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
 
-input[type=text] { font-size: 14px; border: 1px solid #CCC; width: 300px}
+input[type=text] { font-size: 14px; text-align: center; border: 1px solid #CCC; width: 300px}
 

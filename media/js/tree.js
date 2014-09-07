@@ -376,7 +376,10 @@ jQuery(function ($) {
 
 
             function endDrag() {
-                if (selectedNode) {var appendedDepth = selectedNode.depth;}
+                if (selectedNode) {
+                    var appendedDepth = selectedNode.depth;
+                    var selectedName = selectedNode.name;
+                }
                 selectedNode = null;
                 d3.selectAll('.ghostCircle').attr('class', 'ghostCircle');
                 d3.select(domNode).attr('class', 'node');
@@ -384,7 +387,7 @@ jQuery(function ($) {
                 d3.select(domNode).select('.ghostCircle').attr('pointer-events', '');
                 updateTempConnector();
 
-                if (draggingNode !== null) {
+                if (draggingNode !== null && typeof selectedName !== 'undefined') {
                     var newDepth = appendedDepth + 1;
                     var translate = newDepth - globalData.draggedDepth;
                     // we have to manually set the new depths for dragged nodes
@@ -574,7 +577,7 @@ jQuery(function ($) {
                     }
                     centerNode(found);
                 }
-
+                $("#query").val("");
             }
 
             function chdGraph() {
@@ -886,7 +889,7 @@ jQuery(function ($) {
                     .append('<input id="exportGraph" type="button" value="Save as...">');
             }
 
-            $("#searchdiv").append('<input type="text" id="query" placeholder="Search for tag name"/>')
+            $("#searchdiv").append('<input type="text" id="query" placeholder="Search for a tag"/>')
                 .append('<input id="getResult" type="button" value="Get Result" title="Go to the searched tag">');
 
             var options = { delimiter: /(,|;)\s*/,
