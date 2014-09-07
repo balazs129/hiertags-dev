@@ -521,16 +521,7 @@ jQuery(function ($) {
                     updateDepth();
                     updateNodes();
 
-                    var options = { delimiter: /(,|;)\s*/,
-                        maxHeight: 100,
-                        width: 100,
-                        deferRequestBy: 0,
-                        lookup: globalData.suggestions[globalData.graphIndex],
-                        onSelect: function (name) {
-                            globalData.selected = name;
-                        }
-                    };
-                    $("#query").autocomplete(options);
+                    $("#query").autocomplete().setOptions({lookup: globalData.suggestions[globalData.graphIndex]});
 
                 }
             }
@@ -610,16 +601,7 @@ jQuery(function ($) {
                     updateDepth();
                     updateNodes();
 
-                    var options = { delimiter: /(,|;)\s*/,
-                        maxHeight: 100,
-                        width: 100,
-                        deferRequestBy: 0,
-                        lookup: globalData.suggestions[globalData.graphIndex],
-                        onSelect: function (names) {
-                            globalData.selected = name;
-                        }
-                    };
-                    $("#query").autocomplete(options);
+                    $("#query").autocomplete().setOptions({lookup: globalData.suggestions[globalData.graphIndex]});
                 }
             }
 
@@ -878,8 +860,6 @@ jQuery(function ($) {
                 .append('<input id="centerRoot" type="button" value="Center root" title="Reset view to the root element">')
                 .append('<input id="toggleLabels" type="button" value="Toggle Labels" title="Show/hide node labels">')
                 .append('<input id="flipLayout" type="button" value="Flip Layout" title="Change between horizontal and vertical tree layout">')
-                .append('<input type="text" name="q" id="query" />')
-                .append('<input id="getResult" type="button" value="Get Result" title="Go to the searched tag">');
 
             /*if (globalData.extraEdges.length > 0) {
              $('#rightbar').append('<input id="reorderNodes" type="button" value="Reorder Nodes" title="Select the previous graph">');
@@ -906,9 +886,13 @@ jQuery(function ($) {
                     .append('<input id="exportGraph" type="button" value="Save as...">');
             }
 
+            $("#searchdiv").append('<input type="text" id="query" placeholder="Search for tag name"/>')
+                .append('<input id="getResult" type="button" value="Get Result" title="Go to the searched tag">');
+
             var options = { delimiter: /(,|;)\s*/,
                 maxHeight: 100,
-                width: 100,
+                width: 300,
+                minChars: 2,
                 deferRequestBy: 0,
                 lookup: globalData.suggestions[globalData.graphIndex],
                 onSelect: function (node) {
@@ -917,6 +901,7 @@ jQuery(function ($) {
             };
             $("#query").autocomplete(options);
 
+            $("#searchdiv").tooltip({show: {delay: 1000}});
             $("#rightbar").tooltip({show: {delay: 1000}});
             $("#rightbar2").tooltip({show: {delay: 1000}});
 
