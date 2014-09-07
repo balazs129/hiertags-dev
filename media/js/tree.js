@@ -209,7 +209,6 @@ jQuery(function ($) {
             root.y0 = height / 4;
 
             function get_new_depth(root){
-
                 var depths = [];
                 function log(d) {
                     if (d.children) {
@@ -224,7 +223,6 @@ jQuery(function ($) {
                 }
                 root.children.forEach(log);
 
-                console.log(depths);
                 globalData.graphDepths[globalData.graphIndex] = _.max(depths);
             }
 
@@ -385,11 +383,12 @@ jQuery(function ($) {
                 // now restore the mouseover event or we won't be able to drag a 2nd time
                 d3.select(domNode).select('.ghostCircle').attr('pointer-events', '');
                 updateTempConnector();
-                // if dragging subtree, we have to manually set the new depths
+
                 if (draggingNode !== null) {
-                    if (draggingNode._children){
-                        var newDepth = appendedDepth + 1;
-                        var translate = newDepth - globalData.draggedDepth;
+                    var newDepth = appendedDepth + 1;
+                    var translate = newDepth - globalData.draggedDepth;
+                    // if dragging subtree, we have to manually set the new depths
+                    if (draggingNode._children && draggingNode._children !== null){
 
                         function visitor(node){
                             if (node._children) {
@@ -401,14 +400,17 @@ jQuery(function ($) {
                         }
 
                         draggingNode._children.forEach(visitor);
+                    } else {
+                        draggingNode.depth = newDepth;
                     }
+
                     update(root);
                     centerNode(root);
                     get_new_depth(root);
                     updateDepth();
                     draggingNode = null;
                 }
-                // Update graph depth
+                // else
                 dragStarted = false;
             }
 
