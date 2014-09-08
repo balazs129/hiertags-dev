@@ -883,16 +883,17 @@ jQuery(function ($) {
 
             if (globalData.numberOfComponents > 1) {
                 $('#rightbar2')
-                    .append(depth_data)
                     .tooltip()
-                    .append('<input id="depthExp" type="spinner" value="1" title="Set how deep the graph should be expanded">')
+                    .append(depth_data)
+                    .append('<input id="depthExp" type="spinner" value="1">')
                     .append('<button id="expandSpin" title="Expand the graph to the selected depth">')
                     .append('<button id="exportGraph" value="Save as...">');
 
             } else {
                 $('#rightbar2')
+                    .tooltip()
                     .append(depth_data)
-                    .append('<input id="depthExp" type="spinner" value="1" title="Set how deep the graph should be expanded">')
+                    .append('<input id="depthExp" type="spinner" value="1">')
                     .append('<button id="expandSpin" title="Expand the graph to the selected depth">')
                     .append('<button id="exportGraph" value="Save as...">');
             }
@@ -917,9 +918,9 @@ jQuery(function ($) {
             };
             $("#query").autocomplete(options);
 
-            searchdiv.tooltip({show: {delay: 1000}});
-            $("#rightbar").tooltip({show: {delay: 1000}});
-            $("#rightbar2").tooltip({show: {delay: 1000}});
+            searchdiv.tooltip({show: {delay: 1500}});
+            $("#rightbar").tooltip({show: {delay: 1500}});
+            $("#rightbar2").tooltip({show: {delay: 1500}});
 
 
             $("#depthExp").spinner({ max: globalData.graphDepths[globalData.graphIndex],
