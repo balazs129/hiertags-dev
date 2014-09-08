@@ -31,10 +31,10 @@ jQuery(function ($) {
         };
 
         var initialize_uploader = function () {
-            var url = '/visualize/data/';
-            $('#fileupload').fileupload({
+            var url = "/visualize/data/";
+            $("#fileupload").fileupload({
                 add: function (e, data) {
-                    var infobar = $('#infobar');
+                    var infobar = $("#infobar");
                     $("svg#visualization").empty();
                     var filetmp = data.originalFiles[0].name.split('.');
                     var fext = filetmp[filetmp.length - 1].toLowerCase();
@@ -64,10 +64,13 @@ jQuery(function ($) {
                 $('#progress-circle').css('visibility', 'visible');
 
             }).on('fileuploaddone', function (e, data) {
-                $('#infobar').html("");
-                $('#rightbar').html("");
-                $('#rightbar2').html("");
-                $('#progress-circle').css('visibility', 'hidden');
+                // Clear old content
+                $("#infobar").html("");
+                $("#rightbar").html("");
+                $("#rightbar2").html("");
+                $("#searchdiv").html("");
+
+                $("#progress-circle").css("visibility", "hidden");
                 globalData.numberOfComponents = data.result.data.length;
                 globalData.extraEdges = data.result.edges;
 
@@ -92,20 +95,27 @@ jQuery(function ($) {
                 globalData.verticalLayout = true;
                 globalData.toggled = false;
 
+                globalData.suggestions = [];
+
+                var names = [];
+                var getNames = function(node) {
+                    names.push(node.name);
+                };
+
                 //Calculate data for graphs
                 for (var elem = 0; elem < globalData.numberOfComponents; elem += 1) {
                     globalData.graphData.push(convert_data(data.result.data[elem]));
                     globalData.graphDepths.push(get_depth(globalData.graphData[elem]));
                     globalData.nodes.push(data.result.data[elem].length);
-                    var names = [];
-                    data.result.data[elem].forEach(function (node) {
-                        names.push(node.name);
-                    });
+
+                    //Get the suggestions
+                    names = [];
+                    data.result.data[elem].forEach(getNames);
                     globalData.suggestions.push(names);
                 }
 
                 generate_tree(globalData.graphData[0]);
-
+                $("#query").autocomplete().setOptions({lookup: globalData.suggestions[globalData.graphIndex]});
 
             })
                 .prop('disabled', !$.support.fileInput)
@@ -114,7 +124,6 @@ jQuery(function ($) {
 
         var convert_data = function (data) {
             //Function to convert the returned flat data to recursive tree structure
-
             var dataMap = data.reduce(function (map, node) {
                 map[node.name] = node;
                 return map;
@@ -222,7 +231,6 @@ jQuery(function ($) {
                     }
                 }
                 root.children.forEach(log);
-                console.log(depths);
                 globalData.graphDepths[globalData.graphIndex] = _.max(depths);
             }
 
@@ -265,12 +273,13 @@ jQuery(function ($) {
 
             function initiateDrag(d, domNode) {
                 draggingNode = d;
-                d3.select(domNode).select('.ghostCircle').attr('pointer-events', 'none');
-                d3.select(domNode).select('.node').attr('pointer-events', 'none');
-                d3.selectAll('.ghostCircle').attr('class', 'ghostCircle show');
-                d3.select(domNode).attr('class', 'node activeDrag');
+                d3.select(domNode).select(".ghostCircle").attr("pointer-events", "none");
+                d3.select(domNode).select(".node").attr("pointer-events", "none");
+                d3.selectAll(".ghostCircle").attr("class", "ghostCircle show");
+                d3.select(domNode).attr("class", "node activeDrag");
 
-                svg_group.selectAll("g.node").sort(function (a, b) { // select the parent and sort the path's
+                svg_group.selectAll("g.node").sort(function (a, b) {
+                // select the parent and sort the path's
                     if (a.id !== draggingNode.id) {
                         return 1;
                     } else {
@@ -339,7 +348,7 @@ jQuery(function ($) {
                         if (index > -1) {
                             draggingNode.parent.children.splice(index, 1);
                         }
-                        if (typeof selectedNode.children !== 'undefined' || typeof selectedNode._children !== 'undefined') {
+                        if (typeof selectedNode.children !== "undefined" || typeof selectedNode._children !== "undefined") {
                             if (selectedNode.children) {
                                 selectedNode.children.push(draggingNode);
                             } else {
@@ -350,7 +359,6 @@ jQuery(function ($) {
                             selectedNode.children = [];
                             selectedNode.children.push(draggingNode);
                         }
-                        // Make sure that the node being added to is expanded so user can see added node is correctly moved
                         endDrag();
                     } else {
                         endDrag();
@@ -373,26 +381,27 @@ jQuery(function ($) {
                     step: 1 });
             }
 
-
-
             function endDrag() {
+                // store some data from the nodes if it was a real drag
+                var appendedDepth;
+                var selectedName;
                 if (selectedNode) {
-                    var appendedDepth = selectedNode.depth;
-                    var selectedName = selectedNode.name;
+                    appendedDepth = selectedNode.depth;
+                    selectedName = selectedNode.name;
                 }
+
                 selectedNode = null;
-                d3.selectAll('.ghostCircle').attr('class', 'ghostCircle');
-                d3.select(domNode).attr('class', 'node');
+                d3.selectAll(".ghostCircle").attr("class", "ghostCircle");
+                d3.select(domNode).attr("class", "node");
                 // now restore the mouseover event or we won't be able to drag a 2nd time
-                d3.select(domNode).select('.ghostCircle').attr('pointer-events', '');
+                d3.select(domNode).select(".ghostCircle").attr("pointer-events", "");
                 updateTempConnector();
 
-                if (draggingNode !== null && typeof selectedName !== 'undefined') {
+                if (draggingNode !== null && typeof selectedName !== "undefined") {
                     var newDepth = appendedDepth + 1;
                     var translate = newDepth - globalData.draggedDepth;
                     // we have to manually set the new depths for dragged nodes
                     if (draggingNode._children && draggingNode._children !== null){
-
                         draggingNode.depth = newDepth;
                         function visitor(node){
                             if (node._children) {
@@ -402,7 +411,6 @@ jQuery(function ($) {
                                 node.depth += translate;
                             }
                         }
-
                         draggingNode._children.forEach(visitor);
                     } else {
                         draggingNode.depth = newDepth;
@@ -414,7 +422,6 @@ jQuery(function ($) {
                     updateDepth();
                     draggingNode = null;
                 }
-                // else
                 dragStarted = false;
             }
 
@@ -455,7 +462,7 @@ jQuery(function ($) {
                 link.enter().append("path")
                     .attr("class", "templink")
                     .attr("d", d3.svg.diagonal())
-                    .attr('pointer-events', 'none');
+                    .attr("pointer-events", "none");
 
                 link.attr("d", d3.svg.diagonal());
 
@@ -479,8 +486,6 @@ jQuery(function ($) {
                     d.children = null;
                 }
             }
-
-
 
             function updateNodes() {
                 var rb = $("#rightbar").contents().filter(function () {
@@ -569,7 +574,6 @@ jQuery(function ($) {
                 }
 
                 if (found) {
-                    console.log(found);
                     if (path.length > 0) {
                         path.reverse();
                         path.forEach(toggleChildren);
@@ -578,6 +582,7 @@ jQuery(function ($) {
                     centerNode(found);
                 }
                 $("#query").val("");
+                globalData.selected = "";
             }
 
             function chdGraph() {
@@ -756,7 +761,7 @@ jQuery(function ($) {
                 var rb2 = $("#rightbar2");
                 rb2.append(select_format);
                 $("#exportGraph").attr("disabled", true);
-                var save_button = $("<input id=\"saveAction\" type=\"button\" value=\"Save!\" title=\"Save in the selected format\">");
+                var save_button = $('<input id="saveAction" type="button" value="Save!" title="Save in the selected format">');
                 rb2.append(save_button);
 
                 d3.select("#saveAction").on("click", saveActionButton);
@@ -765,7 +770,7 @@ jQuery(function ($) {
 
             /* Functions for the update function */
             function toggleChildren(d) {
-                if (typeof d.children !== 'undefined' || typeof d._children !== 'undefined') {
+                if (typeof d.children !== "undefined" || typeof d._children !== "undefined") {
                     if (d.children) {
                         d._children = d.children;
                         d.children = null;
@@ -814,7 +819,7 @@ jQuery(function ($) {
                     return 6;
                 });
                 nodeSelection.select("text")
-                    .style({'font-size': '10px'})
+                    .style({'font-size': "10px"})
                     .attr("dy", function () {
                         return ".35em";
                     })
@@ -849,8 +854,6 @@ jQuery(function ($) {
                 zoomListener.translate([x, y]);
             }
 
-            //Set up autocomplete
-
             var node_data = $("<p>").textContent = "Nodes: " + globalData.nodes[globalData.graphIndex];
             var depth_data = $("<p id='spintext'>").textContent = "Depth of graph: " + globalData.get_depth() + " / ";
             var g_data = $("<p>").textContent = "Graph: " + (globalData.graphIndex + 1) +
@@ -863,21 +866,18 @@ jQuery(function ($) {
                 .append('<button id="centerRoot" title="Reset view to the root element">')
                 .append('<button id="toggleLabels" title="Show/hide node labels">')
                 .append('<button id="flipLayout" title="Change between horizontal and vertical tree layout">')
+                .append('<button id="changeGraphUp" title="Select the next graph">')
+                .append('<button id="changeGraphDown" title="Select the previous graph">')
+                .append(g_data)
+                .append("<br>")
+                .append(node_data);
+
             //Jquery ui-button definitions
             $("#expandTree").button({label: "Expand Tree", icons: { primary: 'ui-icon-plus'} })
             $("#shrinkTree").button({label: "Shrink Tree", icons: { primary: 'ui-icon-minus'} })
             $("#centerRoot").button({label: "Center Root", icons: { primary: 'ui-icon-home'} })
             $("#toggleLabels").button({label: "Toggle Labels", icons: { primary: 'ui-icon-tag'} })
             $("#flipLayout").button({label: "Flip Layout", icons: { primary: 'ui-icon-arrowreturnthick-1-e'} })
-            /*if (globalData.extraEdges.length > 0) {
-             $('#rightbar').append('<input id="reorderNodes" type="button" value="Reorder Nodes" title="Select the previous graph">');
-             }*/
-            $('#rightbar').append('<button id="changeGraphUp" title="Select the next graph">')
-                .append('<button id="changeGraphDown" title="Select the previous graph">')
-                .append(g_data)
-                .append("<br>")
-                .append(node_data);
-
             $("#changeGraphUp").button({label: "Next Graph", icons: { primary: 'ui-icon-triangle-1-e'} })
             $("#changeGraphDown").button({label: "Prev. Graph", icons: { primary: 'ui-icon-triangle-1-w'} })
 
@@ -900,15 +900,15 @@ jQuery(function ($) {
             $("#expandSpin").button({label: "Expand" })
             $("#exportGraph").button({label: "Save as...", icons: { primary: 'ui-icon-disk'} })
 
-            $("#searchdiv").append('<input type="text" id="query" placeholder="Search for a tag"/>')
+            var searchdiv = $("#searchdiv");
+            searchdiv.append('<input type="text" id="query" placeholder="Search for a tag"/>')
                 .append('<button id="getResult" value="Get Result" title="Go to the searched tag">');
 
             $("#getResult").button({ text: false, icons: { primary: "ui-icon-search"  } })
 
             var options = { delimiter: /(,|;)\s*/,
-                maxHeight: 100,
-                width: 300,
-                minChars: 2,
+                maxHeight: 400,
+                width: 400,
                 deferRequestBy: 0,
                 lookup: globalData.suggestions[globalData.graphIndex],
                 onSelect: function (node) {
@@ -917,7 +917,7 @@ jQuery(function ($) {
             };
             $("#query").autocomplete(options);
 
-            $("#searchdiv").tooltip({show: {delay: 1000}});
+            searchdiv.tooltip({show: {delay: 1000}});
             $("#rightbar").tooltip({show: {delay: 1000}});
             $("#rightbar2").tooltip({show: {delay: 1000}});
 

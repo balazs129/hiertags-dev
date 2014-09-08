@@ -30,7 +30,7 @@ a {
    background: url("../images/loader.gif") center no-repeat ;
 }
 
-/*.btn {
+.btn {
     float: left;
     -moz-user-select: none;
     background-image: none;
@@ -46,7 +46,7 @@ a {
     text-align: center;
     vertical-align: middle;
     white-space: nowrap;
-}*/
+}
 
 .lefttube2 {
     padding-bottom: 10px;
@@ -121,12 +121,6 @@ a {
     text-align: center;
 }
 
-#getResult {
-    width: 30px;
-    height: 30px;
-    margin-bottom: 5px;
-}
-
 #expandSpin {
     width: 80px;
     height: 30px;
@@ -187,8 +181,14 @@ input[type=text] {
     font-size: 14px;
     text-align: center;
     border: 1px solid #CCC;
-    width: 300px;
-    height: 30px;
+    width: 400px;
+    height: 25px;
+}
+
+#getResult {
+    width: 25px;
+    height: 25px;
+    margin-bottom: 5px;
 }
 
 .ui-widget {
