@@ -249,6 +249,14 @@ jQuery(function ($) {
                 }
             }
 
+            function collapse(d) {
+                if (d.children) {
+                    d._children = d.children;
+                    d._children.forEach(collapse);
+                    d.children = null;
+                }
+            }
+
             function expand_all_children(d) {
                 d3.event.preventDefault();
 
@@ -311,6 +319,9 @@ jQuery(function ($) {
                 .on("dragstart", function (d) {
                     if (d == root) {
                         return;
+                    }
+                    if (d.children) {
+                        toggleChildren(d);
                     }
                     dragStarted = true;
                     globalData.draggedDepth = d.depth;
@@ -479,14 +490,6 @@ jQuery(function ($) {
                 updateTempConnector();
             }
 
-            function collapse(d) {
-                if (d.children) {
-                    d._children = d.children;
-                    d._children.forEach(collapse);
-                    d.children = null;
-                }
-            }
-
             function updateNodes() {
                 var rb = $("#rightbar").contents().filter(function () {
                     return this.nodeType !== 1;
@@ -539,6 +542,7 @@ jQuery(function ($) {
                 var path = [];
                 var found = null;
 
+
                 // Search among the opened nodes
                 var visitor = function (node) {
                     if (node.children) {
@@ -583,6 +587,8 @@ jQuery(function ($) {
                 }
                 $("#query").val("");
                 globalData.selected = "";
+
+                console.log(found);
             }
 
             function chdGraph() {
