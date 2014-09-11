@@ -30,6 +30,7 @@ DEBUG = False
 # Detailed report for any exception raised during template rendering.
 TEMPLATE_DEBUG = False
 
+ADMIN_ENABLED = False
 MANAGERS = ADMINS
 TIME_ZONE = 'Europe/Budapest'
 LANGUAGE_CODE = 'en-us'
@@ -110,6 +111,7 @@ INSTALLED_APPS = (
     'visualize',
 )
 
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 # ==========================
 # = Miscellaneous Settings =
 # ==========================
