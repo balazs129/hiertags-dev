@@ -29,6 +29,8 @@ if path not in sys.path:
 # Setting up the django settings file
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hiertags.settings")
 
+import django
+django.setup()
 import django.core.handlers.wsgi
 
 application = django.core.handlers.wsgi.WSGIHandler()

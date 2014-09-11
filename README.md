@@ -81,11 +81,14 @@ the superuser, just fill in the appropriate information.
 ```bash
     python manage.py syncdb
 ```
-With the provided information you can log in to the app admin interface once the site is running by
-writing 'admin' after the domain name(for example: `http://hiertags-dev.elte.hu/admin`). There you can
-set user privileges and can edit or add/remove flatpages of the site(flatpages storing the html content
-of static pages). With the database creation the shipped data(conf/initial_data.json) is automatically
-added to the database(these are the flatpage contents).
+With the provided information you can log in to the app admin interface(if it's enabled) once the site 
+is running by writing 'admin' after the domain name(for example: `http://hiertags-dev.elte.hu/admin`). 
+There you can set user privileges and can edit or add/remove flatpages of the site(flatpages storing the 
+html content of static pages). We should now add the flatpage contents to the just created(and empty) 
+database:
+```bash
+    python manage.py loaddata conf/flatpages.json
+```
 Next, copy the static files(css, js) to the /static dir for Apache to serve.
 ```bash
     python manage.py collectstatic

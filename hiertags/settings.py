@@ -52,10 +52,6 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, '../templates'),
 )
-# List of directories searched for fixture files
-FIXTURE_DIRS = (
-    os.path.join(BASE_DIR, '../conf'),
-)
 # =============
 # = Databases =
 # =============
