@@ -29,8 +29,8 @@ SECRET_KEY = 'xfgfa7a*+n&v8d(nfv6s)@+*^7nqe0&fr18ursn_cm%-t1fk^i'
 DEBUG = False
 # Detailed report for any exception raised during template rendering.
 TEMPLATE_DEBUG = False
-
 ADMIN_ENABLED = False
+
 MANAGERS = ADMINS
 TIME_ZONE = 'Europe/Budapest'
 LANGUAGE_CODE = 'en-us'
@@ -59,7 +59,7 @@ TEMPLATE_DIRS = (
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, '../database.sqlite3')
+        'NAME': os.path.join(BASE_DIR, '../../database.sqlite3')
     }
 }
 
@@ -89,6 +89,7 @@ MIDDLEWARE_CLASSES = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
     'django.core.context_processors.static',
     'django.core.context_processors.media',
