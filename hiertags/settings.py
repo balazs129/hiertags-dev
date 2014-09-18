@@ -108,6 +108,7 @@ INSTALLED_APPS = (
 )
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
 # ==========================
 # = Miscellaneous Settings =
 # ==========================
@@ -115,6 +116,7 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 ROOT_URLCONF = 'hiertags.urls'
 WSGI_APPLICATION = 'hiertags.wsgi.application'
 
+#Import setting for debug configuration
 try:
     from settings_dev import *
 except ImportError, exp:

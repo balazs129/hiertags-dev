@@ -9,7 +9,9 @@ from xgmmlreader import read_xgmml
 
 
 class FileHandler(object):
-    """ Class to handle graph files."""
+    """
+    This Class handless the uploaded files
+    """
     def __init__(self):
         self.graphs = []
         self.edges = []
@@ -17,10 +19,17 @@ class FileHandler(object):
         self.number_of_graphs = 0
 
     def _generate_graphs(self, graph, check=False):
+        """
+        Helper function for the edgelist cases.
+
+        :param graph: networkX graph
+        :param check: boolean, set True for check in graph directioning
+        :return: None, sets the Class attributes
+        """
         # Number of components
         self.graphs = nx.weakly_connected_component_subgraphs(graph)
 
-        # check if current directioning is OK, else reverse directions
+        # Sort nodes topologically and check if current directioning is OK, else reverse directions
         for elem in self.graphs:
             try:
                 root = nx.topological_sort(elem)[0]
@@ -37,11 +46,18 @@ class FileHandler(object):
                 self.graphs_to_send.append(tree_graph)
                 self.edges.extend(interlinks)
             except NetworkXUnfeasible:
-                #If the graph can't be sorted topologically, we simply skip it.
+                #If the graph can't be sorted topologically(not a DAG), we simply skip it.
                 pass
 
     @staticmethod
     def _parse_DAG(graph):
+        """
+        Helper method, returns a DAG and the extra edges(when you have multiple parents)
+
+        :param graph: NetworkX graph
+        :return: NetworkX graph(DAG), extre edges
+        """
+        # Search for nodes with more than one parent
         nodes = []
         for node, ins in graph.in_degree().items():
             if ins > 1:
@@ -67,6 +83,11 @@ class FileHandler(object):
         return graph, edges_to_remove
 
     def build_graph(self, input_file):
+        """
+        This method builds the NetworkX graph from the uploaded data.
+        :param input_file: The uploaded file
+        :return: None, sets the Class attributes
+        """
         def open_edgelist():
             graph = nx.DiGraph()
             with input_file as f:
