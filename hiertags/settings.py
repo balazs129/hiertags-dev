@@ -4,7 +4,7 @@ import os
 # = Directory Declaractions =
 # ===========================
 
-BASE_DIR = os.path.dirname(__file__)
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # ===================
 # = Server Settings =
@@ -29,7 +29,6 @@ SECRET_KEY = 'xfgfa7a*+n&v8d(nfv6s)@+*^7nqe0&fr18ursn_cm%-t1fk^i'
 DEBUG = False
 # Detailed report for any exception raised during template rendering.
 TEMPLATE_DEBUG = False
-ADMIN_ENABLED = False
 
 MANAGERS = ADMINS
 TIME_ZONE = 'Europe/Budapest'
@@ -59,7 +58,7 @@ TEMPLATE_DIRS = (
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, '../../database.sqlite3')
+        'NAME': os.path.join(BASE_DIR, '../database.sqlite3')
     }
 }
 
@@ -117,7 +116,9 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 ROOT_URLCONF = 'hiertags.urls'
 WSGI_APPLICATION = 'hiertags.wsgi.application'
 
-#Import setting for debug configuration
+#Import setting for debug configuration and for the admin interface
+from adminconf import ADMIN_ENABLED
+
 try:
     from settings_dev import *
 except ImportError, exp:
