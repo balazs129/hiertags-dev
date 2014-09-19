@@ -14,6 +14,19 @@
         hiertags@hal.elte.hu
         <br>
         <br>
+         {%  if act_menu == 'downloads' %}
+        <ul>
+            <li >
+            <a title="Hierarchy Extracting Algorithms" href="/downloads/algorithms/">Algorithms</a>
+            </li>
+            <li >
+            <a title="Tagged Datasets"  href="/downloads/">Datasets</a>
+            </li>
+        </ul>
+         {% else %}
+         <br>
+         {% endif %}
+        <br>
     </div>
 </div>
 {% endblock %}
