@@ -92,13 +92,14 @@ class FileHandler(object):
             graph = nx.DiGraph()
             with input_file as f:
                 lines = itertools.ifilter(None, (line.rstrip() for line in f))
-            for elem in lines:
-                elem = elem.lstrip(' ')
-                if elem[0] != '#':
-                    tmp = elem.strip().split(' ')
-                    graph.add_node(tmp[0], {'id': tmp[0], 'label': tmp[0]})
-                    graph.add_node(tmp[1], {'id': tmp[1], 'label': tmp[1]})
-                    graph.add_edge(tmp[0], tmp[1])
+
+                for elem in lines:
+                    elem = elem.lstrip(' ')
+                    if elem[0] != '#':
+                        tmp = elem.strip().split(' ')
+                        graph.add_node(tmp[0], {'id': tmp[0], 'label': tmp[0]})
+                        graph.add_node(tmp[1], {'id': tmp[1], 'label': tmp[1]})
+                        graph.add_edge(tmp[0], tmp[1])
 
             self._generate_graphs(graph, check=True)
 

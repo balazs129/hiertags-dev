@@ -259,7 +259,6 @@ jQuery(function ($) {
 
             function expand_all_children(d) {
                 d3.event.preventDefault();
-
                 if (globalData.nodes[globalData.graphIndex] < 100) {
                     if (d._children) {
                         d.children = d._children;
@@ -320,9 +319,7 @@ jQuery(function ($) {
                     if (d == root) {
                         return;
                     }
-                    if (d.children) {
-                        toggleChildren(d);
-                    }
+
                     dragStarted = true;
                     globalData.draggedDepth = d.depth;
                     nodes = tree.nodes(d);
@@ -335,6 +332,10 @@ jQuery(function ($) {
                     if (dragStarted) {
                         domNode = this;
                         initiateDrag(d, domNode);
+
+                        if (d.children) {
+                            collapse(d);
+                        }
                     }
 
                     var node = d3.select(this)
@@ -387,9 +388,14 @@ jQuery(function ($) {
                     this.textContent = this.textContent.replace(old_text, new_text);
                 });
 
-                $("#depthExp").spinner({ max: globalData.get_depth(),
+                var spinner_widget = $("#depthExp");
+                var newDepth = globalData.get_depth();
+                spinner_widget.spinner({ max: newDepth,
                     min: 1,
                     step: 1 });
+                if (spinner_widget.spinner("value") > newDepth) {
+                   spinner_widget.spinner("value", newDepth);
+                }
             }
 
             function endDrag() {
@@ -410,16 +416,15 @@ jQuery(function ($) {
 
                 if (draggingNode !== null && typeof selectedName !== "undefined") {
                     var newDepth = appendedDepth + 1;
-                    var translate = newDepth - globalData.draggedDepth;
-                    // we have to manually set the new depths for dragged nodes
                     if (draggingNode._children && draggingNode._children !== null){
                         draggingNode.depth = newDepth;
+
                         function visitor(node){
                             if (node._children) {
-                                node.depth += translate;
+                                node.depth = node.parent.depth + 1;
                                 node._children.forEach(visitor);
                             } else {
-                                node.depth += translate;
+                                node.depth = node.parent.depth + 1;
                             }
                         }
                         draggingNode._children.forEach(visitor);
@@ -942,7 +947,6 @@ jQuery(function ($) {
             d3.select("#toggleLabels").on("click", tlClick);
             d3.select("#flipLayout").on("click", toClick);
             d3.select("#exportGraph").on("click", epdfClick);
-            //d3.select("#reorderNodes").on("click", reordClick);
             d3.select("#getResult").on("click", grClick);
 
             function update(source) {
