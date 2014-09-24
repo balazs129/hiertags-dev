@@ -118,6 +118,77 @@ img.email {
     width: 100%;
 }
 
+#datasettitle {
+    color: orange;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 23px;
+    font-weight: bolder;
+    padding: 4px 0;
+    text-align: left;
+    width: 100%;
+}
+
+#datasettitle2 {
+    color: orange;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 18px;
+    font-weight: bolder;
+    padding: 4px 0;
+    text-align: left;
+    width: 100%;
+}
+
+#datadesc {
+    color: black;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    padding: 10px 0;
+    text-align: left;
+    width: 100%;
+}
+
+#filelist
+{
+background: white;
+margin: 10px;
+border-collapse: collapse;
+text-align: left;
+width: 680px;
+}
+#filelist th
+{
+font-size: 14px;
+font-weight: normal;
+color: white;
+background: blue;
+padding: 5px 10px;
+text-align: left;
+}
+
+#filelist td
+{
+border-bottom: 1px solid #ccc;
+color: black;
+padding: 3px 8px;
+}
+
+#filelist tbody a
+{
+text-decoration:none;
+color: #74a743;
+}
+
+#filelist tbody a:hover
+{
+text-decoration:underline;
+}
+
+#filelist tbody tr:hover td {
+color: #000;
+background: #eeeeee;
+}
+
+
 #subtext1 {
     border-color: #EAEAEA;
     border-style: solid;
