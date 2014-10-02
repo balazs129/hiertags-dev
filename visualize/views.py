@@ -41,7 +41,7 @@ def gen_flat(graph):
     return data
 
 
-def visualize(request, template_name='visualize.html'):
+def visualize(request, template_name='visualize/visualize.html'):
     """
     Basic view for the 'visualize' menu item.
 

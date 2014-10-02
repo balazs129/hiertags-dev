@@ -49,7 +49,7 @@ STATICFILES_DIRS = (
 )
 # List of locations of the template source files searched by django in search order.
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, '../templates'),
+    os.path.join(BASE_DIR, 'templates'),
 )
 # =============
 # = Databases =
@@ -73,8 +73,10 @@ STATICFILES_FINDERS = (
 )
 
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
+    ('django.template.loaders.cached.Loader', (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )),
 )
 
 MIDDLEWARE_CLASSES = (

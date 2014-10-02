@@ -9,12 +9,11 @@ from django.views.generic import RedirectView
 urlpatterns = patterns('',
                        url(r'^$', RedirectView.as_view(url='/home/'), name='root'),
                        url(r'^visualize/', include('visualize.urls')),
-                       url(r'^$', include('django.contrib.flatpages.urls')),
 )
 
 if settings.ADMIN_ENABLED:
     urlpatterns += patterns('',
-                          url(r'^admin/', include(admin.site.urls))
+                            url(r'^admin/', include(admin.site.urls))
     )
 
 if settings.DEBUG:
