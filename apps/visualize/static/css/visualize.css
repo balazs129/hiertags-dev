@@ -27,7 +27,7 @@ a {
    display: block;
    width: 32px;
    height: 32px;
-   background: url("../images/loader.gif") center no-repeat ;
+   background: url("../../../base/static/images/loader.gif") center no-repeat ;
 }
 
 .btn {
