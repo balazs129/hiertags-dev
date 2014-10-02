@@ -1,14 +1,12 @@
 {% load staticfiles %}
+
 <!DOCTYPE html>
-<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <html lang="en">
 <head>
     <meta charset="utf-8">
     <title>{% block title %} HIERTAGS {% endblock %}</title>
     <link type="image/x-icon" href="{%  static "images/favicon.ico" %}" rel="icon">
-    <link rel="stylesheet" href="{%  static "css/bootstrap.min.css" %}">
     <link href="{% static "css/hiertags.css" %}" rel="stylesheet">
-    <script src="{% static "js/jquery-1.11.1.min.js" %}" ></script>
-    <script src="{% static "js/bootstrap.min.js" %}"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
