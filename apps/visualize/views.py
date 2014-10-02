@@ -6,8 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
 from forms import GraphUploadForm, SerializedSvgForm
-from classes.filehandler import FileHandler
-from classes.exportgraph import ExportGraph
+from apps.visualize.classes.filehandler import FileHandler
+from apps.visualize.classes.exportgraph import ExportGraph
 
 
 def gen_flat(graph):

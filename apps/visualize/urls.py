@@ -1,5 +1,7 @@
 from django.conf.urls import url, patterns
-import views
+
+from apps.visualize import views
+
 
 urlpatterns = patterns('',
     url(r'^$', views.visualize, name='visualize'),

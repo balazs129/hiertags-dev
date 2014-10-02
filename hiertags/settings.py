@@ -48,9 +48,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, '../media'),
 )
 # List of locations of the template source files searched by django in search order.
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-)
 # =============
 # = Databases =
 # =============
@@ -106,7 +103,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.flatpages',
-    'visualize',
+    'apps.base',
+    'apps.visualize',
 )
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'

@@ -5,7 +5,7 @@ import itertools
 import networkx as nx
 from networkx.exception import NetworkXUnfeasible
 
-from xgmmlreader import read_xgmml
+from apps.visualize.classes.xgmmlreader import read_xgmml
 
 
 class FileHandler(object):

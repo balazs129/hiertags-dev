@@ -8,7 +8,7 @@ from django.views.generic import RedirectView
 
 urlpatterns = patterns('',
                        url(r'^$', RedirectView.as_view(url='/home/'), name='root'),
-                       url(r'^visualize/', include('visualize.urls')),
+                       url(r'^visualize/', include('apps.visualize.urls')),
 )
 
 if settings.ADMIN_ENABLED:
