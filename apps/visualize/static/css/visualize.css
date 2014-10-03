@@ -1,5 +1,6 @@
-body {
+html, body {
     text-align: center;
+    height: 100%;
 }
 
 #contentcolumn {
@@ -8,44 +9,87 @@ body {
     width: 700px;
 }
 
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 90px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
 a {
     text-decoration: underline;
 }
 
-#infobar {
-   position: absolute;
-   top: 8px;
-   right: 0px;
-   width: 500px;
-   color: #8a6d3b;
-   /*font-size: 100%;*/
-   font-weight: bold;
-}
 #progress-circle {
-   visibility: hidden;
-   float: left;
-   display: block;
-   width: 32px;
-   height: 32px;
-   background: url("../../../base/static/images/loader.gif") center no-repeat ;
+    #visibility: hidden;
+    display: block;
+    width: 36px;
+    height: 36px;
+    background: url("/static/images/loader.gif") center no-repeat;
 }
 
-.btn {
-    float: left;
-    -moz-user-select: none;
-    background-image: none;
-    border: 1px solid rgba(0, 0, 0, 0);
-    border-radius: 4px;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.42857;
-    margin-bottom: 0;
-    padding: 6px 12px;
+#infobar {
+    color: #8a6d3b;
+    font-size: 16px;
+    margin-top: 5px;
     text-align: center;
     vertical-align: middle;
-    white-space: nowrap;
+    font-weight: bold;
+}
+
+.col-md-12, .row{
+    height: 90%;
+}
+
+.row > div {
+    height: 100%;
+}
+
+/* to make columns visible */
+.row .col-xs-1 {
+    background-color: #eee;
+}
+
+.row .col-xs-8 {
+    background-color: #ddd;
+}
+
+/*space between buttons*/
+.btn-group-vertical > div > button {
+    margin-bottom: 10px;
+}
+
+.btn-group-vertical > div > button > span {
+    vertical-align: middle;
+    display: inline-block;
+    text-align: center;
+    width: 80px;
+}
+
+.btnicon {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 4px;
+    width: 30px;
+}
+
+.btnsize {
+    width: 120px;
+    margin: 0 auto;
 }
 
 .lefttube2 {
@@ -58,17 +102,18 @@ a {
 
 #visualization {
     display: inline-block;
-    /*width: 70%;*/
-    /*height: 480px;*/
-    margin-left: auto;
-    margin-right: auto;
+    border-width: 2px;
+    border-color: #000;
+    width: 100%;
+    height: 100%;
+    margin: 5px 5px 5px 5px;
 }
 
 #rightbar {
-    display: inline-block;
-    position: absolute;
-    margin-left: 10px;
-    width: 100px;
+    /*display: inline-block;*/
+    /*position: absolute;*/
+    /*margin-left: 10px;*/
+    /*width: 100px;*/
     /*height: auto;*/
 }
 
@@ -165,8 +210,9 @@ a {
 }
 
 #searchdiv {
+    width: 50%;
     display: block;
-    width: 70%;
+    margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
 }

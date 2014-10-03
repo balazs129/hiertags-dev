@@ -1,40 +1,45 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
-    <html lang="en">
+<html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %} HIERTAGS {% endblock %}</title>
-    <link type="image/x-icon" href="{%  static "images/favicon.ico" %}" rel="icon">
+    <link type="image/x-icon" href="{% static "images/favicon.ico" %}" rel="icon">
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
     <link href="{% static "css/hiertags.css" %}" rel="stylesheet">
     {% block head %}{% endblock %}
 </head>
 <body>
+<div class="container">
+<div class="row">
     <div id="maincontainer">
         <div class="center">
-            <img src="{% static "images/HIERTAGS_banner.jpg" %}" alt="" style="width: 700px; height: 107px;" >
+            <img src="{% static "images/HIERTAGS_banner.jpg" %}" alt="" style="width: 700px; height: 107px;">
             <br>
         </div>
         <div id="modernbricksmenu2">
             <ul>
-                <li {%  if act_menu == 'home' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
+                <li {% if act_menu == 'home' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
                     <a title="Home" href="/home/">Home</a>
                 </li>
-                <li {%  if act_menu == 'downloads' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
+                <li {% if act_menu == 'downloads' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
                     <a title="Downloads" href="/downloads/">Downloads </a>
                 </li>
-                <li {%  if act_menu == 'publications' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
+                <li {% if act_menu == 'publications' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
                     <a title="Publications" href="/publications/">Publications</a>
                 </li>
-                <li {%  if act_menu == 'people' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
+                <li {% if act_menu == 'people' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
                     <a title="People" href="/people/">People</a>
                 </li>
-                <li {%  if act_menu == 'visualize' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
+                <li {% if act_menu == 'visualize' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
                     <a title="Visualize" href="/visualize">Visualize</a>
                 </li>
             </ul>
         </div>
-        <br style="clear: left" />
+        <br style="clear: left"/>
+
         <div id="contentwrapper">
             <div id="contentcolumn">
                 <div class="innertube3">
@@ -44,11 +49,14 @@
         </div>
         {% block leftcontact %}{% endblock %}
     </div>
-    {% if act_menu == 'visualize' %}
-        <div id="searchdiv"></div>
-        <svg id="visualization"></svg>
-        <div id="rightbar"></div>
-        <div id="rightbar2"></div>
-    {%  endif %}
+</div></div>
+{% block visualization %}{% endblock %}
+{#    {% if act_menu == 'visualize' %}#}
+{#        <div id="searchdiv"></div>#}
+{#        <svg id="visualization"></svg>#}
+{#        <div id="rightbar"></div>#}
+{#        <div id="rightbar2"></div>#}
+{#    {%  endif %}#}
+<script src="{% static "js/bootstrap.min.js" %}"></script>
 </body>
 </html>
