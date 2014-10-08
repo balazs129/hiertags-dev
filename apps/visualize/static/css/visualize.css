@@ -3,12 +3,14 @@ html, body {
     height: 100%;
 }
 
+/* Override contentcolumn to span the whole column */
 #contentcolumn {
     text-align: left;
     margin-left: 0px;
     width: 700px;
 }
 
+/* === File upload button === */
 .btn-file {
     position: relative;
     overflow: hidden;
@@ -37,8 +39,8 @@ a {
 #progress-circle {
     #visibility: hidden;
     display: block;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     background: url("/static/images/loader.gif") center no-repeat;
 }
 
@@ -46,13 +48,11 @@ a {
     color: #8a6d3b;
     font-size: 16px;
     margin-top: 5px;
-    text-align: center;
-    vertical-align: middle;
     font-weight: bold;
 }
 
-.col-md-12, .row{
-    height: 90%;
+.max-height {
+    height: 90%
 }
 
 .row > div {
@@ -69,8 +69,12 @@ a {
 }
 
 /*space between buttons*/
-.btn-group-vertical > div > button {
-    margin-bottom: 10px;
+/*.btn-group-vertical > div > button {*/
+    /*margin-bottom: 10px;*/
+/*}*/
+
+.btn-200-below {
+    margin-bottom: 50px;
 }
 
 .btn-group-vertical > div > button > span {
@@ -79,7 +83,9 @@ a {
     text-align: center;
     width: 80px;
 }
-
+.inline-button {
+    display: inline-block;
+}
 .btnicon {
     display: inline-block;
     vertical-align: middle;
@@ -209,13 +215,13 @@ a {
     display: none;
 }
 
-#searchdiv {
-    width: 50%;
-    display: block;
-    margin-top: 15px;
-    margin-left: auto;
-    margin-right: auto;
-}
+/*#searchdiv {*/
+    /*width: 50%;*/
+    /*display: block;*/
+    /*margin-top: 15px;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+/*}*/
 
 .autocomplete-suggestions { border: 1px solid #999; background: #FFF; cursor: default; overflow: auto; -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); }
 .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }

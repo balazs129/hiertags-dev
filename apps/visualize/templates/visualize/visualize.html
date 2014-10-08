@@ -34,20 +34,28 @@
             </span>
         </div>
         <div class="col-md-1">
-            <div id="progress-circle" class="progress-circle"></div>
+            <div id="progress-circle" class="progress-circle text-center"></div>
         </div>
         <div class="col-md-9">
-             <div id="infobar">Ez egy teszt szöveg!</div>
+             <div class="text-center" id="infobar">Ez egy teszt szöveg!</div>
         </div>
     </div>
         <div class="row">
-            <input type="search" id="searchdiv">
+            <div class="col-xs-4"></div>
+            <div class="col-xs-6">
+            <div class="input-group input-group-sm">
+                <input class="text-center form-control" type="search" id="searchdiv" placeholder="Search for a tag">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Go!</button>
+      </span>
+            </div>
+            </div>
         </div>
     {% endblock %}
 
     {% block visualization %}
-        <div class="col-md-12">
-        <div class="row">
+        <div class="col-md-12 max-height">
+        <div class="row max-height">
             <div class="col-xs-2"></div>
             <div class="col-xs-8">
                 <svg id="visualization"></svg>
@@ -66,9 +74,19 @@
                 <button type="button" class="btn btn-sm btn-primary btn-block">
                     <i class="glyphicon glyphicon-tag"></i>
                     <span>Toggle Labels</span></button>
-                <button type="button" class="btn btn-sm btn-primary btn-block">
+                <button type="button" class="btn btn-sm btn-primary btn-block btn-200-below">
                     <i class="glyphicon glyphicon-share-alt"></i>
                     <span>Flip Layout</span></button>
+                <div class="btn-group-sm">
+                <button type="button" class="btn btn-sm btn-primary btn-block">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                    <span>Previous Graph</span></button>
+                <button type="button" class="btn btn-sm btn-primary btn-block">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span>Next Graph</span></button>
+                </div>
+                    <p>Graph: 1/76</p>
+                    <p>Nodes: 156</p>
                 </div>
             </div>
 {#            <div class="col-sm-1 btn-group-vertical" id="rightbar-2">#}
@@ -76,6 +94,32 @@
 {#                <button type="button" class="btn btn-sm">HELLO</button>#}
 {#                <button type="button" class="btn btn-sm">HELLO</button>#}
 {#            </div>#}
+        </div>
+        <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-2">
+                <div class="input-group input-group-sm">
+                    <input type="number" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Expand</button>
+                        </span>
+                </div>
+                </div>
+            <div class="col-xs-2"></div>
+            <div class="col-xs-2">
+                <div class="btn-group dropup">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                        Save <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>SVG</li>
+                        <li>JPG</li>
+                        <li>PNG</li>
+                        <li class="divider"></li>
+                        <li>Edgelist</li>
+                    </ul>
+                </div>
+            </div>
         </div>
         </div>
     {% endblock %}
@@ -85,8 +129,6 @@
         <input type="text" id="layout" name="layout" style="visibility:hidden">
         <input type="submit" value="submit" style="visibility:hidden">
     </form>
-
-    <script src="{%  static "js/jquery-2.1.1.min.js" %}"></script>
 {#    <script src="{%  static "js/d3.min.js" %}"></script>#}
 {#    <script src="{%  static "js/jquery.autocomplete.min.js" %}"></script>#}
 {#    <script src="{%  static "js/underscore-min.js" %}"></script>#}
