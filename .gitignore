@@ -1,10 +1,23 @@
-*.log
-*.pot
+# generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+
+#Python specific
 *.pyc
-*.sublime-project
-*.sublime-workspace
-*.cys
-*.sq3
-*.pyo
-build*
-src*
+
+#Sqlite
+*.sqlite3
+
+#Apllication specific
+.idea/
+bin/
+include/
+local/
+sandbox/
+share/
+lib/
+
+hiertags/settings_dev.py

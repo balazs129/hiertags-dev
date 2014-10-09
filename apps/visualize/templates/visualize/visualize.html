@@ -26,35 +26,35 @@
     </div>
     <div class="row">
         <div class="col-md-2">
-{#            <span class="btn btn-success fileinput-button">#}
             <span class="btn btn-default btn-file">
                 <i class="glyphicon glyphicon-folder-open"></i>
                 <span>Choose file</span>
                 <input id="fileupload" type="file" name="files[]">
             </span>
-        </div>
+        </div><!-- col-md-2 !-->
         <div class="col-md-1">
-            <div id="progress-circle" class="progress-circle text-center"></div>
+            <div id="progress-circle" class="hidden progress-circle text-center"></div>
         </div>
         <div class="col-md-9">
-             <div class="text-center" id="infobar">Ez egy teszt szöveg!</div>
+             <div class="hidden text-center" id="infobar">Ez egy teszt szöveg!</div>
         </div>
     </div>
         <div class="row">
-            <div class="col-xs-4"></div>
-            <div class="col-xs-6">
-            <div class="input-group input-group-sm">
-                <input class="text-center form-control" type="search" id="searchdiv" placeholder="Search for a tag">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Go!</button>
-      </span>
-            </div>
-            </div>
+            <div class="col-xs-3"></div>
+                <div class="col-xs-7">
+                    <div class="input-group input-group-sm hidden">
+                        <input class="text-center form-control" type="search" id="searchdiv" placeholder="Search for a tag">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Go!</button>
+                        </span>
+                    </div><!-- /input-group -->
+                </div>
+            <div class="col-xs-2"></div>
         </div>
     {% endblock %}
 
     {% block visualization %}
-        <div class="col-md-12 max-height">
+        <div class="col-md-12 max-height hidden">
         <div class="row max-height">
             <div class="col-xs-2"></div>
             <div class="col-xs-8">
@@ -122,13 +122,16 @@
             </div>
         </div>
         </div>
-    {% endblock %}
     <form id="svgform" method="POST" action="download/">
         <input type="text" id="output_format" name="output_format" style="visibility:hidden">
         <input type="text" id="data" name="data" style="visibility:hidden">
         <input type="text" id="layout" name="layout" style="visibility:hidden">
         <input type="submit" value="submit" style="visibility:hidden">
     </form>
+    <script src="{% static "js/jquery.ui.widget.min.js" %}"></script>
+    <script src="{% static "js/jquery.fileupload.min.js" %}"></script>
+    <script src="{% static "js/visualization.js" %}"></script>
+    {% endblock %}
 {#    <script src="{%  static "js/d3.min.js" %}"></script>#}
 {#    <script src="{%  static "js/jquery.autocomplete.min.js" %}"></script>#}
 {#    <script src="{%  static "js/underscore-min.js" %}"></script>#}

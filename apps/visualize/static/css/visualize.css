@@ -68,6 +68,9 @@ a {
     background-color: #ddd;
 }
 
+.hidden {
+    display: hidden;
+}
 /*space between buttons*/
 /*.btn-group-vertical > div > button {*/
     /*margin-bottom: 10px;*/
