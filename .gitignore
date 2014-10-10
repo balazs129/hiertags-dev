@@ -20,4 +20,7 @@ sandbox/
 share/
 lib/
 
+#Node
+node_modules/
+
 hiertags/settings_dev.py

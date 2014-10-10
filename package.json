@@ -1,0 +1,7 @@
+{
+  "name": "hiertags-dev",
+  "version": "0.0.1",
+  "dependencies": {
+    "grunt": "~0.4.5"
+  }
+}
