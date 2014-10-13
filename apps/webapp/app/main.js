@@ -1,25 +1,39 @@
 var Backbone = require('backbone'),
-    $ = require('jquery');
+    _ = require('underscore');
 
+//Link Backbone and jQuery
 Backbone.$ = $;
 
-var Todo = Backbone.Model.extend({
-  initialize: function () {
-    console.log('This model has been initialized.');
-  }
+$(function(){
+  'use strict';
+
+  //Handling the fileupload
+  $('#fileupload').fileupload({
+    url: '/visualize/data/',
+    crossDomain: false,
+    paramName: 'graph',
+    dataType: 'json',
+    add: function (e, data) {
+      var uploadedFile = data.originalFiles[0].name.split('.'),
+          fileExt = _.last(uploadedFile).toLowerCase(),
+          infoBar = $('#infobar');
+
+      switch (fileExt) {
+        case 'txt':
+        case 'zip':
+        case 'cys':
+        case 'xgmml':
+        case 'xml':
+          data.submit();
+          break;
+        default :
+          infoBar.text('Invalid file type!');
+      }
+    },
+    progress: function () {
+    },
+    done: function (e, data) {
+      console.log(data);
+    }
+  });
 });
-
-var myTodo = new Todo({
-  title: "Arbitrary Title",
-  completed: true
-});
-
-var TodoView = Backbone.View.extend({
-  tagName: 'ul',
-  className: 'container',
-  id: 'todos'
-});
-
-var todosView = new TodoView();
-
-console.log(todosView.el);
