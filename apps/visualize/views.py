@@ -10,37 +10,6 @@ from apps.visualize.util.filehandler import FileHandler
 from apps.visualize.util.exportgraph import ExportGraph
 
 
-def gen_flat(graph):
-    """
-    Generate Flat edgelist from the generated graph for the JS script.
-
-    :param graph: NetworkX graph
-    :return: flattened data
-    """
-    data = []
-    idmap = {}
-
-    # If data dict empty then label=id
-    for elem in graph.nodes_iter(data=True):
-        if len(elem[1]) == 0:
-            elem[1]['id'] = elem[0]
-            elem[1]['label'] = elem[0]
-            idmap[elem[1]['id']] = elem[1]['label']
-        else:
-            idmap[elem[1]['id']] = elem[1]['label']
-
-    for elem in graph.nodes():
-        tmp = {'name': idmap[elem]}
-        if len(graph.pred[elem].keys()) == 0:
-            parent = "null"
-        else:
-            t_parent = graph.pred[elem].keys()[0]
-            parent = idmap[t_parent]
-        tmp['parent'] = parent
-        data.append(tmp)
-    return data
-
-
 def visualize(request, template_name='visualize/visualize.html'):
     """
     Basic view for the 'visualize' menu item.
@@ -66,19 +35,12 @@ def visualize_data(request):
     :return: json object in response to the js script
     """
     form = GraphUploadForm(request.POST or None, request.FILES or None)
-    to_send = []
     if form.is_valid():
         input_file = form.cleaned_data['graph']
         fh = FileHandler()
         fh.build_graph(input_file)
 
-        for elem in fh.graphs:
-            if elem.number_of_nodes() > 1:
-                data = gen_flat(elem)
-                to_send.append(data)
-        excees_edges = fh.edges
-        return_data = {'data': to_send, 'edges': excees_edges}
-        return HttpResponse(json.dumps(return_data), content_type="application/json")
+        return HttpResponse(json.dumps(fh.graphs), content_type="application/json")
 
 
 @csrf_exempt

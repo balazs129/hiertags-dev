@@ -7,6 +7,7 @@ from networkx.exception import NetworkXUnfeasible
 
 from apps.visualize.util.xgmmlreader import read_xgmml
 from apps.visualize.util.parsedag import parse_DAG
+from apps.visualize.util.genflat import gen_flat
 
 
 class FileHandler(object):
@@ -18,7 +19,7 @@ class FileHandler(object):
         self.graphs = []
         self.number_of_graphs = 0
 
-    def _generate_graphs(self, graph, check=False):
+    def _generate_graphs(self, graph, name, check=False):
         """
         Helper function for the edgelist cases.
 
@@ -43,9 +44,9 @@ class FileHandler(object):
                         elem.reverse(copy=False)
 
                 dag_graph, interlinks = parse_DAG(elem)
-                self.graphs.append({'dag': dag_graph, 'interlinks': interlinks})
+                self.graphs.append({'dag': gen_flat(dag_graph), 'interlinks': interlinks, 'name': name})
             except NetworkXUnfeasible:
-                #If the graph can't be sorted topologically(not a DAG)
+                # If the graph can't be sorted topologically(not a DAG)
                 self.graphs.append({'dag': None})
 
 
@@ -55,6 +56,7 @@ class FileHandler(object):
         :param input_file: The uploaded file
         :return: None, sets the Class attributes
         """
+
         def open_edgelist():
             graph = nx.DiGraph()
             with input_file as f:
@@ -69,10 +71,10 @@ class FileHandler(object):
                             graph.add_node(tmp[1], {'id': tmp[1], 'label': tmp[1]})
                             graph.add_edge(tmp[0], tmp[1])
 
-            self._generate_graphs(graph, check=True)
+            self._generate_graphs(graph, input_file.name, check=True)
 
         def open_zipfile():
-            #TODO: Rewrite
+            # TODO: Rewrite
             with ZipFile(input_file) as zf:
                 graph = nx.DiGraph()
                 for line in zf.open('nodes.txt').readlines():
@@ -95,10 +97,12 @@ class FileHandler(object):
                     line = line.strip().split(' ')
                     graph.add_edge(line[1], line[0])
 
-            self._generate_graphs(graph, check=True)
+            self._generate_graphs(graph, input_file.name, check=True)
 
         def open_xgmml():
-            self._generate_graphs(read_xgmml(input_file))
+            # self._generate_graphs(read_xgmml(input_file))
+            for elem in read_xgmml(input_file):
+                self._generate_graphs(elem['graph'], elem['name'])
 
         def open_cys():
             sessionfile = ZipFile(input_file, 'r')
@@ -115,10 +119,9 @@ class FileHandler(object):
             for elem in networks:
                 cysfile = ZipFile(input_file, 'r')
                 graphfile = cysfile.open(elem)
-                graph = read_xgmml(graphfile)
+                for graphs in read_xgmml(graphfile):
+                    self._generate_graphs(graphs['graph'], graphs['name'])
                 cysfile.close()
-
-                self._generate_graphs(graph)
 
         fileext = {'txt': open_edgelist,
                    'zip': open_zipfile,
@@ -126,5 +129,5 @@ class FileHandler(object):
                    'xml': open_xgmml,
                    'cys': open_cys}
 
-        #TODO check for valid input
+        # TODO check for valid input
         fileext[input_file.name.split('.')[-1]]()

@@ -1,6 +1,7 @@
+import HTMLParser
+
 from lxml import etree
 import networkx as nx
-import HTMLParser
 
 
 def read_xgmml(inputfile):
@@ -92,4 +93,3 @@ def read_xgmml(inputfile):
                     tmp_graph.add_edge(link.attrib['source'], link.attrib['target'])
         nx_graphs.append({'name': elem['name'], 'graph': tmp_graph})
     return nx_graphs
-
