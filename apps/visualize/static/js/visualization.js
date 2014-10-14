@@ -1,6 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var Backbone = require('backbone'),
-    _ = require('underscore');
+    _ = require('underscore'),
+    baseUploadOptions = require('util/fileupload');
 
 //Link Backbone and jQuery
 Backbone.$ = $;
@@ -8,38 +9,55 @@ Backbone.$ = $;
 $(function(){
   'use strict';
 
-  //Handling the fileupload
-  $('#fileupload').fileupload({
-    url: '/visualize/data/',
-    crossDomain: false,
-    paramName: 'graph',
-    dataType: 'json',
-    add: function (e, data) {
-      var uploadedFile = data.originalFiles[0].name.split('.'),
-          fileExt = _.last(uploadedFile).toLowerCase(),
-          infoBar = $('#infobar');
-
-      switch (fileExt) {
-        case 'txt':
-        case 'zip':
-        case 'cys':
-        case 'xgmml':
-        case 'xml':
-          data.submit();
-          break;
-        default :
-          infoBar.text('Invalid file type!');
-      }
-    },
-    progress: function () {
-    },
+  var fileUploadOptions = _.extend(baseUploadOptions, {
     done: function (e, data) {
-      console.log(data);
+      console.log(data.result);
     }
   });
+  
+  //Handling the fileupload
+  $('#fileupload').fileupload(fileUploadOptions);
 });
 
-},{"backbone":2,"underscore":4}],2:[function(require,module,exports){
+},{"backbone":3,"underscore":5,"util/fileupload":2}],2:[function(require,module,exports){
+var _ = require('underscore'),
+    url = '/visualize/data/';
+
+
+var fileUploadOptions = {
+
+  url: url,
+  dropZone: null,
+  crossDomain: false,
+  paramName: 'graph',
+  dataType: 'json',
+
+  add: function (e, data) {
+    'use strict';
+    var uploadedFile = data.originalFiles[0].name.split('.'),
+      fileExt = _.last(uploadedFile).toLowerCase(),
+      infoBar = $('#infobar');
+
+    switch (fileExt) {
+      case 'txt':
+      case 'zip':
+      case 'cys':
+      case 'xgmml':
+      case 'xml':
+        data.submit();
+        break;
+      default :
+        infoBar.text('Invalid file type!');
+    }
+  },
+
+  progress: function () {
+  }
+};
+
+module.exports = fileUploadOptions;
+
+},{"underscore":5}],3:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1649,7 +1667,7 @@ $(function(){
 
 }));
 
-},{"underscore":3}],3:[function(require,module,exports){
+},{"underscore":4}],4:[function(require,module,exports){
 //     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -3066,6 +3084,6 @@ $(function(){
   }
 }.call(this));
 
-},{}],4:[function(require,module,exports){
-module.exports=require(3)
-},{"/home/balazs/PycharmProjects/hiertags-dev/apps/webapp/node_modules/backbone/node_modules/underscore/underscore.js":3}]},{},[1]);
+},{}],5:[function(require,module,exports){
+module.exports=require(4)
+},{"/home/balazs/PycharmProjects/hiertags-dev/apps/webapp/node_modules/backbone/node_modules/underscore/underscore.js":4}]},{},[1]);

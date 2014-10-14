@@ -75,7 +75,7 @@ jQuery(function ($) {
                 globalData.extraEdges = data.result.edges;
 
                 if (globalData.numberOfComponents > 1) {
-                    var error = $('<p>').textContent = "Uploaded file contained multiple graphs(" + globalData.numberOfComponents + "), using the first.";
+                    var error = $('<p>').textContent = "Uploaded file contained multiple components(" + globalData.numberOfComponents + "), using the first.";
                     $('#infobar').append(error);
                 }
                 $('#visualization').css('border', '1px solid #e0e0e0');
@@ -102,7 +102,7 @@ jQuery(function ($) {
                     names.push(node.name);
                 };
 
-                //Calculate data for graphs
+                //Calculate data for components
                 for (var elem = 0; elem < globalData.numberOfComponents; elem += 1) {
                     globalData.graphData.push(convert_data(data.result.data[elem]));
                     globalData.graphDepths.push(get_depth(globalData.graphData[elem]));

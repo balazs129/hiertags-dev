@@ -5,7 +5,8 @@ import itertools
 import networkx as nx
 from networkx.exception import NetworkXUnfeasible
 
-from apps.visualize.classes.xgmmlreader import read_xgmml
+from apps.visualize.util.xgmmlreader import read_xgmml
+from apps.visualize.util.parsedag import parse_DAG
 
 
 class FileHandler(object):
@@ -13,9 +14,8 @@ class FileHandler(object):
     This Class handless the uploaded files
     """
     def __init__(self):
+        self.components = []
         self.graphs = []
-        self.edges = []
-        self.graphs_to_send = []
         self.number_of_graphs = 0
 
     def _generate_graphs(self, graph, check=False):
@@ -27,10 +27,10 @@ class FileHandler(object):
         :return: None, sets the Class attributes
         """
         # Number of components
-        self.graphs = nx.weakly_connected_component_subgraphs(graph)
+        self.components = nx.weakly_connected_component_subgraphs(graph)
 
         # Sort nodes topologically and check if current directioning is OK, else reverse directions
-        for elem in self.graphs:
+        for elem in self.components:
             try:
                 root = nx.topological_sort(elem)[0]
 
@@ -42,45 +42,12 @@ class FileHandler(object):
                     if sum(1 for _ in nx.bfs_edges(elem, root)) < sum(1 for _ in nx.bfs_edges(rev_graph, revroot)):
                         elem.reverse(copy=False)
 
-                tree_graph, interlinks = self._parse_DAG(elem)
-                self.graphs_to_send.append(tree_graph)
-                self.edges.extend(interlinks)
+                dag_graph, interlinks = parse_DAG(elem)
+                self.graphs.append({'dag': dag_graph, 'interlinks': interlinks})
             except NetworkXUnfeasible:
-                #If the graph can't be sorted topologically(not a DAG), we simply skip it.
-                pass
+                #If the graph can't be sorted topologically(not a DAG)
+                self.graphs.append({'dag': None})
 
-    @staticmethod
-    def _parse_DAG(graph):
-        """
-        Helper method, returns a DAG and the extra edges(when you have multiple parents)
-
-        :param graph: NetworkX graph
-        :return: NetworkX graph(DAG), extre edges
-        """
-        # Search for nodes with more than one parent
-        nodes = []
-        for node, ins in graph.in_degree().items():
-            if ins > 1:
-                nodes.append(node)
-        sorted_nodes = nx.topological_sort(graph)
-        root = sorted_nodes[0]
-
-        snodes = []
-        edges_to_remove = []
-        for elem in sorted_nodes:
-            if elem in nodes:
-                snodes.append(elem)
-
-        for elem in snodes:
-            paths = list(nx.all_simple_paths(graph, root, elem))
-            paths.sort(key=lambda x: len(x))
-            to_remove = paths[:-1]
-            for rem in to_remove:
-                if graph.in_degree(rem[-1]) > 1:
-                    graph.remove_edge(rem[-2], rem[-1])
-                    edges_to_remove.append([graph.node[rem[-2]]['label'], graph.node[rem[-1]]['label']])
-
-        return graph, edges_to_remove
 
     def build_graph(self, input_file):
         """
@@ -97,13 +64,15 @@ class FileHandler(object):
                     elem = elem.lstrip(' ')
                     if elem[0] != '#':
                         tmp = elem.strip().split(' ')
-                        graph.add_node(tmp[0], {'id': tmp[0], 'label': tmp[0]})
-                        graph.add_node(tmp[1], {'id': tmp[1], 'label': tmp[1]})
-                        graph.add_edge(tmp[0], tmp[1])
+                        if len(tmp) == 2:
+                            graph.add_node(tmp[0], {'id': tmp[0], 'label': tmp[0]})
+                            graph.add_node(tmp[1], {'id': tmp[1], 'label': tmp[1]})
+                            graph.add_edge(tmp[0], tmp[1])
 
             self._generate_graphs(graph, check=True)
 
         def open_zipfile():
+            #TODO: Rewrite
             with ZipFile(input_file) as zf:
                 graph = nx.DiGraph()
                 for line in zf.open('nodes.txt').readlines():

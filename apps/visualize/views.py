@@ -6,8 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
 from forms import GraphUploadForm, SerializedSvgForm
-from apps.visualize.classes.filehandler import FileHandler
-from apps.visualize.classes.exportgraph import ExportGraph
+from apps.visualize.util.filehandler import FileHandler
+from apps.visualize.util.exportgraph import ExportGraph
 
 
 def gen_flat(graph):
@@ -72,7 +72,7 @@ def visualize_data(request):
         fh = FileHandler()
         fh.build_graph(input_file)
 
-        for elem in fh.graphs_to_send:
+        for elem in fh.graphs:
             if elem.number_of_nodes() > 1:
                 data = gen_flat(elem)
                 to_send.append(data)
