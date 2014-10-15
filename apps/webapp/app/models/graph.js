@@ -12,7 +12,7 @@ var Graph = Backbone.Model.extend({
 
     // Properties for the view
     suggestions: [],
-    islayoutVertical: true,
+    isLayoutVertical: true,
     depth: 0,
     width: 0,
     isLabelsVisible: true
@@ -22,16 +22,18 @@ var Graph = Backbone.Model.extend({
     var _this = this,
         tree = d3.layout.tree();
 
+    // Get the node names for suggestions
+    this.attributes.suggestions = [];
     this.attributes.dag.forEach(function(node){
       _this.attributes.suggestions.push(node.name);
     });
 
+    // Convert the returned flat structure to a recursive one needed by d3
     this.attributes.dag = utils.convertData(this.attributes.dag);
 
-    var root = this.attributes.dag[0],
-        nodes = tree.nodes(root).reverse();
-
-    this.attributes.depth = utils.getDepth(root);
+    //Compute the tree depth
+    tree.nodes(this.attributes.dag).reverse();
+    this.attributes.depth = utils.getDepth(this.attributes.dag);
 
   }
 });

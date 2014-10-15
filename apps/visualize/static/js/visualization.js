@@ -3,6 +3,7 @@ var Backbone = require('backbone'),
     _ = require('underscore'),
     d3 = require('d3'),
     baseUploadOptions = require('util/file-upload'),
+    TreeView = require('views/tree');
     Graph = require('models/graph');
 
 //Link Backbone and jQuery
@@ -27,17 +28,14 @@ $(function(){
         interlinks: graph.interlinks
       });
 
-      console.log(treeGraph);
+      var treeView = new TreeView({model: treeGraph});
     }
   });
 
   $('#fileupload').fileupload(fileUploadOptions);
-
-
-
 });
 
-},{"backbone":5,"d3":7,"models/graph":2,"underscore":8,"util/file-upload":3}],2:[function(require,module,exports){
+},{"backbone":6,"d3":8,"models/graph":2,"underscore":9,"util/file-upload":3,"views/tree":5}],2:[function(require,module,exports){
 var Backbone = require('backbone'),
     _ = require('underscore'),
     d3 = require('d3'),
@@ -52,7 +50,7 @@ var Graph = Backbone.Model.extend({
 
     // Properties for the view
     suggestions: [],
-    islayoutVertical: true,
+    isLayoutVertical: true,
     depth: 0,
     width: 0,
     isLabelsVisible: true
@@ -62,22 +60,24 @@ var Graph = Backbone.Model.extend({
     var _this = this,
         tree = d3.layout.tree();
 
+    // Get the node names for suggestions
+    this.attributes.suggestions = [];
     this.attributes.dag.forEach(function(node){
       _this.attributes.suggestions.push(node.name);
     });
 
+    // Convert the returned flat structure to a recursive one needed by d3
     this.attributes.dag = utils.convertData(this.attributes.dag);
 
-    var root = this.attributes.dag[0],
-        nodes = tree.nodes(root).reverse();
-
-    this.attributes.depth = utils.getDepth(root);
+    //Compute the tree depth
+    tree.nodes(this.attributes.dag).reverse();
+    this.attributes.depth = utils.getDepth(this.attributes.dag);
 
   }
 });
 
 module.exports = Graph;
-},{"backbone":5,"d3":7,"underscore":8,"util/graph-utils":4}],3:[function(require,module,exports){
+},{"backbone":6,"d3":8,"underscore":9,"util/graph-utils":4}],3:[function(require,module,exports){
 var _ = require('underscore'),
     url = '/visualize/data/';
 
@@ -117,7 +117,7 @@ var fileUploadOptions = {
 
 module.exports = fileUploadOptions;
 
-},{"underscore":8}],4:[function(require,module,exports){
+},{"underscore":9}],4:[function(require,module,exports){
 var _ = require('underscore');
 
 var utils = utils || {};
@@ -145,9 +145,10 @@ utils.convertData = function convert_data(data) {
       treeData.push(node);
     }
   });
-  return treeData;
+  return treeData[0];
 };
 
+// Compute the tree depth after it was processed with d3.layout.tree
 utils.getDepth = function get_depth(root) {
   'use strict';
   var depths = [];
@@ -169,7 +170,26 @@ utils.getDepth = function get_depth(root) {
 };
 
 module.exports = utils;
-},{"underscore":8}],5:[function(require,module,exports){
+},{"underscore":9}],5:[function(require,module,exports){
+var Backbone = require('backbone');
+
+var TreeView = Backbone.View.extend({
+  el: '#visualization',
+
+  initialize: function () {
+    console.log(this.model);
+    this.listenTo(this.model, "change", this.render);
+  },
+
+  render: function (){
+    console.log(this);
+    return this;
+  }
+});
+
+module.exports = TreeView;
+
+},{"backbone":6}],6:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1779,7 +1799,7 @@ module.exports = utils;
 
 }));
 
-},{"underscore":6}],6:[function(require,module,exports){
+},{"underscore":7}],7:[function(require,module,exports){
 //     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -3196,7 +3216,7 @@ module.exports = utils;
   }
 }.call(this));
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 !function() {
   var d3 = {
     version: "3.4.12"
@@ -12435,6 +12455,6 @@ module.exports = utils;
   if (typeof define === "function" && define.amd) define(d3); else if (typeof module === "object" && module.exports) module.exports = d3;
   this.d3 = d3;
 }();
-},{}],8:[function(require,module,exports){
-module.exports=require(6)
-},{"/home/balazs/PycharmProjects/hiertags-dev/apps/webapp/node_modules/backbone/node_modules/underscore/underscore.js":6}]},{},[1]);
+},{}],9:[function(require,module,exports){
+module.exports=require(7)
+},{"/home/balazs/PycharmProjects/hiertags-dev/apps/webapp/node_modules/backbone/node_modules/underscore/underscore.js":7}]},{},[1]);

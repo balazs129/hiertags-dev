@@ -2,6 +2,7 @@ var Backbone = require('backbone'),
     _ = require('underscore'),
     d3 = require('d3'),
     baseUploadOptions = require('util/file-upload'),
+    TreeView = require('views/tree');
     Graph = require('models/graph');
 
 //Link Backbone and jQuery
@@ -26,12 +27,9 @@ $(function(){
         interlinks: graph.interlinks
       });
 
-      console.log(treeGraph);
+      var treeView = new TreeView({model: treeGraph});
     }
   });
 
   $('#fileupload').fileupload(fileUploadOptions);
-
-
-
 });
