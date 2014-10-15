@@ -30,6 +30,8 @@ var fileUploadOptions = {
   },
 
   progress: function () {
+    'use strict';
+    $('#progress-circle').removeClass('hidden');
   }
 };
 

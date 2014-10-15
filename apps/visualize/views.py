@@ -40,7 +40,8 @@ def visualize_data(request):
         fh = FileHandler()
         fh.build_graph(input_file)
 
-        return HttpResponse(json.dumps(fh.graphs), content_type="application/json")
+        ret_val = {'numGraph': len(fh.graphs), 'graph': fh.graphs[0]}
+        return HttpResponse(json.dumps(ret_val), content_type="application/json")
 
 
 @csrf_exempt

@@ -109,14 +109,14 @@ a {
     padding-bottom: 10px;
 }
 
-#visualization {
-    display: inline-block;
-    border-width: 2px;
-    border-color: #000;
-    width: 100%;
-    height: 100%;
-    margin: 5px 5px 5px 5px;
-}
+/*#visualization {*/
+    /*display: inline-block;*/
+    /*border-width: 2px;*/
+    /*border-color: #000;*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*margin: 5px 5px 5px 5px;*/
+/*}*/
 
 #rightbar {
     /*display: inline-block;*/
