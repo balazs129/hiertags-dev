@@ -2,6 +2,7 @@ var Backbone = require('backbone');
 
 var TreeView = Backbone.View.extend({
   el: '#visualization',
+  events: {},
 
   initialize: function () {
     console.log(this.model);

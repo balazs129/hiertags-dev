@@ -28,6 +28,7 @@ $(function(){
       });
 
       var treeView = new TreeView({model: treeGraph});
+
     }
   });
 

@@ -17,6 +17,7 @@ var Graph = Backbone.Model.extend({
     width: 0,
     isLabelsVisible: true
   },
+
   initialize: function(){
     'use strict';
     var _this = this,

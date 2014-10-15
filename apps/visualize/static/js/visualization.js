@@ -29,6 +29,8 @@ $(function(){
       });
 
       var treeView = new TreeView({model: treeGraph});
+
+      treeGraph.set('width', 500);
     }
   });
 
