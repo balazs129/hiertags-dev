@@ -12,7 +12,6 @@ $(function(){
   'use strict';
 
   var numberOfGraphs = 0;
-  var graph = {};
 
   var treeGraph = new Graph({});
   var treeView = new TreeView({model: treeGraph});
@@ -21,15 +20,15 @@ $(function(){
   var fileUploadOptions = _.extend(baseUploadOptions, {
     done: function (e, data) {
       numberOfGraphs = data.result.numGraph;
-      graph = data.result.graph;
       $('#visualization-area').removeClass('hidden');
       $('#progress-circle').addClass('hidden');
 
       treeGraph.set({
-        dag: graph.dag,
-        name: graph.name,
-        interlinks: graph.interlinks
+        dag: data.result.graph.dag,
+        name: data.result.graph.name,
+        interlinks: data.result.graph.interlinks
       }, {silent: true});
+      console.log(treeGraph);
       treeGraph.update();
     }
   });

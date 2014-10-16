@@ -25,7 +25,7 @@ utils.convertData = function convert_data(data) {
       treeData.push(node);
     }
   });
-  return treeData[0];
+  return treeData;
 };
 
 // Compute the tree depth after it was processed with d3.layout.tree

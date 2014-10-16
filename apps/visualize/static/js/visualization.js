@@ -13,7 +13,6 @@ $(function(){
   'use strict';
 
   var numberOfGraphs = 0;
-  var graph = {};
 
   var treeGraph = new Graph({});
   var treeView = new TreeView({model: treeGraph});
@@ -22,17 +21,16 @@ $(function(){
   var fileUploadOptions = _.extend(baseUploadOptions, {
     done: function (e, data) {
       numberOfGraphs = data.result.numGraph;
-      graph = data.result.graph;
       $('#visualization-area').removeClass('hidden');
       $('#progress-circle').addClass('hidden');
 
       treeGraph.set({
-        dag: graph.dag,
-        name: graph.name,
-        interlinks: graph.interlinks
+        dag: data.result.graph.dag,
+        name: data.result.graph.name,
+        interlinks: data.result.graph.interlinks
       }, {silent: true});
+      console.log(treeGraph);
       treeGraph.update();
-
     }
   });
 
@@ -69,7 +67,6 @@ var Graph = Backbone.Model.extend({
     'use strict';
     var _this = this,
         tree = d3.layout.tree();
-
     // Get the node names for suggestions
     this.attributes.suggestions = [];
     this.attributes.dag.forEach(function(node){
@@ -80,8 +77,8 @@ var Graph = Backbone.Model.extend({
     this.attributes.dag = utils.convertData(this.attributes.dag);
 
     //Compute the tree depth
-    tree.nodes(this.attributes.dag).reverse();
-    this.attributes.depth = utils.getDepth(this.attributes.dag);
+    tree.nodes(this.attributes.dag[0]).reverse();
+    this.attributes.depth = utils.getDepth(this.attributes.dag[0]);
 
     //Trigger change event
     this.trigger('change');
@@ -157,7 +154,7 @@ utils.convertData = function convert_data(data) {
       treeData.push(node);
     }
   });
-  return treeData[0];
+  return treeData;
 };
 
 // Compute the tree depth after it was processed with d3.layout.tree
@@ -192,8 +189,6 @@ var TreeView = Backbone.View.extend({
   events: {},
 
   treeData: {
-    width: 0,
-    height: 0,
     tree: null,
     diagonal: null,
     svg: null
@@ -203,13 +198,14 @@ var TreeView = Backbone.View.extend({
     'use strict';
     // Generate the tree diagram
     var svgArea = $(this.el),
-        root;
+        root,
+        i = 0;
 
-    this.treeData.height = svgArea.height();
-    this.treeData.width = svgArea.width();
+    var height = svgArea.height(),
+        width = svgArea.width();
 
     this.treeData.tree = d3.layout.tree()
-          .size([this.treeData.height, this.treeData.width]);
+          .size([height, width]);
 
     this.treeData.diagonal = d3.svg.diagonal()
       .projection(function(d) { return [d.y, d.x]; });
@@ -219,22 +215,22 @@ var TreeView = Backbone.View.extend({
       .attr("height", this.treeData.height)
       .attr("class", "overlay");
 
-    root = this.model.get('dag');
-    this.update(root);
-
     this.listenTo(this.model, "change", this.render);
   },
 
   render: function (){
     'use strict';
+    var root = this.model.get('dag')[0],
+        i = 0;
+    this.update(root, i);
+    console.log(root);
     return this;
   },
-  update: function (root){
-  'use strict';
-  // Compute the new tree layout.
-  var nodes = this.treeData.tree.nodes(root).reverse(),
-      links = this.treeData.tree.links(nodes),
-      i = 0;
+  update: function (root, i){
+    'use strict';
+    // Compute the new tree layout.
+    var nodes = this.treeData.tree.nodes(root).reverse(),
+        links = this.treeData.tree.links(nodes);
 
   // Normalize for fixed-depth.
   nodes.forEach(function (d) {

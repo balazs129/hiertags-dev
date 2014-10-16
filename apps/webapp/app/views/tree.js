@@ -7,8 +7,6 @@ var TreeView = Backbone.View.extend({
   events: {},
 
   treeData: {
-    width: 0,
-    height: 0,
     tree: null,
     diagonal: null,
     svg: null
@@ -18,13 +16,14 @@ var TreeView = Backbone.View.extend({
     'use strict';
     // Generate the tree diagram
     var svgArea = $(this.el),
-        root;
+        root,
+        i = 0;
 
-    this.treeData.height = svgArea.height();
-    this.treeData.width = svgArea.width();
+    var height = svgArea.height(),
+        width = svgArea.width();
 
     this.treeData.tree = d3.layout.tree()
-          .size([this.treeData.height, this.treeData.width]);
+          .size([height, width]);
 
     this.treeData.diagonal = d3.svg.diagonal()
       .projection(function(d) { return [d.y, d.x]; });
@@ -34,22 +33,22 @@ var TreeView = Backbone.View.extend({
       .attr("height", this.treeData.height)
       .attr("class", "overlay");
 
-    root = this.model.get('dag');
-    this.update(root);
-
     this.listenTo(this.model, "change", this.render);
   },
 
   render: function (){
     'use strict';
+    var root = this.model.get('dag')[0],
+        i = 0;
+    this.update(root, i);
+    console.log(root);
     return this;
   },
-  update: function (root){
-  'use strict';
-  // Compute the new tree layout.
-  var nodes = this.treeData.tree.nodes(root).reverse(),
-      links = this.treeData.tree.links(nodes),
-      i = 0;
+  update: function (root, i){
+    'use strict';
+    // Compute the new tree layout.
+    var nodes = this.treeData.tree.nodes(root).reverse(),
+        links = this.treeData.tree.links(nodes);
 
   // Normalize for fixed-depth.
   nodes.forEach(function (d) {

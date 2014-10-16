@@ -27,7 +27,6 @@ var Graph = Backbone.Model.extend({
     'use strict';
     var _this = this,
         tree = d3.layout.tree();
-
     // Get the node names for suggestions
     this.attributes.suggestions = [];
     this.attributes.dag.forEach(function(node){
@@ -38,8 +37,8 @@ var Graph = Backbone.Model.extend({
     this.attributes.dag = utils.convertData(this.attributes.dag);
 
     //Compute the tree depth
-    tree.nodes(this.attributes.dag).reverse();
-    this.attributes.depth = utils.getDepth(this.attributes.dag);
+    tree.nodes(this.attributes.dag[0]).reverse();
+    this.attributes.depth = utils.getDepth(this.attributes.dag[0]);
 
     //Trigger change event
     this.trigger('change');
