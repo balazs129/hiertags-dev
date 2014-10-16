@@ -2,7 +2,7 @@ var Backbone = require('backbone'),
     _ = require('underscore'),
     d3 = require('d3'),
     baseUploadOptions = require('util/file-upload'),
-    TreeView = require('views/tree');
+    TreeView = require('views/tree'),
     Graph = require('models/graph');
 
 //Link Backbone and jQuery
@@ -13,6 +13,10 @@ $(function(){
 
   var numberOfGraphs = 0;
   var graph = {};
+
+  var treeGraph = new Graph({});
+  var treeView = new TreeView({model: treeGraph});
+
   //Handling the fileupload
   var fileUploadOptions = _.extend(baseUploadOptions, {
     done: function (e, data) {
@@ -21,14 +25,12 @@ $(function(){
       $('#visualization-area').removeClass('hidden');
       $('#progress-circle').addClass('hidden');
 
-      var treeGraph = new Graph({
+      treeGraph.set({
         dag: graph.dag,
         name: graph.name,
         interlinks: graph.interlinks
-      });
-
-      var treeView = new TreeView({model: treeGraph});
-
+      }, {silent: true});
+      treeGraph.update();
     }
   });
 

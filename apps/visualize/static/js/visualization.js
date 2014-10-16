@@ -3,7 +3,7 @@ var Backbone = require('backbone'),
     _ = require('underscore'),
     d3 = require('d3'),
     baseUploadOptions = require('util/file-upload'),
-    TreeView = require('views/tree');
+    TreeView = require('views/tree'),
     Graph = require('models/graph');
 
 //Link Backbone and jQuery
@@ -14,6 +14,10 @@ $(function(){
 
   var numberOfGraphs = 0;
   var graph = {};
+
+  var treeGraph = new Graph({});
+  var treeView = new TreeView({model: treeGraph});
+
   //Handling the fileupload
   var fileUploadOptions = _.extend(baseUploadOptions, {
     done: function (e, data) {
@@ -22,15 +26,13 @@ $(function(){
       $('#visualization-area').removeClass('hidden');
       $('#progress-circle').addClass('hidden');
 
-      var treeGraph = new Graph({
+      treeGraph.set({
         dag: graph.dag,
         name: graph.name,
         interlinks: graph.interlinks
-      });
+      }, {silent: true});
+      treeGraph.update();
 
-      var treeView = new TreeView({model: treeGraph});
-
-      treeGraph.set('width', 500);
     }
   });
 
@@ -57,7 +59,13 @@ var Graph = Backbone.Model.extend({
     width: 0,
     isLabelsVisible: true
   },
-  initialize: function(){
+
+  initialize: function () {
+    'use strict';
+    this.on('change', function () { console.log('Model changed: ', this); });
+  },
+
+  update: function () {
     'use strict';
     var _this = this,
         tree = d3.layout.tree();
@@ -75,6 +83,8 @@ var Graph = Backbone.Model.extend({
     tree.nodes(this.attributes.dag).reverse();
     this.attributes.depth = utils.getDepth(this.attributes.dag);
 
+    //Trigger change event
+    this.trigger('change');
   }
 });
 
@@ -173,25 +183,110 @@ utils.getDepth = function get_depth(root) {
 
 module.exports = utils;
 },{"underscore":9}],5:[function(require,module,exports){
-var Backbone = require('backbone');
+var Backbone = require('backbone'),
+    d3 = require('d3');
+
 
 var TreeView = Backbone.View.extend({
   el: '#visualization',
+  events: {},
+
+  treeData: {
+    width: 0,
+    height: 0,
+    tree: null,
+    diagonal: null,
+    svg: null
+    },
 
   initialize: function () {
-    console.log(this.model);
+    'use strict';
+    // Generate the tree diagram
+    var svgArea = $(this.el),
+        root;
+
+    this.treeData.height = svgArea.height();
+    this.treeData.width = svgArea.width();
+
+    this.treeData.tree = d3.layout.tree()
+          .size([this.treeData.height, this.treeData.width]);
+
+    this.treeData.diagonal = d3.svg.diagonal()
+      .projection(function(d) { return [d.y, d.x]; });
+
+    this.treeData.svg = d3.select("#visualization")
+      .attr("width", this.treeData.width)
+      .attr("height", this.treeData.height)
+      .attr("class", "overlay");
+
+    root = this.model.get('dag');
+    this.update(root);
+
     this.listenTo(this.model, "change", this.render);
   },
 
   render: function (){
-    console.log(this);
+    'use strict';
     return this;
-  }
+  },
+  update: function (root){
+  'use strict';
+  // Compute the new tree layout.
+  var nodes = this.treeData.tree.nodes(root).reverse(),
+      links = this.treeData.tree.links(nodes),
+      i = 0;
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function (d) {
+    d.y = d.depth * 180;
+  });
+
+  // Declare the nodesâ€¦
+  var node = this.treeData.svg.selectAll("g.node")
+    .data(nodes, function (d) {
+      return d.id || (d.id = ++i);
+    });
+
+  // Enter the nodes.
+  var nodeEnter = node.enter().append("g")
+    .attr("class", "node")
+    .attr("transform", function (d) {
+      return "translate(" + d.y + "," + d.x + ")";
+    });
+
+  nodeEnter.append("circle")
+    .attr("r", 10)
+    .style("fill", "#fff");
+
+  nodeEnter.append("text")
+    .attr("x", function (d) {
+      return d.children || d._children ? -13 : 13;
+    })
+    .attr("dy", ".35em")
+    .attr("text-anchor", function (d) {
+      return d.children || d._children ? "end" : "start";
+    })
+    .text(function (d) {
+      return d.name;
+    })
+    .style("fill-opacity", 1);
+
+  // Declare the linksâ€¦
+  var link = this.treeData.svg.selectAll("path.link")
+    .data(links, function (d) {
+      return d.target.id;
+    });
+
+  // Enter the links.
+  link.enter().insert("path", "g")
+    .attr("class", "link")
+    .attr("d", this.treeData.diagonal);
+}
 });
 
 module.exports = TreeView;
 
-},{"backbone":6}],6:[function(require,module,exports){
+},{"backbone":6,"d3":8}],6:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors

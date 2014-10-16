@@ -18,7 +18,12 @@ var Graph = Backbone.Model.extend({
     isLabelsVisible: true
   },
 
-  initialize: function(){
+  initialize: function () {
+    'use strict';
+    this.on('change', function () { console.log('Model changed: ', this); });
+  },
+
+  update: function () {
     'use strict';
     var _this = this,
         tree = d3.layout.tree();
@@ -36,6 +41,8 @@ var Graph = Backbone.Model.extend({
     tree.nodes(this.attributes.dag).reverse();
     this.attributes.depth = utils.getDepth(this.attributes.dag);
 
+    //Trigger change event
+    this.trigger('change');
   }
 });
 
