@@ -3,7 +3,7 @@ var Backbone = require('backbone'),
     _ = require('underscore'),
     d3 = require('d3'),
     baseUploadOptions = require('util/file-upload'),
-    TreeView = require('views/tree'),
+    treeView = require('views/tree'),
     Graph = require('models/graph');
 
 //Link Backbone and jQuery
@@ -12,29 +12,54 @@ Backbone.$ = $;
 $(function(){
   'use strict';
 
-  var numberOfGraphs = 0;
+  var numberOfGraphs = 0,
+    tagSearch = $('#tag-search'),
+    depthField = $('#depth-input');
+
+  // Create the autocomplete instance
+  tagSearch.autocomplete({delimiter: /(,|;)\s*/,
+      maxHeight: 400,
+      width: 400,
+      lookup: []
+    });
+
+  // Initialize the autocomplete instance
+  var autoComplete = tagSearch.autocomplete();
 
   var treeGraph = new Graph({});
-  var treeView = new TreeView({model: treeGraph});
+  var event_bus = _({}).extend(Backbone.Events);
 
   //Handling the fileupload
   var fileUploadOptions = _.extend(baseUploadOptions, {
     done: function (e, data) {
       numberOfGraphs = data.result.numGraph;
-      $('#visualization-area').removeClass('hidden');
+      $('.hidden').removeClass('hidden');
       $('#progress-circle').addClass('hidden');
 
       treeGraph.set({
         dag: data.result.graph.dag,
         name: data.result.graph.name,
         interlinks: data.result.graph.interlinks
-      }, {silent: true});
-      console.log(treeGraph);
+      });
       treeGraph.update();
+      event_bus.trigger('newfile');
     }
   });
 
   $('#fileupload').fileupload(fileUploadOptions);
+
+  _.extend(treeView, Backbone.Events);
+
+  treeView.listenTo(event_bus, 'newfile', function(){
+    // Generate a new view
+    treeView.generateTree(treeGraph);
+    // Set autocomplete
+    autoComplete.setOptions({lookup: treeGraph.get('suggestions')});
+    // Set the spinner
+    depthField.attr('min', 0)
+      .attr('max', treeGraph.get('depth'));
+  });
+
 });
 
 },{"backbone":6,"d3":8,"models/graph":2,"underscore":9,"util/file-upload":3,"views/tree":5}],2:[function(require,module,exports){
@@ -53,20 +78,22 @@ var Graph = Backbone.Model.extend({
     // Properties for the view
     suggestions: [],
     isLayoutVertical: true,
+    horizontalRatio: 0,
     depth: 0,
-    width: 0,
+    extraWidth: 0,
     isLabelsVisible: true
   },
 
   initialize: function () {
     'use strict';
-    this.on('change', function () { console.log('Model changed: ', this); });
+//    this.on('change', function () { console.log('Model changed: ', this); });
   },
 
   update: function () {
     'use strict';
     var _this = this,
         tree = d3.layout.tree();
+
     // Get the node names for suggestions
     this.attributes.suggestions = [];
     this.attributes.dag.forEach(function(node){
@@ -79,9 +106,6 @@ var Graph = Backbone.Model.extend({
     //Compute the tree depth
     tree.nodes(this.attributes.dag[0]).reverse();
     this.attributes.depth = utils.getDepth(this.attributes.dag[0]);
-
-    //Trigger change event
-    this.trigger('change');
   }
 });
 
@@ -181,108 +205,144 @@ utils.getDepth = function get_depth(root) {
 module.exports = utils;
 },{"underscore":9}],5:[function(require,module,exports){
 var Backbone = require('backbone'),
+    _ = require('underscore'),
     d3 = require('d3');
 
 
-var TreeView = Backbone.View.extend({
-  el: '#visualization',
-  events: {},
 
-  treeData: {
-    tree: null,
-    diagonal: null,
-    svg: null
-    },
+// Set up the initial canvas
+var app = {
 
-  initialize: function () {
+  generateTree : function (treeData) {
     'use strict';
-    // Generate the tree diagram
-    var svgArea = $(this.el),
-        root,
-        i = 0;
+    var margin = {top: 20, right: 120, bottom: 20, left: 120},
+      visualizationArea = $('#visualization'),
+      width = visualizationArea.width() - margin.right - margin.left,
+      height = visualizationArea.height() - margin.top - margin.bottom;
 
-    var height = svgArea.height(),
-        width = svgArea.width();
+    var i = 0,
+      duration = 750,
+      root;
 
-    this.treeData.tree = d3.layout.tree()
-          .size([height, width]);
+    var tree = d3.layout.tree();
+//      .size([width, height])
+//      .separation(function (a, b) {
+//        return a.name.length + b.name.length + 5;
+//      });
 
-    this.treeData.diagonal = d3.svg.diagonal()
-      .projection(function(d) { return [d.y, d.x]; });
+    var diagonal = d3.svg.diagonal()
+      .projection(function (d) {
+        if (treeData.get('isLayoutVertical')) {
+          return [d.x, d.y];
+        } else {
+          return [d.y, d.x];
+        }
+      });
 
-    this.treeData.svg = d3.select("#visualization")
-      .attr("width", this.treeData.width)
-      .attr("height", this.treeData.height)
-      .attr("class", "overlay");
+    root = treeData.get('dag')[0];
+    root.x0 = width / 2;
+    root.y0 = height / 4;
 
-    this.listenTo(this.model, "change", this.render);
-  },
+    update(root);
 
-  render: function (){
-    'use strict';
-    var root = this.model.get('dag')[0],
-        i = 0;
-    this.update(root, i);
-    console.log(root);
-    return this;
-  },
-  update: function (root, i){
-    'use strict';
-    // Compute the new tree layout.
-    var nodes = this.treeData.tree.nodes(root).reverse(),
-        links = this.treeData.tree.links(nodes);
+    function update(source) {
+      var levelWidth = [1],
+        levelLabelWidth = [1],
+        childSum,
+        newHeight,
+        newWidth;
 
-  // Normalize for fixed-depth.
-  nodes.forEach(function (d) {
-    d.y = d.depth * 180;
-  });
+      // Function to calculate the number of childrens/sum of the label widths per depth
+      function childCount(level, n) {
+        function get_numbers(d) {
+          var tmp = 0,
+            numChild = d.length,
+            index;
 
-  // Declare the nodesâ€¦
-  var node = this.treeData.svg.selectAll("g.node")
-    .data(nodes, function (d) {
-      return d.id || (d.id = ++i);
-    });
+          for (index = 0; index < numChild; index += 1) {
+            tmp += d[index].name.length;
+          }
+          return tmp;
+        }
 
-  // Enter the nodes.
-  var nodeEnter = node.enter().append("g")
-    .attr("class", "node")
-    .attr("transform", function (d) {
-      return "translate(" + d.y + "," + d.x + ")";
-    });
+        if (n.children && n.children.length > 0) {
+          if (levelWidth.length <= level + 1) {
+            levelWidth.push(0);
+          }
+          if (levelLabelWidth.length <= level + 1) {
+            levelLabelWidth.push(0);
+          }
 
-  nodeEnter.append("circle")
-    .attr("r", 10)
-    .style("fill", "#fff");
+          levelWidth[level + 1] += n.children.length;
+          levelLabelWidth[level + 1] += get_numbers(n.children);
+          n.children.forEach(function (d) {
+            childCount(level + 1, d);
+          });
+        }
+      }
 
-  nodeEnter.append("text")
-    .attr("x", function (d) {
-      return d.children || d._children ? -13 : 13;
-    })
-    .attr("dy", ".35em")
-    .attr("text-anchor", function (d) {
-      return d.children || d._children ? "end" : "start";
-    })
-    .text(function (d) {
-      return d.name;
-    })
-    .style("fill-opacity", 1);
+      childCount(0, root);
+      childSum = _.reduce(levelWidth, function (memo, num) {
+        return memo + num;
+      }, 0);
 
-  // Declare the linksâ€¦
-  var link = this.treeData.svg.selectAll("path.link")
-    .data(links, function (d) {
-      return d.target.id;
-    });
+      // Set the new widths and heights
+      // Vertical Layout
+      if (treeData.get('isLayoutVertical')) {
+        newHeight = treeData.get('depth') * 100;
 
-  // Enter the links.
-  link.enter().insert("path", "g")
-    .attr("class", "link")
-    .attr("d", this.treeData.diagonal);
-}
-});
+        if (treeData.get('isLabelsVisible')) {
+          var tmpWidth = _.map(levelWidth, function (num, index) {
+            return num * 4 + levelLabelWidth[index];
+          });
 
-module.exports = TreeView;
+          newWidth = _.max(tmpWidth) + treeData.get('extraWidth');
+        } else {
+          newWidth = childSum * 25;
+        }
+        // Horizontal Layout
+      } else {
+        newWidth = treeData.get('depth') * (100 + childSum + treeData.get('horizontalRatio'));
+        newHeight = treeData.get('depth') * (childSum * 3);
+      }
 
-},{"backbone":6,"d3":8}],6:[function(require,module,exports){
+      tree.size([newWidth, newHeight]).separation(function (a, b) {
+        if (treeData.get('isLabelsVisible')) {
+          return a.name.length + b.name.length + 5;
+        } else {
+          return 10;
+        }
+      });
+
+      // Calculate the new layout
+      var nodes = tree.nodes(root).reverse(),
+        links = tree.links(nodes);
+
+      // Add the extra edges if any
+      var InterLink = function (source, target) {
+        this.source = source;
+        this.target = target;
+        this.added = true;
+      };
+
+      treeData.get('interlinks').forEach(function (link) {
+        var sourceNode,
+            targetNode;
+        sourceNode = _.find(nodes, function(n) { return n.name === link[0];});
+        targetNode = _.find(nodes, function(n) { return n.name === link[1];});
+        links.push(new InterLink(sourceNode, targetNode));
+      });
+
+      console.log(links);
+
+
+    }
+  }
+};
+
+module.exports = app;
+
+},{"backbone":6,"d3":8,"underscore":9}],6:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors

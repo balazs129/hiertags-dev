@@ -13,20 +13,22 @@ var Graph = Backbone.Model.extend({
     // Properties for the view
     suggestions: [],
     isLayoutVertical: true,
+    horizontalRatio: 0,
     depth: 0,
-    width: 0,
+    extraWidth: 0,
     isLabelsVisible: true
   },
 
   initialize: function () {
     'use strict';
-    this.on('change', function () { console.log('Model changed: ', this); });
+//    this.on('change', function () { console.log('Model changed: ', this); });
   },
 
   update: function () {
     'use strict';
     var _this = this,
         tree = d3.layout.tree();
+
     // Get the node names for suggestions
     this.attributes.suggestions = [];
     this.attributes.dag.forEach(function(node){
@@ -39,9 +41,6 @@ var Graph = Backbone.Model.extend({
     //Compute the tree depth
     tree.nodes(this.attributes.dag[0]).reverse();
     this.attributes.depth = utils.getDepth(this.attributes.dag[0]);
-
-    //Trigger change event
-    this.trigger('change');
   }
 });
 
