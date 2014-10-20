@@ -370,10 +370,12 @@ var app = {
 
       var sourceNode,
           targetNode;
-      treeData.get('interlinks').forEach(function (link) {
-        sourceNode = _.find(nodes, function(n) { return n.name === link[0];});
-        targetNode = _.find(nodes, function(n) { return n.name === link[1];});
-        links.push(new InterLink(sourceNode, targetNode));
+      treeData.get('interlinks').forEach(function (interLink) {
+        sourceNode = _.find(nodes, function(n) { return n.name === interLink[0];});
+        targetNode = _.find(nodes, function(n) { return n.name === interLink[1];});
+        if (sourceNode && targetNode) {
+          links.push(new InterLink(sourceNode, targetNode));
+        }
       });
 
       // Join data with nodes and edges
@@ -385,16 +387,20 @@ var app = {
           return d.id || (d.id = ++i);
         });
 
+      // Id the links
+      console.log(links);
+      links.forEach(function (d) {
+        if (d.hasOwnProperty('added')) {
+          d.id = d.source.id + d.target.id + parseInt(treeData.get('numNodes'));
+        } else {
+          d.id = d.target.id;
+        }
+      });
+
       // Update the edges
       var link = svgGroup.selectAll('path.link')
         .data(links, function (d) {
-          var linkId;
-          if (d.hasOwnProperty('added')) {
-            linkId = d.source.id + d.target.id + parseInt(treeData.get('numNodes'));
-          } else {
-            linkId = d.target.id;
-          }
-          return d.id || (d.id = linkId);
+          return d.id;
         });
 
       // NODES
