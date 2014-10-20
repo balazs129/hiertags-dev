@@ -24,4 +24,5 @@ lib/
 #Node
 node_modules/
 
+#local dev-settings for django
 hiertags/settings_dev.py

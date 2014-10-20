@@ -12,18 +12,18 @@ $(function(){
   'use strict';
 
   var numberOfGraphs = 0,
-    tagSearch = $('#tag-search'),
-    depthField = $('#depth-input');
+    $tagSearch = $('#tag-search'),
+    $depthField = $('#depth-input');
 
   // Create the autocomplete instance
-  tagSearch.autocomplete({delimiter: /(,|;)\s*/,
+  $tagSearch.autocomplete({delimiter: /(,|;)\s*/,
       maxHeight: 400,
       width: 400,
       lookup: []
     });
 
   // Initialize the autocomplete instance
-  var autoComplete = tagSearch.autocomplete();
+  var autoComplete = $tagSearch.autocomplete();
 
   var treeGraph = new Graph({});
   var event_bus = _({}).extend(Backbone.Events);
@@ -55,7 +55,7 @@ $(function(){
     // Set autocomplete
     autoComplete.setOptions({lookup: treeGraph.get('suggestions')});
     // Set the spinner
-    depthField.attr('min', 0)
+    $depthField.attr('min', 0)
       .attr('max', treeGraph.get('depth'));
   });
 
