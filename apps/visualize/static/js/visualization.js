@@ -39,7 +39,9 @@ $(function(){
       treeGraph.set({
         dag: data.result.graph.dag,
         name: data.result.graph.name,
-        interlinks: data.result.graph.interlinks
+        interlinks: data.result.graph.interlinks,
+        numNodes: data.result.graph.nodes,
+        numEdges: data.result.graph.edges
       });
       treeGraph.update();
       event_bus.trigger('newfile');
@@ -74,6 +76,8 @@ var Graph = Backbone.Model.extend({
     dag: {},
     name: '',
     interlinks: [],
+    numNodes: 0,
+    numEdges: 0,
 
     // Properties for the view
     suggestions: [],
@@ -212,31 +216,69 @@ var Backbone = require('backbone'),
 
 // Set up the initial canvas
 var app = {
-
-  generateTree : function (treeData) {
+  generateTree: function (treeData) {
     'use strict';
-    var margin = {top: 20, right: 120, bottom: 20, left: 120},
+
+    // Set up the canvas
+    var margin = {top: 0, right: 0, bottom: 0, left: 0},
       $visualizationArea = $('#visualization'),
       width = $visualizationArea.width() - margin.right - margin.left,
       height = $visualizationArea.height() - margin.top - margin.bottom;
 
+    // Listen for zoom/pan events on the svg canvas
+    var zoomListener = d3.behavior.zoom()
+      .scaleExtent([0.2, 2])
+      .on("zoom", function zoom() {
+        svgGroup.attr("transform",
+            "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
+      });
+
     var svg = d3.select('#visualization')
       .attr('width', width)
       .attr('height', height)
-      .attr('class', 'overlay');
-//      .call(zoomListener);
+      .attr('class', 'overlay')
+      .call(zoomListener);
 
     var svgGroup = svg.append('g');
 
-    var i = 0,
-      duration = 750,
-      root;
+    var duration = 750,
+        root,
+        i = 0;
+
+    // Helper functions for the update function
+    function centerNode(source) {
+      var scale = zoomListener.scale();
+      var x, y = 0;
+      if (treeData.get('isLayoutVertical')) {
+        x = -source.x0 * scale + width / 2;
+        y = -source.y0 * scale + height / 4;
+      } else {
+        x = -source.y0 * scale + 100;
+        y = -source.x0 * scale + height / 2;
+      }
+      d3.select('g').transition()
+        .duration(duration)
+        .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
+      zoomListener.scale(scale);
+      zoomListener.translate([x, y]);
+    }
+
+    function nodeClick (d) {
+
+      if (d.children) {
+        d._children = d.children;
+        d.children = null;
+        d._children.forEach(app.util.collapse);
+      } else {
+        d.children = d._children;
+        d._children = null;
+        d.children.forEach(app.util.collapse);
+      }
+      update(d);
+      centerNode(d);
+    }
 
     var tree = d3.layout.tree();
-//      .size([width, height])
-//      .separation(function (a, b) {
-//        return a.name.length + b.name.length + 5;
-//      });
 
     var diagonal = d3.svg.diagonal()
       .projection(function (d) {
@@ -253,6 +295,7 @@ var app = {
     root.y0 = height / 4;
 
     update(root);
+    centerNode(root);
 
     function update(source) {
       var levelWidth = [1],
@@ -306,7 +349,6 @@ var app = {
         newHeight = treeData.get('depth') * (childSum * 3);
       }
 
-      console.log(newWidth, newHeight);
       tree.size([newWidth, newHeight]).separation(function (a, b) {
         if (treeData.get('isLabelsVisible')) {
           return a.name.length + b.name.length + 10;
@@ -339,14 +381,20 @@ var app = {
 
       // Update the nodes
       var node = svgGroup.selectAll('g.node')
-        .data(nodes, function (d, i) {
-          return d.id || (d.id = i);
+        .data(nodes, function (d) {
+          return d.id || (d.id = ++i);
         });
 
       // Update the edges
       var link = svgGroup.selectAll('path.link')
-        .data(links, function (d, i) {
-          return d.id || (d.id = i);
+        .data(links, function (d) {
+          var linkId;
+          if (d.hasOwnProperty('added')) {
+            linkId = d.source.id + d.target.id + parseInt(treeData.get('numNodes'));
+          } else {
+            linkId = d.target.id;
+          }
+          return d.id || (d.id = linkId);
         });
 
       // NODES
@@ -366,6 +414,7 @@ var app = {
       nodeEnter.append('circle')
         .attr('class', 'nodeCircle')
         .attr('r', 5)
+        .on('click', nodeClick)
         .style('fill', function (d) {
           return d._children ? 'lightsteelblue' : '#fff';
         })
@@ -435,9 +484,9 @@ var app = {
       // LINKS
       // Enter any new links at the parent's previous position
       link.enter().append('path', 'g')
-        .attr('class', 'edge')
+        .attr('class', 'link')
         .attr('d', function () {
-          var o = {x: source.x0, y:source.y0};
+          var o = {x: source.x0, y: source.y0};
           return diagonal({source: o, target: o});
         });
 
@@ -450,7 +499,7 @@ var app = {
       link.exit().transition()
         .duration(duration)
         .attr('d', function () {
-          var o = {x: source.x0, y: source.y0};
+          var o = {x: source.x, y: source.y};
           return diagonal({source: o, target: o});
         })
         .remove();
@@ -460,6 +509,16 @@ var app = {
         d.x0 = d.x;
         d.y0 = d.y;
       });
+    }
+  },
+
+  util: {
+    collapse: function (d) {
+      if (d.children) {
+        d._children = d.children;
+        d.children = null;
+        d._children.forEach(app.util.collapse);
+      }
     }
   }
 };

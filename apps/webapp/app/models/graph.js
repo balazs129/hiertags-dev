@@ -9,6 +9,8 @@ var Graph = Backbone.Model.extend({
     dag: {},
     name: '',
     interlinks: [],
+    numNodes: 0,
+    numEdges: 0,
 
     // Properties for the view
     suggestions: [],

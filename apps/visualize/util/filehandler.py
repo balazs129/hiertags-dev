@@ -14,6 +14,7 @@ class FileHandler(object):
     """
     This Class handless the uploaded files
     """
+
     def __init__(self):
         self.components = []
         self.graphs = []
@@ -44,7 +45,8 @@ class FileHandler(object):
                         elem.reverse(copy=False)
 
                 dag_graph, interlinks = parse_DAG(elem)
-                self.graphs.append({'dag': gen_flat(dag_graph), 'interlinks': interlinks, 'name': name})
+                self.graphs.append({'dag': gen_flat(dag_graph), 'interlinks': interlinks, 'name': name,
+                                    'nodes': dag_graph.number_of_nodes(), 'edges': dag_graph.number_of_edges()})
             except NetworkXUnfeasible:
                 # If the graph can't be sorted topologically(not a DAG)
                 self.graphs.append({'dag': None})

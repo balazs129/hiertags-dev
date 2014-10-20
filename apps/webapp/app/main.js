@@ -38,7 +38,9 @@ $(function(){
       treeGraph.set({
         dag: data.result.graph.dag,
         name: data.result.graph.name,
-        interlinks: data.result.graph.interlinks
+        interlinks: data.result.graph.interlinks,
+        numNodes: data.result.graph.nodes,
+        numEdges: data.result.graph.edges
       });
       treeGraph.update();
       event_bus.trigger('newfile');
