@@ -13,6 +13,7 @@ $(function(){
   'use strict';
 
   var numberOfGraphs = 0,
+      graphIndex = 1,
     $tagSearch = $('#tag-search'),
     $depthField = $('#depth-input');
 
@@ -35,6 +36,7 @@ $(function(){
       numberOfGraphs = data.result.numGraph;
       $('.hidden').removeClass('hidden');
       $('#progress-circle').addClass('hidden');
+      $('#left-bar').addClass('hidden');
 
       treeGraph.set({
         dag: data.result.graph.dag,
@@ -45,6 +47,10 @@ $(function(){
       });
       treeGraph.update();
       event_bus.trigger('newfile');
+      var $data = $('#graph-data').children();
+      $data.first().text('Graph: ' + graphIndex + '/' + numberOfGraphs)
+        .next().text('Nodes:  ' + treeGraph.get('numNodes'))
+        .next().text('Edges:  ' + treeGraph.get('numEdges'));
     }
   });
 
@@ -310,6 +316,8 @@ var app = {
     root.x0 = width / 2;
     root.y0 = height / 4;
 
+    app.util.collapse(root);
+
     update(root);
     centerNode(root);
 
@@ -445,13 +453,10 @@ var app = {
           return d._children ? 'lightsteelblue' : '#fff';
         });
 
-
-
       // Add node text
-      if (treeData.get('isLabelsVisible')) {
         if (treeData.get('isLayoutVertical')) {
           nodeEnter.append('text')
-//            .attr('class', 'nodeVerticalText')
+            .attr('class', 'nodeVerticalText')
             .attr('y', function (d) {
               if (d === root) {
                 return -10;
@@ -462,11 +467,15 @@ var app = {
             .attr('dy', '.35em')
             .attr('text-anchor', 'middle')
             .text(function (d) {
-              return d.name;
-            });
+              if (treeData.get('isLabelsVisible')) {
+                return d.name;
+              } else {
+                return '';
+              }
+            })
         } else {
           nodeEnter.append('text')
-//            .attr('class', 'nodeHorizontalText')
+            .attr('class', 'nodeHorizontalText')
             .attr("x", function (d) {
               return d.children || d._children ? -10 : 10;
             })
@@ -475,10 +484,13 @@ var app = {
               return d.children || d._children ? "end" : "start";
             })
             .text(function (d) {
-              return d.name;
+              if (treeData.get('isLabelsVisible')) {
+                return d.name;
+              } else {
+                return '';
+              }
             });
         }
-      }
 
       // Enter any new links at the parent's previous position
       link.enter().append('path', 'g')
@@ -507,7 +519,6 @@ var app = {
           return d._children ? "lightsteelblue" : "#fff";
         });
 
-      if (treeData.get('isLabelsVisible')) {
         if (treeData.get('isLayoutVertical')) {
           nodeUpdate.select('text')
             .attr('x', 0)
@@ -519,7 +530,7 @@ var app = {
               }
             })
             .attr('dy', '.35em')
-            .attr('text-anchor', 'middle');
+            .attr('text-anchor', 'middle')
         } else {
           nodeUpdate.select('text')
             .attr('y', 0)
@@ -531,7 +542,6 @@ var app = {
               return d.children || d._children ? 'end' : 'start';
             });
         }
-      }
 
       // Transition links to their new position
       link.transition()
@@ -572,7 +582,6 @@ var app = {
     //Button Functions
     d3.select('#btn-expand-tree').on('click', function () {
       var oldWidth = treeData.get('extraWidth');
-      console.log(oldWidth);
       var newWidth = oldWidth + 50;
       treeData.set({extraWidth: newWidth});
       update(root);
@@ -580,7 +589,6 @@ var app = {
 
     d3.select('#btn-shrink-tree').on('click', function () {
       var oldWidth = treeData.get('extraWidth');
-      console.log(oldWidth);
       var newWidth = oldWidth > 50 ? oldWidth - 50 : 0;
       treeData.set({extraWidth: newWidth});
       update(root);
@@ -588,6 +596,29 @@ var app = {
 
     d3.select('#btn-center-root').on('click', function () {
       zoomListener.scale(1).translate([0, 0]);
+      centerNode(root);
+    });
+
+    d3.select('#btn-toggle-label').on('click', function () {
+      var labels = !treeData.get('isLabelsVisible');
+      treeData.set({isLabelsVisible: labels});
+
+      var nodeSelection = d3.selectAll("g.node");
+      nodeSelection.select('text')
+        .text(function (d) {
+        if (labels) {
+          return d.name;
+        } else {
+          return '';
+        }
+      });
+      update(root);
+    });
+
+    d3.select('#btn-flip-layout').on('click', function () {
+      var layout = !treeData.get('isLayoutVertical');
+      treeData.set({isLayoutVertical: layout});
+      update(root);
       centerNode(root);
     });
   },

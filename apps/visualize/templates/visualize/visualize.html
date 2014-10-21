@@ -4,18 +4,18 @@
 {% block title %} HIERTAGS - Visualize{% endblock %}
 
 {% block head %}
-{#    <link href="{% static "css/jquery.fileupload.css" %}" rel="stylesheet">#}
-{#    <link href="{% static "css/jquery-ui.min.css" %}" rel="stylesheet">#}
-{#    <link href="{% static "css/jquery-ui.structure.min.css" %}" rel="stylesheet">#}
-{#    <link href="{% static "css/jquery-ui.theme.min.css" %}" rel="stylesheet">#}
+    {#    <link href="{% static "css/jquery.fileupload.css" %}" rel="stylesheet">#}
+    {#    <link href="{% static "css/jquery-ui.min.css" %}" rel="stylesheet">#}
+    {#    <link href="{% static "css/jquery-ui.structure.min.css" %}" rel="stylesheet">#}
+    {#    <link href="{% static "css/jquery-ui.theme.min.css" %}" rel="stylesheet">#}
     <link href="{% static "css/visualize.css" %}" rel="stylesheet">
-{##}
-{#    <script src="{%  static "js/jquery-ui.min.js" %}"></script>#}
-{#    <script src="{%  static "js/underscore-min.js" %}"></script>#}
-{#    <script src="{%  static "js/jquery.autocomplete.min.js" %}"></script>#}
-{#    <script src="{%  static "js/jquery.fileupload.min.js" %}"></script>#}
-{#    <script src="{%  static "js/d3.min.js" %}"></script>#}
-{#    <script src="{%  static "js/tree.js" %}"></script>#}
+    {##}
+    {#    <script src="{%  static "js/jquery-ui.min.js" %}"></script>#}
+    {#    <script src="{%  static "js/underscore-min.js" %}"></script>#}
+    {#    <script src="{%  static "js/jquery.autocomplete.min.js" %}"></script>#}
+    {#    <script src="{%  static "js/jquery.fileupload.min.js" %}"></script>#}
+    {#    <script src="{%  static "js/d3.min.js" %}"></script>#}
+    {#    <script src="{%  static "js/tree.js" %}"></script>#}
 {% endblock %}
 
 {% block content %}
@@ -31,73 +31,91 @@
                 <span>Choose file</span>
                 <input id="fileupload" type="file" name="files[]">
             </span>
-        </div><!-- col-md-2 !-->
+        </div>
+        <!-- col-md-2 !-->
         <div class="col-md-1">
             <div id="progress-circle" class="hidden progress-circle text-center"></div>
         </div>
         <div class="col-md-9">
-             <div class="text-center" id="infobar"></div>
+            <div class="text-center" id="infobar"></div>
         </div>
     </div>
-        <div class="row">
-            <div class="col-xs-3"></div>
-                <div class="col-xs-7 hidden">
-                    <div class="input-group input-group-sm">
-                        <input class="text-center form-control" type="search"
-                               id="tag-search" placeholder="Search for a tag">
+    <div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-7 hidden">
+            <div class="input-group input-group-sm">
+                <input class="text-center form-control" type="search"
+                       id="tag-search" placeholder="Search for a tag">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">Go!</button>
                         </span>
-                    </div><!-- /input-group -->
-                </div>
-            <div class="col-xs-2"></div>
+            </div>
+            <!-- /input-group -->
         </div>
-    {% endblock %}
+        <div class="col-xs-2"></div>
+    </div>
+{% endblock %}
 
-    {% block visualization %}
-        <div class="col-md-12 max-height hidden" id="visualization-area">
+{% block visualization %}
+    <div class="col-md-12 max-height hidden" id="visualization-area">
         <div class="row max-height">
-            <div class="col-xs-2"></div>
+            <div class="col-xs-2">
+                <div class="input-group input-group-sm" id="left-bar">
+                    <form id="svgform" method="POST" action="download/">
+                        <input type="text" id="output_format">
+                        <input type="text" id="data" name="data">
+                        <input type="text" id="layout" name="layout">
+                        <input type="submit" value="submit">
+                    </form>
+                </div>
+            </div>
             <div class="col-xs-8">
                 <svg id="visualization"></svg>
             </div>
             <div class="col-xs-2 btn-group-vertical" id="rightbar">
                 <div class="btnsize">
-                <button type="button" class="btn btn-primary btn-sm btn-block"
-                        id="btn-expand-tree">
-                    <i class="glyphicon glyphicon-plus btnicon"></i>
-                    <span>Expand Tree</span></button>
-                <button type="button" class="btn btn-sm btn-primary btn-block"
-                        id="btn-shrink-tree">
-                    <i class="glyphicon glyphicon-minus"></i>
-                    <span>Shrink Tree</span></button>
-                <button type="button" class="btn btn-sm btn-primary btn-block"
-                        id="btn-center-root">
-                    <i class="glyphicon glyphicon-home"></i>
-                    <span>Center root</span></button>
-                <button type="button" class="btn btn-sm btn-primary btn-block">
-                    <i class="glyphicon glyphicon-tag"></i>
-                    <span>Toggle Labels</span></button>
-                <button type="button" class="btn btn-sm btn-primary btn-block btn-200-below">
-                    <i class="glyphicon glyphicon-share-alt"></i>
-                    <span>Flip Layout</span></button>
-                <div class="btn-group-sm">
-                <button type="button" class="btn btn-sm btn-primary btn-block">
-                    <i class="glyphicon glyphicon-chevron-left"></i>
-                    <span>Previous Graph</span></button>
-                <button type="button" class="btn btn-sm btn-primary btn-block">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    <span>Next Graph</span></button>
-                </div>
-                    <p>Graph: 1/76</p>
-                    <p>Nodes: 156</p>
+                    <button type="button" class="btn btn-primary btn-sm btn-block"
+                            id="btn-expand-tree">
+                        <i class="glyphicon glyphicon-plus btnicon"></i>
+                        <span>Expand Tree</span></button>
+                    <button type="button" class="btn btn-sm btn-primary btn-block"
+                            id="btn-shrink-tree">
+                        <i class="glyphicon glyphicon-minus"></i>
+                        <span>Shrink Tree</span></button>
+                    <button type="button" class="btn btn-sm btn-primary btn-block"
+                            id="btn-center-root">
+                        <i class="glyphicon glyphicon-home"></i>
+                        <span>Center root</span></button>
+                    <button type="button" class="btn btn-sm btn-primary btn-block"
+                            id="btn-toggle-label">
+                        <i class="glyphicon glyphicon-tag"></i>
+                        <span>Toggle Labels</span></button>
+                    <button type="button" class="btn btn-sm btn-primary btn-block btn-200-below"
+                            id="btn-flip-layout">
+                        <i class="glyphicon glyphicon-share-alt"></i>
+                        <span>Flip Layout</span></button>
+
+                    <div class="btn-group-sm" id="graph-pager">
+                        <button type="button" class="btn btn-sm btn-primary btn-block">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            <span>Previous Graph</span></button>
+                        <button type="button" class="btn btn-sm btn-primary btn-block">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <span>Next Graph</span></button>
+                    </div>
+                        <div id="graph-data">
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                        </div>
+
                 </div>
             </div>
-{#            <div class="col-sm-1 btn-group-vertical" id="rightbar-2">#}
-{#                <button type="button" class="btn btn-sm">HELLO</button>#}
-{#                <button type="button" class="btn btn-sm">HELLO</button>#}
-{#                <button type="button" class="btn btn-sm">HELLO</button>#}
-{#            </div>#}
+            {#            <div class="col-sm-1 btn-group-vertical" id="rightbar-2">#}
+            {#                <button type="button" class="btn btn-sm">HELLO</button>#}
+            {#                <button type="button" class="btn btn-sm">HELLO</button>#}
+            {#                <button type="button" class="btn btn-sm">HELLO</button>#}
+            {#            </div>#}
         </div>
         <div class="row">
             <div class="col-xs-3"></div>
@@ -108,7 +126,7 @@
                             <button class="btn btn-default" type="button">Expand</button>
                         </span>
                 </div>
-                </div>
+            </div>
             <div class="col-xs-2"></div>
             <div class="col-xs-2">
                 <div class="btn-group dropup">
@@ -125,20 +143,14 @@
                 </div>
             </div>
         </div>
-        </div>
-    <form id="svgform" method="POST" action="download/">
-        <input type="text" id="output_format" name="output_format" style="visibility:hidden">
-        <input type="text" id="data" name="data" style="visibility:hidden">
-        <input type="text" id="layout" name="layout" style="visibility:hidden">
-        <input type="submit" value="submit" style="visibility:hidden">
-    </form>
+    </div>
     <script src="{% static "js/jquery-2.1.1.min.js" %}"></script>
     <script src="{% static "js/bootstrap.min.js" %}"></script>
     <script src="{% static "js/jquery.ui.widget.min.js" %}"></script>
     <script src="{% static "js/jquery.fileupload.min.js" %}"></script>
     <script src="{% static "js/jquery.autocomplete.js" %}"></script>
     <script src="{% static "js/visualization.js" %}"></script>
-    {% endblock %}
+{% endblock %}
 {#    <script src="{%  static "js/d3.min.js" %}"></script>#}
 {#    <script src="{%  static "js/jquery.autocomplete.min.js" %}"></script>#}
 {#    <script src="{%  static "js/underscore-min.js" %}"></script>#}

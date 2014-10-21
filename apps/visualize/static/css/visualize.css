@@ -71,6 +71,7 @@ a {
 .hidden {
     display: hidden;
 }
+
 /*space between buttons*/
 /*.btn-group-vertical > div > button {*/
     /*margin-bottom: 10px;*/
@@ -140,6 +141,15 @@ a {
     fill: none;
     stroke: #ccc;
     stroke-width: 1px;
+}
+
+#graph-data {
+    margin-top: 20px;
+}
+
+#graph-data > p {
+    margin-top: -5px;
+    line-height: 1em;
 }
 /*#rightbar {*/
     /*display: inline-block;*/
