@@ -204,8 +204,8 @@ jQuery(function ($) {
                     return d;
                 })
                 .attr("viewBox", "0 -5 10 10")
-                .attr("refX", 17)
-                .attr("refY", 0)
+                .attr("refX", 5)
+                .attr("refY", -1.5)
                 .attr("markerWidth", 7)
                 .attr("markerHeight", 7)
                 .attr("fill", "#555")

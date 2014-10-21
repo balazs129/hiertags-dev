@@ -129,6 +129,7 @@ a {
 .node circle {
     stroke: steelblue;
     stroke-width: 1px;
+    fill: #ffffff;
 }
 
 .node text {

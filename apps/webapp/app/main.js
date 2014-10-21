@@ -52,6 +52,8 @@ $(function(){
   _.extend(treeView, Backbone.Events);
 
   treeView.listenTo(event_bus, 'newfile', function(){
+    // Clear the previous content
+    $('#visualization').html('');
     // Generate a new view
     treeView.generateTree(treeGraph);
     // Set autocomplete
