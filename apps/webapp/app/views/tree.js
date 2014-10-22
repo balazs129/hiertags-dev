@@ -406,20 +406,28 @@ var app = {
 
     d3.select('#btn-tag-search').on('click', function () {
       var $tag = $('#tag-search'),
-          tag = $tag.val(),
-          path = [],
-          found = null;
+        tag = $tag.val(),
+        path = [],
+        found = null;
 
-      // Search among the opened nodes
-      function visitor (node) {
-        if (node.children) {
-          node.children.forEach(visitor);
-        }
-        if (node.name === tag) {
-          found = node;
-        }
+      // Search among the opened nodes(check if root is fully collapsed)
+      if (tag === root.name) {
+        centerNode(root);
+      } else if (root.children) {
+        var visitor = function (node) {
+          if (node.children) {
+            node.children.forEach(visitor);
+          }
+          if (node.name === tag) {
+            found = node;
+          }
+        };
+        root.children.forEach(visitor);
+      } else {
+        app.util.toggleNode(root);
+        update(root);
       }
-      root.children.forEach(visitor);
+
 
       // If not found among the opened nodes, search in the collapsed nodes
       if (!found) {
@@ -453,8 +461,8 @@ var app = {
         centerNode(found);
         treeData.set({lastSearched: tag});
       }
+
       $tag.val('');
-      console.log(path);
     });
   },
 
