@@ -98,7 +98,7 @@ var app = {
     root.x0 = width / 2;
     root.y0 = height / 4;
 
-    app.util.collapse(root);
+    root.children.forEach(app.util.collapse);
 
     update(root);
     centerNode(root);
@@ -254,7 +254,7 @@ var app = {
               } else {
                 return '';
               }
-            })
+            });
         } else {
           nodeEnter.append('text')
             .attr('class', 'nodeHorizontalText')
@@ -312,7 +312,7 @@ var app = {
               }
             })
             .attr('dy', '.35em')
-            .attr('text-anchor', 'middle')
+            .attr('text-anchor', 'middle');
         } else {
           nodeUpdate.select('text')
             .attr('y', 0)
@@ -403,6 +403,59 @@ var app = {
       update(root);
       centerNode(root);
     });
+
+    d3.select('#btn-tag-search').on('click', function () {
+      var $tag = $('#tag-search'),
+          tag = $tag.val(),
+          path = [],
+          found = null;
+
+      // Search among the opened nodes
+      function visitor (node) {
+        if (node.children) {
+          node.children.forEach(visitor);
+        }
+        if (node.name === tag) {
+          found = node;
+        }
+      }
+      root.children.forEach(visitor);
+
+      // If not found among the opened nodes, search in the collapsed nodes
+      if (!found) {
+        var hiddenVisitor = function (node) {
+          if (node.children) {
+            node.children.forEach(hiddenVisitor);
+          }
+          else if (node._children) {
+            node._children.forEach(hiddenVisitor);
+          }
+          if (node.name === tag) {
+            found = node;
+            var unpack = function (h_node) {
+              if (h_node.parent !== "null" && h_node._children) {
+                path.push(h_node);
+                unpack(h_node.parent);
+              }
+            };
+            unpack(node.parent);
+          }
+        };
+        root.children.forEach(hiddenVisitor);
+      }
+
+      if (found) {
+        if (path.length > 0) {
+          path.reverse();
+          path.forEach(app.util.toggleNode);
+          update(root);
+        }
+        centerNode(found);
+        treeData.set({lastSearched: tag});
+      }
+      $tag.val('');
+      console.log(path);
+    });
   },
 
   util: {
@@ -412,6 +465,21 @@ var app = {
         d.children = null;
         d._children.forEach(app.util.collapse);
       }
+    },
+
+    toggleNode: function (d) {
+      if (typeof d.children !== "undefined" || typeof d._children !== "undefined") {
+        if (d.children) {
+          d._children = d.children;
+          d.children = null;
+          d._children.forEach(app.util.collapse);
+        } else {
+          d.children = d._children;
+          d._children = null;
+          d.children.forEach(app.util.collapse);
+        }
+      }
+      return d;
     },
 
     magnifyNode: function (d) {

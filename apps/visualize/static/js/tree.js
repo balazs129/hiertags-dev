@@ -2,7 +2,7 @@
 /*global d3:false */
 /*global _:false */
 
-$.noConflict();
+
 jQuery(function ($) {
         var globalData = {
             treeWidth: 0,
@@ -592,8 +592,6 @@ jQuery(function ($) {
                 }
                 $("#query").val("");
                 globalData.selected = "";
-
-                console.log(found);
             }
 
             function chdGraph() {

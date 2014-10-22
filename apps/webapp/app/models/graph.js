@@ -7,7 +7,10 @@ var Backbone = require('backbone'),
 var Graph = Backbone.Model.extend({
   defaults: {
     dag: {},
+
+    // Graph properties
     name: '',
+    depth: 0,
     interlinks: [],
     numNodes: 0,
     numEdges: 0,
@@ -16,9 +19,9 @@ var Graph = Backbone.Model.extend({
     suggestions: [],
     isLayoutVertical: true,
     horizontalRatio: 0,
-    depth: 0,
     extraWidth: 0,
-    isLabelsVisible: true
+    isLabelsVisible: true,
+    lastSearched: null
   },
 
   initialize: function () {

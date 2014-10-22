@@ -72,6 +72,9 @@ a {
     display: hidden;
 }
 
+#depth-input {
+    width: 60px;
+}
 /*space between buttons*/
 /*.btn-group-vertical > div > button {*/
     /*margin-bottom: 10px;*/

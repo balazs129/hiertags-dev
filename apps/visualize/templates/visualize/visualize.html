@@ -47,7 +47,8 @@
                 <input class="text-center form-control" type="search"
                        id="tag-search" placeholder="Search for a tag">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
+                            <button class="btn btn-default" id="btn-tag-search"
+                                    type="button">Go!</button>
                         </span>
             </div>
             <!-- /input-group -->
@@ -104,9 +105,9 @@
                             <span>Next Graph</span></button>
                     </div>
                         <div id="graph-data">
-                            <p></p>
-                            <p></p>
-                            <p></p>
+                            <div></div>
+                            <div></div>
+                            <div></div>
                         </div>
 
                 </div>
@@ -118,16 +119,27 @@
             {#            </div>#}
         </div>
         <div class="row">
-            <div class="col-xs-3"></div>
-            <div class="col-xs-2">
-                <div class="input-group input-group-sm">
-                    <input type="number" class="form-control" id="depth-input">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Expand</button>
-                        </span>
-                </div>
-            </div>
             <div class="col-xs-2"></div>
+            <div class="col-xs-3">
+{#                <div class="input-group input-group-sm">#}
+{#                    <input type="number" class="form-control" id="depth-input">#}
+{#                        <span class="input-group-btn">#}
+{#                            <button class="btn btn-default" type="button">Expand</button>#}
+{#                        </span>#}
+{#                </div>#}
+                <form class="form-inline">
+                    <div class="form-group form-group-sm">
+                        <label class="control-label" for="depth-input">Depth of graph: 5 /</label>
+                        <div class="input-group">
+                        <input type="number" class="form-control input-sm" id="depth-input">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-sm" type="button">Expand</button>
+                        </span>
+                            </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-3"></div>
             <div class="col-xs-2">
                 <div class="btn-group dropup">
                     <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
