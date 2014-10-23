@@ -236,43 +236,43 @@ var app = {
         });
 
       // Add node text
-        if (treeData.get('isLayoutVertical')) {
-          nodeEnter.append('text')
-            .attr('class', 'nodeVerticalText')
-            .attr('y', function (d) {
-              if (d === root) {
-                return -10;
-              } else {
-                return 10;
-              }
-            })
-            .attr('dy', '.35em')
-            .attr('text-anchor', 'middle')
-            .text(function (d) {
-              if (treeData.get('isLabelsVisible')) {
-                return d.name;
-              } else {
-                return '';
-              }
-            });
-        } else {
-          nodeEnter.append('text')
-            .attr('class', 'nodeHorizontalText')
-            .attr("x", function (d) {
-              return d.children || d._children ? -10 : 10;
-            })
-            .attr("dx", ".35em")
-            .attr("text-anchor", function (d) {
-              return d.children || d._children ? "end" : "start";
-            })
-            .text(function (d) {
-              if (treeData.get('isLabelsVisible')) {
-                return d.name;
-              } else {
-                return '';
-              }
-            });
-        }
+      if (treeData.get('isLayoutVertical')) {
+        nodeEnter.append('text')
+          .attr('class', 'nodeVerticalText')
+          .attr('y', function (d) {
+            if (d === root) {
+              return -10;
+            } else {
+              return 10;
+            }
+          })
+          .attr('dy', '.35em')
+          .attr('text-anchor', 'middle')
+          .text(function (d) {
+            if (treeData.get('isLabelsVisible')) {
+              return d.name;
+            } else {
+              return '';
+            }
+          });
+      } else {
+        nodeEnter.append('text')
+          .attr('class', 'nodeHorizontalText')
+          .attr("x", function (d) {
+            return d.children || d._children ? -10 : 10;
+          })
+          .attr("dx", ".35em")
+          .attr("text-anchor", function (d) {
+            return d.children || d._children ? "end" : "start";
+          })
+          .text(function (d) {
+            if (treeData.get('isLabelsVisible')) {
+              return d.name;
+            } else {
+              return '';
+            }
+          });
+      }
 
       // Enter any new links at the parent's previous position
       link.enter().append('path', 'g')
@@ -301,29 +301,29 @@ var app = {
           return d._children ? "lightsteelblue" : "#fff";
         });
 
-        if (treeData.get('isLayoutVertical')) {
-          nodeUpdate.select('text')
-            .attr('x', 0)
-            .attr('y', function (d) {
-              if (d === root) {
-                return -14;
-              } else {
-                return 14;
-              }
-            })
-            .attr('dy', '.35em')
-            .attr('text-anchor', 'middle');
-        } else {
-          nodeUpdate.select('text')
-            .attr('y', 0)
-            .attr('x', function (d) {
-              return d.children || d._children ? -20 : 10;
-            })
-            .attr('dx', '.35em')
-            .attr("text-anchor", function (d) {
-              return d.children || d._children ? 'end' : 'start';
-            });
-        }
+      if (treeData.get('isLayoutVertical')) {
+        nodeUpdate.select('text')
+          .attr('x', 0)
+          .attr('y', function (d) {
+            if (d === root) {
+              return -14;
+            } else {
+              return 14;
+            }
+          })
+          .attr('dy', '.35em')
+          .attr('text-anchor', 'middle');
+      } else {
+        nodeUpdate.select('text')
+          .attr('y', 0)
+          .attr('x', function (d) {
+            return d.children || d._children ? -20 : 10;
+          })
+          .attr('dx', '.35em')
+          .attr("text-anchor", function (d) {
+            return d.children || d._children ? 'end' : 'start';
+          });
+      }
 
       // Transition links to their new position
       link.transition()
@@ -388,12 +388,12 @@ var app = {
       var nodeSelection = d3.selectAll("g.node");
       nodeSelection.select('text')
         .text(function (d) {
-        if (labels) {
-          return d.name;
-        } else {
-          return '';
-        }
-      });
+          if (labels) {
+            return d.name;
+          } else {
+            return '';
+          }
+        });
       update(root);
     });
 
@@ -463,6 +463,54 @@ var app = {
       }
 
       $tag.val('');
+    });
+
+    d3.select('#btn-expand-graph').on('click', function () {
+      var $depth = $('#depth-input'),
+          graphDepth = treeData.get('depth'),
+          depth = $depth.val();
+
+      // Validate input
+      if (depth < 1) {
+        $depth.val('1');
+        depth = 1;
+      } else if (depth > graphDepth){
+        $depth.val(graphDepth);
+        depth = graphDepth;
+      }
+
+      function expandTree() {
+        root.children.forEach(app.util.collapse);
+        update(root);
+
+        function expand(d) {
+          if (d.depth < depth) {
+            if (d._children) {
+              d.children = d._children;
+              d.children.forEach(expand);
+              d._children = null;
+            } else {
+              if (d._children) {
+                d.children = d._children;
+                d.children.forEach(expand);
+                d._children = null;
+              }
+            }
+          }
+        }
+
+        root.children.forEach(expand);
+        update(root);
+        centerNode(root);
+      }
+
+      if (root.children) {
+        expandTree();
+      } else {
+        root.children = root._children;
+        root._children = null;
+        expandTree();
+      }
     });
   },
 

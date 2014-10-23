@@ -121,19 +121,17 @@
         <div class="row">
             <div class="col-xs-2"></div>
             <div class="col-xs-3">
-{#                <div class="input-group input-group-sm">#}
-{#                    <input type="number" class="form-control" id="depth-input">#}
-{#                        <span class="input-group-btn">#}
-{#                            <button class="btn btn-default" type="button">Expand</button>#}
-{#                        </span>#}
-{#                </div>#}
                 <form class="form-inline">
                     <div class="form-group form-group-sm">
-                        <label class="control-label" for="depth-input">Depth of graph: 5 /</label>
+                        <label class="control-label" for="depth-input">Depth of graph: </label>
+                        <span id="depth-number"></span>
+                        <span> / </span>
                         <div class="input-group">
-                        <input type="number" class="form-control input-sm" id="depth-input">
+                        <input type="number" class="form-control input-sm" id="depth-input"
+                               value="1" min="1">
                         <span class="input-group-btn">
-                            <button class="btn btn-default btn-sm" type="button">Expand</button>
+                            <button class="btn btn-default btn-sm" id="btn-expand-graph"
+                                    type="button">Expand</button>
                         </span>
                             </div>
                     </div>

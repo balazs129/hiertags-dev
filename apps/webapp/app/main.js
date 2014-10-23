@@ -46,10 +46,13 @@ $(function(){
       });
       treeGraph.update();
       event_bus.trigger('newfile');
+
       var $data = $('#graph-data').children();
       $data.first().text('Graph: ' + graphIndex + '/' + numberOfGraphs)
         .next().text('Nodes:  ' + treeGraph.get('numNodes'))
         .next().text('Edges:  ' + treeGraph.get('numEdges'));
+
+      $('#depth-number').text(treeGraph.get('depth'));
     }
   });
 
