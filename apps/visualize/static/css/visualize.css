@@ -246,13 +246,13 @@ a {
     /*stroke-width: 3px;*/
 /*}*/
 
-/*.ghostCircle.show{*/
-    /*display:block;*/
-/*}*/
-
-/*.ghostCircle, .activeDrag .ghostCircle{*/
-    /*display: none;*/
-/*}*/
+.ghostCircle.show{
+    display:block;
+}
+/**/
+.ghostCircle, .activeDrag .ghostCircle{
+    display: none;
+}
 
 /*#searchdiv {*/
     /*width: 50%;*/

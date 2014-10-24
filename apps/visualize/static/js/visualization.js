@@ -256,7 +256,18 @@ var app = {
 
     var duration = 750,
       root,
-      i = 0;
+      i = 0,
+      dragData = {
+        selectedNode: null,
+        draggingNode: null,
+        dragStarted: false,
+        draggedDepth: 0,
+        domNode: null,
+        nodes: null,
+        nodePaths: null,
+        nodesExit: null
+      };
+
 
     // Helper functions for the update function
     function centerNode(source) {
@@ -316,6 +327,64 @@ var app = {
       .attr("orient", "auto")
       .append("path")
       .attr("d", "M0,-5L10,0L0,5");
+
+    function initiateDrag(d, domNode) {
+      var draggedId = d.id;
+      // If node has children, remove the links and nodes
+      if (dragData.nodes.length > 1) {
+        // Remove link paths
+        var links = tree.links(dragData.nodes);
+        svgGroup.selectAll('path.link')
+          .data(links, function (d) {
+            return d.target.id;
+          })
+          .remove();
+        // Remve child nodes
+        svgGroup.selectAll('g.node')
+          .data(dragData.nodes, function (d) {
+            return d.id;
+          })
+          .filter(function (d) {
+            return d.id !== draggedId;
+          })
+          .remove();
+      }
+    }
+
+    var dragListener = d3.behavior.drag()
+      .origin(function (d) {
+        return d;
+      })
+      .on('dragstart', function (d) {
+        if (d !== root) {
+          var _this = this;
+//          dragData.dragStarted = true;
+
+          dragData.draggedDepth = d.depth;
+          dragData.nodes = tree.nodes(d);
+          d3.event.sourceEvent.stopPropagation();
+          initiateDrag(d, _this);
+
+          if (d.children) {
+            app.util.collapse(d);
+          }
+        }
+      })
+      .on('drag', function (d) {
+        var draggedNode = d3.select(this)
+
+        if (treeData.get('isLayoutVertical')) {
+          d.x0 += d3.event.dx;
+          d.y0 += d3.event.dy;
+          draggedNode.attr('transform', 'translate(' + d.x0 + ',' + d.y0 + ')');
+        } else {
+          d.x0 += d3.event.dy;
+          d.y0 += d3.event.dx;
+          draggedNode.attr('transform', 'translate(' + d.y0 + ',' + d.x0 + ')');
+        }
+
+      });
+
 
     root = treeData.get('dag')[0];
     // Entering nodes requires these attributes to present
@@ -439,6 +508,7 @@ var app = {
       // ENTER
       // Enter any new nodes at the parent's previous position
       var nodeEnter = node.enter().append('g')
+        .call(dragListener)
         .attr('class', 'node')
         .attr('transform', function () {
           if (treeData.get('isLayoutVertical')) {
@@ -450,6 +520,7 @@ var app = {
         .on('click', nodeClick)
         .on('mouseover', app.util.magnifyNode)
         .on('mouseout', app.util.resetMagnifiedNode);
+//        .on('contextmenu', app.util.expandAllChildren);
 
       // Add node circles
       nodeEnter.append('circle')
@@ -458,6 +529,20 @@ var app = {
         .style('fill', function (d) {
           return d._children ? 'lightsteelblue' : '#fff';
         });
+
+//      // Phantom node
+//      nodeEnter.append("circle")
+//        .attr("class", "ghostCircle")
+//        .attr("r", 30)
+//        .attr("opacity", 0)
+//        .style("fill", "red")
+//        .attr("pointer-events", "mouseover")
+//        .on("mouseover", function (node) {
+//          overCircle(node);
+//        })
+//        .on("mouseout", function (node) {
+//          outCircle(node);
+//        });
 
       // Add node text
       if (treeData.get('isLayoutVertical')) {
@@ -585,7 +670,9 @@ var app = {
       });
     }
 
-    //Button Functions
+
+
+    // Button Functions
     d3.select('#btn-expand-tree').on('click', function () {
       var oldWidth = treeData.get('extraWidth');
       var newWidth = oldWidth + 50;
@@ -736,6 +823,8 @@ var app = {
         expandTree();
       }
     });
+
+
   },
 
   util: {
@@ -764,7 +853,7 @@ var app = {
 
     magnifyNode: function (d) {
       var nodeSelection = d3.select(this),
-          duration = 600;
+        duration = 600;
 
       nodeSelection.select('circle')
         .transition(duration)
@@ -779,7 +868,7 @@ var app = {
           return "1em";
         })
         .text(function (d) {
-            return d.name;
+          return d.name;
         });
 
 //      nodeSelection.select(".ghostCircle")
@@ -794,8 +883,8 @@ var app = {
       nodeSelection.select("circle")
         .transition(duration)
         .attr("r", function () {
-        return 6;
-      });
+          return 6;
+        });
 
       nodeSelection.select("text")
         .transition(duration)
@@ -804,7 +893,7 @@ var app = {
           return ".35em";
         })
         .text(function (d) {
-            return d.name;
+          return d.name;
         });
 
 //      nodeSelection.select(".ghostCircle")
