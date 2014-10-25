@@ -34,6 +34,7 @@ $(function(){
   var fileUploadOptions = _.extend(baseUploadOptions, {
     done: function (e, data) {
       numberOfGraphs = data.result.numGraph;
+      console.log(numberOfGraphs);
       $('.hidden').removeClass('hidden');
       $('#progress-circle').addClass('hidden');
       $('#left-bar').addClass('hidden');
@@ -73,6 +74,40 @@ $(function(){
       .attr('max', treeGraph.get('depth'));
   });
 
+  var $btnNext = $('#btn-next-graph'),
+      $btnPrev = $('#btn-prev-graph');
+
+  $btnNext.on('click', function () {
+    if (graphIndex < numberOfGraphs) {
+      if (graphIndex === 1) {
+        $btnPrev.removeAttr('disabled');
+      }
+      // Get new data
+      graphIndex += 1;
+      var url = '/visualize/graph/' + graphIndex;
+      console.log(url);
+      $.ajax({
+      });
+
+      if (graphIndex === numberOfGraphs) {
+        $btnNext.attr('disabled', true);
+        // removeAttr('disabled)
+      }
+    }
+  });
+
+  $btnPrev.on('click', function () {
+    if (graphIndex > 1) {
+      if (graphIndex === numberOfGraphs) {
+        $btnNext.removeAttr('disabled');
+      }
+      graphIndex -= 1;
+
+    if (graphIndex === 1) {
+      $btnPrev.attr('disabled', true);
+    }
+    }
+  });
 });
 
 },{"backbone":6,"d3":8,"models/graph":2,"underscore":9,"util/file-upload":3,"views/tree":5}],2:[function(require,module,exports){
@@ -289,7 +324,6 @@ var app = {
     }
 
     function nodeClick(d) {
-      console.log(d);
       if (typeof d.children !== "undefined" || typeof d._children !== "undefined") {
         if (d.children) {
           d._children = d.children;
@@ -369,7 +403,6 @@ var app = {
           dragData.draggedDepth = d.depth;
           dragData.nodes = tree.nodes(d);
           dragData.runInitializer = true;
-          console.log('dragstart');
         }
       })
       .on('drag', function (d) {
@@ -385,10 +418,8 @@ var app = {
               app.util.collapse(d);
             }
             dragData.runInitializer = false;
-            console.log('initiate');
           }
 
-          console.log('drag');
           if (treeData.get('isLayoutVertical')) {
             d.x0 += d3.event.dx;
             d.y0 += d3.event.dy;
@@ -402,8 +433,7 @@ var app = {
       })
       .on('dragend', function (d) {
         if (d !== root && dragData.dragStarted) {
-          var _this = this,
-              draggingNode = d3.select(this).datum();
+          var draggingNode = d3.select(this).datum();
 
           if (dragData.selectedNode) {
             var selectedNodeChildren = dragData.selectedNode.children,
@@ -428,7 +458,6 @@ var app = {
 
           }
           d3.select(this).attr('pointer-events', 'all');
-          console.log('dragend');
           dragData.dragStarted = false;
 
           update(root);

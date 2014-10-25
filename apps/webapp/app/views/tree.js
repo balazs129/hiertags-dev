@@ -65,7 +65,6 @@ var app = {
     }
 
     function nodeClick(d) {
-      console.log(d);
       if (typeof d.children !== "undefined" || typeof d._children !== "undefined") {
         if (d.children) {
           d._children = d.children;
@@ -145,7 +144,6 @@ var app = {
           dragData.draggedDepth = d.depth;
           dragData.nodes = tree.nodes(d);
           dragData.runInitializer = true;
-          console.log('dragstart');
         }
       })
       .on('drag', function (d) {
@@ -161,10 +159,8 @@ var app = {
               app.util.collapse(d);
             }
             dragData.runInitializer = false;
-            console.log('initiate');
           }
 
-          console.log('drag');
           if (treeData.get('isLayoutVertical')) {
             d.x0 += d3.event.dx;
             d.y0 += d3.event.dy;
@@ -178,8 +174,7 @@ var app = {
       })
       .on('dragend', function (d) {
         if (d !== root && dragData.dragStarted) {
-          var _this = this,
-              draggingNode = d3.select(this).datum();
+          var draggingNode = d3.select(this).datum();
 
           if (dragData.selectedNode) {
             var selectedNodeChildren = dragData.selectedNode.children,
@@ -204,7 +199,6 @@ var app = {
 
           }
           d3.select(this).attr('pointer-events', 'all');
-          console.log('dragend');
           dragData.dragStarted = false;
 
           update(root);

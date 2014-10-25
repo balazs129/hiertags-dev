@@ -72,4 +72,38 @@ $(function(){
       .attr('max', treeGraph.get('depth'));
   });
 
+  var $btnNext = $('#btn-next-graph'),
+      $btnPrev = $('#btn-prev-graph');
+
+  $btnNext.on('click', function () {
+    if (graphIndex < numberOfGraphs) {
+      if (graphIndex === 1) {
+        $btnPrev.removeAttr('disabled');
+      }
+      // Get new data
+      graphIndex += 1;
+      var url = '/visualize/graph/' + graphIndex;
+      console.log(url);
+      $.ajax({
+      });
+
+      if (graphIndex === numberOfGraphs) {
+        $btnNext.attr('disabled', true);
+        // removeAttr('disabled)
+      }
+    }
+  });
+
+  $btnPrev.on('click', function () {
+    if (graphIndex > 1) {
+      if (graphIndex === numberOfGraphs) {
+        $btnNext.removeAttr('disabled');
+      }
+      graphIndex -= 1;
+
+    if (graphIndex === 1) {
+      $btnPrev.attr('disabled', true);
+    }
+    }
+  });
 });
