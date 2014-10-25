@@ -258,6 +258,7 @@ var app = {
       root,
       i = 0,
       dragData = {
+        runInitializer: false,
         selectedNode: null,
         draggingNode: null,
         dragStarted: false,
@@ -288,6 +289,7 @@ var app = {
     }
 
     function nodeClick(d) {
+      console.log(d);
       if (typeof d.children !== "undefined" || typeof d._children !== "undefined") {
         if (d.children) {
           d._children = d.children;
@@ -329,7 +331,11 @@ var app = {
       .attr("d", "M0,-5L10,0L0,5");
 
     function initiateDrag(d, domNode) {
-      var draggedId = d.id;
+      var draggedId = d.id,
+          draggedNode = d3.select(domNode);
+
+      draggedNode.attr('pointer-events', 'none');
+
       // If node has children, remove the links and nodes
       if (dragData.nodes.length > 1) {
         // Remove link paths
@@ -357,32 +363,76 @@ var app = {
       })
       .on('dragstart', function (d) {
         if (d !== root) {
-          var _this = this;
-//          dragData.dragStarted = true;
+
+          d3.event.sourceEvent.stopPropagation();
 
           dragData.draggedDepth = d.depth;
           dragData.nodes = tree.nodes(d);
-          d3.event.sourceEvent.stopPropagation();
-          initiateDrag(d, _this);
-
-          if (d.children) {
-            app.util.collapse(d);
-          }
+          dragData.runInitializer = true;
+          console.log('dragstart');
         }
       })
       .on('drag', function (d) {
-        var draggedNode = d3.select(this)
+        if (d !== root) {
+          var draggedNode = d3.select(this),
+              _this = this;
 
-        if (treeData.get('isLayoutVertical')) {
-          d.x0 += d3.event.dx;
-          d.y0 += d3.event.dy;
-          draggedNode.attr('transform', 'translate(' + d.x0 + ',' + d.y0 + ')');
-        } else {
-          d.x0 += d3.event.dy;
-          d.y0 += d3.event.dx;
-          draggedNode.attr('transform', 'translate(' + d.y0 + ',' + d.x0 + ')');
+          dragData.dragStarted = true;
+          // Execute this block only once
+          if (dragData.runInitializer) {
+            initiateDrag(d, _this);
+            if (d.children) {
+              app.util.collapse(d);
+            }
+            dragData.runInitializer = false;
+            console.log('initiate');
+          }
+
+          console.log('drag');
+          if (treeData.get('isLayoutVertical')) {
+            d.x0 += d3.event.dx;
+            d.y0 += d3.event.dy;
+            draggedNode.attr('transform', 'translate(' + d.x0 + ',' + d.y0 + ')');
+          } else {
+            d.x0 += d3.event.dy;
+            d.y0 += d3.event.dx;
+            draggedNode.attr('transform', 'translate(' + d.y0 + ',' + d.x0 + ')');
+          }
         }
+      })
+      .on('dragend', function (d) {
+        if (d !== root && dragData.dragStarted) {
+          var _this = this,
+              draggingNode = d3.select(this).datum();
 
+          if (dragData.selectedNode) {
+            var selectedNodeChildren = dragData.selectedNode.children,
+                selectedNode_Children = dragData.selectedNode._children;
+            // We have a valid drag, remove element from the parent and insert it
+            // into the new elements children
+
+            // Remove
+            draggingNode.parent.children = _.without(draggingNode.parent.children, draggingNode);
+
+            // Insert
+            if (selectedNodeChildren) {
+              // Target has children
+              selectedNodeChildren.push(draggingNode);
+            } else if (selectedNode_Children) {
+              // Target has children, but collapsed
+              selectedNode_Children.push(draggingNode);
+            } else {
+              // Leaf node
+              dragData.selectedNode._children = [draggingNode];
+            }
+
+          }
+          d3.select(this).attr('pointer-events', 'all');
+          console.log('dragend');
+          dragData.dragStarted = false;
+
+          update(root);
+        }
       });
 
 
@@ -517,9 +567,21 @@ var app = {
             return 'translate(' + source.y0 + ',' + source.x0 + ')';
           }
         })
-        .on('click', nodeClick)
-        .on('mouseover', app.util.magnifyNode)
-        .on('mouseout', app.util.resetMagnifiedNode);
+        .on('click', function(d) {
+          // Ignore the click event if it was suppressed
+          if (d3.event.defaultPrevented) { return; }
+          nodeClick(d);
+        })
+        .on('mouseover', function (d) {
+          var nodeSelection = d3.select(this);
+          dragData.selectedNode = d;
+          app.util.magnifyNode(d, nodeSelection);
+        })
+        .on('mouseout', function (d) {
+          var nodeSelection = d3.select(this);
+          dragData.selectedNode = null;
+          app.util.resetMagnifiedNode(d, nodeSelection);
+        });
 //        .on('contextmenu', app.util.expandAllChildren);
 
       // Add node circles
@@ -851,9 +913,8 @@ var app = {
       return d;
     },
 
-    magnifyNode: function (d) {
-      var nodeSelection = d3.select(this),
-        duration = 600;
+    magnifyNode: function (d, nodeSelection) {
+      var duration = 600;
 
       nodeSelection.select('circle')
         .transition(duration)
@@ -877,9 +938,9 @@ var app = {
 //        });
     },
 
-    resetMagnifiedNode: function (d) {
-      var nodeSelection = d3.select(this),
-        duration = 600;
+    resetMagnifiedNode: function (d, nodeSelection) {
+      var duration = 600;
+
       nodeSelection.select("circle")
         .transition(duration)
         .attr("r", function () {
