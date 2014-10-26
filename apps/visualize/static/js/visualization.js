@@ -65,7 +65,6 @@ $(function(){
       if (numberOfGraphs > 1) {
         $btnNext.removeAttr('disabled');
       }
-
     }
   });
 
@@ -81,7 +80,7 @@ $(function(){
     // Set autocomplete
     autoComplete.setOptions({lookup: treeGraph.get('suggestions')});
     // Set the spinner
-    $depthField.attr('min', 0)
+    $depthField.attr('min', 1)
       .attr('max', treeGraph.get('depth'));
   });
 
@@ -125,9 +124,9 @@ $(function(){
         setNewGraph(data.graph);
       });
 
-    if (graphIndex === 1) {
-      $btnPrev.attr('disabled', true);
-    }
+      if (graphIndex === 1) {
+        $btnPrev.attr('disabled', true);
+      }
     }
   });
 });
@@ -153,7 +152,7 @@ var Graph = Backbone.Model.extend({
     // Properties for the view
     suggestions: [],
     isLayoutVertical: true,
-    horizontalRatio: 0,
+    horizontalRatio: 1,
     extraWidth: 0,
     isLabelsVisible: true,
     lastSearched: null
@@ -281,6 +280,7 @@ module.exports = utils;
 },{"underscore":9}],5:[function(require,module,exports){
 var Backbone = require('backbone'),
   _ = require('underscore'),
+  utils = require('util/graph-utils'),
   d3 = require('d3');
 
 
@@ -314,16 +314,13 @@ var app = {
     var duration = 750,
       root,
       i = 0,
+      $depthField = $('#depth-input'),
+      $depthText = $('#depth-number'),
       dragData = {
         runInitializer: false,
         selectedNode: null,
         draggingNode: null,
-        dragStarted: false,
-        draggedDepth: 0,
-        domNode: null,
-        nodes: null,
-        nodePaths: null,
-        nodesExit: null
+        dragStarted: false
       };
 
 
@@ -347,6 +344,8 @@ var app = {
 
     function nodeClick(d) {
       if (typeof d.children !== "undefined" || typeof d._children !== "undefined") {
+        console.log(d.children);
+        console.log(d._children);
         if (d.children) {
           d._children = d.children;
           d.children = null;
@@ -422,7 +421,6 @@ var app = {
 
           d3.event.sourceEvent.stopPropagation();
 
-          dragData.draggedDepth = d.depth;
           dragData.nodes = tree.nodes(d);
           dragData.runInitializer = true;
         }
@@ -482,6 +480,33 @@ var app = {
           d3.select(this).attr('pointer-events', 'all');
           dragData.dragStarted = false;
 
+          // Update depth for dragged nodes
+          var newDepth = dragData.selectedNode.depth + 1,
+              updatedDepth;
+
+          if (draggingNode._children && draggingNode._children !== null) {
+            draggingNode.depth = newDepth;
+
+            var visitor = function (node) {
+              if (node.children) {
+                node.depth = node.parent.depth + 1;
+                node._children.forEach(visitor);
+              } else {
+                node.depth = node.parent.depth + 1;
+              }
+            };
+            draggingNode._children.forEach(visitor);
+          } else {
+            draggingNode.depth = newDepth;
+          }
+
+          // Update depth
+          updatedDepth = utils.getDepth(root);
+          treeData.set({depth: updatedDepth});
+          $depthText.text(updatedDepth);
+          // Set new max for the depth field
+          $depthField.attr('max', updatedDepth).val('1');
+
           update(root);
         }
       });
@@ -502,6 +527,7 @@ var app = {
         levelLabelWidth = [1],
         childSum,
         newHeight,
+        tmpWidth,
         newWidth;
 
       // Function to calculate the number of childrens/sum of the label widths per depth
@@ -526,7 +552,7 @@ var app = {
         }
       }
 
-      childCount(0, source);
+      childCount(0, root);
       childSum = _.reduce(levelWidth, function (memo, num) {
         return memo + num;
       }, 0);
@@ -534,10 +560,10 @@ var app = {
       // Set the new widths and heights
       // Vertical Layout
       if (treeData.get('isLayoutVertical')) {
-        newHeight = treeData.get('depth') * 100;
+        newHeight =  (levelWidth.length - 1) * 90;
 
         if (treeData.get('isLabelsVisible')) {
-          var tmpWidth = _.map(levelWidth, function (num, index) {
+          tmpWidth = _.map(levelWidth, function (num, index) {
             return num * 24 + levelLabelWidth[index] * 10;
           });
 
@@ -547,13 +573,21 @@ var app = {
         }
         // Horizontal Layout
       } else {
-        newWidth = treeData.get('depth') * (100 + childSum + treeData.get('horizontalRatio'));
-        newHeight = treeData.get('depth') * (childSum * 3);
+        newHeight = (levelWidth.length - 1) * (90 * treeData.get('horizontalRatio'));
+        if (treeData.get('isLabelsVisible')) {
+          tmpWidth = _.map(levelWidth, function (num, index) {
+            return num * 24 + levelLabelWidth[index] * 10;
+          });
+          newWidth = _.max(tmpWidth) * treeData.get('horizontalRatio');
+        } else {
+          newWidth = _.max(levelWidth) * (17 * treeData.get('horizontalRatio'));
+        }
+        console.log(newWidth, newHeight);
       }
 
       tree.size([newWidth, newHeight]).separation(function (a, b) {
         if (treeData.get('isLabelsVisible')) {
-          return a.name.length + b.name.length + 10;
+          return a.name.length + b.name.length + 5;
         } else {
           return 10;
         }
@@ -787,16 +821,34 @@ var app = {
 
     // Button Functions
     d3.select('#btn-expand-tree').on('click', function () {
-      var oldWidth = treeData.get('extraWidth');
-      var newWidth = oldWidth + 50;
-      treeData.set({extraWidth: newWidth});
+      var oldWidth,
+          newWidth;
+
+      if (treeData.get('isLayoutVertical')) {
+        oldWidth = treeData.get('extraWidth');
+        newWidth = oldWidth + 50;
+        treeData.set({extraWidth: newWidth});
+      } else {
+        oldWidth = treeData.get('horizontalRatio');
+        newWidth = oldWidth + 0.2;
+        treeData.set({horizontalRatio: newWidth});
+      }
       update(root);
     });
 
     d3.select('#btn-shrink-tree').on('click', function () {
-      var oldWidth = treeData.get('extraWidth');
-      var newWidth = oldWidth > 50 ? oldWidth - 50 : 0;
-      treeData.set({extraWidth: newWidth});
+      var oldWidth,
+          newWidth;
+
+      if (treeData.get('isLayoutVertical')) {
+        oldWidth = treeData.get('extraWidth');
+        newWidth = oldWidth > 50 ? oldWidth - 50 : 0;
+        treeData.set({extraWidth: newWidth});
+      } else {
+        oldWidth = treeData.get('horizontalRatio');
+        newWidth = oldWidth > 0.2 ? oldWidth - 0.2 : 0.2;
+        treeData.set({horizontalRatio: newWidth});
+      }
       update(root);
     });
 
@@ -1018,7 +1070,7 @@ var app = {
 
 module.exports = app;
 
-},{"backbone":6,"d3":8,"underscore":9}],6:[function(require,module,exports){
+},{"backbone":6,"d3":8,"underscore":9,"util/graph-utils":4}],6:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors

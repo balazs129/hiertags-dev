@@ -18,7 +18,7 @@ var Graph = Backbone.Model.extend({
     // Properties for the view
     suggestions: [],
     isLayoutVertical: true,
-    horizontalRatio: 0,
+    horizontalRatio: 1,
     extraWidth: 0,
     isLabelsVisible: true,
     lastSearched: null

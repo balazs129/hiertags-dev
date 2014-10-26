@@ -64,7 +64,6 @@ $(function(){
       if (numberOfGraphs > 1) {
         $btnNext.removeAttr('disabled');
       }
-
     }
   });
 
@@ -80,7 +79,7 @@ $(function(){
     // Set autocomplete
     autoComplete.setOptions({lookup: treeGraph.get('suggestions')});
     // Set the spinner
-    $depthField.attr('min', 0)
+    $depthField.attr('min', 1)
       .attr('max', treeGraph.get('depth'));
   });
 
@@ -124,9 +123,9 @@ $(function(){
         setNewGraph(data.graph);
       });
 
-    if (graphIndex === 1) {
-      $btnPrev.attr('disabled', true);
-    }
+      if (graphIndex === 1) {
+        $btnPrev.attr('disabled', true);
+      }
     }
   });
 });
