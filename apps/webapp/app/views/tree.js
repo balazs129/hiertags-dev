@@ -1,10 +1,8 @@
-var Backbone = require('backbone'),
-  _ = require('underscore'),
+var _ = require('underscore'),
   utils = require('util/graph-utils'),
   d3 = require('d3');
 
 
-// Set up the initial canvas
 var app = {
   generateTree: function (treeData) {
     'use strict';
@@ -18,9 +16,9 @@ var app = {
     // Listen for zoom/pan events on the svg canvas
     var zoomListener = d3.behavior.zoom()
       .scaleExtent([0.2, 2])
-      .on("zoom", function zoom() {
-        svgGroup.attr("transform",
-            "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
+      .on('zoom', function zoom() {
+        svgGroup.attr('transform',
+            'translate(' + d3.event.translate + ')' + ' scale(' + d3.event.scale + ')');
       });
 
     var svg = d3.select('#visualization')
@@ -57,15 +55,13 @@ var app = {
       }
       d3.select('g').transition()
         .duration(duration)
-        .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
+        .attr('transform', 'translate(' + x + ',' + y + ')scale(' + scale + ')');
       zoomListener.scale(scale);
       zoomListener.translate([x, y]);
     }
 
     function nodeClick(d) {
-      if (typeof d.children !== "undefined" || typeof d._children !== "undefined") {
-        console.log(d.children);
-        console.log(d._children);
+      if (typeof d.children !== 'undefined' || typeof d._children !== 'undefined') {
         if (d.children) {
           d._children = d.children;
           d.children = null;
@@ -92,18 +88,18 @@ var app = {
       });
 
     // Build the arrow
-    svg.append("defs").selectAll("marker")
-      .data(["end"])
-      .enter().append("marker")
-      .attr("id", String)
-      .attr("viewBox", "0 -5 10 10")
-      .attr("refX", 0)
-      .attr("refY", 0)
-      .attr("markerWidth", 6)
-      .attr("markerHeight", 6)
-      .attr("orient", "auto")
-      .append("path")
-      .attr("d", "M0,-5L10,0L0,5");
+    svg.append('defs').selectAll('marker')
+      .data(['end'])
+      .enter().append('marker')
+      .attr('id', String)
+      .attr('viewBox', '0 -5 10 10')
+      .attr('refX', 0)
+      .attr('refY', 0)
+      .attr('markerWidth', 6)
+      .attr('markerHeight', 6)
+      .attr('orient', 'auto')
+      .append('path')
+      .attr('d', 'M0,-5L10,0L0,5');
 
     function initiateDrag(d, domNode) {
       var draggedId = d.id,
@@ -225,7 +221,10 @@ var app = {
           treeData.set({depth: updatedDepth});
           $depthText.text(updatedDepth);
           // Set new max for the depth field
-          $depthField.attr('max', updatedDepth).val('1');
+          if (parseInt($depthField.val()) > updatedDepth) {
+            $depthField.val(updatedDepth);
+          }
+          $depthField.attr('max', updatedDepth);
 
           update(root);
         }
@@ -397,24 +396,10 @@ var app = {
           return d._children ? 'lightsteelblue' : '#fff';
         });
 
-//      // Phantom node
-//      nodeEnter.append("circle")
-//        .attr("class", "ghostCircle")
-//        .attr("r", 30)
-//        .attr("opacity", 0)
-//        .style("fill", "red")
-//        .attr("pointer-events", "mouseover")
-//        .on("mouseover", function (node) {
-//          overCircle(node);
-//        })
-//        .on("mouseout", function (node) {
-//          outCircle(node);
-//        });
-
       // Add node text
       if (treeData.get('isLayoutVertical')) {
         nodeEnter.append('text')
-          .attr('class', 'nodeVerticalText')
+          .attr('class', 'nodeText')
           .attr('y', function (d) {
             if (d === root) {
               return -10;
@@ -433,13 +418,13 @@ var app = {
           });
       } else {
         nodeEnter.append('text')
-          .attr('class', 'nodeHorizontalText')
-          .attr("x", function (d) {
+          .attr('class', 'nodeText')
+          .attr('x', function (d) {
             return d.children || d._children ? -10 : 10;
           })
-          .attr("dx", ".35em")
-          .attr("text-anchor", function (d) {
-            return d.children || d._children ? "end" : "start";
+          .attr('dx', '.35em')
+          .attr('text-anchor', function (d) {
+            return d.children || d._children ? 'end' : 'start';
           })
           .text(function (d) {
             if (treeData.get('isLabelsVisible')) {
@@ -457,7 +442,7 @@ var app = {
           var o = {x: source.x0, y: source.y0 };
           return diagonal({source: o, target: o});
         })
-        .attr("marker-end", "url(#end)");
+        .attr('marker-end', 'url(#end)');
 
       // UPDATE
       // Transition nodes to their new position
@@ -474,7 +459,7 @@ var app = {
       nodeUpdate.select('circle')
         .attr('r', 6)
         .style('fill', function (d) {
-          return d._children ? "lightsteelblue" : "#fff";
+          return d._children ? 'lightsteelblue' : '#fff';
         });
 
       if (treeData.get('isLayoutVertical')) {
@@ -536,8 +521,6 @@ var app = {
         d.y0 = d.y;
       });
     }
-
-
 
     // Button Functions
     d3.select('#btn-expand-tree').on('click', function () {
@@ -741,24 +724,19 @@ var app = {
 
       nodeSelection.select('circle')
         .transition(duration)
-        .attr("r", function () {
+        .attr('r', function () {
           return 15;
         });
 
       nodeSelection.select('text')
         .transition(duration)
         .style('font-size', '20px')
-        .attr("dy", function () {
-          return "1em";
+        .attr('dy', function () {
+          return '1em';
         })
         .text(function (d) {
           return d.name;
         });
-
-//      nodeSelection.select(".ghostCircle")
-//        .attr("r", function () {
-//          return 20;
-//        });
     },
 
     resetMagnifiedNode: function (d, nodeSelection) {
@@ -779,11 +757,6 @@ var app = {
         .text(function (d) {
           return d.name;
         });
-
-//      nodeSelection.select(".ghostCircle")
-//        .attr("r", function () {
-//          return 6;
-//        });
     }
   }
 };
