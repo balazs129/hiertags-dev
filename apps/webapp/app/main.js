@@ -57,7 +57,13 @@ $(function(){
       $('#progress-circle').addClass('hidden');
       $('#left-bar').addClass('hidden');
 
+      graphIndex = 1;
       setNewGraph(data.result.graph);
+
+      $btnPrev.attr('disabled', true);
+      if (numberOfGraphs > 1) {
+        $btnNext.removeAttr('disabled');
+      }
 
     }
   });
@@ -98,7 +104,7 @@ $(function(){
 
       if (graphIndex === numberOfGraphs) {
         $btnNext.attr('disabled', true);
-        // removeAttr('disabled)
+
       }
     }
   });
