@@ -61,7 +61,7 @@ var app = {
     }
 
     function nodeClick(d) {
-      if (typeof d.children !== 'undefined' || typeof d._children !== 'undefined') {
+      if (d.children || d._children) {
         if (d.children) {
           d._children = d.children;
           d.children = null;
@@ -192,39 +192,38 @@ var app = {
               dragData.selectedNode._children = [draggingNode];
             }
 
-          }
-          d3.select(this).attr('pointer-events', 'all');
-          dragData.dragStarted = false;
-
-          // Update depth for dragged nodes
-          var newDepth = dragData.selectedNode.depth + 1,
+            // Update depth for dragged nodes
+            var newDepth = dragData.selectedNode.depth + 1,
               updatedDepth;
 
-          if (draggingNode._children && draggingNode._children !== null) {
-            draggingNode.depth = newDepth;
+            if (draggingNode._children && draggingNode._children !== null) {
+              draggingNode.depth = newDepth;
 
-            var visitor = function (node) {
-              if (node.children) {
-                node.depth = node.parent.depth + 1;
-                node._children.forEach(visitor);
-              } else {
-                node.depth = node.parent.depth + 1;
-              }
-            };
-            draggingNode._children.forEach(visitor);
-          } else {
-            draggingNode.depth = newDepth;
-          }
+              var visitor = function (node) {
+                if (node.children) {
+                  node.depth = node.parent.depth + 1;
+                  node._children.forEach(visitor);
+                } else {
+                  node.depth = node.parent.depth + 1;
+                }
+              };
+              draggingNode._children.forEach(visitor);
+            } else {
+              draggingNode.depth = newDepth;
+            }
 
-          // Update depth
-          updatedDepth = utils.getDepth(root);
-          treeData.set({depth: updatedDepth});
-          $depthText.text(updatedDepth);
-          // Set new max for the depth field
-          if (parseInt($depthField.val()) > updatedDepth) {
-            $depthField.val(updatedDepth);
-          }
-          $depthField.attr('max', updatedDepth);
+            // Update depth
+            updatedDepth = utils.getDepth(root);
+            treeData.set({depth: updatedDepth});
+            $depthText.text(updatedDepth);
+            // Set new max for the depth field
+            if (parseInt($depthField.val()) > updatedDepth) {
+              $depthField.val(updatedDepth);
+            }
+            $depthField.attr('max', updatedDepth);
+           }
+          d3.select(this).attr('pointer-events', 'all');
+          dragData.dragStarted = false;
 
           update(root);
         }
