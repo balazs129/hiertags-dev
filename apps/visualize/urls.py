@@ -7,4 +7,5 @@ urlpatterns = patterns('',
     url(r'^$', views.visualize, name='visualize'),
     url(r'^data/$', views.visualize_data, name='visualize-data'),
     url(r'^download/$', views.export_data, name='export-data'),
+    url(r'^graph/(\d+)', views.send_graph, name='send-graph'),
 )

@@ -13,8 +13,10 @@ $(function(){
 
   var numberOfGraphs = 0,
       graphIndex = 1,
-    $tagSearch = $('#tag-search'),
-    $depthField = $('#depth-input');
+      $tagSearch = $('#tag-search'),
+      $depthField = $('#depth-input'),
+      $depthText = $('#depth-number'),
+      $graphData = $('#graph-data').children();
 
   // Create the autocomplete instance
   $tagSearch.autocomplete({delimiter: /(,|;)\s*/,
@@ -27,8 +29,26 @@ $(function(){
   var autoComplete = $tagSearch.autocomplete();
 
   var treeGraph = new Graph({});
-  var event_bus = _({}).extend(Backbone.Events);
+  var eventBus = _({}).extend(Backbone.Events);
 
+  function setNewGraph(graph) {
+    treeGraph.set({
+      dag: graph.dag,
+      name: graph.name,
+      interlinks: graph.interlinks,
+      numNodes: graph.nodes,
+      numEdges: graph.edges
+    });
+    treeGraph.update();
+    eventBus.trigger('newfile');
+
+    $graphData.first().text('Graph: ' + graphIndex + '/' + numberOfGraphs)
+      .next().text('Nodes:  ' + treeGraph.get('numNodes'))
+      .next().text('Edges:  ' + treeGraph.get('numEdges'));
+
+    $depthText.text(treeGraph.get('depth'));
+    $depthField.val('1');
+  }
   //Handling the fileupload
   var fileUploadOptions = _.extend(baseUploadOptions, {
     done: function (e, data) {
@@ -37,22 +57,8 @@ $(function(){
       $('#progress-circle').addClass('hidden');
       $('#left-bar').addClass('hidden');
 
-      treeGraph.set({
-        dag: data.result.graph.dag,
-        name: data.result.graph.name,
-        interlinks: data.result.graph.interlinks,
-        numNodes: data.result.graph.nodes,
-        numEdges: data.result.graph.edges
-      });
-      treeGraph.update();
-      event_bus.trigger('newfile');
+      setNewGraph(data.result.graph);
 
-      var $data = $('#graph-data').children();
-      $data.first().text('Graph: ' + graphIndex + '/' + numberOfGraphs)
-        .next().text('Nodes:  ' + treeGraph.get('numNodes'))
-        .next().text('Edges:  ' + treeGraph.get('numEdges'));
-
-      $('#depth-number').text(treeGraph.get('depth'));
     }
   });
 
@@ -60,7 +66,7 @@ $(function(){
 
   _.extend(treeView, Backbone.Events);
 
-  treeView.listenTo(event_bus, 'newfile', function(){
+  treeView.listenTo(eventBus, 'newfile', function(){
     // Clear the previous content
     $('#visualization').html('');
     // Generate a new view
@@ -80,11 +86,14 @@ $(function(){
       if (graphIndex === 1) {
         $btnPrev.removeAttr('disabled');
       }
+
       // Get new data
       graphIndex += 1;
       var url = '/visualize/graph/' + graphIndex;
-      console.log(url);
       $.ajax({
+        url: url
+      }).done(function(data) {
+        setNewGraph(data.graph);
       });
 
       if (graphIndex === numberOfGraphs) {
@@ -100,6 +109,14 @@ $(function(){
         $btnNext.removeAttr('disabled');
       }
       graphIndex -= 1;
+
+      // Get new data
+      var url = '/visualize/graph/' + graphIndex;
+      $.ajax({
+        url: url
+      }).done(function (data) {
+        setNewGraph(data.graph);
+      });
 
     if (graphIndex === 1) {
       $btnPrev.attr('disabled', true);

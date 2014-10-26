@@ -40,6 +40,12 @@ def visualize_data(request):
         fh = FileHandler()
         fh.build_graph(input_file)
 
+        request.session['kuki'] = 'muki'
+        request.session.set_expiry(0)
+        request.session.modified = True
+
+        request.session['graphs'] = fh.graphs
+
         ret_val = {'numGraph': len(fh.graphs), 'graph': fh.graphs[0]}
         return HttpResponse(json.dumps(ret_val), content_type="application/json")
 
@@ -74,3 +80,15 @@ def export_data(request):
         response['Content-Disposition'] = 'attachment; filename="exported_graph.{}"'.format(choosen_type)
 
         return response
+
+
+def send_graph(request, graph_num):
+    graphs = request.session['graphs']
+    index = int(graph_num) - 1
+
+    try:
+        ret_val = {'graph': graphs[index]}
+    except IndexError:
+        ret_val = None
+
+    return HttpResponse(json.dumps(ret_val), content_type="application/json")
