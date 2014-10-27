@@ -17,6 +17,14 @@ var app = {
 
     // Diagonal projection for the node paths
     var diagonal = d3.svg.diagonal()
+      // At default, edges start/end at the nodes center, we need to move endpoints to the circle
+      // edges
+      .source(function (d) {
+        return {'x': d.source.x, 'y': d.source.y + 6};
+      })
+      .target(function (d) {
+        return {'x': d.target.x, 'y': d.target.y - 11};
+      })
       .projection(function (d) {
         if (treeData.get('isLayoutVertical')) {
           return [d.x, d.y];
@@ -53,6 +61,21 @@ var app = {
         dragStarted: false
       };
 
+    // Build the arrow
+    svg.append('defs').selectAll('marker')
+      .data(['end'])
+      .enter().append('marker')
+      .attr('id', 'arrow')
+      .attr('viewBox', '0 -5 10 10')
+      .attr('refX', 0)
+      .attr('refY', 0)
+      .attr('markerWidth', 5)
+      .attr('markerHeight', 5)
+      .attr('position', 10)
+      .attr('orient', 'auto')
+      .append('path')
+      .attr('fill', '#333')
+      .attr('d', 'M0,-5L10,0L0,5');
     // Enering nodes require these attributes to present
     root.x0 = width / 2;
     root.y0 = height / 4;
@@ -89,7 +112,7 @@ var app = {
         d._children = null;
       }
 
-      update(root);
+      update(d);
       centerNode(d);
     }
 
@@ -130,21 +153,7 @@ var app = {
       }
     }
 
-    // Build the arrow
-    svg.append('defs').selectAll('marker')
-      .data(['end'])
-      .enter().append('marker')
-      .attr('id', 'arrow')
-      .attr('viewBox', '0 -5 10 10')
-      .attr('refX', 6)
-      .attr('refY', 0)
-      .attr('markerWidth', 5)
-      .attr('markerHeight', 5)
-      .attr('position', 10)
-      .attr('orient', 'auto')
-      .append('path')
-      .attr('fill', '#333')
-      .attr('d', 'M0,-5L10,0L0,5');
+
 
     function initiateDrag(d, domNode) {
       var draggedId = d.id,
