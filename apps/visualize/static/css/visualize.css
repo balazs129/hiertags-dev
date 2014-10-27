@@ -3,6 +3,14 @@ html, body {
     height: 100%;
 }
 
+.dropdown-menu {
+    max-width: 50px !important;
+    text-align: center;
+    cursor: pointer;
+}
+.dropdown-menu li:hover {
+    background: dodgerblue;
+}
 /* Override contentcolumn to span the whole column */
 #contentcolumn {
     text-align: left;
