@@ -161,7 +161,16 @@ a {
     stroke: red;
 }
 
-.nodeText {
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.nodeText, {
     pointer-events: none;
 }
 #graph-data {

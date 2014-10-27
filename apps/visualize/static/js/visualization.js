@@ -928,6 +928,7 @@ var app = {
       var $tag = $('#tag-search'),
         tag = $tag.val(),
         path = [],
+        parents = [],
         nodes,
         links,
         found = null;
@@ -983,6 +984,16 @@ var app = {
         centerNode(found);
         treeData.set({lastSearched: tag});
 
+        // Get the parents of the found node
+        var getParent = function (node) {
+          if (node.parent !== 'null') {
+            parents.push(node.name);
+            getParent(node.parent);
+          } else {
+            parents.push(node.name);
+          }
+        };
+        getParent(found);
 
         nodes = svgGroup.selectAll('g.node');
         links = svgGroup.selectAll('path.link');
@@ -999,8 +1010,9 @@ var app = {
           .select('circle')
           .classed('foundCircle', true);
 
-        path.push(root, found);
-        links.filter(function (d) { return _.contains(path, d.source) && _.contains(path, d.target);})
+        links.filter(function (d) {
+          return _.contains(parents, d.source.name) && _.contains(parents, d.target.name);
+        })
           .classed('foundLink', true);
       }
 
