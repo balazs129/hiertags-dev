@@ -70,6 +70,8 @@ $(function(){
       if (numberOfGraphs > 1) {
         $btnNext.removeAttr('disabled');
       }
+
+      $tagSearch.val('');
     }
   });
 

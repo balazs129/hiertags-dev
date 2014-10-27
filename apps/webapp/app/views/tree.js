@@ -476,13 +476,8 @@ var app = {
 
       // Enter any new links at the parent's previous position
       link.enter().append('path', 'g')
-        .attr('class', function (d) {
-          if (d.hasOwnProperty('added')) {
-            return 'addedLink';
-          } else {
-            return 'link';
-          }
-        })
+        .attr('class', 'link')
+        .classed('addedLink', function (d) { return d.hasOwnProperty('added');})
         .attr('title', function (d) {
           return 'Source: ' + d.source.name + '\n' + 'Target : ' + d.target.name;
         })
@@ -645,6 +640,8 @@ var app = {
       var $tag = $('#tag-search'),
         tag = $tag.val(),
         path = [],
+        nodes,
+        links,
         found = null;
 
       // Search among the opened nodes(check if root is fully collapsed)
@@ -697,6 +694,26 @@ var app = {
         }
         centerNode(found);
         treeData.set({lastSearched: tag});
+
+
+        nodes = svgGroup.selectAll('g.node');
+        links = svgGroup.selectAll('path.link');
+
+        // Clear old result
+        svgGroup.select('.foundCircle')
+          .classed('foundCircle', false);
+
+        svgGroup.selectAll('.foundLink')
+          .classed('foundLink', false);
+
+        // Set new result
+        nodes.filter(function (d) { return d.name === found.name;})
+          .select('circle')
+          .classed('foundCircle', true);
+
+        path.push(root, found);
+        links.filter(function (d) { return _.contains(path, d.source) && _.contains(path, d.target);})
+          .classed('foundLink', true);
       }
 
       $tag.val('');
@@ -788,7 +805,7 @@ var app = {
 
       nodeSelection.select('text')
         .transition(duration)
-        .style('font-size', '20px')
+        .style('font-size', '14px')
         .attr('dy', function () {
           return '1em';
         })
@@ -800,24 +817,22 @@ var app = {
     resetMagnifiedNode: function (d, nodeSelection) {
       var duration = 600;
 
-      nodeSelection.select("circle")
+      nodeSelection.select('circle')
         .transition(duration)
-        .attr("r", function () {
+        .attr('r', function () {
           return 6;
         });
 
-      nodeSelection.select("text")
+      nodeSelection.select('text')
         .transition(duration)
-        .style({'font-size': "10px"})
-        .attr("dy", function () {
-          return ".35em";
+        .style({'font-size': '10px'})
+        .attr('dy', function () {
+          return '.35em';
         })
         .text(function (d) {
           return d.name;
         });
-    },
-
-
+    }
   }
 };
 
