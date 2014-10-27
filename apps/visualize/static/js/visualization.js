@@ -341,6 +341,7 @@ var app = {
     }
 
     function nodeClick(d) {
+      console.log(d);
       if (d.children || d._children) {
         if (d.children) {
           d._children = d.children;
@@ -351,8 +352,46 @@ var app = {
           d._children = null;
           d.children.forEach(app.util.collapse);
         }
-        update(d);
+
+        update(root);
         centerNode(d);
+      }
+    }
+
+    function expandAllChildren (d) {
+      d3.event.preventDefault();
+
+      function expand(d) {
+        if (d._children) {
+          d.children = d._children;
+          d.children.forEach(expand);
+          d._children = null;
+        }
+      }
+
+      function expand_norec(d) {
+        if (d._children) {
+          d.children = d._children;
+          d._children = null;
+        }
+      }
+
+      if (treeData.get('numNodes') < 100) {
+        if (d._children) {
+          d.children = d._children;
+          d.children.forEach(expand);
+          d._children = null;
+          update(d);
+          centerNode(d);
+        }
+      } else {
+        if (d._children) {
+          d.children = d._children;
+          d.children.forEach(expand_norec);
+          d._children = null;
+          update(d);
+          centerNode(d);
+        }
       }
     }
 
@@ -474,13 +513,13 @@ var app = {
 
             // Update depth for dragged nodes
             var newDepth = dragData.selectedNode.depth + 1,
-              updatedDepth;
+                updatedDepth;
 
-            if (draggingNode._children && draggingNode._children !== null) {
+            if (draggingNode._children) {
               draggingNode.depth = newDepth;
 
               var visitor = function (node) {
-                if (node.children) {
+                if (node._children) {
                   node.depth = node.parent.depth + 1;
                   node._children.forEach(visitor);
                 } else {
@@ -664,8 +703,8 @@ var app = {
           var nodeSelection = d3.select(this);
           dragData.selectedNode = null;
           app.util.resetMagnifiedNode(d, nodeSelection);
-        });
-//        .on('contextmenu', app.util.expandAllChildren);
+        })
+        .on('contextmenu', expandAllChildren);
 
       // Add node circles
       nodeEnter.append('circle')
@@ -774,16 +813,16 @@ var app = {
       // Exit nodes
       var nodeExit = node.exit().transition()
         .duration(duration)
-        .attr("transform", function () {
-          return "translate(" + source.x + "," + source.y + ")";
+        .attr('transform', function () {
+          return 'translate(' + source.x + ',' + source.y + ')';
         })
         .remove();
 
-      nodeExit.select("circle")
-        .attr("r", 1e-6);
+      nodeExit.select('circle')
+        .attr('r', 1e-6);
 
-      nodeExit.select("text")
-        .style("fill-opacity", 1e-6);
+      nodeExit.select('text')
+        .style('fill-opacity', 1e-6);
 
       // Transition exiting nodes to the parent's new position
       link.exit().transition()
@@ -1036,7 +1075,9 @@ var app = {
         .text(function (d) {
           return d.name;
         });
-    }
+    },
+
+
   }
 };
 
