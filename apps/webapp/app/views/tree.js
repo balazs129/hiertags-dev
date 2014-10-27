@@ -13,6 +13,18 @@ var app = {
       width = $visualizationArea.width() - margin.right - margin.left,
       height = $visualizationArea.height() - margin.top - margin.bottom;
 
+    var tree = d3.layout.tree().size([width, height]);
+
+    // Diagonal projection for the node paths
+    var diagonal = d3.svg.diagonal()
+      .projection(function (d) {
+        if (treeData.get('isLayoutVertical')) {
+          return [d.x, d.y];
+        } else {
+          return [d.y, d.x];
+        }
+      });
+
     // Listen for zoom/pan events on the svg canvas
     var zoomListener = d3.behavior.zoom()
       .scaleExtent([0.2, 2])
@@ -30,7 +42,7 @@ var app = {
     var svgGroup = svg.append('g');
 
     var duration = 750,
-      root,
+      root = treeData.get('dag')[0],
       i = 0,
       $depthField = $('#depth-input'),
       $depthText = $('#depth-number'),
@@ -40,6 +52,10 @@ var app = {
         draggingNode: null,
         dragStarted: false
       };
+
+    // Enering nodes require these attributes to present
+    root.x0 = width / 2;
+    root.y0 = height / 4;
 
 
     // Helper functions for the update function
@@ -61,21 +77,20 @@ var app = {
     }
 
     function nodeClick(d) {
-      console.log(d);
-      if (d.children || d._children) {
-        if (d.children) {
-          d._children = d.children;
-          d.children = null;
-          d._children.forEach(app.util.collapse);
-        } else {
-          d.children = d._children;
-          d._children = null;
-          d.children.forEach(app.util.collapse);
-        }
+      if (d3.event.defaultPrevented) {
+        return;
+      } // click suppressed
 
-        update(root);
-        centerNode(d);
+      if (d.children) {
+        d._children = d.children;
+        d.children = null;
+      } else if (d._children) {
+        d.children = d._children;
+        d._children = null;
       }
+
+      update(root);
+      centerNode(d);
     }
 
     function expandAllChildren (d) {
@@ -115,29 +130,20 @@ var app = {
       }
     }
 
-    var tree = d3.layout.tree();
-
-    var diagonal = d3.svg.diagonal()
-      .projection(function (d) {
-        if (treeData.get('isLayoutVertical')) {
-          return [d.x, d.y];
-        } else {
-          return [d.y, d.x];
-        }
-      });
-
     // Build the arrow
     svg.append('defs').selectAll('marker')
       .data(['end'])
       .enter().append('marker')
-      .attr('id', String)
+      .attr('id', 'arrow')
       .attr('viewBox', '0 -5 10 10')
-      .attr('refX', 0)
+      .attr('refX', 6)
       .attr('refY', 0)
-      .attr('markerWidth', 6)
-      .attr('markerHeight', 6)
+      .attr('markerWidth', 5)
+      .attr('markerHeight', 5)
+      .attr('position', 10)
       .attr('orient', 'auto')
       .append('path')
+      .attr('fill', '#333')
       .attr('d', 'M0,-5L10,0L0,5');
 
     function initiateDrag(d, domNode) {
@@ -269,23 +275,14 @@ var app = {
       });
 
 
-    root = treeData.get('dag')[0];
-    // Entering nodes requires these attributes to present
-    root.x0 = width / 2;
-    root.y0 = height / 4;
-
-    root.children.forEach(app.util.collapse);
-
-    update(root);
-    centerNode(root);
 
     function update(source) {
       var levelWidth = [1],
-        levelLabelWidth = [1],
-        childSum,
-        newHeight,
-        tmpWidth,
-        newWidth;
+          levelLabelWidth = [1],
+          childSum,
+          newHeight,
+          tmpWidth,
+          newWidth;
 
       // Function to calculate the number of childrens/sum of the label widths per depth
       function childCount(level, n) {
@@ -352,7 +349,7 @@ var app = {
 
       // Calculate the new layout
       var nodes = tree.nodes(root).reverse(),
-        links = tree.links(nodes);
+          links = tree.links(nodes);
 
       // Add the extra edges if any
       var InterLink = function (source, target) {
@@ -409,11 +406,7 @@ var app = {
             return 'translate(' + source.y0 + ',' + source.x0 + ')';
           }
         })
-        .on('click', function(d) {
-          // Ignore the click event if it was suppressed
-          if (d3.event.defaultPrevented) { return; }
-          nodeClick(d);
-        })
+        .on('click', nodeClick)
         .on('mouseover', function (d) {
           var nodeSelection = d3.select(this);
           dragData.selectedNode = d;
@@ -429,7 +422,7 @@ var app = {
       // Add node circles
       nodeEnter.append('circle')
         .attr('class', 'nodeCircle')
-        .attr('r', 6)
+        .attr('r', 0)
         .style('fill', function (d) {
           return d._children ? 'lightsteelblue' : '#fff';
         });
@@ -480,7 +473,7 @@ var app = {
           var o = {x: source.x0, y: source.y0 };
           return diagonal({source: o, target: o});
         })
-        .attr('marker-end', 'url(#end)');
+        .attr('marker-end', 'url(#arrow)');
 
       // UPDATE
       // Transition nodes to their new position
@@ -494,7 +487,7 @@ var app = {
           }
         });
 
-      nodeUpdate.select('circle')
+      node.select('circle.nodeCircle')
         .attr('r', 6)
         .style('fill', function (d) {
           return d._children ? 'lightsteelblue' : '#fff';
@@ -539,10 +532,10 @@ var app = {
         .remove();
 
       nodeExit.select('circle')
-        .attr('r', 1e-6);
+        .attr('r', 0);
 
       nodeExit.select('text')
-        .style('fill-opacity', 1e-6);
+        .style('fill-opacity', 0);
 
       // Transition exiting nodes to the parent's new position
       link.exit().transition()
@@ -559,6 +552,10 @@ var app = {
         d.y0 = d.y;
       });
     }
+
+    root.children.forEach(app.util.collapse);
+    update(root);
+    centerNode(root);
 
     // Button Functions
     d3.select('#btn-expand-tree').on('click', function () {
