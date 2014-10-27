@@ -25,6 +25,12 @@ $(function(){
       width: 400,
       lookup: []
     });
+  // Initialize tooltips
+  $('svg link').tooltip({
+    'animation': true,
+    'container': 'body',
+    'placement': 'right'
+  });
 
   // Initialize the autocomplete instance
   var autoComplete = $tagSearch.autocomplete();
@@ -303,7 +309,7 @@ var app = {
         return {'x': d.source.x, 'y': d.source.y + 6};
       })
       .target(function (d) {
-        return {'x': d.target.x, 'y': d.target.y - 11};
+        return {'x': d.target.x, 'y': d.target.y - 10};
       })
       .projection(function (d) {
         if (treeData.get('isLayoutVertical')) {
@@ -349,9 +355,8 @@ var app = {
       .attr('viewBox', '0 -5 10 10')
       .attr('refX', 0)
       .attr('refY', 0)
-      .attr('markerWidth', 5)
-      .attr('markerHeight', 5)
-      .attr('position', 10)
+      .attr('markerWidth', 4)
+      .attr('markerHeight', 4)
       .attr('orient', 'auto')
       .append('path')
       .attr('fill', '#333')
@@ -757,12 +762,27 @@ var app = {
 
       // Enter any new links at the parent's previous position
       link.enter().append('path', 'g')
-        .attr('class', 'link')
+        .attr('class', function (d) {
+          if (d.hasOwnProperty('added')) {
+            return 'addedLink';
+          } else {
+            return 'link';
+          }
+        })
+        .attr('title', function (d) {
+          return 'Source: ' + d.source.name + '\n' + 'Target : ' + d.target.name;
+        })
         .attr('d', function () {
           var o = {x: source.x0, y: source.y0 };
           return diagonal({source: o, target: o});
         })
-        .attr('marker-end', 'url(#arrow)');
+        .attr('marker-end', 'url(#arrow)')
+        .on('mouseover', function () {
+          d3.select(this).classed('selectedLink', true);
+      })
+        .on('mouseout', function () {
+          d3.select(this).classed('selectedLink', false);
+      });
 
       // UPDATE
       // Transition nodes to their new position

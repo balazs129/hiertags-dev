@@ -24,6 +24,12 @@ $(function(){
       width: 400,
       lookup: []
     });
+  // Initialize tooltips
+  $('svg link').tooltip({
+    'animation': true,
+    'container': 'body',
+    'placement': 'right'
+  });
 
   // Initialize the autocomplete instance
   var autoComplete = $tagSearch.autocomplete();
