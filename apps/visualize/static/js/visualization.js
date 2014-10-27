@@ -55,6 +55,8 @@ $(function(){
 
     $depthText.text(treeGraph.get('depth'));
     $depthField.val('1');
+
+
   }
   //Handling the fileupload
   var fileUploadOptions = _.extend(baseUploadOptions, {
@@ -73,6 +75,9 @@ $(function(){
       }
 
       $tagSearch.val('');
+
+      // Scroll to the bottom of the page
+      window.scrollTo(0, document.body.scrollHeight);
     }
   });
 
@@ -818,7 +823,7 @@ var app = {
             return d.children || d._children ? -20 : 10;
           })
           .attr('dx', '.35em')
-          .attr("text-anchor", function (d) {
+          .attr('text-anchor', function (d) {
             return d.children || d._children ? 'end' : 'start';
           });
       }
@@ -905,7 +910,7 @@ var app = {
       var labels = !treeData.get('isLabelsVisible');
       treeData.set({isLabelsVisible: labels});
 
-      var nodeSelection = d3.selectAll("g.node");
+      var nodeSelection = d3.selectAll('g.node');
       nodeSelection.select('text')
         .text(function (d) {
           if (labels) {
@@ -964,7 +969,7 @@ var app = {
           if (node.name === tag) {
             found = node;
             var unpack = function (h_node) {
-              if (h_node.parent !== "null" && h_node._children) {
+              if (h_node.parent !== 'null' && h_node._children) {
                 path.push(h_node);
                 unpack(h_node.parent);
               }
@@ -1035,7 +1040,6 @@ var app = {
 
       function expandTree() {
         root.children.forEach(app.util.collapse);
-        update(root);
 
         function expand(d) {
           if (d.depth < depth) {

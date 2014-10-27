@@ -54,6 +54,8 @@ $(function(){
 
     $depthText.text(treeGraph.get('depth'));
     $depthField.val('1');
+
+
   }
   //Handling the fileupload
   var fileUploadOptions = _.extend(baseUploadOptions, {
@@ -72,6 +74,9 @@ $(function(){
       }
 
       $tagSearch.val('');
+
+      // Scroll to the bottom of the page
+      window.scrollTo(0, document.body.scrollHeight);
     }
   });
 

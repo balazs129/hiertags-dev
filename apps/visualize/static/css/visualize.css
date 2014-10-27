@@ -150,6 +150,7 @@ a {
 
 .foundLink {
    stroke: green;
+   stroke-width: 2px;
 }
 
 .node .foundCircle {
