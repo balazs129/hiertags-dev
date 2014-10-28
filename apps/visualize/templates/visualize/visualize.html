@@ -68,33 +68,43 @@
             </div>
             <div class="col-xs-2 btn-group-vertical" id="rightbar">
                 <div class="btnsize">
-                    <button type="button" class="btn btn-primary btn-sm btn-block"
-                            id="btn-expand-tree">
+                    <button type="button" class="btn btn-primary btn-sm btn-block btn-tooltip"
+                            id="btn-expand-tree"
+                            data-toggle="tooltip" data-placement="left"
+                            title="Increase the space between the nodes">
                         <i class="glyphicon glyphicon-plus btnicon"></i>
                         <span>Expand Tree</span></button>
-                    <button type="button" class="btn btn-sm btn-primary btn-block"
-                            id="btn-shrink-tree">
+                    <button type="button" class="btn btn-sm btn-primary btn-block btn-tooltip"
+                            id="btn-shrink-tree"
+                            data-toggle="tooltip" data-placement="left"
+                            title="Decrease the space between the nodes">
                         <i class="glyphicon glyphicon-minus"></i>
                         <span>Shrink Tree</span></button>
-                    <button type="button" class="btn btn-sm btn-primary btn-block"
-                            id="btn-center-root">
+                    <button type="button" class="btn btn-sm btn-primary btn-block btn-tooltip"
+                            id="btn-center-root"
+                            data-toggle="tooltip" data-placement="left"
+                            title="Reset view to the root element">
                         <i class="glyphicon glyphicon-home"></i>
                         <span>Center root</span></button>
-                    <button type="button" class="btn btn-sm btn-primary btn-block"
-                            id="btn-toggle-label">
+                    <button type="button" class="btn btn-sm btn-primary btn-block btn-tooltip"
+                            id="btn-toggle-label"
+                            data-toggle="tooltip" data-placement="left"
+                            title="Show/hide node labels">
                         <i class="glyphicon glyphicon-tag"></i>
                         <span>Toggle Labels</span></button>
-                    <button type="button" class="btn btn-sm btn-primary btn-block btn-200-below"
-                            id="btn-flip-layout">
+                    <button type="button" class="btn btn-sm btn-primary btn-block btn-200-below btn-tooltip"
+                            id="btn-flip-layout"
+                            data-toggle="tooltip" data-placement="left"
+                            title="Change between horizontal and vertical tree layout">
                         <i class="glyphicon glyphicon-share-alt"></i>
                         <span>Flip Layout</span></button>
 
                     <div class="btn-group-sm" id="graph-pager">
-                        <button type="button" class="btn btn-sm btn-primary btn-block"
+                        <button type="button" class="btn btn-sm btn-primary btn-block btn-tooltip"
                                 id="btn-prev-graph">
                             <i class="glyphicon glyphicon-chevron-left"></i>
                             <span>Previous Graph</span></button>
-                        <button type="button" class="btn btn-sm btn-primary btn-block"
+                        <button type="button" class="btn btn-sm btn-primary btn-block btn-tooltip"
                                 id="btn-next-graph">
                             <span>Next Graph</span>
                             <span class="glyphicon glyphicon-chevron-right"></span>
@@ -105,7 +115,6 @@
                             <div></div>
                             <div></div>
                         </div>
-
                 </div>
             </div>
         </div>
@@ -121,8 +130,10 @@
                         <input type="number" class="form-control input-sm" id="depth-input"
                                value="1" min="1">
                         <span class="input-group-btn">
-                            <button class="btn btn-default btn-sm" id="btn-expand-graph"
-                                    type="button">Expand</button>
+                            <button class="btn btn-default btn-sm btn-tooltip" id="btn-expand-graph"
+                                    type="button"
+                                    data-toggle="tooltip" data-placement="top"
+                                    title="Expand the graph to the selected depth">Expand</button>
                         </span>
                             </div>
                     </div>

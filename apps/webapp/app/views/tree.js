@@ -199,9 +199,9 @@ var app = {
           var draggedNode = d3.select(this),
               _this = this;
 
-          dragData.dragStarted = true;
           // Execute this block only once
           if (dragData.runInitializer) {
+            dragData.dragStarted = true;
             initiateDrag(d, _this);
             if (d.children) {
               app.util.collapse(d);
@@ -276,10 +276,10 @@ var app = {
             $depthField.attr('max', updatedDepth);
            }
           d3.select(this).attr('pointer-events', 'all');
-          dragData.dragStarted = false;
 
           update(root);
         }
+        dragData.dragStarted = false;
       });
 
 
@@ -418,11 +418,15 @@ var app = {
         .on('mouseover', function (d) {
           var nodeSelection = d3.select(this);
           dragData.selectedNode = d;
+          if (dragData.dragStarted) {
+            nodeSelection.select('circle').classed('dragCircle', true);
+          }
           app.util.magnifyNode(d, nodeSelection);
         })
         .on('mouseout', function (d) {
           var nodeSelection = d3.select(this);
           dragData.selectedNode = null;
+          nodeSelection.select('circle').classed('dragCircle', false);
           app.util.resetMagnifiedNode(d, nodeSelection);
         })
         .on('contextmenu', expandAllChildren);

@@ -160,6 +160,11 @@ a {
     stroke-width: 2px;
 }
 
+.node .dragCircle {
+    stroke: red;
+    stroke-width: 2px;
+}
+
 .selectedLink {
     stroke: red;
 }

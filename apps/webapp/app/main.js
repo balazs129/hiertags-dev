@@ -28,11 +28,13 @@ $(function(){
       width: 400,
       lookup: []
     });
+
   // Initialize tooltips
-  $('svg link').tooltip({
+
+  $('.btn-tooltip').tooltip({
     'animation': true,
-    'container': 'body',
-    'placement': 'right'
+    'delay': {'show':1200, 'hide': 0},
+    'container': 'body'
   });
 
   // Initialize the autocomplete instance
