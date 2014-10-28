@@ -36,6 +36,11 @@ $(function(){
     'container': 'body'
   });
 
+  // Dont close save menu if checking the checkbox
+  $('.dropdown-menu').on('click', function (e) {
+      e.stopPropagation();
+  });
+
   // Initialize the autocomplete instance
   var autoComplete = $tagSearch.autocomplete();
 
