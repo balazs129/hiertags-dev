@@ -1,6 +1,6 @@
 {
   "name": "hiertags-webapp",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "The webapp for the visualization",
   "main": "./app/main.js",
   "scripts": {

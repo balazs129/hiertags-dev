@@ -37,7 +37,7 @@ module.exports = function (grunt) {
     uglify: {
       all: {
         files: {
-          './build/visualization.min.js': ['./build/visualization.js']
+          '../visualize/static/js/visualization.min.js': ['./build/visualization.js']
         }
       }
     }
@@ -50,5 +50,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Task definitions
-  grunt.registerTask('default', ['clean', 'browserify', 'concat', 'uglify']);
+  grunt.registerTask('default', ['clean', 'browserify', 'concat', 'uglify', 'clean']);
 };
