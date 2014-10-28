@@ -112,6 +112,7 @@ $(function(){
       $.ajax({
         url: url
       }).done(function(data) {
+        console.log(data);
         setNewGraph(data.graph);
       });
 

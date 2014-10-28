@@ -40,13 +40,15 @@ def visualize_data(request):
         fh = FileHandler()
         fh.build_graph(input_file)
 
-        request.session['kuki'] = 'muki'
+        valid_graphs = [graph for graph in fh.graphs if graph['nodes'] > 1]
+
         request.session.set_expiry(0)
         request.session.modified = True
+        request.session['graphs'] = valid_graphs
 
-        request.session['graphs'] = fh.graphs
+        # Only return valid graphs
 
-        ret_val = {'numGraph': len(fh.graphs), 'graph': fh.graphs[0]}
+        ret_val = {'numGraph': len(valid_graphs), 'graph': valid_graphs[0]}
         return HttpResponse(json.dumps(ret_val), content_type="application/json")
 
 
