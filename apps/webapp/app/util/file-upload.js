@@ -14,7 +14,8 @@ var fileUploadOptions = {
     'use strict';
     var uploadedFile = data.originalFiles[0].name.split('.'),
       fileExt = _.last(uploadedFile).toLowerCase(),
-      infoBar = $('#infobar');
+      $infoBar = $('#error-bar'),
+      $visualization = $('#visualization');
 
     switch (fileExt) {
       case 'txt':
@@ -25,7 +26,7 @@ var fileUploadOptions = {
         data.submit();
         break;
       default :
-        infoBar.text('Invalid file type!');
+        $infoBar.text('Invalid file type!');
     }
   },
 

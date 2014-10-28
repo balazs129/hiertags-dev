@@ -20,8 +20,7 @@ var Graph = Backbone.Model.extend({
     isLayoutVertical: true,
     horizontalRatio: 1,
     extraWidth: 0,
-    isLabelsVisible: true,
-    lastSearched: null
+    isLabelsVisible: true
   },
 
   initialize: function () {

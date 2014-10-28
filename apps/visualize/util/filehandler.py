@@ -49,7 +49,7 @@ class FileHandler(object):
                                     'nodes': dag_graph.number_of_nodes(), 'edges': dag_graph.number_of_edges()})
             except NetworkXUnfeasible:
                 # If the graph can't be sorted topologically(not a DAG)
-                self.graphs.append({'dag': None})
+                self.graphs.append({'dag': None, 'nodes': 0})
 
 
     def build_graph(self, input_file):

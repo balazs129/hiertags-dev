@@ -13,10 +13,14 @@ $(function(){
 
   var numberOfGraphs = 0,
       graphIndex = 1,
+      $visualization = $('#visualization'),
       $tagSearch = $('#tag-search'),
       $depthField = $('#depth-input'),
       $depthText = $('#depth-number'),
+      $errorBar = $('#error-bar'),
+      $graphName = $('#graph-name'),
       $graphData = $('#graph-data').children();
+
 
   // Create the autocomplete instance
   $tagSearch.autocomplete({delimiter: /(,|;)\s*/,
@@ -55,11 +59,14 @@ $(function(){
     $depthText.text(treeGraph.get('depth'));
     $depthField.val('1');
 
+    $graphName.text(graph.name);
 
   }
   //Handling the fileupload
   var fileUploadOptions = _.extend(baseUploadOptions, {
     done: function (e, data) {
+      $errorBar.html('');
+
       numberOfGraphs = data.result.numGraph;
       $('.hidden').removeClass('hidden');
       $('#progress-circle').addClass('hidden');
@@ -71,6 +78,8 @@ $(function(){
       $btnPrev.attr('disabled', true);
       if (numberOfGraphs > 1) {
         $btnNext.removeAttr('disabled');
+      } else {
+        $btnNext.attr('disabled', true);
       }
 
       $tagSearch.val('');
@@ -86,7 +95,7 @@ $(function(){
 
   treeView.listenTo(eventBus, 'newfile', function(){
     // Clear the previous content
-    $('#visualization').html('');
+    $visualization.html('');
     // Generate a new view
     treeView.generateTree(treeGraph);
     // Set autocomplete

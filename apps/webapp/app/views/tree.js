@@ -791,7 +791,7 @@ var app = {
     },
 
     toggleNode: function (d) {
-      if (typeof d.children !== "undefined" || typeof d._children !== "undefined") {
+      if (typeof d.children !== 'undefined' || typeof d._children !== 'undefined') {
         if (d.children) {
           d._children = d.children;
           d.children = null;

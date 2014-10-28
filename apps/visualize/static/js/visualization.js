@@ -14,10 +14,14 @@ $(function(){
 
   var numberOfGraphs = 0,
       graphIndex = 1,
+      $visualization = $('#visualization'),
       $tagSearch = $('#tag-search'),
       $depthField = $('#depth-input'),
       $depthText = $('#depth-number'),
+      $errorBar = $('#error-bar'),
+      $graphName = $('#graph-name'),
       $graphData = $('#graph-data').children();
+
 
   // Create the autocomplete instance
   $tagSearch.autocomplete({delimiter: /(,|;)\s*/,
@@ -56,11 +60,14 @@ $(function(){
     $depthText.text(treeGraph.get('depth'));
     $depthField.val('1');
 
+    $graphName.text(graph.name);
 
   }
   //Handling the fileupload
   var fileUploadOptions = _.extend(baseUploadOptions, {
     done: function (e, data) {
+      $errorBar.html('');
+
       numberOfGraphs = data.result.numGraph;
       $('.hidden').removeClass('hidden');
       $('#progress-circle').addClass('hidden');
@@ -72,6 +79,8 @@ $(function(){
       $btnPrev.attr('disabled', true);
       if (numberOfGraphs > 1) {
         $btnNext.removeAttr('disabled');
+      } else {
+        $btnNext.attr('disabled', true);
       }
 
       $tagSearch.val('');
@@ -87,7 +96,7 @@ $(function(){
 
   treeView.listenTo(eventBus, 'newfile', function(){
     // Clear the previous content
-    $('#visualization').html('');
+    $visualization.html('');
     // Generate a new view
     treeView.generateTree(treeGraph);
     // Set autocomplete
@@ -112,7 +121,6 @@ $(function(){
       $.ajax({
         url: url
       }).done(function(data) {
-        console.log(data);
         setNewGraph(data.graph);
       });
 
@@ -168,8 +176,7 @@ var Graph = Backbone.Model.extend({
     isLayoutVertical: true,
     horizontalRatio: 1,
     extraWidth: 0,
-    isLabelsVisible: true,
-    lastSearched: null
+    isLabelsVisible: true
   },
 
   initialize: function () {
@@ -215,7 +222,8 @@ var fileUploadOptions = {
     'use strict';
     var uploadedFile = data.originalFiles[0].name.split('.'),
       fileExt = _.last(uploadedFile).toLowerCase(),
-      infoBar = $('#infobar');
+      $infoBar = $('#error-bar'),
+      $visualization = $('#visualization');
 
     switch (fileExt) {
       case 'txt':
@@ -226,7 +234,7 @@ var fileUploadOptions = {
         data.submit();
         break;
       default :
-        infoBar.text('Invalid file type!');
+        $infoBar.text('Invalid file type!');
     }
   },
 
@@ -1085,7 +1093,7 @@ var app = {
     },
 
     toggleNode: function (d) {
-      if (typeof d.children !== "undefined" || typeof d._children !== "undefined") {
+      if (typeof d.children !== 'undefined' || typeof d._children !== 'undefined') {
         if (d.children) {
           d._children = d.children;
           d.children = null;
