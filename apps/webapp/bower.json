@@ -1,0 +1,8 @@
+{
+  "name": "hiertags-webapp",
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "blueimp-file-upload": "~9.8.0",
+    "devbridge-autocomplete": "~1.2.14"
+  }
+}

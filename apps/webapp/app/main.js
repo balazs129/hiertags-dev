@@ -1,6 +1,5 @@
 var Backbone = require('backbone'),
     _ = require('underscore'),
-    d3 = require('d3'),
     baseUploadOptions = require('util/file-upload'),
     treeView = require('views/tree'),
     Graph = require('models/graph');

@@ -1,5 +1,5 @@
 {
-  "name": "webapp",
+  "name": "hiertags-webapp",
   "version": "1.0.0",
   "description": "The webapp for the visualization",
   "main": "./app/main.js",
@@ -10,10 +10,14 @@
   "license": "ISC",
   "dependencies": {
     "backbone": "^1.1.2",
-    "blueimp-file-upload": "^9.8.0",
     "d3": "^3.4.12",
-    "devbridge-autocomplete": "^1.2.11",
-    "jquery": "^2.1.1",
     "underscore": "^1.7.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^3.1.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-uglify": "^0.6.0"
   }
 }
