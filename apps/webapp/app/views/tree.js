@@ -62,9 +62,9 @@ var app = {
         dragStarted: false
       };
 
+    // Global listener for the right-click. We need to suppress drag while right clicking.
     $(document).bind('contextmenu', function () {
       isRMB = true;
-      console.log("you clicked the page");
     });
 
     // Build the arrow
@@ -154,8 +154,9 @@ var app = {
           }
         }
 
-      update(root);
+      update(d);
       centerNode(d);
+
       isRMB = false;
       return false;
     }
@@ -231,9 +232,13 @@ var app = {
       })
       .on('dragend', function (d) {
         if (d !== root && dragData.dragStarted) {
-          var draggingNode = d3.select(this).datum();
+          var draggingNode = d3.select(this).datum(),
+              isOwnChildren = _.contains(draggingNode.children, dragData.selectedNode),
+              isSame = draggingNode.selectedNode === draggingNode;
 
-          if (dragData.selectedNode) {
+
+
+          if (dragData.selectedNode && !isOwnChildren && !isSame) {
             console.log(draggingNode, dragData.selectedNode);
             var selectedNodeChildren = dragData.selectedNode.children,
                 selectedNode_Children = dragData.selectedNode._children;

@@ -138,6 +138,7 @@ a {
 
 .node text {
     font: 10px sans-serif;
+    pointer-events: none;
 }
 
 .link {
@@ -178,9 +179,10 @@ a {
     user-select: none;
 }
 
-.nodeText, {
-    pointer-events: none;
-}
+/*.nodeText, {*/
+    /*pointer-events: none;*/
+/*}*/
+
 #graph-data {
     margin-top: 20px;
 }
