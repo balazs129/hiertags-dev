@@ -54,12 +54,18 @@ var app = {
       i = 0,
       $depthField = $('#depth-input'),
       $depthText = $('#depth-number'),
+      isRMB = false,
       dragData = {
         runInitializer: false,
         selectedNode: null,
         draggingNode: null,
         dragStarted: false
       };
+
+    $(document).bind('contextmenu', function () {
+      isRMB = true;
+      console.log("you clicked the page");
+    });
 
     // Build the arrow
     svg.append('defs').selectAll('marker')
@@ -103,6 +109,7 @@ var app = {
         return;
       } // click suppressed
 
+      isRMB = false;
       if (d.children) {
         d._children = d.children;
         d.children = null;
@@ -133,23 +140,24 @@ var app = {
         }
       }
 
-      if (treeData.get('numNodes') < 100) {
-        if (d._children) {
-          d.children = d._children;
-          d.children.forEach(expand);
-          d._children = null;
-          update(d);
-          centerNode(d);
+        if (treeData.get('numNodes') < 100) {
+          if (d._children) {
+            d.children = d._children;
+            d.children.forEach(expand);
+            d._children = null;
+          }
+        } else {
+          if (d._children) {
+            d.children = d._children;
+            d.children.forEach(expand_norec);
+            d._children = null;
+          }
         }
-      } else {
-        if (d._children) {
-          d.children = d._children;
-          d.children.forEach(expand_norec);
-          d._children = null;
-          update(d);
-          centerNode(d);
-        }
-      }
+
+      update(root);
+      centerNode(d);
+      isRMB = false;
+      return false;
     }
 
 
@@ -195,7 +203,8 @@ var app = {
         }
       })
       .on('drag', function (d) {
-        if (d !== root) {
+        if (d !== root && !isRMB) {
+          console.log('dragging');
           var draggedNode = d3.select(this),
               _this = this;
 
@@ -225,8 +234,10 @@ var app = {
           var draggingNode = d3.select(this).datum();
 
           if (dragData.selectedNode) {
+            console.log(draggingNode, dragData.selectedNode);
             var selectedNodeChildren = dragData.selectedNode.children,
                 selectedNode_Children = dragData.selectedNode._children;
+
             // We have a valid drag, remove element from the parent and insert it
             // into the new elements children
 
@@ -344,7 +355,6 @@ var app = {
         } else {
           newWidth = _.max(levelWidth) * (17 * treeData.get('horizontalRatio'));
         }
-        console.log(newWidth, newHeight);
       }
 
       tree.size([newWidth, newHeight]).separation(function (a, b) {

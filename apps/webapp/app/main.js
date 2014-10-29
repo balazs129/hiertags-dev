@@ -29,7 +29,6 @@ $(function(){
     });
 
   // Initialize tooltips
-
   $('.btn-tooltip').tooltip({
     'animation': true,
     'delay': {'show':1200, 'hide': 0},

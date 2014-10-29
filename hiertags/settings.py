@@ -41,7 +41,7 @@ USE_I18N = False
 # URL to use when referring to static files located in STATIC_ROOT.
 STATIC_URL = '/static/'
 # The absolute path to the directory where collectstatic will collect static files for deployment.
-#STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 ALLOWED_HOSTS = ['*']
 # Additional locations the staticfiles app will traverse if the FileSystemFinder finder is enabled
 #STATICFILES_DIRS = (
