@@ -225,12 +225,12 @@ a {
 
 div.tooltip {
     position: absolute;
-    text-align: center;
+    text-align: left;
     height: 40px;
     padding: 4px;
     font: 12px sans-serif;
-    background: rgba(0, 0, 0, 0.8);
-    color: #fff;
+    background: rgba(28, 28, 28, 0.7);
+    color: lightsteelblue;
     border-radius: 4px;
     pointer-events: none;
 }
