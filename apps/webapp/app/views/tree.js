@@ -41,6 +41,10 @@ var app = {
             'translate(' + d3.event.translate + ')' + ' scale(' + d3.event.scale + ')');
       });
 
+    var div = d3.select('body').append('div')
+      .attr('class', 'tooltip')
+      .style('opacity', 0);
+
     var svg = d3.select('#visualization')
       .attr('width', width)
       .attr('height', height)
@@ -48,6 +52,8 @@ var app = {
       .call(zoomListener);
 
     var svgGroup = svg.append('g');
+
+
 
     var duration = 750,
       root = treeData.get('dag')[0],
@@ -497,20 +503,29 @@ var app = {
       link.enter().append('path', 'g')
         .attr('class', 'link')
         .classed('addedLink', function (d) { return d.hasOwnProperty('added');})
-        .attr('title', function (d) {
-          return 'Source: ' + d.source.name + '\n' + 'Target : ' + d.target.name;
-        })
         .attr('d', function () {
           var o = {x: source.x0, y: source.y0 };
           return diagonal({source: o, target: o});
         })
         .attr('marker-end', 'url(#arrow)')
-        .on('mouseover', function () {
+        .on('mouseover', function (d) {
           d3.select(this).classed('selectedLink', true);
-      })
-        .on('mouseout', function () {
+          var divWidth = _.max([d.source.name.length, d.target.name.length]);
+          div.transition()
+            .duration(200)
+            .style('opacity', .9);
+          div.html('<div><strong>Source: </strong><span style="color:red">' + d.source.name + '</span></div>' +
+                   '<div><strong>Destination: </strong><span style = "color:red" > ' + d.target.name + '</span></div>')
+            .style('width', divWidth)
+            .style('left', (d3.event.pageX) + 'px')
+            .style('top', (d3.event.pageY - 40) + 'px');
+    })
+        .on('mouseout', function (d) {
           d3.select(this).classed('selectedLink', false);
-      });
+          div.transition()
+            .duration(500)
+            .style("opacity", 0);
+        });
 
       // UPDATE
       // Transition nodes to their new position
