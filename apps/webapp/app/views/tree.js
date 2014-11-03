@@ -501,7 +501,7 @@ var app = {
       }
 
       // Enter any new links at the parent's previous position
-      link.enter().append('path', 'g')
+      link.enter().insert('path', 'g')
         .attr('class', 'link')
         .classed('addedLink', function (d) {
           return d.hasOwnProperty('added');
