@@ -16,7 +16,7 @@ class ExportGraph(object):
         self._type = export_type
         self._data = data
         self._layout = layout
-        if export_type != 'txt':
+        if export_type != 'edgelist':
             self._parser = etree.XMLParser(encoding='UTF-8')
             self._generate_xml()
 
@@ -55,7 +55,9 @@ class ExportGraph(object):
         return file_name
 
     def export_edgelist(self):
-        out_file = cStringIO.StringIO()
+        file_name = str(uuid.uuid4()) + '.txt'
+        out_file_name = '/tmp/' + file_name
+        out_file = open(out_file_name, 'w')
 
         for elem in self._data.split("],["):
             if elem[0:2] == "[[":
@@ -71,7 +73,5 @@ class ExportGraph(object):
             to_write = token_1 + ' ' + token_2 + '\n'
             out_file.write(to_write)
 
-        out_file.seek(0)
-        output = out_file.read()
-        return output
+        return file_name
 

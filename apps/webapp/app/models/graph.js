@@ -14,6 +14,7 @@ var Graph = Backbone.Model.extend({
     interlinks: [],
     numNodes: 0,
     numEdges: 0,
+    edgeList: {},
 
     // Properties for the view
     suggestions: [],

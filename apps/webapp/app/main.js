@@ -157,28 +157,28 @@ $(function(){
     }
   });
 
-  $('.export').on('click', function (e) {
+  $('.export').on('click', function () {
     var format = $(this).text().toLowerCase(),
         url = '/visualize/download/',
         svgData,
-        layout,
-        toSend,
+        toSend = { output_format: format },
         content = $visualization.html();
 
-    // We need to wrap the svg content in a root svg element for the lxml
+    // We need to wrap the svg content in a root svg element for lxml
     svgData = '<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg">' +
               content + '</svg>';
 
     if (treeGraph.get('isLayoutVertical')) {
-      layout = 'vertical';
+      toSend.layout = 'vertical';
     } else {
-      layout = 'horizontal';
+      toSend.layout = 'horizontal';
     }
 
-    toSend ={ output_format: format,
-        layout: layout,
-        svg: svgData
-    };
+    if (format === 'edgelist') {
+      toSend.edgelist = treeGraph.get('edgeList');
+    } else {
+      toSend.svg = svgData;
+    }
 
     $.ajax({
       url: url,

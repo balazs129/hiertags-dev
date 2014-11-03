@@ -15,6 +15,7 @@ var app = {
 
     var tree = d3.layout.tree().size([width, height]);
 
+
     // Diagonal projection for the node paths
     var diagonal = d3.svg.diagonal()
       // At default, edges start/end at the nodes center, we need to move endpoints to the circle
@@ -65,6 +66,9 @@ var app = {
         draggingNode: null,
         dragStarted: false
       };
+
+    // Set initial edgelist
+    treeData.set({'edgeList': app.getEdgeList(root)});
 
     // Global listener for the right-click. We need to suppress drag while right clicking.
     $(document).bind('contextmenu', function () {
@@ -126,7 +130,7 @@ var app = {
       centerNode(d);
     }
 
-    function expandAllChildren (d) {
+    function expandAllChildren(d) {
       d3.event.preventDefault();
 
       function expand(d) {
@@ -144,19 +148,19 @@ var app = {
         }
       }
 
-        if (treeData.get('numNodes') < 100) {
-          if (d._children) {
-            d.children = d._children;
-            d.children.forEach(expand);
-            d._children = null;
-          }
-        } else {
-          if (d._children) {
-            d.children = d._children;
-            d.children.forEach(expand_norec);
-            d._children = null;
-          }
+      if (treeData.get('numNodes') < 100) {
+        if (d._children) {
+          d.children = d._children;
+          d.children.forEach(expand);
+          d._children = null;
         }
+      } else {
+        if (d._children) {
+          d.children = d._children;
+          d.children.forEach(expand_norec);
+          d._children = null;
+        }
+      }
 
       update(d);
       centerNode(d);
@@ -166,10 +170,9 @@ var app = {
     }
 
 
-
     function initiateDrag(d, domNode) {
       var draggedId = d.id,
-          draggedNode = d3.select(domNode);
+        draggedNode = d3.select(domNode);
 
       draggedNode.attr('pointer-events', 'none');
 
@@ -211,7 +214,7 @@ var app = {
         if (d !== root && !isRMB) {
           console.log('dragging');
           var draggedNode = d3.select(this),
-              _this = this;
+            _this = this;
 
           // Execute this block only once
           if (dragData.runInitializer) {
@@ -237,15 +240,14 @@ var app = {
       .on('dragend', function (d) {
         if (d !== root && dragData.dragStarted) {
           var draggingNode = d3.select(this).datum(),
-              isOwnChildren = _.contains(draggingNode.children, dragData.selectedNode),
-              isSame = draggingNode.selectedNode === draggingNode;
-
+            isOwnChildren = _.contains(draggingNode.children, dragData.selectedNode),
+            isSame = draggingNode.selectedNode === draggingNode;
 
 
           if (dragData.selectedNode && !isOwnChildren && !isSame) {
             console.log(draggingNode, dragData.selectedNode);
             var selectedNodeChildren = dragData.selectedNode.children,
-                selectedNode_Children = dragData.selectedNode._children;
+              selectedNode_Children = dragData.selectedNode._children;
 
             // We have a valid drag, remove element from the parent and insert it
             // into the new elements children
@@ -267,7 +269,7 @@ var app = {
 
             // Update depth for dragged nodes
             var newDepth = dragData.selectedNode.depth + 1,
-                updatedDepth;
+              updatedDepth;
 
             if (draggingNode._children) {
               draggingNode.depth = newDepth;
@@ -294,7 +296,10 @@ var app = {
               $depthField.val(updatedDepth);
             }
             $depthField.attr('max', updatedDepth);
-           }
+
+            // Update edgelist
+            treeData.set({'edgeList': app.getEdgeList(root)});
+          }
           d3.select(this).attr('pointer-events', 'all');
 
           update(root);
@@ -304,11 +309,11 @@ var app = {
 
     function update(source) {
       var levelWidth = [1],
-          levelLabelWidth = [1],
-          childSum,
-          newHeight,
-          tmpWidth,
-          newWidth;
+        levelLabelWidth = [1],
+        childSum,
+        newHeight,
+        tmpWidth,
+        newWidth;
 
       // Function to calculate the number of childrens/sum of the label widths per depth
       function childCount(level, n) {
@@ -340,7 +345,7 @@ var app = {
       // Set the new widths and heights
       // Vertical Layout
       if (treeData.get('isLayoutVertical')) {
-        newHeight =  (levelWidth.length - 1) * 90;
+        newHeight = (levelWidth.length - 1) * 90;
 
         if (treeData.get('isLabelsVisible')) {
           tmpWidth = _.map(levelWidth, function (num, index) {
@@ -374,7 +379,7 @@ var app = {
 
       // Calculate the new layout
       var nodes = tree.nodes(root).reverse(),
-          links = tree.links(nodes);
+        links = tree.links(nodes);
 
       // Add the extra edges if any
       var InterLink = function (source, target) {
@@ -498,7 +503,9 @@ var app = {
       // Enter any new links at the parent's previous position
       link.enter().append('path', 'g')
         .attr('class', 'link')
-        .classed('addedLink', function (d) { return d.hasOwnProperty('added');})
+        .classed('addedLink', function (d) {
+          return d.hasOwnProperty('added');
+        })
         .attr('d', function () {
           var o = {x: source.x0, y: source.y0 };
           return diagonal({source: o, target: o});
@@ -511,11 +518,11 @@ var app = {
             .duration(200)
             .style('opacity', 0.9);
           div.html('<div><strong>Source:</strong><span style="color:white">' + d.source.name + '</span></div>' +
-                   '<div><strong>Destination: </strong><span style = "color:white" > ' + d.target.name + '</span></div>')
+            '<div><strong>Destination: </strong><span style = "color:white" > ' + d.target.name + '</span></div>')
             .style('width', divWidth)
             .style('left', (d3.event.pageX) + 'px')
             .style('top', (d3.event.pageY - 40) + 'px');
-    })
+        })
         .on('mouseout', function () {
           d3.select(this).classed('selectedLink', false);
           div.transition()
@@ -608,7 +615,7 @@ var app = {
     // Button Functions
     d3.select('#btn-expand-tree').on('click', function () {
       var oldWidth,
-          newWidth;
+        newWidth;
 
       if (treeData.get('isLayoutVertical')) {
         oldWidth = treeData.get('extraWidth');
@@ -624,7 +631,7 @@ var app = {
 
     d3.select('#btn-shrink-tree').on('click', function () {
       var oldWidth,
-          newWidth;
+        newWidth;
 
       if (treeData.get('isLayoutVertical')) {
         oldWidth = treeData.get('extraWidth');
@@ -748,7 +755,9 @@ var app = {
           .classed('foundLink', false);
 
         // Set new result
-        nodes.filter(function (d) { return d.name === found.name;})
+        nodes.filter(function (d) {
+          return d.name === found.name;
+        })
           .select('circle')
           .classed('foundCircle', true);
 
@@ -763,14 +772,14 @@ var app = {
 
     d3.select('#btn-expand-graph').on('click', function () {
       var $depth = $('#depth-input'),
-          graphDepth = treeData.get('depth'),
-          depth = $depth.val();
+        graphDepth = treeData.get('depth'),
+        depth = $depth.val();
 
       // Validate input
       if (depth < 1) {
         $depth.val('1');
         depth = 1;
-      } else if (depth > graphDepth){
+      } else if (depth > graphDepth) {
         $depth.val(graphDepth);
         depth = graphDepth;
       }
@@ -874,6 +883,26 @@ var app = {
           return d.name;
         });
     }
+  },
+
+  getEdgeList: function (root) {
+    var result = [];
+
+    function log(d) {
+      if (d.children) {
+        result.push([d.parent.name, d.name]);
+        d.children.forEach(log);
+      } else if (d._children) {
+        result.push([d.parent.name, d.name]);
+        d._children.forEach(log);
+      } else {
+        result.push([d.parent.name, d.name]);
+      }
+
+    }
+
+    root.children.forEach(log);
+    return JSON.stringify(result);
   }
 };
 
