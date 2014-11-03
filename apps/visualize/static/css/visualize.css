@@ -110,7 +110,7 @@ a {
 }
 
 .innertube3 {
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
 
 #visualization {
@@ -118,9 +118,7 @@ a {
     width: 104%;
     height: 100%;
     margin-left: -2%;
-
 }
-
 
 .node {
     cursor: pointer;
@@ -144,7 +142,7 @@ a {
 .link {
     fill: none;
     stroke: #ccc;
-    stroke-width: 1px;
+    stroke-width: 2px;
 }
 .addedLink {
     stroke: #88F;
@@ -194,42 +192,13 @@ a {
 .autocomplete-selected { background: #F0F0F0; }
 .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
 
-.d3-tip {
-    line-height: 1;
-    font-weight: bold;
-    padding: 12px;
-    background: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    border-radius: 2px;
-}
-
-/* Creates a small triangle extender for the tooltip */
-.d3-tip:after {
-    box-sizing: border-box;
-    display: inline;
-    font-size: 10px;
-    width: 100%;
-    line-height: 1;
-    color: rgba(0, 0, 0, 0.8);
-    content: "\25BC";
-    position: absolute;
-    text-align: center;
-}
-
-/* Style northward tooltips differently */
-.d3-tip.n:after {
-    margin: -1px 0 0 0;
-    top: 100%;
-    left: 0;
-}
-
 div.tooltip {
     position: absolute;
     text-align: left;
     height: 40px;
     padding: 4px;
     font: 12px sans-serif;
-    background: rgba(28, 28, 28, 0.7);
+    background: rgba(28, 28, 28, 0.85);
     color: lightsteelblue;
     border-radius: 4px;
     pointer-events: none;

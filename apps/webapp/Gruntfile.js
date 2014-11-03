@@ -25,7 +25,7 @@ module.exports = function (grunt) {
               './build/vis.js'],
         dest: 'build/visualization.js'
       },
-      debug: {
+      dev: {
         src: ['./bower_components/jquery/dist/jquery.js',
           './bower_components/bootstrap/js/button.js',
           './bower_components/bootstrap/js/dropdown.js',
@@ -63,5 +63,5 @@ module.exports = function (grunt) {
 
   // Task definitions
   grunt.registerTask('default', ['clean', 'browserify', 'concat:dist', 'uglify', 'clean']);
-  grunt.registerTask('debug', ['clean', 'browserify', 'concat:debug', 'clean']);
+  grunt.registerTask('dev', ['clean', 'browserify', 'concat:dev', 'clean']);
 };

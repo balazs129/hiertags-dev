@@ -1,4 +1,5 @@
 import json
+import os
 
 from django.shortcuts import render
 from django.contrib.flatpages.models import FlatPage
@@ -47,9 +48,10 @@ def visualize_data(request):
         request.session['graphs'] = valid_graphs
 
         # Only return valid graphs
-
         ret_val = {'numGraph': len(valid_graphs), 'graph': valid_graphs[0]}
-        return HttpResponse(json.dumps(ret_val), content_type="application/json")
+        response = HttpResponse(json.dumps(ret_val), content_type="application/json")
+
+        return response
 
 
 @csrf_exempt
@@ -59,30 +61,39 @@ def export_data(request):
     :param request: request object
     :return: the appropriate file, forced to download.
     """
-    form = SerializedSvgForm(request.POST)
-    if form.is_valid():
-        choosen_type = form.cleaned_data['output_format']
-        cleaned_data = form.cleaned_data['data'].encode('utf-8')
-        layout = form.cleaned_data['layout']
+    choosen_type = request.POST['output_format']
+    svg_data = request.POST['svg'].encode('utf-8')
+    layout = request.POST['layout']
 
-        exporter = ExportGraph(choosen_type, cleaned_data, layout)
+    exporter = ExportGraph(choosen_type, svg_data, layout)
 
-        if choosen_type == 'txt':
-            ret_data = exporter.export_edgelist()
-        else:
-            ret_data = exporter.export_graphics()
+    if choosen_type == 'Edgelist':
+        ret_data = exporter.export_edgelist()
+    else:
+        ret_data = exporter.export_graphics()
 
-        content = {"pdf": "application/pdf",
-                   "png": "image/png",
-                   "jpg": "image/jpg",
-                   "svg": "image/svg",
-                   "txt": "text/plain"}
+    response = HttpResponse(ret_data)
+    return response
 
-        response = HttpResponse(ret_data, content_type="{}".format(content[choosen_type]))
-        response['Content-Disposition'] = 'attachment; filename="exported_graph.{}"'.format(choosen_type)
+def download_file(request):
+    file_name = request.get_full_path().split('/')[-1]
+    file_type = file_name.split('.')[-1]
 
-        return response
+    content = {"pdf": "application/pdf",
+               "png": "image/png",
+               "jpg": "image/jpg",
+               "svg": "image/svg",
+               "txt": "text/plain"}
 
+    tmp_file = '/tmp/' + file_name
+    ret_file = open(tmp_file, 'rb')
+    ret_file.seek(0)
+    os.remove(tmp_file)
+
+    response = HttpResponse(ret_file, content_type="{}".format(content[file_type]))
+    response['Content-Disposition'] = 'attachment; filename="exported_graph.{}"'.format(file_type)
+
+    return response
 
 def send_graph(request, graph_num):
     graphs = request.session['graphs']

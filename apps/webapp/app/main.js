@@ -18,6 +18,7 @@ $(function(){
       $depthText = $('#depth-number'),
       $errorBar = $('#error-bar'),
       $graphName = $('#graph-name'),
+      $dropDown = $('.dropdown-toggle'),
       $graphData = $('#graph-data').children();
 
 
@@ -154,5 +155,39 @@ $(function(){
         $btnPrev.attr('disabled', true);
       }
     }
+  });
+
+  $('.export').on('click', function (e) {
+    var format = $(this).text().toLowerCase(),
+        url = '/visualize/download/',
+        svgData,
+        layout,
+        toSend,
+        content = $visualization.html();
+
+    // We need to wrap the svg content in a root svg element for the lxml
+    svgData = '<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg">' +
+              content + '</svg>';
+
+    if (treeGraph.get('isLayoutVertical')) {
+      layout = 'vertical';
+    } else {
+      layout = 'horizontal';
+    }
+
+    toSend ={ output_format: format,
+        layout: layout,
+        svg: svgData
+    };
+
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: toSend
+    }).success(function (d) {
+      window.location = '/visualize/download/' + d;
+    });
+
+    $dropDown.dropdown('toggle');
   });
 });

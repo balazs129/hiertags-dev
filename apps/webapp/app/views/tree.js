@@ -53,8 +53,6 @@ var app = {
 
     var svgGroup = svg.append('g');
 
-
-
     var duration = 750,
       root = treeData.get('dag')[0],
       i = 0,
@@ -79,10 +77,10 @@ var app = {
       .enter().append('marker')
       .attr('id', 'arrow')
       .attr('viewBox', '0 -5 10 10')
-      .attr('refX', 0)
+      .attr('refX', 2)
       .attr('refY', 0)
       .attr('markerWidth', 4)
-      .attr('markerHeight', 4)
+      .attr('markerHeight', 3)
       .attr('orient', 'auto')
       .append('path')
       .attr('fill', '#333')
@@ -304,8 +302,6 @@ var app = {
         dragData.dragStarted = false;
       });
 
-
-
     function update(source) {
       var levelWidth = [1],
           levelLabelWidth = [1],
@@ -513,18 +509,18 @@ var app = {
           var divWidth = _.max([d.source.name.length, d.target.name.length]);
           div.transition()
             .duration(200)
-            .style('opacity', .9);
+            .style('opacity', 0.9);
           div.html('<div><strong>Source:</strong><span style="color:white">' + d.source.name + '</span></div>' +
                    '<div><strong>Destination: </strong><span style = "color:white" > ' + d.target.name + '</span></div>')
             .style('width', divWidth)
             .style('left', (d3.event.pageX) + 'px')
             .style('top', (d3.event.pageY - 40) + 'px');
     })
-        .on('mouseout', function (d) {
+        .on('mouseout', function () {
           d3.select(this).classed('selectedLink', false);
           div.transition()
             .duration(500)
-            .style("opacity", 0);
+            .style('opacity', 0);
         });
 
       // UPDATE
