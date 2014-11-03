@@ -511,13 +511,20 @@ var app = {
           return diagonal({source: o, target: o});
         })
         .attr('marker-end', 'url(#arrow)')
+        .style('stroke-dasharray', function (d) {
+          if (d.hasOwnProperty('added')) {
+            return '5, 2';
+          } else {
+            return '1, 0';
+          }
+        })
         .on('mouseover', function (d) {
           d3.select(this).classed('selectedLink', true);
           var divWidth = _.max([d.source.name.length, d.target.name.length]);
           div.transition()
             .duration(200)
             .style('opacity', 0.9);
-          div.html('<div><strong>Source:</strong><span style="color:white">' + d.source.name + '</span></div>' +
+          div.html('<div><strong>Source: </strong><span style="color:white">' + d.source.name + '</span></div>' +
             '<div><strong>Destination: </strong><span style = "color:white" > ' + d.target.name + '</span></div>')
             .style('width', divWidth)
             .style('left', (d3.event.pageX) + 'px')

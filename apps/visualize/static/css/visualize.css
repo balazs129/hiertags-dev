@@ -146,7 +146,6 @@ a {
 }
 .addedLink {
     stroke: #88F;
-    stroke-dasharray: 5 2;
 }
 
 .foundLink {
