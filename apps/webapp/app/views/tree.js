@@ -43,7 +43,7 @@ var app = {
       });
 
     var div = d3.select('body').append('div')
-      .attr('class', 'tooltip')
+      .attr('class', 'tooltip graph-tooltip')
       .style('opacity', 0);
 
     var svg = d3.select('#visualization')
@@ -81,7 +81,7 @@ var app = {
       .enter().append('marker')
       .attr('id', 'arrow')
       .attr('viewBox', '0 -5 10 10')
-      .attr('refX', 2)
+      .attr('refX', 3)
       .attr('refY', 0)
       .attr('markerWidth', 4)
       .attr('markerHeight', 3)
@@ -172,7 +172,7 @@ var app = {
 
     function initiateDrag(d, domNode) {
       var draggedId = d.id,
-        draggedNode = d3.select(domNode);
+          draggedNode = d3.select(domNode);
 
       draggedNode.attr('pointer-events', 'none');
 
@@ -212,7 +212,6 @@ var app = {
       })
       .on('drag', function (d) {
         if (d !== root && !isRMB) {
-          console.log('dragging');
           var draggedNode = d3.select(this),
             _this = this;
 
@@ -245,7 +244,6 @@ var app = {
 
 
           if (dragData.selectedNode && !isOwnChildren && !isSame) {
-            console.log(draggingNode, dragData.selectedNode);
             var selectedNodeChildren = dragData.selectedNode.children,
               selectedNode_Children = dragData.selectedNode._children;
 
@@ -266,6 +264,9 @@ var app = {
               // Leaf node
               dragData.selectedNode._children = [draggingNode];
             }
+
+            // Update the parent
+            draggingNode.parent = dragData.selectedNode;
 
             // Update depth for dragged nodes
             var newDepth = dragData.selectedNode.depth + 1,
@@ -297,12 +298,13 @@ var app = {
             }
             $depthField.attr('max', updatedDepth);
 
-            // Update edgelist
-            treeData.set({'edgeList': app.getEdgeList(root)});
+
           }
           d3.select(this).attr('pointer-events', 'all');
 
           update(root);
+          // Update edgelist
+          treeData.set({'edgeList': app.getEdgeList(root)});
         }
         dragData.dragStarted = false;
       });
@@ -349,37 +351,30 @@ var app = {
 
         if (treeData.get('isLabelsVisible')) {
           tmpWidth = _.map(levelWidth, function (num, index) {
-            return num * 24 + levelLabelWidth[index] * 10;
+            return num * 14 + levelLabelWidth[index] * 10;
           });
 
-          newWidth = _.max(tmpWidth) + treeData.get('extraWidth');
+          newWidth = _.max(tmpWidth) * treeData.get('verticalRatio');
         } else {
           newWidth = childSum * 25;
         }
         // Horizontal Layout
       } else {
-        newHeight = (levelWidth.length - 1) * (90 * treeData.get('horizontalRatio'));
-        if (treeData.get('isLabelsVisible')) {
-          tmpWidth = _.map(levelWidth, function (num, index) {
-            return num * 24 + levelLabelWidth[index] * 10;
-          });
-          newWidth = _.max(tmpWidth) * treeData.get('horizontalRatio');
-        } else {
-          newWidth = _.max(levelWidth) * (17 * treeData.get('horizontalRatio'));
-        }
+        newHeight = (levelWidth.length - 1) * (120 * treeData.get('horizontalRatio'));
+          newWidth = _.max(levelWidth) * (25 * treeData.get('horizontalRatio'));
       }
 
       tree.size([newWidth, newHeight]).separation(function (a, b) {
-        if (treeData.get('isLabelsVisible')) {
-          return a.name.length + b.name.length + 5;
+        if (treeData.get('isLayoutVertical')) {
+          return treeData.get('isLabelsVisible') ? a.name.length + b.name.length + 5 : 10;
         } else {
-          return 10;
+          return 15;
         }
       });
 
       // Calculate the new layout
       var nodes = tree.nodes(root).reverse(),
-        links = tree.links(nodes);
+          links = tree.links(nodes);
 
       // Add the extra edges if any
       var InterLink = function (source, target) {
@@ -389,7 +384,7 @@ var app = {
       };
 
       var sourceNode,
-        targetNode;
+          targetNode;
       treeData.get('interlinks').forEach(function (interLink) {
         sourceNode = _.find(nodes, function (n) {
           return n.name === interLink[0];
@@ -449,7 +444,7 @@ var app = {
           var nodeSelection = d3.select(this);
           dragData.selectedNode = null;
           nodeSelection.select('circle').classed('dragCircle', false);
-          app.util.resetMagnifiedNode(d, nodeSelection);
+          app.util.resetMagnifiedNode(d, nodeSelection, treeData.get('isLabelsVisible'));
         })
         .on('contextmenu', expandAllChildren);
 
@@ -550,7 +545,7 @@ var app = {
         });
 
       node.select('circle.nodeCircle')
-        .attr('r', 6)
+        .attr('r', 7)
         .style('fill', function (d) {
           return d._children ? 'lightsteelblue' : '#fff';
         });
@@ -625,9 +620,9 @@ var app = {
         newWidth;
 
       if (treeData.get('isLayoutVertical')) {
-        oldWidth = treeData.get('extraWidth');
-        newWidth = oldWidth + 50;
-        treeData.set({extraWidth: newWidth});
+        oldWidth = treeData.get('verticalRatio');
+        newWidth = oldWidth + 0.2;
+        treeData.set({verticalRatio: newWidth});
       } else {
         oldWidth = treeData.get('horizontalRatio');
         newWidth = oldWidth + 0.2;
@@ -641,9 +636,9 @@ var app = {
         newWidth;
 
       if (treeData.get('isLayoutVertical')) {
-        oldWidth = treeData.get('extraWidth');
-        newWidth = oldWidth > 50 ? oldWidth - 50 : 0;
-        treeData.set({extraWidth: newWidth});
+        oldWidth = treeData.get('verticalRatio');
+        newWidth = oldWidth > 0.2 ? oldWidth - 0.2 : 0.2;
+        treeData.set({verticalRatio: newWidth});
       } else {
         oldWidth = treeData.get('horizontalRatio');
         newWidth = oldWidth > 0.2 ? oldWidth - 0.2 : 0.2;
@@ -671,6 +666,7 @@ var app = {
           }
         });
       update(root);
+      centerNode(root);
     });
 
     d3.select('#btn-flip-layout').on('click', function () {
@@ -871,7 +867,7 @@ var app = {
         });
     },
 
-    resetMagnifiedNode: function (d, nodeSelection) {
+    resetMagnifiedNode: function (d, nodeSelection, isLabelsVisible) {
       var duration = 600;
 
       nodeSelection.select('circle')
@@ -887,7 +883,11 @@ var app = {
           return '.35em';
         })
         .text(function (d) {
-          return d.name;
+          if (isLabelsVisible) {
+            return d.name;
+          } else {
+            return '';
+          }
         });
     }
   },
@@ -905,11 +905,10 @@ var app = {
       } else {
         result.push([d.parent.name, d.name]);
       }
-
     }
 
     root.children.forEach(log);
-    return JSON.stringify(result);
+    return result;
   }
 };
 

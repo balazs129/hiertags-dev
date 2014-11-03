@@ -175,7 +175,7 @@ $(function(){
     }
 
     if (format === 'edgelist') {
-      toSend.edgelist = treeGraph.get('edgeList');
+      toSend.edgelist = JSON.stringify(treeGraph.get('edgeList'));
     } else {
       toSend.svg = svgData;
     }

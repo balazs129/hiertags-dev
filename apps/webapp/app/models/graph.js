@@ -14,13 +14,13 @@ var Graph = Backbone.Model.extend({
     interlinks: [],
     numNodes: 0,
     numEdges: 0,
-    edgeList: {},
+    edgeList: [],
 
     // Properties for the view
     suggestions: [],
     isLayoutVertical: true,
     horizontalRatio: 1,
-    extraWidth: 0,
+    verticalRatio: 1,
     isLabelsVisible: true
   },
 

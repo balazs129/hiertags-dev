@@ -191,13 +191,13 @@ a {
 .autocomplete-selected { background: #F0F0F0; }
 .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
 
-div.tooltip {
+div.graph-tooltip {
     position: absolute;
     text-align: left;
     height: 40px;
     padding: 4px;
     font: 12px sans-serif;
-    background: rgba(28, 28, 28, 0.85);
+    background-color: rgba(28, 28, 28, 0.9);
     color: lightsteelblue;
     border-radius: 4px;
     pointer-events: none;
