@@ -5,7 +5,7 @@ import math
 from lxml import etree
 
 
-def style_circle(elem, text_padding_left, styles, ns):
+def style_circle(elem, text_padding_left, layout, styles, ns):
     for c_elem in elem.getchildren():
         if c_elem.tag == ('{' + ns['svg'] + '}' + 'text'):
             if len(c_elem.text) > text_padding_left:
@@ -23,7 +23,7 @@ def style_circle(elem, text_padding_left, styles, ns):
 def parse_svg(svgtree, layout):
     styles = {'expanded_node': 'fill:#ffffff;stroke:#4682b4;stroke-width:1px',
               'collapsed_node': 'fill:#0099ff;stroke:#4682b4;stroke-width:1px',
-              'node_text': 'font-size:10px;text-anchor:middle;fill:#353524;fill-opacity:1;font-family:sans-serif',
+              'node_text': 'font-size:10px;fill:#353524;fill-opacity:1;font-family:sans-serif',
               'normal_link': 'fill:none;stroke:#666666;stroke-width:1px;',
               'added_link': 'fill:none;stroke:#8888ff;stroke-width:1px;'}
 
@@ -57,7 +57,7 @@ def parse_svg(svgtree, layout):
         tmp = elem.attrib['transform'].split('translate')[1]
         x0 = float(tmp.split(',')[0][1:])
 
-        style_circle(elem, text_padding_left, styles, ns)
+        style_circle(elem, text_padding_left, layout, styles, ns)
 
         if x0 < margin_left:
             margin_left = x0
