@@ -70,11 +70,6 @@ var app = {
     // Set initial edgelist
     treeData.set({'edgeList': app.getEdgeList(root)});
 
-    // Global listener for the right-click. We need to suppress drag while right clicking.
-    $(document).bind('contextmenu', function () {
-      isRMB = true;
-    });
-
     // Build the arrow
     svg.append('defs').selectAll('marker')
       .data(['end'])
@@ -165,7 +160,6 @@ var app = {
       update(d);
       centerNode(d);
 
-      isRMB = false;
       return false;
     }
 
@@ -202,7 +196,7 @@ var app = {
         return d;
       })
       .on('dragstart', function (d) {
-        if (d !== root) {
+        if (d !== root && d3.event.sourceEvent.button === 0) {
 
           d3.event.sourceEvent.stopPropagation();
 
@@ -211,7 +205,7 @@ var app = {
         }
       })
       .on('drag', function (d) {
-        if (d !== root && !isRMB) {
+        if (d !== root && d3.event.sourceEvent.button === 0) {
           var draggedNode = d3.select(this),
             _this = this;
 
@@ -237,7 +231,7 @@ var app = {
         }
       })
       .on('dragend', function (d) {
-        if (d !== root && dragData.dragStarted) {
+        if (d !== root && dragData.dragStarted && d3.event.sourceEvent.button === 0) {
           var draggingNode = d3.select(this).datum(),
             isOwnChildren = _.contains(draggingNode.children, dragData.selectedNode),
             isSame = draggingNode.selectedNode === draggingNode;
@@ -298,14 +292,13 @@ var app = {
             }
             $depthField.attr('max', updatedDepth);
 
-
           }
-          d3.select(this).attr('pointer-events', 'all');
 
           update(root);
           // Update edgelist
           treeData.set({'edgeList': app.getEdgeList(root)});
         }
+        d3.select(this).attr('pointer-events', 'all');
         dragData.dragStarted = false;
       });
 
@@ -351,12 +344,12 @@ var app = {
 
         if (treeData.get('isLabelsVisible')) {
           tmpWidth = _.map(levelWidth, function (num, index) {
-            return num * 14 + levelLabelWidth[index] * 10;
+            return num * 24 + levelLabelWidth[index] * 10;
           });
 
           newWidth = _.max(tmpWidth) * treeData.get('verticalRatio');
         } else {
-          newWidth = childSum * 25;
+          newWidth = childSum * 14;
         }
         // Horizontal Layout
       } else {
@@ -873,7 +866,7 @@ var app = {
       nodeSelection.select('circle')
         .transition(duration)
         .attr('r', function () {
-          return 6;
+          return 7;
         });
 
       nodeSelection.select('text')

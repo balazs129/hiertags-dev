@@ -24,8 +24,8 @@ def parse_svg(svgtree, layout):
     styles = {'expanded_node': 'fill:#ffffff;stroke:#4682b4;stroke-width:1px',
               'collapsed_node': 'fill:#0099ff;stroke:#4682b4;stroke-width:1px',
               'node_text': 'font-size:10px;fill:#353524;fill-opacity:1;font-family:sans-serif',
-              'normal_link': 'fill:none;stroke:#666666;stroke-width:1px;',
-              'added_link': 'fill:none;stroke:#8888ff;stroke-width:1px;'}
+              'normal_link': 'fill:none;stroke:#cccccc;stroke-width:2px;',
+              'added_link': 'fill:none;stroke:#cddaff;;stroke-width:2px;'}
 
     root = svgtree.getroot()
 
