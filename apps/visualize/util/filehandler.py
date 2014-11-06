@@ -45,8 +45,10 @@ class FileHandler(object):
                         elem.reverse(copy=False)
 
                 dag_graph, interlinks = parse_DAG(elem)
+                num_nodes = dag_graph.number_of_nodes()
+                num_edges = dag_graph.number_of_edges() + len(interlinks)
                 self.graphs.append({'dag': gen_flat(dag_graph), 'interlinks': interlinks, 'name': name,
-                                    'nodes': dag_graph.number_of_nodes(), 'edges': dag_graph.number_of_edges()})
+                                    'nodes': num_nodes, 'edges': num_edges})
             except NetworkXUnfeasible:
                 # If the graph can't be sorted topologically(not a DAG)
                 self.graphs.append({'dag': None, 'nodes': 0})

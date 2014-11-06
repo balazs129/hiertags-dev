@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import networkx as nx
 
+
 def parse_DAG(graph):
     """
     Helper function, returns a DAG and the extra edges(when you have multiple parents)

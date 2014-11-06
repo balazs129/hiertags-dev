@@ -13,10 +13,11 @@ middleware here, or combine a Django application with an application of another
 framework.
 
 """
-import os
 import sys
 
+import os
 import site
+
 
 # Add the site-packages of the chosen virtualenv to work with
 site.addsitedir('/home/hiertags/hiertags-dev/lib/python2.7/site-packages')
@@ -30,6 +31,7 @@ if path not in sys.path:
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hiertags.settings")
 
 import django
+
 django.setup()
 import django.core.handlers.wsgi
 

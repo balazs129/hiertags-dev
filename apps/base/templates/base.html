@@ -13,43 +13,45 @@
 </head>
 <body>
 <div class="container">
-<div class="row">
-    <div id="maincontainer">
-        <div class="center">
-            <img src="{% static "images/HIERTAGS_banner.jpg" %}" alt="" style="width: 700px; height: 107px;">
-            <br>
-        </div>
-        <div id="modernbricksmenu2">
-            <ul>
-                <li {% if act_menu == 'home' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
-                    <a title="Home" href="/home/">Home</a>
-                </li>
-                <li {% if act_menu == 'downloads' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
-                    <a title="Downloads" href="/downloads/">Downloads </a>
-                </li>
-                <li {% if act_menu == 'publications' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
+    <div class="row">
+        <div id="maincontainer">
+            <div class="center">
+                <img src="{% static "images/HIERTAGS_banner.jpg" %}" alt="" style="width: 700px; height: 107px;">
+                <br>
+            </div>
+            <div id="modernbricksmenu2">
+                <ul>
+                    <li {% if act_menu == 'home' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
+                        <a title="Home" href="/home/">Home</a>
+                    </li>
+                    <li {% if act_menu == 'downloads' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
+                        <a title="Downloads" href="/downloads/">Downloads </a>
+                    </li>
+                    <li {% if act_menu == 'publications' %}id="currentleft"
+                        style="margin-left: 1px">{% else %}>{% endif %}
                     <a title="Publications" href="/publications/">Publications</a>
-                </li>
-                <li {% if act_menu == 'people' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
-                    <a title="People" href="/people/">People</a>
-                </li>
-                <li {% if act_menu == 'visualize' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
-                    <a title="Visualize" href="/visualize">Visualize</a>
-                </li>
-            </ul>
-        </div>
-        <br style="clear: left"/>
+                    </li>
+                    <li {% if act_menu == 'people' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
+                        <a title="People" href="/people/">People</a>
+                    </li>
+                    <li {% if act_menu == 'visualize' %}id="currentleft" style="margin-left: 1px">{% else %}>{% endif %}
+                        <a title="Visualize" href="/visualize">Visualize</a>
+                    </li>
+                </ul>
+            </div>
+            <br style="clear: left"/>
 
-        <div id="contentwrapper">
-            <div id="contentcolumn">
-                <div class="innertube3">
-                    {% block content %}{% endblock %}
+            <div id="contentwrapper">
+                <div id="contentcolumn">
+                    <div class="innertube3">
+                        {% block content %}{% endblock %}
+                    </div>
                 </div>
             </div>
+            {% block leftcontact %}{% endblock %}
         </div>
-        {% block leftcontact %}{% endblock %}
     </div>
-</div></div>
+</div>
 {% block visualization %}{% endblock %}
 </body>
 </html>

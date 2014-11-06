@@ -5,7 +5,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    clean : {
+    clean: {
       build: ['./build']
     },
 
@@ -15,14 +15,14 @@ module.exports = function (grunt) {
       },
       dist: {
         src: ['./bower_components/jquery/dist/jquery.js',
-              './bower_components/bootstrap/js/button.js',
-              './bower_components/bootstrap/js/dropdown.js',
-              './bower_components/bootstrap/js/tooltip.js',
-              './bower_components/bootstrap/js/transition.js',
-              './bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js',
-              './bower_components/blueimp-file-upload/js/jquery.fileupload.js',
-              './bower_components/devbridge-autocomplete/dist/jquery.autocomplete.js',
-              './build/vis.js'],
+          './bower_components/bootstrap/js/button.js',
+          './bower_components/bootstrap/js/dropdown.js',
+          './bower_components/bootstrap/js/tooltip.js',
+          './bower_components/bootstrap/js/transition.js',
+          './bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js',
+          './bower_components/blueimp-file-upload/js/jquery.fileupload.js',
+          './bower_components/devbridge-autocomplete/dist/jquery.autocomplete.js',
+          './build/vis.js'],
         dest: 'build/visualization.js'
       },
       dev: {

@@ -21,13 +21,22 @@ def gen_flat(graph):
         else:
             idmap[elem[1]['id']] = elem[1]['label']
 
+    roots = []
+    idx = 0
     for elem in graph.nodes():
         tmp = {'name': idmap[elem]}
         if len(graph.pred[elem].keys()) == 0:
             parent = "null"
+            roots.append([elem, idx])
         else:
             t_parent = graph.pred[elem].keys()[0]
             parent = idmap[t_parent]
         tmp['parent'] = parent
         data.append(tmp)
+        idx += 1
+
+    if len(roots) > 1:
+        for root in roots:
+            data[root[1]]['parent'] = 'DUMMY'
+        data.append({'name': 'DUMMY', 'parent': 'null'})
     return data

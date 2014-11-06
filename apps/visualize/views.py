@@ -1,12 +1,12 @@
 import json
-import os
 
+import os
 from django.shortcuts import render
 from django.contrib.flatpages.models import FlatPage
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
-from forms import GraphUploadForm, SerializedSvgForm
+from forms import GraphUploadForm
 from apps.visualize.util.filehandler import FileHandler
 from apps.visualize.util.exportgraph import ExportGraph
 
@@ -65,8 +65,6 @@ def export_data(request):
 
     layout = request.POST['layout']
 
-
-
     if choosen_type == 'edgelist':
         edge_data = request.POST['edgelist'].encode('utf-8')
         exporter = ExportGraph(choosen_type, edge_data, layout)
@@ -78,6 +76,7 @@ def export_data(request):
 
     response = HttpResponse(ret_data)
     return response
+
 
 def download_file(request):
     file_name = request.get_full_path().split('/')[-1]
@@ -98,6 +97,7 @@ def download_file(request):
     response['Content-Disposition'] = 'attachment; filename="exported_graph.{}"'.format(file_type)
 
     return response
+
 
 def send_graph(request, graph_num):
     graphs = request.session['graphs']

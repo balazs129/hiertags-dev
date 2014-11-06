@@ -1,44 +1,44 @@
 var Backbone = require('backbone'),
-    _ = require('underscore'),
-    baseUploadOptions = require('util/file-upload'),
-    treeView = require('views/tree'),
-    Graph = require('models/graph');
+  _ = require('underscore'),
+  baseUploadOptions = require('util/file-upload'),
+  treeView = require('views/tree'),
+  Graph = require('models/graph');
 
 //Link Backbone and jQuery
 Backbone.$ = $;
 
-$(function(){
+$(function () {
   'use strict';
 
   var numberOfGraphs = 0,
-      graphIndex = 1,
-      $visualization = $('#visualization'),
-      $tagSearch = $('#tag-search'),
-      $depthField = $('#depth-input'),
-      $depthText = $('#depth-number'),
-      $errorBar = $('#error-bar'),
-      $graphName = $('#graph-name'),
-      $dropDown = $('.dropdown-toggle'),
-      $graphData = $('#graph-data').children();
+    graphIndex = 1,
+    $visualization = $('#visualization'),
+    $tagSearch = $('#tag-search'),
+    $depthField = $('#depth-input'),
+    $depthText = $('#depth-number'),
+    $errorBar = $('#error-bar'),
+    $graphName = $('#graph-name'),
+    $dropDown = $('.dropdown-toggle'),
+    $graphData = $('#graph-data').children();
 
 
   // Create the autocomplete instance
   $tagSearch.autocomplete({delimiter: /(,|;)\s*/,
-      maxHeight: 400,
-      width: 400,
-      lookup: []
-    });
+    maxHeight: 400,
+    width: 400,
+    lookup: []
+  });
 
   // Initialize tooltips
   $('.btn-tooltip').tooltip({
     'animation': true,
-    'delay': {'show':1200, 'hide': 0},
+    'delay': {'show': 1200, 'hide': 0},
     'container': 'body'
   });
 
   // Dont close save menu if checking the checkbox
   $('.dropdown-menu').on('click', function (e) {
-      e.stopPropagation();
+    e.stopPropagation();
   });
 
   // Initialize the autocomplete instance
@@ -68,6 +68,7 @@ $(function(){
     $graphName.text(graph.name);
 
   }
+
   //Handling the fileupload
   var fileUploadOptions = _.extend(baseUploadOptions, {
     done: function (e, data) {
@@ -99,7 +100,7 @@ $(function(){
 
   _.extend(treeView, Backbone.Events);
 
-  treeView.listenTo(eventBus, 'newfile', function(){
+  treeView.listenTo(eventBus, 'newfile', function () {
     // Clear the previous content
     $visualization.html('');
     // Generate a new view
@@ -112,7 +113,7 @@ $(function(){
   });
 
   var $btnNext = $('#btn-next-graph'),
-      $btnPrev = $('#btn-prev-graph');
+    $btnPrev = $('#btn-prev-graph');
 
   $btnNext.on('click', function () {
     if (graphIndex < numberOfGraphs) {
@@ -125,7 +126,7 @@ $(function(){
       var url = '/visualize/graph/' + graphIndex;
       $.ajax({
         url: url
-      }).done(function(data) {
+      }).done(function (data) {
         setNewGraph(data.graph);
       });
 
@@ -159,14 +160,19 @@ $(function(){
 
   $('.export').on('click', function () {
     var format = $(this).text().toLowerCase(),
-        url = '/visualize/download/',
-        svgData,
-        toSend = { output_format: format },
-        content = $visualization.html();
+      url = '/visualize/download/',
+      svgData,
+      toSend = { output_format: format },
+      $body = $('body'),
+      $saveButton = $('.dropdown-toggle'),
+      content = $visualization.html();
 
+    $body.css('cursor', 'progress');
+    $dropDown.dropdown('toggle');
+    $saveButton.attr('disabled', 'disabled');
     // We need to wrap the svg content in a root svg element for lxml
     svgData = '<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg">' +
-              content + '</svg>';
+      content + '</svg>';
 
     if (treeGraph.get('isLayoutVertical')) {
       toSend.layout = 'vertical';
@@ -186,8 +192,10 @@ $(function(){
       data: toSend
     }).success(function (d) {
       window.location = '/visualize/download/' + d;
+    }).complete( function () {
+      $body.css('cursor', 'default');
+      $saveButton.removeAttr('disabled');
     });
 
-    $dropDown.dropdown('toggle');
   });
 });

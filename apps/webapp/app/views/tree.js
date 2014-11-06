@@ -15,16 +15,15 @@ var app = {
 
     var tree = d3.layout.tree().size([width, height]);
 
-
     // Diagonal projection for the node paths
     var diagonal = d3.svg.diagonal()
       // At default, edges start/end at the nodes center, we need to move endpoints to the circle
       // edges
       .source(function (d) {
-        return {'x': d.source.x, 'y': d.source.y + 6};
+        return {'x': d.source.x, 'y': d.source.y + 7};
       })
       .target(function (d) {
-        return {'x': d.target.x, 'y': d.target.y - 10};
+        return {'x': d.target.x, 'y': d.target.y - 12};
       })
       .projection(function (d) {
         if (treeData.get('isLayoutVertical')) {
@@ -78,7 +77,7 @@ var app = {
       .attr('viewBox', '0 -5 10 10')
       .attr('refX', 3)
       .attr('refY', 0)
-      .attr('markerWidth', 4)
+      .attr('markerWidth', 3)
       .attr('markerHeight', 3)
       .attr('orient', 'auto')
       .append('path')
@@ -310,7 +309,7 @@ var app = {
         tmpWidth,
         newWidth;
 
-      // Function to calculate the number of childrens/sum of the label widths per depth
+      // Function to calculate the number of children/sum of the label widths per depth
       function childCount(level, n) {
         if (n.children && n.children.length > 0) {
           if (levelWidth.length <= level + 1) {
@@ -354,7 +353,7 @@ var app = {
         // Horizontal Layout
       } else {
         newHeight = (levelWidth.length - 1) * (120 * treeData.get('horizontalRatio'));
-          newWidth = _.max(levelWidth) * (25 * treeData.get('horizontalRatio'));
+        newWidth = _.max(levelWidth) * (25 * treeData.get('horizontalRatio'));
       }
 
       tree.size([newWidth, newHeight]).separation(function (a, b) {
@@ -812,8 +811,6 @@ var app = {
         expandTree();
       }
     });
-
-
   },
 
   util: {

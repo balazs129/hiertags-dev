@@ -1,7 +1,7 @@
 var Backbone = require('backbone'),
-    _ = require('underscore'),
-    d3 = require('d3'),
-    utils = require('util/graph-utils');
+  _ = require('underscore'),
+  d3 = require('d3'),
+  utils = require('util/graph-utils');
 
 // The Graph model
 var Graph = Backbone.Model.extend({
@@ -32,11 +32,11 @@ var Graph = Backbone.Model.extend({
   update: function () {
     'use strict';
     var _this = this,
-        tree = d3.layout.tree();
+      tree = d3.layout.tree();
 
     // Get the node names for suggestions
     this.attributes.suggestions = [];
-    this.attributes.dag.forEach(function(node){
+    this.attributes.dag.forEach(function (node) {
       _this.attributes.suggestions.push(node.name);
     });
 

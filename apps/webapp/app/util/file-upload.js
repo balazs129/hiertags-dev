@@ -1,5 +1,5 @@
 var _ = require('underscore'),
-    url = '/visualize/data/';
+  url = '/visualize/data/';
 
 
 var fileUploadOptions = {

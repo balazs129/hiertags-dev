@@ -4,12 +4,13 @@ import cStringIO
 import subprocess
 import tempfile
 import uuid
-import os
 
+import os
 from lxml import etree
 from PIL import Image
 
 from parsesvg import parse_svg
+
 
 class ExportGraph(object):
     def __init__(self, export_type, data, layout):

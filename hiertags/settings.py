@@ -33,7 +33,7 @@ TEMPLATE_DEBUG = False
 MANAGERS = ADMINS
 TIME_ZONE = 'Europe/Budapest'
 LANGUAGE_CODE = 'en-us'
-#Use timezones
+# Use timezones
 USE_TZ = True
 SITE_ID = 1
 # Translation system

@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import math
+
 from lxml import etree
 
 
-def style_circle(elem, text_padding_left, layout, styles, ns):
+def style_circle(elem, text_padding_left, styles, ns):
     for c_elem in elem.getchildren():
         if c_elem.tag == ('{' + ns['svg'] + '}' + 'text'):
             if len(c_elem.text) > text_padding_left:
@@ -57,7 +58,7 @@ def parse_svg(svgtree, layout):
         tmp = elem.attrib['transform'].split('translate')[1]
         x0 = float(tmp.split(',')[0][1:])
 
-        style_circle(elem, text_padding_left, layout, styles, ns)
+        style_circle(elem, text_padding_left, styles, ns)
 
         if x0 < margin_left:
             margin_left = x0
