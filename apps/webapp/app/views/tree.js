@@ -15,15 +15,36 @@ var app = {
 
     var tree = d3.layout.tree().size([width, height]);
 
-    // Diagonal projection for the node paths
     var diagonal = d3.svg.diagonal()
       // At default, edges start/end at the nodes center, we need to move endpoints to the circle
       // edges
       .source(function (d) {
-        return {'x': d.source.x, 'y': d.source.y + 7};
+        if (d.source.y === d.target.y) {
+          // Edge is between two nodes of same level
+          if (d.source.x < d.target.x) {
+            // Left-to-right
+            return {'x': d.source.x + 7, 'y': d.source.y};
+          } else {
+            // Right-to-left
+            return {'x': d.source.x - 7, 'y': d.source.y};
+          }
+        } else {
+          return {'x': d.source.x, 'y': d.source.y + 7};
+        }
       })
       .target(function (d) {
-        return {'x': d.target.x, 'y': d.target.y - 12};
+        if (d.source.y === d.target.y) {
+          // Edge is between two nodes of same level
+          if (d.source.x < d.target.x) {
+            // Left-to-right
+            return {'x': d.target.x - 12, 'y': d.target.y};
+          } else {
+            // Right-to-left
+            return {'x': d.target.x + 12, 'y': d.target.y};
+          }
+        } else {
+          return {'x': d.target.x, 'y': d.target.y - 12};
+        }
       })
       .projection(function (d) {
         if (treeData.get('isLayoutVertical')) {
@@ -69,21 +90,29 @@ var app = {
     // Set initial edgelist
     treeData.set({'edgeList': app.getEdgeList(root)});
 
+    var markerData = [
+      {id: 0, name: 'arrow', orient: 'auto' },
+      {id: 1, name: 'rotated-arrow', orient: '180' },
+      {id: 2, name: 'horizontal-plus-arrow', orient: '90' },
+      {id: 2, name: 'horizontal-minus-arrow', orient: '-90' }
+    ];
+
     // Build the arrow
     svg.append('defs').selectAll('marker')
-      .data(['end'])
+      .data(markerData)
       .enter().append('marker')
-      .attr('id', 'arrow')
+      .attr('id', function (d) { return d.name; })
       .attr('viewBox', '0 -5 10 10')
       .attr('refX', 3)
       .attr('refY', 0)
       .attr('markerWidth', 3)
       .attr('markerHeight', 3)
-      .attr('orient', 'auto')
+      .attr('orient', function (d) { return d.orient; })
       .append('path')
       .attr('fill', '#333')
       .attr('d', 'M0,-5L10,0L0,5');
-    // Enering nodes require these attributes to present
+
+    // Enering nodes require these attributes to present at first
     root.x0 = width / 2;
     root.y0 = height / 4;
 
@@ -389,6 +418,10 @@ var app = {
         }
       });
 
+      // TEST
+//      links.push(new InterLink(nodes[1], nodes[0]));
+      links.push(new InterLink(nodes[0], nodes[1]));
+
       // Join data with nodes and edges
       // Update the nodes
       var node = svgGroup.selectAll('g.node')
@@ -495,9 +528,11 @@ var app = {
         })
         .attr('d', function () {
           var o = {x: source.x0, y: source.y0 };
-          return diagonal({source: o, target: o});
+            return diagonal({source: o, target: o});
         })
-        .attr('marker-end', 'url(#arrow)')
+        .attr('marker-end', function (d) {
+          return app.linkMarker(d, treeData.get('isLayoutVertical'));
+        })
         .style('stroke-dasharray', function (d) {
           if (d.hasOwnProperty('added')) {
             return '5, 2';
@@ -567,9 +602,12 @@ var app = {
       }
 
       // Transition links to their new position
-      link.transition()
+      link.attr('marker-end', function (d) {return app.linkMarker(d, treeData.get('isLayoutVertical')); })
+        .transition()
         .duration(duration)
-        .attr('d', diagonal);
+        .attr('d', function (d) {
+          return diagonal(d);
+        });
 
       // EXIT
       // Exit nodes
@@ -899,6 +937,20 @@ var app = {
 
     root.children.forEach(log);
     return result;
+  },
+
+  linkMarker: function (d, isLayoutVertical) {
+    // Layout is vertical and link between siblings R-to-L
+    if (d.source.y === d.target.y) {
+      if (d.source.x > d.target.x) {
+        return isLayoutVertical ? 'url(#rotated-arrow)' : 'url(#horizontal-minus-arrow)';
+      } else {
+        return isLayoutVertical ? 'url(#rotated-arrow)' : 'url(#horizontal-plus-arrow)';
+      }
+    } else {
+      // Normal arrow in vertical layout
+      return 'url(#arrow)';
+    }
   }
 };
 

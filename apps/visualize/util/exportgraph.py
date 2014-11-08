@@ -36,7 +36,7 @@ class ExportGraph(object):
         type_formatter = {"pdf": "-A", "png": "-e", "jpg": "-e", "svg": "-l"}
 
         _ = subprocess.Popen(
-            ['inkscape', "-b white", "-f", tmp_infile.name, "{0}".format(type_formatter[self._type]), tmp_outfile],
+            ['inkscape', '--without-gui', '-b white', '-f', tmp_infile.name, '{0}'.format(type_formatter[self._type]), tmp_outfile],
             shell=False,
             stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
 
