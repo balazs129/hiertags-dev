@@ -61,17 +61,20 @@ def export_data(request):
     :param request: request object
     :return: the appropriate file, forced to download.
     """
-    choosen_type = request.POST['output_format']
-
+    chosen_type = request.POST['output_format']
     layout = request.POST['layout']
 
-    if choosen_type == 'edgelist':
+    if chosen_type == 'edgelist':
         edge_data = request.POST['edgelist'].encode('utf-8')
-        exporter = ExportGraph(choosen_type, edge_data, layout)
+        exporter = ExportGraph(chosen_type, edge_data, layout)
         ret_data = exporter.export_edgelist()
     else:
         svg_data = request.POST['svg'].encode('utf-8')
-        exporter = ExportGraph(choosen_type, svg_data, layout)
+        if 'width' in request.POST:
+            svg_area = [request.POST['width'], request.POST['height']]
+            exporter = ExportGraph(chosen_type, svg_data, layout, svg_area)
+        else:
+            exporter = ExportGraph(chosen_type, svg_data, layout)
         ret_data = exporter.export_graphics()
 
     response = HttpResponse(ret_data)
@@ -79,6 +82,11 @@ def export_data(request):
 
 
 def download_file(request):
+    """
+    Return the requested file
+    :param request:
+    :return:
+    """
     file_name = request.get_full_path().split('/')[-1]
     file_type = file_name.split('.')[-1]
 

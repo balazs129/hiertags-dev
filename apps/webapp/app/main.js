@@ -19,6 +19,7 @@ $(function () {
     $errorBar = $('#error-bar'),
     $graphName = $('#graph-name'),
     $dropDown = $('.dropdown-toggle'),
+    $check = $('#check-whole-graph'),
     $graphData = $('#graph-data').children();
 
 
@@ -184,6 +185,11 @@ $(function () {
       toSend.edgelist = JSON.stringify(treeGraph.get('edgeList'));
     } else {
       toSend.svg = svgData;
+    }
+
+    if (!$check.is(':checked')) {
+      toSend.width = $visualization.attr('width');
+      toSend.height = $visualization.attr('height');
     }
 
     $.ajax({

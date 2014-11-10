@@ -418,10 +418,6 @@ var app = {
         }
       });
 
-      // TEST
-//      links.push(new InterLink(nodes[1], nodes[0]));
-      links.push(new InterLink(nodes[0], nodes[1]));
-
       // Join data with nodes and edges
       // Update the nodes
       var node = svgGroup.selectAll('g.node')

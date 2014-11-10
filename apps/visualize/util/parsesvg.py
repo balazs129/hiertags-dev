@@ -21,7 +21,7 @@ def style_circle(elem, text_padding_left, styles, ns):
                 c_elem.attrib['style'] = styles['expanded_node']
 
 
-def parse_svg(svgtree, layout):
+def parse_svg(svgtree, layout, full):
     styles = {'expanded_node': 'fill:#ffffff;stroke:#4682b4;stroke-width:1px',
               'collapsed_node': 'fill:#0099ff;stroke:#4682b4;stroke-width:1px',
               'node_text': 'font-size:10px;fill:#353524;fill-opacity:1;font-family:sans-serif',
@@ -48,7 +48,7 @@ def parse_svg(svgtree, layout):
     text_padding_left = 0
     text_padding_right = 0
 
-    for elem in paths[:-1]:
+    for elem in paths[:-4]:
         if elem.attrib['style'][-2] == '0':
             elem.attrib['style'] += styles['normal_link']
         else:
@@ -81,10 +81,23 @@ def parse_svg(svgtree, layout):
     height = margins[3] - margins[2] + padding
     root.attrib['width'] = str(width)
     root.attrib['height'] = str(height)
+
+    # Get and set the scale
+    transform = trans.attrib['transform'].split(' ')
+    if len(transform) == 1:
+        tr_x, tr_y = transform[0][10:-1].split(',')
+        scale = '1'
+    else:
+        scale = transform[-1][6:-1]
+        tr_x, tr_y = transform[0][10:-1].split(',')
+
+    if full:
+        scale = '1'
+
     if layout == 'vertical':
-        trans.attrib['transform'] = 'translate(50,50) scale(1)'
+        trans.attrib['transform'] = 'translate(50,50) ' + 'scale({})'.format(scale)
     else:
         transx = 50 + text_padding * 5
-        trans.attrib['transform'] = 'translate(' + str(transx) + ',50) scale(1)'
+        trans.attrib['transform'] = 'translate(' + str(transx) + ',50) ' + 'scale({})'.format(scale)
 
-    return etree.tostring(root)
+    return etree.tostring(root), [tr_x, tr_y, scale]
