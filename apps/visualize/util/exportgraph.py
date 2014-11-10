@@ -4,6 +4,7 @@ import cStringIO
 import subprocess
 import tempfile
 import uuid
+import math
 
 import os
 from lxml import etree
@@ -17,17 +18,17 @@ class ExportGraph(object):
         self._type = export_type
         self._data = data
         self._layout = layout
+
         if svg_area is not None:
             self._full = False
-            self._svg_width = svg_area[0]
-            self._svg_height = svg_area[1]
+            self._svg_width = math.trunc(float(svg_area[0]))
+            self._svg_height = math.trunc(float(svg_area[1]))
         else:
             self._full = True
+
         if export_type != 'edgelist':
             self._parser = etree.XMLParser(encoding='UTF-8')
             self._generate_xml()
-
-
 
     def _generate_xml(self):
         xml_data = etree.parse(cStringIO.StringIO(self._data), parser=self._parser)
@@ -41,16 +42,17 @@ class ExportGraph(object):
         file_name = str(uuid.uuid4()) + '.' + self._type
         tmp_outfile = '/tmp/' + file_name
 
-        type_formatter = {"pdf": "-A", "png": "-e", "jpg": "-e", "svg": "-l"}
+        type_formatter = {'pdf': '-A', 'png': '-e', 'jpg': '-e', 'svg': '-l'}
 
         if self._full:
             export_area = '--export-area-page'
         else:
-            export_area = '--export-area={0}:{1}:{2}:{3}'.format(0, 0, self._svg_width, self._svg_height)
+            # export_area = '--export-area={}:{}:{}:{}'.format(0, 0, self._svg_width, self._svg_height)
+            export_area = '--export-area={}:{}:{}:{}'.format(0, 0, 800, 300)
 
         _ = subprocess.Popen(
-            ['inkscape', '--without-gui', '--vacuum-defs', '{0}'.format(export_area), '-b white', '-f',
-             tmp_infile.name, '{0}'.format(type_formatter[self._type]), tmp_outfile],
+            ['inkscape', '--without-gui', '{}'.format(export_area), '-b white', '-f',
+             tmp_infile.name, '{}'.format(type_formatter[self._type]), tmp_outfile],
             shell=False,
             stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
 

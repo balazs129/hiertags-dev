@@ -93,11 +93,10 @@ def parse_svg(svgtree, layout, full):
 
     if full:
         scale = '1'
+        if layout == 'vertical':
+            trans.attrib['transform'] = 'translate(50,50) ' + 'scale({})'.format(scale)
+        else:
+            transx = 50 + text_padding * 5
+            trans.attrib['transform'] = 'translate(' + str(transx) + ',50) ' + 'scale({})'.format(scale)
 
-    if layout == 'vertical':
-        trans.attrib['transform'] = 'translate(50,50) ' + 'scale({})'.format(scale)
-    else:
-        transx = 50 + text_padding * 5
-        trans.attrib['transform'] = 'translate(' + str(transx) + ',50) ' + 'scale({})'.format(scale)
-
-    return etree.tostring(root), [tr_x, tr_y, scale]
+    return etree.tostring(root), [float(tr_x), float(tr_y), float(scale)]
