@@ -130,7 +130,8 @@ var app = {
       }
       d3.select('g').transition()
         .duration(duration)
-        .attr('transform', 'translate(' + x + ',' + y + ')scale(' + scale + ')');
+        .attr('transform', 'translate(' + x + ',' + y + ') scale(' + scale + ')');
+
       zoomListener.scale(scale);
       zoomListener.translate([x, y]);
     }
@@ -598,7 +599,9 @@ var app = {
       }
 
       // Transition links to their new position
-      link.attr('marker-end', function (d) {return app.linkMarker(d, treeData.get('isLayoutVertical')); })
+      link.attr('marker-end', function (d) {
+          return app.linkMarker(d, treeData.get('isLayoutVertical'));
+        })
         .transition()
         .duration(duration)
         .attr('d', function (d) {

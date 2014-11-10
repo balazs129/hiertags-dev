@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import math
+import re
 
 from lxml import etree
 
@@ -79,17 +80,20 @@ def parse_svg(svgtree, layout, full):
     else:
         width = margins[1] - margins[0] + padding + text_padding * 8
     height = margins[3] - margins[2] + padding
+
     root.attrib['width'] = str(width)
     root.attrib['height'] = str(height)
 
-    # Get and set the scale
-    transform = trans.attrib['transform'].split(' ')
-    if len(transform) == 1:
-        tr_x, tr_y = transform[0][10:-1].split(',')
-        scale = '1'
-    else:
-        scale = transform[-1][6:-1]
-        tr_x, tr_y = transform[0][10:-1].split(',')
+    if layout == 'vertical':
+        pattern = re.compile(r'(-?\d+\.?\d+)')
+        transformation = trans.attrib['transform']
+        it = pattern.finditer(transformation)
+        it.next()  # transform x
+        match = it.next()  # transform y
+        pos = match.span()
+        new_val = str(float(match.group(1)) + 110)
+
+        trans.attrib['transform'] = transformation[:pos[0]] + new_val + transformation[pos[1]:]
 
     if full:
         scale = '1'
@@ -99,4 +103,4 @@ def parse_svg(svgtree, layout, full):
             transx = 50 + text_padding * 5
             trans.attrib['transform'] = 'translate(' + str(transx) + ',50) ' + 'scale({})'.format(scale)
 
-    return etree.tostring(root), [float(tr_x), float(tr_y), float(scale)]
+    return etree.tostring(root)

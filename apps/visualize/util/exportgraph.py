@@ -32,7 +32,7 @@ class ExportGraph(object):
 
     def _generate_xml(self):
         xml_data = etree.parse(cStringIO.StringIO(self._data), parser=self._parser)
-        self._svg_data, self.transform = parse_svg(xml_data, self._layout, self._full)
+        self._svg_data = parse_svg(xml_data, self._layout, self._full)
 
     def export_graphics(self):
         tmp_infile = tempfile.NamedTemporaryFile()
@@ -47,8 +47,7 @@ class ExportGraph(object):
         if self._full:
             export_area = '--export-area-page'
         else:
-            # export_area = '--export-area={}:{}:{}:{}'.format(0, 0, self._svg_width, self._svg_height)
-            export_area = '--export-area={}:{}:{}:{}'.format(0, 0, 800, 300)
+            export_area = '--export-area={}:{}:{}:{}'.format(0, 0, self._svg_width, self._svg_height)
 
         _ = subprocess.Popen(
             ['inkscape', '--without-gui', '{}'.format(export_area), '-b white', '-f',
