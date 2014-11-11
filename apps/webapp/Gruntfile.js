@@ -42,7 +42,7 @@ module.exports = function (grunt) {
     cssmin: {
       combine: {
         files: {
-          '../base/static/css/hiertags.min.css': ['./assets/bootstrap-cleaned.css', './assets/hiertags.css']
+          '../base/static/css/hiertags.min.css': ['./bower_components/bootstrap/dist/css/bootstrap.css', './assets/hiertags.css']
         }
       }
     },
