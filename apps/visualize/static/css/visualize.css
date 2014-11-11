@@ -138,6 +138,10 @@ a {
     fill: #ffffff;
 }
 
+.node .virtual {
+    stroke: #aabbaa;
+}
+
 .node text {
     font: 10px sans-serif;
     pointer-events: none;
@@ -148,6 +152,7 @@ a {
     stroke: #ccc;
     stroke-width: 2px;
 }
+
 
 .addedLink {
     stroke: #cddaff;

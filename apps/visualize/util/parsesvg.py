@@ -2,30 +2,35 @@
 # -*- coding: utf-8 -*-
 
 import math
-import re
 
 from lxml import etree
 
 
 def style_circle(elem, text_padding_left, styles, ns):
+    virtual = False;
     for c_elem in elem.getchildren():
         if c_elem.tag == ('{' + ns['svg'] + '}' + 'text'):
-            if len(c_elem.text) > text_padding_left:
-                text_padding_left = len(c_elem.text)
-            c_elem.attrib['style'] = styles['node_text']
-            # Fix for export
-            c_elem.attrib['dy'] = '2'
+            if c_elem.text is not None:
+                if len(c_elem.text) > text_padding_left:
+                    text_padding_left = len(c_elem.text)
+                    # Fix for export
+                    if c_elem.attrib['class'].split(' ')[-1] == 'virtual':
+                        c_elem.attrib['style'] = styles['virtual_text']
+                    else:
+                        c_elem.attrib['style'] = styles['node_text']
+
+                    c_elem.attrib['dy'] = '2'
         elif c_elem.tag == ('{' + ns['svg'] + '}' + 'circle'):
-            if c_elem.attrib['style'].split(' ')[-1] == 'lightsteelblue;':
-                c_elem.attrib['style'] = styles['collapsed_node']
+            if c_elem.attrib['class'].split(' ')[-1] == 'virtual':
+                c_elem.attrib['style'] += styles['virtual']
             else:
-                c_elem.attrib['style'] = styles['expanded_node']
+                c_elem.attrib['style'] += styles['node']
 
-
-def parse_svg(svgtree, layout, full, size=None):
-    styles = {'expanded_node': 'fill:#ffffff;stroke:#4682b4;stroke-width:1px',
-              'collapsed_node': 'fill:#0099ff;stroke:#4682b4;stroke-width:1px',
+def parse_svg(svgtree, layout, full, size):
+    styles = {'node': 'stroke:#4682b4;stroke-width:1px',
+              'virtual': 'stroke: #aabbaa;stroke-width:1px',
               'node_text': 'font-size:10px;fill:#353524;fill-opacity:1;font-family:sans-serif',
+              'virtual_text': 'font-size:10px;fill:#aabbaa;fill-opacity:1;font-family:sans-serif',
               'normal_link': 'fill:none;stroke:#cccccc;stroke-width:2px;',
               'added_link': 'fill:none;stroke:#cddaff;;stroke-width:2px;'}
 

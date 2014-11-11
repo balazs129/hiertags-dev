@@ -35,8 +35,10 @@ def gen_flat(graph):
         data.append(tmp)
         idx += 1
 
+    # Introduce a new virtual root if there are more than one root elements
+    # because the graph is not a proper tree
     if len(roots) > 1:
         for root in roots:
-            data[root[1]]['parent'] = 'DUMMY'
-        data.append({'name': 'DUMMY', 'parent': 'null'})
+            data[root[1]]['parent'] = '_VIRTUAL_ROOT_'
+        data.append({'name': '_VIRTUAL_ROOT_', 'parent': 'null'})
     return data

@@ -398,6 +398,7 @@ var app = {
       var nodes = tree.nodes(root).reverse(),
           links = tree.links(nodes);
 
+
       // Add the extra edges if any
       var InterLink = function (source, target) {
         this.source = source;
@@ -473,6 +474,9 @@ var app = {
       // Add node circles
       nodeEnter.append('circle')
         .attr('class', 'nodeCircle')
+        .classed('virtual', function (d) {
+          return d.name === '_VIRTUAL_ROOT_';
+        })
         .attr('r', 0)
         .style('fill', function (d) {
           return d._children ? 'lightsteelblue' : '#fff';
@@ -482,6 +486,9 @@ var app = {
       if (treeData.get('isLayoutVertical')) {
         nodeEnter.append('text')
           .attr('class', 'nodeText')
+          .classed('virtual', function (d) {
+            return d.name === '_VIRTUAL_ROOT_';
+          })
           .attr('y', function (d) {
             if (d === root) {
               return -10;
@@ -501,6 +508,9 @@ var app = {
       } else {
         nodeEnter.append('text')
           .attr('class', 'nodeText')
+          .classed('virtual', function (d) {
+            return d.name === '_VIRTUAL_ROOT_';
+          })
           .attr('x', function (d) {
             return d.children || d._children ? -10 : 10;
           })
@@ -523,6 +533,14 @@ var app = {
         .classed('addedLink', function (d) {
           return d.hasOwnProperty('added');
         })
+        .classed('virtualLink', function (d) {
+          if (d.source.name === '_VIRTUAL_ROOT_') {
+            d.virtual = true;
+            return true;
+          } else {
+            return false;
+          }
+        })
         .attr('d', function () {
           var o = {x: source.x0, y: source.y0 };
             return diagonal({source: o, target: o});
@@ -534,7 +552,11 @@ var app = {
           if (d.hasOwnProperty('added')) {
             return '5, 2';
           } else {
-            return '1, 0';
+            if (d.hasOwnProperty('virtual')) {
+              return '1, 4';
+            } else {
+              return '1, 0';
+            }
           }
         })
         .on('mouseover', function (d) {
@@ -944,7 +966,7 @@ var app = {
       if (d.source.x > d.target.x) {
         return isLayoutVertical ? 'url(#rotated-arrow)' : 'url(#horizontal-minus-arrow)';
       } else {
-        return isLayoutVertical ? 'url(#rotated-arrow)' : 'url(#horizontal-plus-arrow)';
+        return isLayoutVertical ? 'url(#arrow)' : 'url(#horizontal-plus-arrow)';
       }
     } else {
       // Normal arrow in vertical layout

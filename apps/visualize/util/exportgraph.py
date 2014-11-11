@@ -24,6 +24,7 @@ class ExportGraph(object):
             self._svg_size = [math.trunc(float(x)) for x in svg_area]
         else:
             self._full = True
+            self._svg_size = []
 
         if export_type != 'edgelist':
             self._parser = etree.XMLParser(encoding='UTF-8')
