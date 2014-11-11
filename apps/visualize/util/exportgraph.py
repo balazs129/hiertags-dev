@@ -21,8 +21,7 @@ class ExportGraph(object):
 
         if svg_area is not None:
             self._full = False
-            self._svg_width = math.trunc(float(svg_area[0]))
-            self._svg_height = math.trunc(float(svg_area[1]))
+            self._svg_size = [math.trunc(float(x)) for x in svg_area]
         else:
             self._full = True
 
@@ -32,7 +31,7 @@ class ExportGraph(object):
 
     def _generate_xml(self):
         xml_data = etree.parse(cStringIO.StringIO(self._data), parser=self._parser)
-        self._svg_data = parse_svg(xml_data, self._layout, self._full)
+        self._svg_data = parse_svg(xml_data, self._layout, self._full, self._svg_size)
 
     def export_graphics(self):
         tmp_infile = tempfile.NamedTemporaryFile()
@@ -47,7 +46,7 @@ class ExportGraph(object):
         if self._full:
             export_area = '--export-area-page'
         else:
-            export_area = '--export-area={}:{}:{}:{}'.format(0, 0, self._svg_width, self._svg_height)
+            export_area = '--export-area={}:{}:{}:{}'.format(0, 0, self._svg_size[0], self._svg_size[1])
 
         _ = subprocess.Popen(
             ['inkscape', '--without-gui', '{}'.format(export_area), '-b white', '-f',

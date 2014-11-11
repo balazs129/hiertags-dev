@@ -22,7 +22,7 @@ def style_circle(elem, text_padding_left, styles, ns):
                 c_elem.attrib['style'] = styles['expanded_node']
 
 
-def parse_svg(svgtree, layout, full):
+def parse_svg(svgtree, layout, full, size=None):
     styles = {'expanded_node': 'fill:#ffffff;stroke:#4682b4;stroke-width:1px',
               'collapsed_node': 'fill:#0099ff;stroke:#4682b4;stroke-width:1px',
               'node_text': 'font-size:10px;fill:#353524;fill-opacity:1;font-family:sans-serif',
@@ -56,51 +56,46 @@ def parse_svg(svgtree, layout, full):
             elem.attrib['style'] += styles['added_link']
 
     for elem in nodes:
-        tmp = elem.attrib['transform'].split('translate')[1]
-        x0 = float(tmp.split(',')[0][1:])
-
         style_circle(elem, text_padding_left, styles, ns)
 
-        if x0 < margin_left:
-            margin_left = x0
-
-        if x0 > margin_right:
-            margin_right = x0
-
-        y0 = float(tmp.split(',')[1][:-1])
-        if y0 < margin_top:
-            margin_top = y0
-        if y0 > margin_bottom:
-            margin_bottom = y0
-
-    text_padding = int(math.floor((text_padding_right / 2 + text_padding_left / 2)))
-    margins = (margin_left, margin_right, margin_top, margin_bottom)
-    if layout == 'vertical':
-        width = margins[1] - margins[0] + padding + text_padding * 2
-    else:
-        width = margins[1] - margins[0] + padding + text_padding * 8
-    height = margins[3] - margins[2] + padding
-
-    root.attrib['width'] = str(width)
-    root.attrib['height'] = str(height)
-
-    if layout == 'vertical':
-        pattern = re.compile(r'(-?\d+\.?\d+)')
-        transformation = trans.attrib['transform']
-        it = pattern.finditer(transformation)
-        it.next()  # transform x
-        match = it.next()  # transform y
-        pos = match.span()
-        new_val = str(float(match.group(1)) + 110)
-
-        trans.attrib['transform'] = transformation[:pos[0]] + new_val + transformation[pos[1]:]
-
     if full:
+        for elem in nodes:
+            tmp = elem.attrib['transform'].split('translate')[1]
+            x0 = float(tmp.split(',')[0][1:])
+
+            style_circle(elem, text_padding_left, styles, ns)
+
+            if x0 < margin_left:
+                margin_left = x0
+
+            if x0 > margin_right:
+                margin_right = x0
+
+            y0 = float(tmp.split(',')[1][:-1])
+            if y0 < margin_top:
+                margin_top = y0
+            if y0 > margin_bottom:
+                margin_bottom = y0
+
+        text_padding = int(math.floor((text_padding_right + text_padding_left)))
+        margins = (margin_left, margin_right, margin_top, margin_bottom)
+        if layout == 'vertical':
+            width = margins[1] - margins[0] + padding + text_padding * 2
+        else:
+            width = margins[1] - margins[0] + padding + text_padding * 8
+        height = margins[3] - margins[2] + padding
+
+        root.attrib['width'] = str(width)
+        root.attrib['height'] = str(height)
+
         scale = '1'
         if layout == 'vertical':
             trans.attrib['transform'] = 'translate(50,50) ' + 'scale({})'.format(scale)
         else:
-            transx = 50 + text_padding * 5
+            transx = 100 + text_padding * 10
             trans.attrib['transform'] = 'translate(' + str(transx) + ',50) ' + 'scale({})'.format(scale)
+    else:
+        root.attrib['width'] = str(size[0])
+        root.attrib['height'] = str(size[1])
 
     return etree.tostring(root)
