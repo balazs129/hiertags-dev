@@ -13,7 +13,7 @@ module.exports = function (grunt) {
       options: {
         separator: ';'
       },
-      dist: {
+      release: {
         src: ['./bower_components/jquery/dist/jquery.js',
           './bower_components/bootstrap/js/button.js',
           './bower_components/bootstrap/js/dropdown.js',
@@ -23,7 +23,7 @@ module.exports = function (grunt) {
           './bower_components/blueimp-file-upload/js/jquery.fileupload.js',
           './bower_components/devbridge-autocomplete/dist/jquery.autocomplete.js',
           './build/vis.js'],
-        dest: 'build/visualization.js'
+        dest: './build/visualization.js'
       },
       dev: {
         src: ['./bower_components/jquery/dist/jquery.js',
@@ -36,6 +36,14 @@ module.exports = function (grunt) {
           './bower_components/devbridge-autocomplete/dist/jquery.autocomplete.js',
           './build/vis.js'],
         dest: '../visualize/static/js/visualization.min.js'
+      }
+    },
+
+    cssmin: {
+      combine: {
+        files: {
+          '../base/static/css/hiertags.min.css': ['./assets/bootstrap-cleaned.css', './assets/hiertags.css']
+        }
       }
     },
 
@@ -58,10 +66,11 @@ module.exports = function (grunt) {
   // Load plugins
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Task definitions
-  grunt.registerTask('default', ['clean', 'browserify', 'concat:dist', 'uglify', 'clean']);
+  grunt.registerTask('default', ['clean', 'browserify', 'cssmin:combine', 'concat:release', 'uglify', 'clean']);
   grunt.registerTask('dev', ['clean', 'browserify', 'concat:dev', 'clean']);
 };
