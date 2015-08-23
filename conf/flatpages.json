@@ -1,1289 +1,212 @@
 [
-  {
+{
     "fields": {
-      "model": "permission",
-      "name": "permission",
-      "app_label": "auth"
-    },
-    "model": "contenttypes.contenttype",
-    "pk": 1
-  },
-  {
-    "fields": {
-      "model": "group",
-      "name": "group",
-      "app_label": "auth"
-    },
-    "model": "contenttypes.contenttype",
-    "pk": 2
-  },
-  {
-    "fields": {
-      "model": "user",
-      "name": "user",
-      "app_label": "auth"
-    },
-    "model": "contenttypes.contenttype",
-    "pk": 3
-  },
-  {
-    "fields": {
-      "model": "contenttype",
-      "name": "content type",
-      "app_label": "contenttypes"
-    },
-    "model": "contenttypes.contenttype",
-    "pk": 4
-  },
-  {
-    "fields": {
-      "model": "site",
-      "name": "site",
-      "app_label": "sites"
-    },
-    "model": "contenttypes.contenttype",
-    "pk": 5
-  },
-  {
-    "fields": {
-      "model": "session",
-      "name": "session",
-      "app_label": "sessions"
-    },
-    "model": "contenttypes.contenttype",
-    "pk": 6
-  },
-  {
-    "fields": {
-      "model": "logentry",
-      "name": "log entry",
-      "app_label": "admin"
-    },
-    "model": "contenttypes.contenttype",
-    "pk": 7
-  },
-  {
-    "fields": {
-      "model": "flatpage",
-      "name": "flat page",
-      "app_label": "flatpages"
-    },
-    "model": "contenttypes.contenttype",
-    "pk": 8
-  },
-  {
-    "fields": {
-      "domain": "elte.hu",
-      "name": "elte.hu"
-    },
-    "model": "sites.site",
-    "pk": 1
-  },
-  {
-    "fields": {
-      "expire_date": "2014-10-07T21:23:21.987Z",
-      "session_data": "NzA2OWQ5MzdjNjMwMjViY2NhZDE0NmQ1NTdiZWM4OGYzZTgxMjRjODp7fQ=="
-    },
-    "model": "sessions.session",
-    "pk": "a38roa8zfptrowmm5gjfhbkhytbjvbsd"
-  },
-  {
-    "fields": {
-      "expire_date": "2014-10-07T08:41:31.063Z",
-      "session_data": "NzA2OWQ5MzdjNjMwMjViY2NhZDE0NmQ1NTdiZWM4OGYzZTgxMjRjODp7fQ=="
-    },
-    "model": "sessions.session",
-    "pk": "bfvxtn1zs50f2zl6g5pji8vokmuxcrk3"
-  },
-  {
-    "fields": {
-      "expire_date": "2014-10-03T13:59:36.804Z",
-      "session_data": "NzA2OWQ5MzdjNjMwMjViY2NhZDE0NmQ1NTdiZWM4OGYzZTgxMjRjODp7fQ=="
-    },
-    "model": "sessions.session",
-    "pk": "zy8cszg1v5um9hxvs1fibolw6xt40yrc"
-  },
-  {
-    "fields": {
-      "registration_required": false,
-      "title": "Home",
-      "url": "/home/",
-      "template_name": "",
-      "sites": [1],
-      "content": "<br>\r\n<div id=\"subtitle1\">Welcome to HIERTAGS, a site dedicated to tag hierarchy extraction.</div>\r\n<br>\r\nTags appear rather frequently on various on line platforms like blogs, photo sharing portals, news feeds, etc. In most cases they correspond to free words, chosen  by independent people, thus, the resulting organization of the tags is \"flat\", (all tags are equal), opposed to traditional hierarchical categorization. Nevertheless, the way users think about the tagged objects has some built in hierarchy, e.g., \"poodle\" is usually considered as a special case of \"dog\". An interesting challenge related to this problem is the extraction of this sort of hierarchy between the tags based on statistical properties as tag frequencies, co-occurrences, etc.\r\n<br>\r\n<br>\r\nOn this site we provide algorithms extracting a tag hierarchy from the weighted co-occurrence network between the tags, (where the weight of a link corresponds to the number of shared objects). Furthermore, we also offer tagged datasets for testing tag hierarchy extracting algorithms in general.\r\n<br>\r\n<br>\r\n<br>",
-      "enable_comments": false
+        "registration_required": false,
+        "title": "Home",
+        "url": "/home/",
+        "template_name": "",
+        "sites": [
+            1
+        ],
+        "content": "<br>\r\n<div id=\"subtitle1\">Welcome to HIERTAGS, a site dedicated to tag hierarchy extraction.</div>\r\n<br>\r\nTags appear rather frequently on various on line platforms like blogs, photo sharing portals, news feeds, etc. In most cases they correspond to free words, chosen  by independent people, thus, the resulting organization of the tags is \"flat\", (all tags are equal), opposed to traditional hierarchical categorization. Nevertheless, the way users think about the tagged objects has some built in hierarchy, e.g., \"poodle\" is usually considered as a special case of \"dog\". An interesting challenge related to this problem is the extraction of this sort of hierarchy between the tags based on statistical properties as tag frequencies, co-occurrences, etc.\r\n<br>\r\n<br>\r\nOn this site we provide algorithms extracting a tag hierarchy from the weighted co-occurrence network between the tags, (where the weight of a link corresponds to the number of shared objects). Furthermore, we also offer tagged datasets for testing tag hierarchy extracting algorithms in general.\r\n<br>\r\n<br>\r\n<br>",
+        "enable_comments": false
     },
     "model": "flatpages.flatpage",
     "pk": 1
-  },
-  {
+},
+{
     "fields": {
-      "registration_required": false,
-      "title": "Archive",
-      "url": "/archive_algo/",
-      "template_name": "",
-      "sites": [1],
-      "content": "<br>\r\n<div id=\"subtitle1\">Download older versions of the tag-hierarchy extracting algorithms:</div>\r\n<br>\r\nBoth algorithms are aimed at extracting a directed acyclic graph (a hierarchy) between tags\r\nfrom co-occurrence statistics. A detailed description of the algorithms can be found in our paper \r\n\"Extracting tag hierarchies\". They take either the weighted co-occurrence network between the tags \r\nas the input, (accompanied by the frequency distribution of the tags), or simply the list of \r\nco-occurring tags on the individual objects, (in which case the first step is the preparation of \r\nthe co-occurrence network). The output is simply the list of directed links between the tags, \r\nrepresenting the hierarchy. Both algorithms are implemented in Perl.\r\n\r\n<br>\r\n<br>\r\nVersion used in the publication\r\n<a href=\"http://dx.plos.org/10.1371/journal.pone.0084133\">\r\n    PLoS ONE 8(12): e84133.)</a>\r\n<div id=\"subtitle2\"><a class=\"noline\" href=\"/static/data/reconstr_A_1.0.pl\">Download Algorithm A</a> (reconstr_A_1.0.pl, perl, 14Kb,\r\n    2013.11.01.)\r\n</div>\r\n<div id=\"subtitle2\"><a class=\"noline\" href=\"/static/data/reconstr_B_1.0.pl\">Download Algorithm B</a> (reconstr_B_1.0.pl, perl, 11Kb,\r\n    2013.11.01.)\r\n</div>\r\n<br>\r\nlast version and example datasets are <a href=\"/downloads/\">here</a>\r\n<br>\r\n<br>",
-      "enable_comments": false
+        "registration_required": false,
+        "title": "Archive",
+        "url": "/archive_algo/",
+        "template_name": "",
+        "sites": [
+            1
+        ],
+        "content": "<br>\r\n<div id=\"subtitle1\">Download older versions of the tag-hierarchy extracting algorithms:</div>\r\n<br>\r\nBoth algorithms are aimed at extracting a directed acyclic graph (a hierarchy) between tags\r\nfrom co-occurrence statistics. A detailed description of the algorithms can be found in our paper \r\n\"Extracting tag hierarchies\". They take either the weighted co-occurrence network between the tags \r\nas the input, (accompanied by the frequency distribution of the tags), or simply the list of \r\nco-occurring tags on the individual objects, (in which case the first step is the preparation of \r\nthe co-occurrence network). The output is simply the list of directed links between the tags, \r\nrepresenting the hierarchy. Both algorithms are implemented in Perl.\r\n\r\n<br>\r\n<br>\r\nVersion used in the publication\r\n<a href=\"http://dx.plos.org/10.1371/journal.pone.0084133\">\r\n    PLoS ONE 8(12): e84133.)</a>\r\n<div id=\"subtitle2\"><a class=\"noline\" href=\"/static/data/reconstr_A_1.0.pl\">Download Algorithm A</a> (reconstr_A_1.0.pl, perl, 14Kb,\r\n    2013.11.01.)\r\n</div>\r\n<div id=\"subtitle2\"><a class=\"noline\" href=\"/static/data/reconstr_B_1.0.pl\">Download Algorithm B</a> (reconstr_B_1.0.pl, perl, 11Kb,\r\n    2013.11.01.)\r\n</div>\r\n<br>\r\nAn improved version of algorithm B:\r\n<div id=\"subtitle2\"><a class=\"noline\" href=\"/static/data/reconstr_B_1.1.pl\">Download Algorithm B</a> (reconstr_B_1.1.pl, perl, 11Kb,\r\n    2014.01.16.)\r\n</div>\r\n<br>\r\nlast version and example datasets are <a href=\"/downloads/\">here</a>\r\n<br>\r\n<br>",
+        "enable_comments": false
     },
     "model": "flatpages.flatpage",
     "pk": 2
-  },
-  {
+},
+{
     "fields": {
-      "registration_required": false,
-      "title": "Downloads",
-      "url": "/downloads/",
-      "template_name": "",
-      "sites": [1],
-      "content": "<div id=\"subtitle1\">Download our tagged datasets:</div>\r\n<br />\r\n<div id=\"subtitle2\">Large datasets</div>\r\n<ul>\r\n<li><a href=\"/downloads/datasets/protein/\">Protein dataset:</a> \r\nA collection of proteins tagged by their known function annotations, describing molecular functions.\r\n<br />\r\n</li>\r\n<li>\r\n<a href=\"/downloads/datasets/flickr_large/\">Flickr dataset:</a>\r\nWe provide a weighted co-occurrence network between Flickr tags together with the corresponding tag frequencies.\r\n<ul>\r\n<li>\r\n<a href=\"/downloads/datasets/flickr_small/\">Small extract from the Flickr dataset:</a>\r\nWe provide a weighted co-occurrence network between Flickr tags together with the corresponding tag frequencies.\r\n</li>\r\n</ul>\r\n</li>\r\n\r\n<li>\r\n<a href=\"/downloads/datasets/imdb/\">IMDb dataset:</a>\r\nA filtered data set listing most frequent keywords associated with movies in the IMDb\r\n</li>\r\n\r\n</ul>\r\n\r\n\r\n<div id=\"subtitle2\">Tiny datasets for testing</div>\r\n(results provided for reference)\r\n<ul>\r\n<li>\r\n<a href=\"/downloads/datasets/tiny1/\">Tiny dataset </a>\r\nA very minimalistic dataset constructed for testing the code and getting results in a few seconds.\r\n</li>\r\n<li>\r\n<a href=\"/downloads/datasets/tiny2/\">Tiny dataset in network format</a>\r\nA very minimalistic dataset for testing the code and getting results in a few seconds.\r\n</li>\r\n\r\n</ul>\r\n\r\n",
-      "enable_comments": false
+        "registration_required": false,
+        "title": "Downloads",
+        "url": "/downloads/",
+        "template_name": "",
+        "sites": [
+            1
+        ],
+        "content": "<div id=\"subtitle1\">Download our tagged datasets:</div>\r\n<br />\r\n<div id=\"subtitle2\">Large datasets</div>\r\n<ul>\r\n<li><a href=\"/downloads/datasets/protein/\">Protein dataset:</a> \r\nA collection of proteins tagged by their known function annotations, describing molecular functions.\r\n<br />\r\n</li>\r\n<li>\r\n<a href=\"/downloads/datasets/flickr_large/\">Flickr dataset:</a>\r\nWe provide a weighted co-occurrence network between Flickr tags together with the corresponding tag frequencies.\r\n<ul>\r\n<li>\r\n<a href=\"/downloads/datasets/flickr_small/\">Small extract from the Flickr dataset:</a>\r\nWe provide a weighted co-occurrence network between Flickr tags together with the corresponding tag frequencies.\r\n</li>\r\n</ul>\r\n</li>\r\n\r\n<li>\r\n<a href=\"/downloads/datasets/imdb/\">IMDb dataset:</a>\r\nA filtered data set listing most frequent keywords associated with movies in the IMDb\r\n</li>\r\n\r\n</ul>\r\n\r\n\r\n<div id=\"subtitle2\">Tiny datasets for testing</div>\r\n(results provided for reference)\r\n<ul>\r\n<li>\r\n<a href=\"/downloads/datasets/tiny1/\">Tiny dataset </a>\r\nA very minimalistic dataset constructed for testing the code and getting results in a few seconds.\r\n</li>\r\n<li>\r\n<a href=\"/downloads/datasets/tiny2/\">Tiny dataset in network format</a>\r\nA very minimalistic dataset for testing the code and getting results in a few seconds.\r\n</li>\r\n\r\n</ul>\r\n\r\n",
+        "enable_comments": false
     },
     "model": "flatpages.flatpage",
     "pk": 3
-  },
-  {
+},
+{
     "fields": {
-      "registration_required": false,
-      "title": "File Upload Examples",
-      "url": "/examples/",
-      "template_name": "",
-      "sites": [1],
-      "content": "<p>The following file-formats are accepted by the system: \r\n<ul>\r\n    <li> Edge list in one text file (.txt)</li>\r\n    <li> Zipped text files (.zip)</li> \r\n    <li> XGMML files (generated by Cytoscape) (.xgmml)</li> \r\n    <li> Cytoscape session files(both 2.x and 3.x) (.cys)</li> \r\n</ul>\r\n</p>\r\n<br>\r\n\r\n<p> <b>Edge list</b> contains lines with node names separated by space to define an edge between them. Lines starting with '#' considered as comments.</p>\r\n\r\n<p>The <b>zip file</b> must contain two text files named edges.txt and nodes.txt. In the edges file each row defines one edge in the graph, the source and target IDs are separated by space. In the nodes file each line defines one node, ID and name are separated by space (be careful not use spaces in the name part).</p>\r\n\r\n<p><b> XGMML</b> files are xml based graph files, usually exported by Cytoscape.</p>\r\n\r\n<p><b>Cytoscape session files</b> are session files used by Cytoscape.</p>\r\n\r\n<p> The uploaded files can contain multiple components. The application selects the first, but you can change between them later. Only components with no loops can be used at the moment(which can be represented as a DAG(Directed Acyclic Graph)).</p>\r\n\r\n<p> Nodes with no child element appears as blank circles, and nodes which has further child elements appears as filled circles. Left-clicking on a node opens its child elements, right-clicking opens all the child elements of the node(if graph has no more than 100 node) or opens until grandchilds(if graph has more than 100 nodes).</p>\r\n\r\n<p>\r\nHere is a list of example files that can be uploaded directly:\r\n<ul>\r\n    <li><a href=\"/static/data/examples/example.txt\">example.txt</a></li>   \r\n    <li><a href=\"/static/data/examples/example.zip\">example.zip</a></li> \r\n    <li><a href=\"/static/data/examples/example.xgmml\">example.xgmml</a></li> \r\n    <li><a href=\"/static/data/examples/journals_common_tags_2.8.cys\">Cytoscape 2.8 session example</a></li> \r\n    <li><a href=\"/static/data/examples/journals_common_tags_3.0.cys\">Cytoscape 3.0 session example</a></li> \r\n</ul>\r\n\r\n<p>\r\nback to <a href=\"/visualize/\">visualization</a>\r\n<p>",
-      "enable_comments": false
+        "registration_required": false,
+        "title": "File Upload Examples",
+        "url": "/examples/",
+        "template_name": "",
+        "sites": [
+            1
+        ],
+        "content": "<p>The following file-formats are accepted by the system: \r\n<ul>\r\n    <li> Edge list in one text file (.txt)</li>\r\n    <li> Zipped text files (.zip)</li> \r\n    <li> XGMML files (generated by Cytoscape) (.xgmml)</li> \r\n    <li> Cytoscape session files(both 2.x and 3.x) (.cys)</li> \r\n</ul>\r\n</p>\r\n<br>\r\n\r\n<p> <b>Edge list</b> contains lines with node names separated by space to define an edge between them. Lines starting with '#' considered as comments.</p>\r\n\r\n<p>The <b>zip file</b> must contain two text files named edges.txt and nodes.txt. In the edges file each row defines one edge in the graph, the source and target IDs are separated by space. In the nodes file each line defines one node, ID and name are separated by space (be careful not use spaces in the name part).</p>\r\n\r\n<p><b> XGMML</b> files are xml based graph files, usually exported by Cytoscape.</p>\r\n\r\n<p><b>Cytoscape session files</b> are session files used by Cytoscape.</p>\r\n\r\n<p> The uploaded files can contain multiple graphs. The application selects the first, but you can change between them later. Only graphs with no loops can be used at the moment(which can be represented as a DAG(Directed Acyclic Graph)).</p>\r\n\r\n<p> Nodes with no child element appears as blank circles, and nodes which has further child elements appears as filled circles. Left-clicking on a node opens its child elements, right-clicking opens all the child elements of the node(if graph has no more than 100 node) or opens until grandchilds(if graph has more than 100 nodes).</p>\r\n\r\n<p>\r\nHere is a list of example files that can be uploaded directly:\r\n<ul>\r\n    <li><a href=\"/static/data/examples/example.txt\">example.txt</a></li>   \r\n    <li><a href=\"/static/data/examples/example.zip\">example.zip</a></li> \r\n    <li><a href=\"/static/data/examples/example.xgmml\">example.xgmml</a></li> \r\n    <li><a href=\"/static/data/examples/journals_common_tags_2.8.cys\">Cytoscape 2.8 session example</a></li> \r\n    <li><a href=\"/static/data/examples/journals_common_tags_3.0.cys\">Cytoscape 3.0 session example</a></li> \r\n</ul>\r\n\r\n<p>\r\nback to <a href=\"/visualize/\">visualization</a>\r\n<p>",
+        "enable_comments": false
     },
     "model": "flatpages.flatpage",
     "pk": 4
-  },
-  {
+},
+{
     "fields": {
-      "registration_required": false,
-      "title": "People",
-      "url": "/people/",
-      "template_name": "",
-      "sites": [1],
-      "content": "<br>\r\n<div id=\"subtitle1\">Our team:</div>\r\n<br>\r\n<div id=\"subtitle2\"><a href=\"http://hal.elte.hu/~tibelyg/\">Gergely Tib\u00e9ly</a></div>\r\nResearch Associate<br>\r\nDepartment of Biological Physics,<br>\r\nE\u00f6tv\u00f6s University,<br>\r\n1117 Budapest, P\u00e1zm\u00e1ny P. stny. 1/A<br>\r\nHungary<br>\r\n<br>\r\n<div id=\"subtitle2\"><a href=\"http://hal.elte.hu/~pollner/\">P\u00e9ter Pollner</a></div>\r\nSenior Research Associate<br>\r\nStatistical and Biological Physics Resarch Group of HAS,<br>\r\nE\u00f6tv\u00f6s University, <br>\r\n1117 Budapest, P\u00e1zm\u00e1ny P. stny. 1/A<br>\r\nHungary<br>\r\n<br>\r\n<div id=\"subtitle2\"><a href=\"http://hal.elte.hu/~vicsek/\">Tam\u00e1s Vicsek</a></div>\r\nProfessor<br>\r\nDepartment of Biological Physics,<br>\r\nE\u00f6tv\u00f6s University,<br>\r\n1117 Budapest, P\u00e1zm\u00e1ny P. stny. 1/A<br>\r\nHungary<br>\r\n<br>\r\n<div id=\"subtitle2\"><a href=\"http://hal.elte.hu/~pallag/\">Gergely Palla</a></div>\r\nSenior Research Associate<br>\r\nStatistical and Biological Physics Resarch Group of HAS,<br>\r\nE\u00f6tv\u00f6s University,<br>\r\n1117 Budapest, P\u00e1zm\u00e1ny P. stny. 1/A<br>\r\nHungary<br>\r\n<br>",
-      "enable_comments": false
+        "registration_required": false,
+        "title": "People",
+        "url": "/people/",
+        "template_name": "",
+        "sites": [
+            1
+        ],
+        "content": "<br>\r\n<div id=\"subtitle1\">Our team:</div>\r\n<br>\r\n<div id=\"subtitle2\"><a href=\"http://hal.elte.hu/~tibelyg/\">Gergely Tib\u00e9ly</a></div>\r\nResearch Associate<br>\r\nDepartment of Biological Physics,<br>\r\nE\u00f6tv\u00f6s University,<br>\r\n1117 Budapest, P\u00e1zm\u00e1ny P. stny. 1/A<br>\r\nHungary<br>\r\n<br>\r\n<div id=\"subtitle2\"><a href=\"http://hal.elte.hu/~pollner/\">P\u00e9ter Pollner</a></div>\r\nSenior Research Associate<br>\r\nStatistical and Biological Physics Resarch Group of HAS,<br>\r\nE\u00f6tv\u00f6s University, <br>\r\n1117 Budapest, P\u00e1zm\u00e1ny P. stny. 1/A<br>\r\nHungary<br>\r\n<br>\r\n<div id=\"subtitle2\"><a href=\"http://hal.elte.hu/~vicsek/\">Tam\u00e1s Vicsek</a></div>\r\nProfessor<br>\r\nDepartment of Biological Physics,<br>\r\nE\u00f6tv\u00f6s University,<br>\r\n1117 Budapest, P\u00e1zm\u00e1ny P. stny. 1/A<br>\r\nHungary<br>\r\n<br>\r\n<div id=\"subtitle2\"><a href=\"http://hal.elte.hu/~pallag/\">Gergely Palla</a></div>\r\nSenior Research Associate<br>\r\nStatistical and Biological Physics Resarch Group of HAS,<br>\r\nE\u00f6tv\u00f6s University,<br>\r\n1117 Budapest, P\u00e1zm\u00e1ny P. stny. 1/A<br>\r\nHungary<br>\r\n<br>",
+        "enable_comments": false
     },
     "model": "flatpages.flatpage",
     "pk": 5
-  },
-  {
+},
+{
     "fields": {
-      "registration_required": false,
-      "title": "Publications",
-      "url": "/publications/",
-      "template_name": "",
-      "sites": [1],
-      "content": "<br>\r\n<div id=\"subtitle1\">Publications:</div>\r\n<br>\r\nG. Tib\u00e9ly, P. Pollner, T. Vicsek and G. Palla\r\n<a class=\"noline\" href=\"http://dx.plos.org/10.1371/journal.pone.0084133\"> Extracting tag-hierarchies </a>\r\n<br>\r\n<a class=\"noline\" href=\"http://dx.plos.org/10.1371/journal.pone.0084133\">\r\n    <i>PLoS ONE 8(12): e84133.</i>\r\n    <b>8(12)</b>\r\n    e84133 (2013).\r\n</a>\r\n<br>\r\n<a class=\"noline\" href=\"http://dx.doi.org/10.1371/journal.pone.0084133\">doi:10.1371/journal.pone.0084133</a>\r\n<br>\r\n<br>\r\nG. Tib\u00e9ly, P. Pollner, T. Vicsek and G. Palla,\r\n<a class=\"noline\" href=\"http://lanl.arxiv.org/abs/1201.1085\">Ontologies and tag-statistics</a>\r\n<br>\r\n<a class=\"noline\" href=\"http://iopscience.iop.org/1367-2630/14/5/053009/\">\r\n    <i>New Journal of Physics</i>\r\n    <b>14</b>\r\n    , 053009 (2012).\r\n</a>\r\n<br>\r\n<a class=\"noline\" href=\"http://dx.doi.org/10.1088/1367-2630/14/5/053009\">doi:10.1088/1367-2630/14/5/053009</a>\r\n<br>\r\n<br>\r\n<br>",
-      "enable_comments": false
+        "registration_required": false,
+        "title": "Publications",
+        "url": "/publications/",
+        "template_name": "",
+        "sites": [
+            1
+        ],
+        "content": "<br>\r\n<div id=\"subtitle1\">Publications:</div>\r\n<br>\r\nGergely Palla, Gergely Tib\u00e9ly, Enys Mones, P\u00e9ter Pollner & Tam\u00e1s Vicsek\r\n<a class=\"noline\" href=\"http://www.palgrave-journals.com/articles/palcomms201516\"> Hierarchical networks of scientific journals </a>\r\n<br>\r\n<a class=\"noline\" href=\"http://dx.doi.org/10.1057/palcomms.2015.16\">\r\n    <i>Palgrave Communications</i>\r\n    <b>1</b>\r\n     15016 (2015) .\r\n</a>\r\n<br>\r\n<a class=\"noline\" href=\"http://dx.doi.org/10.1057/palcomms.2015.16\">doi:10.1057/palcomms.2015.16</a>\r\n<br>\r\n<br>\r\nG. Tib\u00e9ly, P. Pollner, T. Vicsek and G. Palla\r\n<a class=\"noline\" href=\"http://dx.plos.org/10.1371/journal.pone.0084133\"> Extracting tag-hierarchies </a>\r\n<br>\r\n<a class=\"noline\" href=\"http://dx.plos.org/10.1371/journal.pone.0084133\">\r\n    <i>PLoS ONE</i>\r\n    <b>8(12)</b>\r\n    e84133 (2013).\r\n</a>\r\n<br>\r\n<a class=\"noline\" href=\"http://dx.doi.org/10.1371/journal.pone.0084133\">doi:10.1371/journal.pone.0084133</a>\r\n<br>\r\n<br>\r\nG. Tib\u00e9ly, P. Pollner, T. Vicsek and G. Palla,\r\n<a class=\"noline\" href=\"http://lanl.arxiv.org/abs/1201.1085\">Ontologies and tag-statistics</a>\r\n<br>\r\n<a class=\"noline\" href=\"http://iopscience.iop.org/1367-2630/14/5/053009/\">\r\n    <i>New Journal of Physics</i>\r\n    <b>14</b>\r\n    , 053009 (2012).\r\n</a>\r\n<br>\r\n<a class=\"noline\" href=\"http://dx.doi.org/10.1088/1367-2630/14/5/053009\">doi:10.1088/1367-2630/14/5/053009</a>\r\n<br>\r\n<br>\r\n<br>",
+        "enable_comments": false
     },
     "model": "flatpages.flatpage",
     "pk": 6
-  },
-  {
+},
+{
     "fields": {
-      "registration_required": false,
-      "title": "Visualize",
-      "url": "/visdesc/",
-      "template_name": "",
-      "sites": [1],
-      "content": "<p>On this site you can visualize the result of the algorithm. After running the perl program on your computer, please upload the result file. Click on the <b>Choose file</b> button and select the file, then <b>Submit</b> the form. The system checks the file format of the network. Because the technical limitations of browser based network visualization, please do not use large networks. The network is rendered as SVG image, which is most effectively displayed in Google Chrome.<p>\r\n\r\nYou can find example files and detailed description <a href=\"/examples/\">here</a>",
-      "enable_comments": false
+        "registration_required": false,
+        "title": "Visualize",
+        "url": "/visdesc/",
+        "template_name": "",
+        "sites": [
+            1
+        ],
+        "content": "<p>On this site you can visualize the result of the algorithm. After running the perl program on your computer, please upload the result file. Click on the <b>Choose file</b> button and select the file, then <b>Submit</b> the form. The system checks the file format of the network. Because the technical limitations of browser based network visualization, please do not use large networks. The network is rendered as SVG image, which is most effectively displayed in Google Chrome.<p>\r\n\r\nYou can find example files and detailed description <a href=\"/examples/\">here</a>",
+        "enable_comments": false
     },
     "model": "flatpages.flatpage",
     "pk": 7
-  },
-  {
+},
+{
     "fields": {
-      "registration_required": false,
-      "title": "downloads_algorithms",
-      "url": "/downloads/algorithms/",
-      "template_name": "",
-      "sites": [1],
-      "content": "<br>\r\n<div id=\"subtitle1\">Download our tag-hierarchy extracting algorithms:</div>\r\n<br>\r\n\r\n\r\n<ul style=\"list-style-image: url('/static/images/algo_icon.svg'); \">\r\n<li >\r\n<a class=\"noline\" href=\"/static/data/reconstr_A.pl\">Algorithm A </a>(perl, 14Kb, updated 2014.01.16.)\r\n</li>\r\n<li >\r\n<a class=\"noline\" href=\"/static/data/reconstr_B.pl\">Algorithm B </a>(perl, 11Kb, updated 2014.01.16.)\r\n</li>\r\n\r\n</ul>\r\n\r\nBoth algorithms are aimed at extracting a directed acyclic graph (a hierarchy) between tags from co-occurrence statistics. A detailed description of the algorithms can be found in our paper \"Extracting tag hierarchies\". They take either the weighted co-occurrence network between the tags as the input, (accompanied by the frequency distribution of the tags), or simply the list of co-occurring tags on the individual objects, (in which case the first step is the preparation of the co-occurrence network). The output is simply the list of directed links between the tags, representing the hierarchy. Both algorithms are implemented in Perl.\r\n<br>\r\n<br>\r\narchived versions are\r\n<a href=\"/archive_algo/\">here</a>\r\n<br>\r\n<br>\r\n",
-      "enable_comments": false
+        "registration_required": false,
+        "title": "downloads_algorithms",
+        "url": "/downloads/algorithms/",
+        "template_name": "",
+        "sites": [
+            1
+        ],
+        "content": "<br>\r\n<div id=\"subtitle1\">Download our tag-hierarchy extracting algorithms:</div>\r\n<br>\r\n\r\n\r\n<ul style=\"list-style-image: url('/static/images/algo_icon.svg'); \">\r\n<li >\r\n<a class=\"noline\" href=\"/static/data/reconstr_A.pl\">Algorithm A </a>(perl, 14Kb, updated 2014.01.16.)\r\n</li>\r\n<li >\r\n<a class=\"noline\" href=\"/static/data/reconstr_B.pl\">Algorithm B</a> (perl, 22Kb, updated 2015.07.15.)\r\n</li>\r\n</ul>\r\n\r\nBoth algorithms are aimed at extracting a directed acyclic graph (a hierarchy) between tags from co-occurrence statistics. A detailed description of the algorithms can be found in our paper \"Extracting tag hierarchies\". They take either the weighted co-occurrence network between the tags as the input, (accompanied by the frequency distribution of the tags), or simply the list of co-occurring tags on the individual objects, (in which case the first step is the preparation of the co-occurrence network). The output is simply the list of directed links between the tags, representing the hierarchy. Both algorithms are implemented in Perl.\r\n<br>\r\nThe last version of algorithm B has extra features:\r\n<ul>\r\n<li>the algorithm allows more complex Directed Acyclic Graphs (DAGs) to be reconstructed, where the indegree can be larger than 1, that is allowing multiple parents for a node in the hierarchy\r\n</li>\r\n<li>with an option the reconstructed DAG is enforced to have a single connected component\r\n</li>\r\n</ul>\r\n<br>\r\n<br>\r\narchived versions are\r\n<a href=\"/archive_algo/\">here</a>\r\n<br>\r\n<br>\r\n",
+        "enable_comments": false
     },
     "model": "flatpages.flatpage",
     "pk": 8
-  },
-  {
+},
+{
     "fields": {
-      "registration_required": false,
-      "title": "Protein dataset",
-      "url": "/downloads/datasets/protein/",
-      "template_name": "",
-      "sites": [1],
-      "content": "<div id=\"datasettitle\">Protein dataset:</div>\r\n\r\n<div id=\"datadesc\">A collection of proteins tagged by their known function annotations, describing molecular functions. The original dataset was taken from the Gene Ontology, providing both a hierarchy between the molecular functions and also a quality controlled list of known function annotations for the proteins. We narrowed the list of molecular functions to be taken into account to the descendants of \"catalytic\" activity\" in the hierarchy. Thus, our dataset is limited to proteins having at least one annotation from the descendants of \"catalytic activity\", and any tag coming from other parts of the hierarchy is excluded from the lists of annotations.\r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nReference\r\n</div>\r\n\r\n<div id=\"datadesc\">\r\nG. Tib\u00e9ly et al: \r\n<a href=\"http://dx.doi.org/10.1371/journal.pone.0084133\">\r\nExtracting tag hierarchies \r\n</a>\r\nPLoS ONE 8(12): e84133 (2013). \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nFiles:\r\n</div>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>File name</th>\r\n<th width=\"30%\">Description</th>\r\n<th>Format</th>\r\n<th>Size</th>\r\n</tr>\r\n<tr>\r\n<td><a href=\"/static/data/List_of_proteins.zip\">List_of_proteins.zip</a></td>\r\n<td>List of proteins, where each row corresponds to a protein</td>\r\n<td>plain text file<br>1st. column: protein id <br>rest of the columns: function ids.</td>\r\n<td>31Mb</td>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/Protein_tag_hierarchy.txt\">Protein_tag_hierarchy.txt</a></td>\r\n<td>Tag hierarchy, giving the directed acyclic graph between the tags</td>\r\n<td>plain text file<br>1st column: source id<br> 2nd column: target id</td>\r\n<td>52kB</td>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/Protein_function_names.zip\">Protein_function_names.zip</a></td>\r\n<td>Function names, giving the names of the molecular functions</td>\r\n<td>compressed plain text file<br>1st column: function id<br> rest of the columns: the name</td>\r\n<td>356kB</td>\r\n</tr>\r\n</table>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>\r\n<a href=\"/static/data/Protein_dataset.zip\"> Protein_dataset.zip</a>\r\n</th>\r\n<th>\r\nAll files in the Protein dataset as a zip archive\r\n</th>\r\n<th>32Mb</th>\r\n</tr>\r\n</table>\r\n\r\n<div id=\"datasettitle2\">Note:</div>\r\n\r\n<div id=\"datadesc\">\r\nEach file header contains instructions for processing the data with the \r\n<a href=\"/downloads/algorithms/\">Hierarchy Extracting Algorithms</a>\r\n</div>",
-      "enable_comments": false
+        "registration_required": false,
+        "title": "Protein dataset",
+        "url": "/downloads/datasets/protein/",
+        "template_name": "",
+        "sites": [
+            1
+        ],
+        "content": "<div id=\"datasettitle\">Protein dataset:</div>\r\n\r\n<div id=\"datadesc\">A collection of proteins tagged by their known function annotations, describing molecular functions. The original dataset was taken from the Gene Ontology, providing both a hierarchy between the molecular functions and also a quality controlled list of known function annotations for the proteins. We narrowed the list of molecular functions to be taken into account to the descendants of \"catalytic\" activity\" in the hierarchy. Thus, our dataset is limited to proteins having at least one annotation from the descendants of \"catalytic activity\", and any tag coming from other parts of the hierarchy is excluded from the lists of annotations.\r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nReference\r\n</div>\r\n\r\n<div id=\"datadesc\">\r\nG. Tib\u00e9ly et al: \r\n<a href=\"http://dx.doi.org/10.1371/journal.pone.0084133\">\r\nExtracting tag hierarchies \r\n</a>\r\nPLoS ONE 8(12): e84133 (2013). \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nFiles:\r\n</div>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>File name</th>\r\n<th width=\"30%\">Description</th>\r\n<th>Format</th>\r\n<th>Size</th>\r\n</tr>\r\n<tr>\r\n<td><a href=\"/static/data/List_of_proteins.zip\">List_of_proteins.zip</a></td>\r\n<td>List of proteins, where each row corresponds to a protein</td>\r\n<td>plain text file<br>1st. column: protein id <br>rest of the columns: function ids.</td>\r\n<td>31Mb</td>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/Protein_tag_hierarchy.txt\">Protein_tag_hierarchy.txt</a></td>\r\n<td>Tag hierarchy, giving the directed acyclic graph between the tags</td>\r\n<td>plain text file<br>1st column: source id<br> 2nd column: target id</td>\r\n<td>52kB</td>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/Protein_function_names.zip\">Protein_function_names.zip</a></td>\r\n<td>Function names, giving the names of the molecular functions</td>\r\n<td>compressed plain text file<br>1st column: function id<br> rest of the columns: the name</td>\r\n<td>356kB</td>\r\n</tr>\r\n</table>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>\r\n<a href=\"/static/data/Protein_dataset.zip\"> Protein_dataset.zip</a>\r\n</th>\r\n<th>\r\nAll files in the Protein dataset as a zip archive\r\n</th>\r\n<th>32Mb</th>\r\n</tr>\r\n</table>\r\n\r\n<div id=\"datasettitle2\">Note:</div>\r\n\r\n<div id=\"datadesc\">\r\nEach file header contains instructions for processing the data with the \r\n<a href=\"/downloads/algorithms/\">Hierarchy Extracting Algorithms</a>\r\n</div>",
+        "enable_comments": false
     },
     "model": "flatpages.flatpage",
     "pk": 9
-  },
-  {
+},
+{
     "fields": {
-      "registration_required": false,
-      "title": "Flickr large dataset",
-      "url": "/downloads/datasets/flickr_large/",
-      "template_name": "",
-      "sites": [1],
-      "content": "<div id=\"datasettitle\">Flickr dataset:</div>\r\n\r\n<div id=\"datadesc\">\r\nWe provide a weighted co-occurrence network between Flickr tags together with the corresponding tag frequencies. This network is resulting from the tags (free words) co-appearing on photos in rather long list of queries from Flickr. In the preparation of the network we kept only English nouns and took into account co-occurrences only if they were present on photos from at least 10 different users. \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nReference\r\n</div>\r\n\r\n<div id=\"datadesc\">\r\nG. Tib\u00e9ly et al: \r\n<a href=\"http://dx.doi.org/10.1371/journal.pone.0084133\">\r\nExtracting tag hierarchies \r\n</a>\r\nPLoS ONE 8(12): e84133 (2013). \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nFiles:\r\n</div>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>File name</th>\r\n<th width=\"30%\">Description</th>\r\n<th>Format</th>\r\n<th>Size</th>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/Flickr_co-occurrence_net.zip\">Flickr_co-occurrence_net.zip</a></td>\r\n<td>Co-occurrence network of tags on Flickr photos</td>\r\n<td>compressed plain text file<br>1st. and 2nd. columns: co-appearing tag ids <br>3d. column: number of co-occurrences.</td>\r\n<td>5.5Mb</td>\r\n</tr>\r\n<tr>\r\n<td><a href=\"/static/data/Flickr_tag_frequencies.zip\">Flickr_tag_frequencies.zip</a></td>\r\n<td>Frequency of Flickr tags</td>\r\n<td>compressed plain text file<br>1st. column: tag id, 2nd column: number of photos.</td>\r\n<td>0.1Mb</td>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/Flickr_tag_names.zip\">Flickr_tag_names.zip</a></td>\r\n<td>Tag names</td>\r\n<td>compressed plain text file<br>1st. column: tag id, 2nd column: name.</td>\r\n<td>1.3Mb</td>\r\n</tr>\r\n</table>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>\r\n<a href=\"/static/data/Flickr_dataset.zip\"> Flickr_dataset.zip</a>\r\n</th>\r\n<th>\r\nAll files in the Flickr dataset as a zip archive\r\n</th>\r\n<th>6.9Mb</th>\r\n</tr>\r\n</table>\r\n\r\n<div id=\"datasettitle2\">Note:</div>\r\n\r\n<div id=\"datadesc\">\r\nEach file header contains instructions for processing the data with the \r\n<a href=\"/downloads/algorithms/\">Hierarchy Extracting Algorithms</a>\r\n</div>\r\n\r\n<div id=\"datasettitle2\">Note2:</div>\r\n\r\n<div id=\"datadesc\">\r\nWe provide a <a href=\"/downloads/datasets/flickr_small/\">smaller version</a> of the dataset, where you may get results faster\r\n</div>\r\n",
-      "enable_comments": false
+        "registration_required": false,
+        "title": "Flickr large dataset",
+        "url": "/downloads/datasets/flickr_large/",
+        "template_name": "",
+        "sites": [
+            1
+        ],
+        "content": "<div id=\"datasettitle\">Flickr dataset:</div>\r\n\r\n<div id=\"datadesc\">\r\nWe provide a weighted co-occurrence network between Flickr tags together with the corresponding tag frequencies. This network is resulting from the tags (free words) co-appearing on photos in rather long list of queries from Flickr. In the preparation of the network we kept only English nouns and took into account co-occurrences only if they were present on photos from at least 10 different users. \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nReference\r\n</div>\r\n\r\n<div id=\"datadesc\">\r\nG. Tib\u00e9ly et al: \r\n<a href=\"http://dx.doi.org/10.1371/journal.pone.0084133\">\r\nExtracting tag hierarchies \r\n</a>\r\nPLoS ONE 8(12): e84133 (2013). \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nFiles:\r\n</div>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>File name</th>\r\n<th width=\"30%\">Description</th>\r\n<th>Format</th>\r\n<th>Size</th>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/Flickr_co-occurrence_net.zip\">Flickr_co-occurrence_net.zip</a></td>\r\n<td>Co-occurrence network of tags on Flickr photos</td>\r\n<td>compressed plain text file<br>1st. and 2nd. columns: co-appearing tag ids <br>3d. column: number of co-occurrences.</td>\r\n<td>5.5Mb</td>\r\n</tr>\r\n<tr>\r\n<td><a href=\"/static/data/Flickr_tag_frequencies.zip\">Flickr_tag_frequencies.zip</a></td>\r\n<td>Frequency of Flickr tags</td>\r\n<td>compressed plain text file<br>1st. column: tag id, 2nd column: number of photos.</td>\r\n<td>0.1Mb</td>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/Flickr_tag_names.zip\">Flickr_tag_names.zip</a></td>\r\n<td>Tag names</td>\r\n<td>compressed plain text file<br>1st. column: tag id, 2nd column: name.</td>\r\n<td>1.3Mb</td>\r\n</tr>\r\n</table>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>\r\n<a href=\"/static/data/Flickr_dataset.zip\"> Flickr_dataset.zip</a>\r\n</th>\r\n<th>\r\nAll files in the Flickr dataset as a zip archive\r\n</th>\r\n<th>6.9Mb</th>\r\n</tr>\r\n</table>\r\n\r\n<div id=\"datasettitle2\">Note:</div>\r\n\r\n<div id=\"datadesc\">\r\nEach file header contains instructions for processing the data with the \r\n<a href=\"/downloads/algorithms/\">Hierarchy Extracting Algorithms</a>\r\n</div>\r\n\r\n<div id=\"datasettitle2\">Note2:</div>\r\n\r\n<div id=\"datadesc\">\r\nWe provide a <a href=\"/downloads/datasets/flickr_small/\">smaller version</a> of the dataset, where you may get results faster\r\n</div>\r\n",
+        "enable_comments": false
     },
     "model": "flatpages.flatpage",
     "pk": 10
-  },
-  {
+},
+{
     "fields": {
-      "registration_required": false,
-      "title": "Flickr small dataset",
-      "url": "/downloads/datasets/flickr_small/",
-      "template_name": "",
-      "sites": [1],
-      "content": "<div id=\"datasettitle\">Small version of Flickr dataset:</div>\r\n\r\n<div id=\"datadesc\">\r\nplain text file, where each row corresponds to a photo. \r\nNote: the tag frequency distribution in this data is different as in the\r\n<a href=\"/downloads/datasets/flickr_large/\">large Flickr dataset</a>, \r\nhence the reconstructed tag-hierarchy is different as well\r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nReference\r\n</div>\r\n\r\n<div id=\"datadesc\">\r\nG. Tib\u00e9ly et al: \r\n<a href=\"http://dx.doi.org/10.1371/journal.pone.0084133\">\r\nExtracting tag hierarchies \r\n</a>\r\nPLoS ONE 8(12): e84133 (2013). \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nFiles:\r\n</div>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>File name</th>\r\n<th width=\"30%\">Description</th>\r\n<th>Format</th>\r\n<th>Size</th>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/flickr_example_300_annots.txt\">flickr_example_300_annots.txt</a></td>\r\n<td>List of proteins, where each row corresponds to a protein</td>\r\n<td>plain text file<br>1st column: photo id<br>rest of columns: keywords</td>\r\n<td>1.4Mb</td>\r\n</tr>\r\n</table>\r\n\r\n<div id=\"datasettitle2\">Note:</div>\r\n\r\n<div id=\"datadesc\">\r\nEach file header contains instructions for processing the data with the \r\n<a href=\"/downloads/algorithms/\">Hierarchy Extracting Algorithms</a>\r\n</div>\r\n",
-      "enable_comments": false
+        "registration_required": false,
+        "title": "Flickr small dataset",
+        "url": "/downloads/datasets/flickr_small/",
+        "template_name": "",
+        "sites": [
+            1
+        ],
+        "content": "<div id=\"datasettitle\">Small version of Flickr dataset:</div>\r\n\r\n<div id=\"datadesc\">\r\nplain text file, where each row corresponds to a photo. \r\nNote: the tag frequency distribution in this data is different as in the\r\n<a href=\"/downloads/datasets/flickr_large/\">large Flickr dataset</a>, \r\nhence the reconstructed tag-hierarchy is different as well\r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nReference\r\n</div>\r\n\r\n<div id=\"datadesc\">\r\nG. Tib\u00e9ly et al: \r\n<a href=\"http://dx.doi.org/10.1371/journal.pone.0084133\">\r\nExtracting tag hierarchies \r\n</a>\r\nPLoS ONE 8(12): e84133 (2013). \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nFiles:\r\n</div>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>File name</th>\r\n<th width=\"30%\">Description</th>\r\n<th>Format</th>\r\n<th>Size</th>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/flickr_example_300_annots.txt\">flickr_example_300_annots.txt</a></td>\r\n<td>List of proteins, where each row corresponds to a protein</td>\r\n<td>plain text file<br>1st column: photo id<br>rest of columns: keywords</td>\r\n<td>1.4Mb</td>\r\n</tr>\r\n</table>\r\n\r\n<div id=\"datasettitle2\">Note:</div>\r\n\r\n<div id=\"datadesc\">\r\nEach file header contains instructions for processing the data with the \r\n<a href=\"/downloads/algorithms/\">Hierarchy Extracting Algorithms</a>\r\n</div>\r\n",
+        "enable_comments": false
     },
     "model": "flatpages.flatpage",
     "pk": 11
-  },
-  {
+},
+{
     "fields": {
-      "registration_required": false,
-      "title": "IMDb dataset",
-      "url": "/downloads/datasets/imdb/",
-      "template_name": "",
-      "sites": [1],
-      "content": "<div id=\"datasettitle\">IMDb dataset:</div>\r\n\r\n<div id=\"datadesc\">\r\nA filtered data set listing most frequent keywords associated with movies in the IMDb. We kept keywords appearing at least on 100 different movies in the\r\n<a href=\"/static/data/keywords.list.gz\">original data</a>\r\n, downloaded from\r\n<a href=\"http://www.imdb.com/interfaces\">here</a>\r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nReference\r\n</div>\r\n\r\n<div id=\"datadesc\">\r\nG. Tib\u00e9ly et al: \r\n<a href=\"http://dx.doi.org/10.1371/journal.pone.0084133\">\r\nExtracting tag hierarchies \r\n</a>\r\nPLoS ONE 8(12): e84133 (2013). \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nFiles:\r\n</div>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>File name</th>\r\n<th width=\"30%\">Description</th>\r\n<th>Format</th>\r\n<th>Size</th>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/List_of_movies.zip\">List_of_movies.zip</a></td>\r\n<td>List of movies, where each row corresponds to a movie</td>\r\n<td>plain text file<br>1st. column:  movie title id <br>rest of the columns: keyword ids.</td>\r\n<td>9.9Mb</td>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/Movie_keyword_names.zip\">Movie_keyword_names.zip</a></td>\r\n<td>Tag id names</td>\r\n<td>compressed plain text file<br>1st. column:  tag id <br>2nd columns: name.</td>\r\n<td>1.2Mb</td>\r\n</tr>\r\n</table>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>\r\n<a href=\"/static/data/imdb_dataset.zip\">imdb_dataset.zip</a>\r\n</th>\r\n<th>\r\nAll files in the IMDb dataset as a zip archive\r\n</th>\r\n<th>6.3Mb</th>\r\n</tr>\r\n</table>\r\n\r\n<div id=\"datasettitle2\">Note:</div>\r\n\r\n<div id=\"datadesc\">\r\nEach file header contains instructions for processing the data with the \r\n<a href=\"/downloads/algorithms/\">Hierarchy Extracting Algorithms</a>\r\n</div>\r\n\r\n<br>\r\n<br>\r\n<center>\r\n    <b>\r\n         Copyrigth notice: Information courtesy of\r\n        <br>\r\n        IMDb\r\n        <br>\r\n        (\r\n        <a href=\"http://www.imdb.com\">www.imdb.com</a>\r\n         ).\r\n       <br>\r\n       For further information contact: licensing@imdb.com\r\n       <br>\r\n    </b>\r\n</center>",
-      "enable_comments": false
+        "registration_required": false,
+        "title": "IMDb dataset",
+        "url": "/downloads/datasets/imdb/",
+        "template_name": "",
+        "sites": [
+            1
+        ],
+        "content": "<div id=\"datasettitle\">IMDb dataset:</div>\r\n\r\n<div id=\"datadesc\">\r\nA filtered data set listing most frequent keywords associated with movies in the IMDb. We kept keywords appearing at least on 100 different movies in the\r\n<a href=\"/static/data/keywords.list.gz\">original data</a>\r\n, downloaded from\r\n<a href=\"http://www.imdb.com/interfaces\">here</a>\r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nReference\r\n</div>\r\n\r\n<div id=\"datadesc\">\r\nG. Tib\u00e9ly et al: \r\n<a href=\"http://dx.doi.org/10.1371/journal.pone.0084133\">\r\nExtracting tag hierarchies \r\n</a>\r\nPLoS ONE 8(12): e84133 (2013). \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nFiles:\r\n</div>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>File name</th>\r\n<th width=\"30%\">Description</th>\r\n<th>Format</th>\r\n<th>Size</th>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/List_of_movies.zip\">List_of_movies.zip</a></td>\r\n<td>List of movies, where each row corresponds to a movie</td>\r\n<td>plain text file<br>1st. column:  movie title id <br>rest of the columns: keyword ids.</td>\r\n<td>9.9Mb</td>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/Movie_keyword_names.zip\">Movie_keyword_names.zip</a></td>\r\n<td>Tag id names</td>\r\n<td>compressed plain text file<br>1st. column:  tag id <br>2nd columns: name.</td>\r\n<td>1.2Mb</td>\r\n</tr>\r\n</table>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>\r\n<a href=\"/static/data/imdb_dataset.zip\">imdb_dataset.zip</a>\r\n</th>\r\n<th>\r\nAll files in the IMDb dataset as a zip archive\r\n</th>\r\n<th>6.3Mb</th>\r\n</tr>\r\n</table>\r\n\r\n<div id=\"datasettitle2\">Note:</div>\r\n\r\n<div id=\"datadesc\">\r\nEach file header contains instructions for processing the data with the \r\n<a href=\"/downloads/algorithms/\">Hierarchy Extracting Algorithms</a>\r\n</div>\r\n\r\n<br>\r\n<br>\r\n<center>\r\n    <b>\r\n         Copyrigth notice: Information courtesy of\r\n        <br>\r\n        IMDb\r\n        <br>\r\n        (\r\n        <a href=\"http://www.imdb.com\">www.imdb.com</a>\r\n         ).\r\n       <br>\r\n       For further information contact: licensing@imdb.com\r\n       <br>\r\n    </b>\r\n</center>",
+        "enable_comments": false
     },
     "model": "flatpages.flatpage",
     "pk": 12
-  },
-  {
+},
+{
     "fields": {
-      "registration_required": false,
-      "title": "Tiny dataset for testing",
-      "url": "/downloads/datasets/tiny1/",
-      "template_name": "",
-      "sites": [1],
-      "content": "<div id=\"datasettitle\">Small dataset for testing:</div>\r\n\r\n<div id=\"datadesc\">\r\nA very tiny dataset, constructed for testing the code and getting results in a few seconds. \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nReference\r\n</div>\r\n\r\n<div id=\"datadesc\">\r\nG. Tib\u00e9ly et al: \r\n<a href=\"http://dx.doi.org/10.1371/journal.pone.0084133\">\r\nExtracting tag hierarchies \r\n</a>\r\nPLoS ONE 8(12): e84133 (2013). \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nFiles:\r\n</div>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>File name</th>\r\n<th width=\"30%\">Description</th>\r\n<th>Format</th>\r\n<th>Size</th>\r\n</tr>\r\n<tr>\r\n<td><a href=\"/static/data/List_of_test_objects.txt\">List_of_test_objects.txt</a></td>\r\n<td>List of objects with tags for testing, where each row corresponds to an object with tags.\r\n            For simplicity each object and tag is represented by a number.</td>\r\n<td>plain text file<br>rows starting with \"#\" are skipped<br> columns\r\n        are separated by spaces<br>1st. column: object <br>rest of the columns: tags.</td>\r\n<td>777b</td>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/List_of_test_objects_tag_hierarchy_A.txt\">List_of_test_objects_tag_hierarchy_A.txt</a></td>\r\n<td>Result for the dataset by <a href=\"/downloads/algorithms/\">Algorithm A</a></td>\r\n<td>Directed graph, where <br>1st. column: source <br> 2nd column: target</td>\r\n<td>16b</td>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/List_of_test_objects_tag_hierarchy_B.txt\">List_of_test_objects_tag_hierarchy_B.txt</a></td>\r\n<td>Result for the dataset by <a href=\"/downloads/algorithms/\">Algorithm B</a></td>\r\n<td>Directed graph, where <br>1st. column: source <br> 2nd column: target</td>\r\n<td>16b</td>\r\n</tr>\r\n\r\n</table>\r\n\r\n<div id=\"datadesc\">\r\nEach file header contains instructions for processing the data with the \r\n<a href=\"/downloads/algorithms/\">Hierarchy Extracting Algorithms</a>.\r\n<br>\r\nLines end with unix end-of-line-character, under windows use an intelligent text viewer like WordPad.\r\n</div>",
-      "enable_comments": false
+        "registration_required": false,
+        "title": "Tiny dataset for testing",
+        "url": "/downloads/datasets/tiny1/",
+        "template_name": "",
+        "sites": [
+            1
+        ],
+        "content": "<div id=\"datasettitle\">Small dataset for testing:</div>\r\n\r\n<div id=\"datadesc\">\r\nA very tiny dataset, constructed for testing the code and getting results in a few seconds. \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nReference\r\n</div>\r\n\r\n<div id=\"datadesc\">\r\nG. Tib\u00e9ly et al: \r\n<a href=\"http://dx.doi.org/10.1371/journal.pone.0084133\">\r\nExtracting tag hierarchies \r\n</a>\r\nPLoS ONE 8(12): e84133 (2013). \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nFiles:\r\n</div>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>File name</th>\r\n<th width=\"30%\">Description</th>\r\n<th>Format</th>\r\n<th>Size</th>\r\n</tr>\r\n<tr>\r\n<td><a href=\"/static/data/List_of_test_objects.txt\">List_of_test_objects.txt</a></td>\r\n<td>List of objects with tags for testing, where each row corresponds to an object with tags.\r\n            For simplicity each object and tag is represented by a number.</td>\r\n<td>plain text file<br>rows starting with \"#\" are skipped<br> columns\r\n        are separated by spaces<br>1st. column: object <br>rest of the columns: tags.</td>\r\n<td>777b</td>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/List_of_test_objects_tag_hierarchy_A.txt\">List_of_test_objects_tag_hierarchy_A.txt</a></td>\r\n<td>Result for the dataset by <a href=\"/downloads/algorithms/\">Algorithm A</a></td>\r\n<td>Directed graph, where <br>1st. column: source <br> 2nd column: target</td>\r\n<td>16b</td>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/List_of_test_objects_tag_hierarchy_B.txt\">List_of_test_objects_tag_hierarchy_B.txt</a></td>\r\n<td>Result for the dataset by <a href=\"/downloads/algorithms/\">Algorithm B</a></td>\r\n<td>Directed graph, where <br>1st. column: source <br> 2nd column: target</td>\r\n<td>16b</td>\r\n</tr>\r\n\r\n</table>\r\n\r\n<div id=\"datadesc\">\r\nEach file header contains instructions for processing the data with the \r\n<a href=\"/downloads/algorithms/\">Hierarchy Extracting Algorithms</a>.\r\n<br>\r\nLines end with unix end-of-line-character, under windows use an intelligent text viewer like WordPad.\r\n</div>",
+        "enable_comments": false
     },
     "model": "flatpages.flatpage",
     "pk": 13
-  },
-  {
+},
+{
     "fields": {
-      "registration_required": false,
-      "title": "Tiny Weighted example",
-      "url": "/downloads/datasets/tiny2/",
-      "template_name": "",
-      "sites": [1],
-      "content": "<div id=\"datasettitle\">Small dataset for testing</div>\r\n\r\n<div id=\"datadesc\">\r\nA very tiny dataset, constructed for testing the code for weighted network format and getting results in a few seconds. This example presents two plain text files: \r\nthe first file contains the co-occurrence network between tags, the second one is for the corresponding tag frequencies. Each object and tag is represented by numbers.\r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nReference\r\n</div>\r\n\r\n<div id=\"datadesc\">\r\nG. Tib\u00e9ly et al: \r\n<a href=\"http://dx.doi.org/10.1371/journal.pone.0084133\">\r\nExtracting tag hierarchies \r\n</a>\r\nPLoS ONE 8(12): e84133 (2013). \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nFiles:\r\n</div>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>File name</th>\r\n<th width=\"30%\">Description</th>\r\n<th>Format</th>\r\n<th>Size</th>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/Example_co-occurance_net.txt\">Example_co-occurance_net.txt</a></td>\r\n<td>Co-occurrence network</td>\r\n<td>plain text file<br>rows starting with \"#\" are skipped<br> columns\r\n        are separated by spaces<br>1st and 2nd columns: co-appearing tag ids<br>3d. column: number of co-occurrences.</td>\r\n<td>621b</td>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/Example_tag_frequencies.txt\">Example_tag_frequencies.txt</a></td>\r\n<td>Tag frequencies</td>\r\n<td>plain text file<br>rows starting with \"#\" are skipped<br> columns\r\n        are separated by spaces<br>1st column: tag id<br>2nd. column: number of tags.</td>\r\n<td>619b</td>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/List_of_test_objects_tag_hierarchy_A.txt\">List_of_test_objects_tag_hierarchy_A.txt</a></td>\r\n<td>Result for the dataset by <a href=\"/downloads/algorithms/\">Algorithm A</a></td>\r\n<td>Directed graph, where <br>1st. column: source <br> 2nd column: target</td>\r\n<td>16b</td>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/List_of_test_objects_tag_hierarchy_B.txt\">List_of_test_objects_tag_hierarchy_B.txt</a></td>\r\n<td>Result for the dataset by <a href=\"/downloads/algorithms/\">Algorithm B</a></td>\r\n<td>Directed graph, where <br>1st. column: source <br> 2nd column: target</td>\r\n<td>16b</td>\r\n</tr>\r\n\r\n</table>\r\n\r\n<div id=\"datasettitle2\">Note:</div>\r\n\r\n<div id=\"datadesc\">\r\nEach file header contains instructions for processing the data with the \r\n<a href=\"/downloads/algorithms/\">Hierarchy Extracting Algorithms</a>.\r\n<br>\r\nLines end with unix end-of-line-character, under windows use an intelligent text viewer like WordPad.\r\n</div>",
-      "enable_comments": false
+        "registration_required": false,
+        "title": "Web of Science data access script",
+        "url": "/downloads/datasets/wos/",
+        "template_name": "",
+        "sites": [
+            1
+        ],
+        "content": "<div id=\"datasettitle\">Web of Science data downloader</div>\r\n\r\n<div id=\"datadesc\">\r\nWith an appropriate license the script below can download citation data from the <a href=\"http://www.webofknowledge.com/\">WebOfScince</a> archive of Thomson Reuters.</div>\r\n\r\n<div id=\"datasettitle2\">\r\nReference\r\n</div>\r\n\r\n<div id=\"datadesc\">\r\nG. Palla et al: \r\n<a href=\"to_be_published\">\r\nPaper to be published\r\n</a>\r\nJournal reference \r\n</div>\r\n\r\n<div id=\"datasettitle2\">\r\nFiles:\r\n</div>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>File name</th>\r\n<th width=\"30%\">Description</th>\r\n<th>Format</th>\r\n<th>Size</th>\r\n</tr>\r\n\r\n<tr>\r\n<td><a href=\"/static/data/wos_downloader.zip\">wos_downloader.zip </a></td>\r\n<td>Downloader script for web of science citation network\r\n</td>\r\n<td>zip archive<br>.</td>\r\n<td>15kb</td>\r\n</tr>\r\n\r\n</table>\r\n\r\n<div id=\"datasettitle2\">\r\ncontents of the archive:\r\n</div>\r\n\r\n<table  id=\"filelist\">\r\n<tr>\r\n<th>File name</th>\r\n<th width=\"30%\">Description</th>\r\n<th>Format</th>\r\n</tr>\r\n\r\n<tr>\r\n<td>auth_check.xml</td>\r\n<td>xml pattern for checking access\r\n</td>\r\n<td>xml</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>download_auth.xml</td>\r\n<td>xml pattern for authentication\r\n</td>\r\n<td>xml</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>wok_search.xml</td>\r\n<td>example search pattern for downloading data\r\n</td>\r\n<td>xml</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>source_list.txt</td>\r\n<td>example list of journals to be downloaded\r\n</td>\r\n<td>text</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>download_login.py</td>\r\n<td>python script for authentication and downloading data\r\n</td>\r\n<td>python</td>\r\n</tr>\r\n</table>\r\n\r\n\r\n<div id=\"datasettitle2\">Note:</div>\r\n\r\n<div id=\"datadesc\">\r\nPython script has been tested with python 2.6 and 2.7\r\n</div>",
+        "enable_comments": false
     },
     "model": "flatpages.flatpage",
     "pk": 14
-  },
-  {
-    "fields": {
-      "codename": "add_permission",
-      "name": "Can add permission",
-      "content_type": 1
-    },
-    "model": "auth.permission",
-    "pk": 1
-  },
-  {
-    "fields": {
-      "codename": "change_permission",
-      "name": "Can change permission",
-      "content_type": 1
-    },
-    "model": "auth.permission",
-    "pk": 2
-  },
-  {
-    "fields": {
-      "codename": "delete_permission",
-      "name": "Can delete permission",
-      "content_type": 1
-    },
-    "model": "auth.permission",
-    "pk": 3
-  },
-  {
-    "fields": {
-      "codename": "add_group",
-      "name": "Can add group",
-      "content_type": 2
-    },
-    "model": "auth.permission",
-    "pk": 4
-  },
-  {
-    "fields": {
-      "codename": "change_group",
-      "name": "Can change group",
-      "content_type": 2
-    },
-    "model": "auth.permission",
-    "pk": 5
-  },
-  {
-    "fields": {
-      "codename": "delete_group",
-      "name": "Can delete group",
-      "content_type": 2
-    },
-    "model": "auth.permission",
-    "pk": 6
-  },
-  {
-    "fields": {
-      "codename": "add_user",
-      "name": "Can add user",
-      "content_type": 3
-    },
-    "model": "auth.permission",
-    "pk": 7
-  },
-  {
-    "fields": {
-      "codename": "change_user",
-      "name": "Can change user",
-      "content_type": 3
-    },
-    "model": "auth.permission",
-    "pk": 8
-  },
-  {
-    "fields": {
-      "codename": "delete_user",
-      "name": "Can delete user",
-      "content_type": 3
-    },
-    "model": "auth.permission",
-    "pk": 9
-  },
-  {
-    "fields": {
-      "codename": "add_contenttype",
-      "name": "Can add content type",
-      "content_type": 4
-    },
-    "model": "auth.permission",
-    "pk": 10
-  },
-  {
-    "fields": {
-      "codename": "change_contenttype",
-      "name": "Can change content type",
-      "content_type": 4
-    },
-    "model": "auth.permission",
-    "pk": 11
-  },
-  {
-    "fields": {
-      "codename": "delete_contenttype",
-      "name": "Can delete content type",
-      "content_type": 4
-    },
-    "model": "auth.permission",
-    "pk": 12
-  },
-  {
-    "fields": {
-      "codename": "add_site",
-      "name": "Can add site",
-      "content_type": 5
-    },
-    "model": "auth.permission",
-    "pk": 13
-  },
-  {
-    "fields": {
-      "codename": "change_site",
-      "name": "Can change site",
-      "content_type": 5
-    },
-    "model": "auth.permission",
-    "pk": 14
-  },
-  {
-    "fields": {
-      "codename": "delete_site",
-      "name": "Can delete site",
-      "content_type": 5
-    },
-    "model": "auth.permission",
-    "pk": 15
-  },
-  {
-    "fields": {
-      "codename": "add_session",
-      "name": "Can add session",
-      "content_type": 6
-    },
-    "model": "auth.permission",
-    "pk": 16
-  },
-  {
-    "fields": {
-      "codename": "change_session",
-      "name": "Can change session",
-      "content_type": 6
-    },
-    "model": "auth.permission",
-    "pk": 17
-  },
-  {
-    "fields": {
-      "codename": "delete_session",
-      "name": "Can delete session",
-      "content_type": 6
-    },
-    "model": "auth.permission",
-    "pk": 18
-  },
-  {
-    "fields": {
-      "codename": "add_logentry",
-      "name": "Can add log entry",
-      "content_type": 7
-    },
-    "model": "auth.permission",
-    "pk": 19
-  },
-  {
-    "fields": {
-      "codename": "change_logentry",
-      "name": "Can change log entry",
-      "content_type": 7
-    },
-    "model": "auth.permission",
-    "pk": 20
-  },
-  {
-    "fields": {
-      "codename": "delete_logentry",
-      "name": "Can delete log entry",
-      "content_type": 7
-    },
-    "model": "auth.permission",
-    "pk": 21
-  },
-  {
-    "fields": {
-      "codename": "add_flatpage",
-      "name": "Can add flat page",
-      "content_type": 8
-    },
-    "model": "auth.permission",
-    "pk": 22
-  },
-  {
-    "fields": {
-      "codename": "change_flatpage",
-      "name": "Can change flat page",
-      "content_type": 8
-    },
-    "model": "auth.permission",
-    "pk": 23
-  },
-  {
-    "fields": {
-      "codename": "delete_flatpage",
-      "name": "Can delete flat page",
-      "content_type": 8
-    },
-    "model": "auth.permission",
-    "pk": 24
-  },
-  {
-    "fields": {
-      "username": "elte",
-      "first_name": "",
-      "last_name": "",
-      "is_active": true,
-      "is_superuser": true,
-      "is_staff": true,
-      "last_login": "2014-09-23T21:21:17.018Z",
-      "groups": [],
-      "user_permissions": [],
-      "password": "pbkdf2_sha256$12000$84hdl36CQGZw$bSvUl9uBQsgbBtMxUc1zyrxkzngof7N/RypR/Nyhdo0=",
-      "email": "",
-      "date_joined": "2014-09-19T11:53:01.497Z"
-    },
-    "model": "auth.user",
-    "pk": 1
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-19T12:06:06.602Z",
-      "object_repr": "elte.hu",
-      "object_id": "1",
-      "change_message": "Changed domain and name.",
-      "user": 1,
-      "content_type": 5
-    },
-    "model": "admin.logentry",
-    "pk": 1
-  },
-  {
-    "fields": {
-      "action_flag": 1,
-      "action_time": "2014-09-19T13:29:11.648Z",
-      "object_repr": "/downloads/datasets/tiny2/ -- Tiny Weighted example",
-      "object_id": "14",
-      "change_message": "",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 2
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-19T13:35:41.674Z",
-      "object_repr": "/downloads/datasets/tiny2/ -- Tiny Weighted example",
-      "object_id": "14",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 3
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-19T13:36:11.980Z",
-      "object_repr": "/downloads/datasets/tiny2/ -- Tiny Weighted example",
-      "object_id": "14",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 4
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-19T13:36:36.220Z",
-      "object_repr": "/downloads/datasets/tiny2/ -- Tiny Weighted example",
-      "object_id": "14",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 5
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-19T13:36:49.526Z",
-      "object_repr": "/downloads/datasets/tiny2/ -- Tiny Weighted example",
-      "object_id": "14",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 6
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-19T13:40:13.848Z",
-      "object_repr": "/downloads/datasets/tiny2/ -- Tiny Weighted example",
-      "object_id": "14",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 7
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-19T13:42:40.336Z",
-      "object_repr": "/downloads/datasets/tiny2/ -- Tiny Weighted example",
-      "object_id": "14",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 8
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-19T13:45:59.064Z",
-      "object_repr": "/downloads/datasets/tiny2/ -- Tiny Weighted example",
-      "object_id": "14",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 9
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-19T13:47:27.019Z",
-      "object_repr": "/downloads/datasets/tiny2/ -- Tiny Weighted example",
-      "object_id": "14",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 10
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-19T13:48:18.379Z",
-      "object_repr": "/downloads/datasets/tiny2/ -- Tiny Weighted example",
-      "object_id": "14",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 11
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-19T13:49:00.779Z",
-      "object_repr": "/downloads/datasets/tiny2/ -- Tiny Weighted example",
-      "object_id": "14",
-      "change_message": "No fields changed.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 12
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-19T13:49:10.327Z",
-      "object_repr": "/downloads/datasets/tiny1/ -- Tiny dataset for testing",
-      "object_id": "13",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 13
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-19T13:49:33.671Z",
-      "object_repr": "/downloads/datasets/tiny1/ -- Tiny dataset for testing",
-      "object_id": "13",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 14
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-19T13:49:50.389Z",
-      "object_repr": "/downloads/datasets/tiny2/ -- Tiny Weighted example",
-      "object_id": "14",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 15
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T06:46:56.127Z",
-      "object_repr": "/downloads/algorithms/ -- downloads_algorithms",
-      "object_id": "8",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 16
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T06:48:07.626Z",
-      "object_repr": "/downloads/algorithms/ -- downloads_algorithms",
-      "object_id": "8",
-      "change_message": "No fields changed.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 17
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T06:49:20.011Z",
-      "object_repr": "/downloads/ -- Downloads",
-      "object_id": "3",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 18
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T07:08:10.891Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 19
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T07:14:23.311Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 20
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T07:26:13.072Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 21
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T07:30:52.868Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 22
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T07:35:10.944Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 23
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T07:40:26.951Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 24
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T07:40:45.869Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 25
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T07:45:16.885Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 26
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T07:46:40.051Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 27
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T07:47:03.659Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 28
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T07:50:36.694Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 29
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T07:56:40.013Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 30
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T07:57:16.251Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 31
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T07:59:54.759Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 32
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T08:04:17.577Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 33
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T08:07:41.353Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 34
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T08:12:40.843Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 35
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T08:13:34.887Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 36
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T08:14:33.463Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 37
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T08:15:51.733Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 38
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T08:17:26.298Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 39
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T08:18:10.849Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 40
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T08:18:21.415Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 41
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-22T08:18:46.434Z",
-      "object_repr": "/downloads/datasets/protein/ -- Protein dataset",
-      "object_id": "9",
-      "change_message": "No fields changed.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 42
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T07:40:51.888Z",
-      "object_repr": "/downloads/datasets/flickr_large/ -- Flickr large dataset",
-      "object_id": "10",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 43
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T07:42:07.525Z",
-      "object_repr": "/downloads/datasets/flickr_large/ -- Flickr large dataset",
-      "object_id": "10",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 44
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T07:42:34.019Z",
-      "object_repr": "/downloads/datasets/flickr_large/ -- Flickr large dataset",
-      "object_id": "10",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 45
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T07:43:42.664Z",
-      "object_repr": "/downloads/datasets/flickr_large/ -- Flickr large dataset",
-      "object_id": "10",
-      "change_message": "No fields changed.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 46
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T07:48:54.442Z",
-      "object_repr": "/downloads/datasets/flickr_small/ -- Flickr small dataset",
-      "object_id": "11",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 47
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T07:49:22.509Z",
-      "object_repr": "/downloads/datasets/flickr_small/ -- Flickr small dataset",
-      "object_id": "11",
-      "change_message": "No fields changed.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 48
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T07:49:24.807Z",
-      "object_repr": "/downloads/datasets/flickr_small/ -- Flickr small dataset",
-      "object_id": "11",
-      "change_message": "No fields changed.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 49
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T07:49:28.957Z",
-      "object_repr": "/downloads/datasets/flickr_small/ -- Flickr small dataset",
-      "object_id": "11",
-      "change_message": "No fields changed.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 50
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T07:54:32.850Z",
-      "object_repr": "/downloads/datasets/flickr_large/ -- Flickr large dataset",
-      "object_id": "10",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 51
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T07:55:35.559Z",
-      "object_repr": "/downloads/datasets/flickr_large/ -- Flickr large dataset",
-      "object_id": "10",
-      "change_message": "No fields changed.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 52
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T08:14:37.605Z",
-      "object_repr": "/downloads/datasets/imdb/ -- IMDb dataset",
-      "object_id": "12",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 53
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T08:15:14.824Z",
-      "object_repr": "/downloads/datasets/imdb/ -- IMDb dataset",
-      "object_id": "12",
-      "change_message": "No fields changed.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 54
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T08:26:19.365Z",
-      "object_repr": "/downloads/datasets/tiny1/ -- Tiny dataset for testing",
-      "object_id": "13",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 55
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T08:27:44.125Z",
-      "object_repr": "/downloads/datasets/tiny1/ -- Tiny dataset for testing",
-      "object_id": "13",
-      "change_message": "No fields changed.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 56
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T08:36:15.773Z",
-      "object_repr": "/downloads/datasets/tiny2/ -- Tiny Weighted example",
-      "object_id": "14",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 57
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T08:40:33.268Z",
-      "object_repr": "/downloads/datasets/tiny2/ -- Tiny Weighted example",
-      "object_id": "14",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 58
-  },
-  {
-    "fields": {
-      "action_flag": 2,
-      "action_time": "2014-09-23T08:40:41.495Z",
-      "object_repr": "/downloads/datasets/tiny1/ -- Tiny dataset for testing",
-      "object_id": "13",
-      "change_message": "Changed content.",
-      "user": 1,
-      "content_type": 8
-    },
-    "model": "admin.logentry",
-    "pk": 59
-  }
+}
 ]
